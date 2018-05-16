@@ -1,0 +1,30 @@
+#header-nav-menu {
+    display: inline-block;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    background: #000;
+    color: white;
+    ul li,
+    #site-title-and-logo>*,
+    #navi-menu>* {
+        float: left;
+        margin: 0;
+        margin: 0px 10px;
+    }
+    #customers-name {
+        color: orange;
+    }
+    ul li,
+    ul li a {
+        text-decoration: none;
+        overflow: hidden;
+        color: white;
+    }
+    .title {
+        font-weight: bold;
+        letter-spacing: 3px;
+        font-size: 18px;
+        color: orange;
+    }
+}
