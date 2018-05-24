@@ -1,0 +1,9 @@
+<section id="navi-container">
+  <nav mat-tab-nav-bar>
+    <a mat-tab-link *ngFor="let link of routeLinks; let i = index" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      {{link.label}}
+    </a>
+  </nav>
+  <button (click)="logout()" style="float: right; ">Log out</button>
+</section>

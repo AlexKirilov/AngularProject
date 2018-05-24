@@ -1,0 +1,21 @@
+#login-container {
+    width: 60%;
+    height: auto;
+    background-color: rgba(220, 220, 220, 0.8);
+    padding: 25px;
+    border: 2px solid rgb(220, 220, 220);
+    .login-form {
+        mat-form-field {
+            margin: 5px 10px;
+        }
+        input {
+            padding: 5px 0;
+        }
+        .error-label {
+            line-height: 15px;
+            font-size: 14px;
+            color: red;
+            margin-bottom: 20px;
+        }
+    }
+}
