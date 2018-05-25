@@ -36,6 +36,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { SigninComponent } from './components/users/signin/signin.component';
 import { ForgetpassComponent } from './components/users/forgetpass/forgetpass.component';
+import { AccountComponent } from './components/account/account.component';
+import { PurchaseComponent } from './components/purchase/purchase.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { ForgetpassComponent } from './components/users/forgetpass/forgetpass.co
     GalleryComponent,
     LoginComponent,
     SigninComponent,
-    ForgetpassComponent
+    ForgetpassComponent,
+    AccountComponent,
+    PurchaseComponent
   ],
   imports: [
     BrowserModule,

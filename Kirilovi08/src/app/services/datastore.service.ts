@@ -160,6 +160,14 @@ export class DatastoreService {
       }
     );
   }
+  editProducts(product, callback) {
+    this.http.post<Product>(`${this.authURL}/store/editproduct`, product).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
 
   registry(newUser, callback, errcallback) {
     this.http.post<NewUser>(`${this.authURL}/customers/register`, newUser).subscribe(

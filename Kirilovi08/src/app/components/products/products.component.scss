@@ -1,3 +1,26 @@
-button, .mat-form-field {
-  margin: 20px 10px;
+#product-container {
+    .controllers {
+        button,
+        .mat-form-field {
+            margin: 20px 10px;
+        }
+    }
+    table {
+        width: 100%;
+        .edit-button,
+        .save-button,
+        .remove-button {
+            color: blue;
+            float: left;
+        }
+    }
+    .product-images {
+        width: 150px;
+        height: 150px;
+        margin: 10px auto;
+        &.zele{
+            background: url('../../images/products/zele.jpg') 50% 50% no-repeat;
+            background-size: cover;
+        }
+    }
 }

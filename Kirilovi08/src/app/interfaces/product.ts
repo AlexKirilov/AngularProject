@@ -6,7 +6,6 @@ export class Product {
     quantity: number;
     imageURL: string;
     iconURL: string;
-    category: string;
-    subcategory: string;
+    categoryID: string;
     details: string;
 }
