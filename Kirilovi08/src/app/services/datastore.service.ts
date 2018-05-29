@@ -33,7 +33,7 @@ export class DatastoreService {
   SITEID_KEY = 'WebSite';
 
   get token() {
-    return localStorage.getItem(this.TOKEN_KEY)
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
   get SiteData() {
@@ -67,11 +67,11 @@ export class DatastoreService {
         callback(result);
       },
       err => errcallback(err)
-    )
+    );
   }
 
   getProducts(items, callback) {
-    if (items == void 0) items = ''
+    if (items === void 0) { items = ''; }
     this.http.post<Product>(`${this.authURL}/store/products`, items).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
@@ -90,7 +90,7 @@ export class DatastoreService {
   }
 
   getSubCategories(parentId, callback) {
-    //Example {"parentId":"5b0428384953411bd455bb90"}
+    // Example {"parentId":"5b0428384953411bd455bb90"}
     this.http.get<any>(`${this.authURL}/category/subcategories`, parentId).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
@@ -123,7 +123,7 @@ export class DatastoreService {
 
 
   getCustomerInvoices(callback) {
-    //Only Customer can get
+    // Only Customer can get
     this.http.get<any>(`${this.authURL}/invoicecustomersdata/cusInvoiceDetails`).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
@@ -152,7 +152,7 @@ export class DatastoreService {
   ////////// POST / PUT ///////////////////
   /////////////////////////////////////////
 
-  addProducts(product, callback) {
+  addEditProducts(product, callback) {
     this.http.post<Product>(`${this.authURL}/store/createproduct`, product).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
@@ -160,38 +160,38 @@ export class DatastoreService {
       }
     );
   }
-  editProducts(product, callback) {
-    this.http.post<Product>(`${this.authURL}/store/editproduct`, product).subscribe(
-      result => callback(result),
-      (err: HttpErrorResponse) => {
-        this.errorHandler.handleError(err);
-      }
-    );
-  }
+  // addEditProducts(product, callback) {
+  //   this.http.post<Product>(`${this.authURL}/store/editproduct`, product).subscribe(
+  //     result => callback(result),
+  //     (err: HttpErrorResponse) => {
+  //       this.errorHandler.handleError(err);
+  //     }
+  //   );
+  // }
 
   registry(newUser, callback, errcallback) {
     this.http.post<NewUser>(`${this.authURL}/customers/register`, newUser).subscribe(
       result => callback(result),
       err => errcallback(err)
-    )
+    );
   }
 
-  //TODO: Change here // Check the API BE
+  // TODO: Change here // Check the API BE
   editCustomer(newUser, callback, errcallback) {
     // As minimum required data for this call -> { "password":"password", "email": "mail@mail.com" } to be available
     this.http.post<NewUser>(`${this.authURL}/customers/editcustomer`, newUser).subscribe(
       result => callback(result),
       err => errcallback(err)
-    )
+    );
   }
 
-  //TODO: Change here // Check the API BE
+  // TODO: Change here // Check the API BE
   addCategoryOrSubcategory(category, callback, errcallback) {
-    //Required data { "name": "bmw", "parentId":"5b05149b8d9e8024cc528527"} for v2 will be included and "type":"5b0428384953411bd455bb90"
+    // Required data { "name": "bmw", "parentId":"5b05149b8d9e8024cc528527"} for v2 will be included and "type":"5b0428384953411bd455bb90"
     this.http.post<NewUser>(`${this.authURL}/customers/createcategory`, category).subscribe(
       result => callback(result),
       err => errcallback(err)
-    )
+    );
   }
 
   addOrEditInvoice(callback) {
@@ -260,7 +260,7 @@ export class DatastoreService {
   // }
 
   removeInvoices(removeInvoice, callback) {
-    //Required Data { all: boolean, cutomerID or/and InvoiceID }
+    // Required Data { all: boolean, cutomerID or/and InvoiceID }
     this.http.get<any>(`${this.authURL}/invoices/removeinvoices`, removeInvoice).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {

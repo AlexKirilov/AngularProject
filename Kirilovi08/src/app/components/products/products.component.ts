@@ -11,12 +11,14 @@ export class ProductsComponent implements OnInit {
 
   public products: Product[] = [];
   public categories = [];
-  public prodName = '';
+  public newProdName = '';
   public selectedCat;
-  public editbtn = false;
+  public editbtn;
   public ifAdmin = true;
 
-  productName = '';
+  prodName = '';
+  prodSorts = '';
+  prodDetails = '';
 
   displayedColumns = ['name', 'image', 'sort', 'details'];
   dataSource;
@@ -41,35 +43,37 @@ export class ProductsComponent implements OnInit {
     this.data.getCategories( data => this.categories = data);
   }
   editProd(el) {
-    this.editbtn = !this.editbtn;
+    this.prodName = el.name;
+    this.prodSorts = el.sort.toString();
+    this.prodDetails = el.details;
+    this.editbtn = el._id;
   }
   saveProd(el) {
-    
-    this.editbtn = !this.editbtn;
-    el.name = this.productName;
-    console.log(el);
-    this.data.editProducts(el, (data) => {console.log('Edit Product: ', data)});
+    this.editbtn = '';
+    el.name = this.prodName;
+    el.sort = this.prodSorts.split(',');
+    el.sort = el.sort.filter( function (n) { return n !== undefined && n.trim() !== ''; });
+    el.details = this.prodDetails;
+    this.data.addEditProducts(el, (data) => { console.log('Edit Product: ', data); } );
   }
   addProd() {
-    const tmp = { name: this.prodName, categoryID: this.selectedCat };
-    this.data.addProducts(tmp, data => { this.getProducts(); });
+    const tmp = { name: this.newProdName, categoryID: this.selectedCat };
+    this.data.addEditProducts(tmp, data => { this.getProducts(); });
   }
 
   showProtByCat() {
     this.data.getProducts({categoryID: this.selectedCat},
-      data => {
-        this.products = data;
-      }
+      data => { this.products = data; }
     );
   }
 
   removeProd(item) {
-    console.log(item);
-    this.data.removeProductbyIdOrCategory(item, data => { console.log(data); this.getProducts(); });
+    this.data.removeProductbyIdOrCategory(item,
+      data => { console.log(data); this.getProducts(); });
   }
   removeProdByCat() {
-    console.log(this.selectedCat)
-    this.data.removeProductbyIdOrCategory({categoryID: this.selectedCat}, data => { console.log(data); this.getProducts(); });
+    this.data.removeProductbyIdOrCategory({categoryID: this.selectedCat},
+      data => { console.log(data); this.getProducts(); });
   }
   // removeAllProd(item) {
   //   this.data.removeAllProductbyCategory(data => { console.log(data); this.getProducts(); })

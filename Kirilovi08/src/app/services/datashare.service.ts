@@ -8,7 +8,6 @@ export class DatashareService {
 
   constructor() { }
 
-  
   private errorMsgTypeSource = new BehaviorSubject<object>({ message: '', showMsg: false });
   errorMsg = this.errorMsgTypeSource.asObservable();
 

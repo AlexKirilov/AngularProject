@@ -12,7 +12,7 @@
     </mat-form-field>
 
     <mat-form-field >
-      <input type="text" matInput [(ngModel)]="prodName" placeholder="New Product -> Name" />
+      <input type="text" matInput [(ngModel)]="newProdName" placeholder="New Product" />
     </mat-form-field>
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -21,9 +21,9 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element">
-        {{element?.name}}
-        <mat-form-field *ngIf="editbtn" >
-          <input matInput placeholder="Product name" value="{{element?.name}}" [(ngModel)]="productName">
+        <div *ngIf="editbtn != element._id" >{{element?.name}}</div>
+        <mat-form-field *ngIf="editbtn == element._id" >
+          <input matInput placeholder="Product name" [(ngModel)]="prodName">
         </mat-form-field>
       </td>
     </ng-container>
@@ -44,16 +44,13 @@
     <ng-container matColumnDef="sort">
       <th mat-header-cell *matHeaderCellDef> Sorts </th>
       <td mat-cell *matCellDef="let element">
-        <ul>
+        <ul *ngIf="editbtn !== element._id">
           <li *ngFor="let item of element?.sort">{{item}}</li>
         </ul>
-        <div *ngIf="editbtn">
+        <div *ngIf="editbtn == element._id">
           <mat-form-field >
-            <input matInput placeholder="Sorts" value="">
+            <input matInput placeholder="Sorts" [(ngModel)]="prodSorts" >
           </mat-form-field>
-          <div class="remove-button small">
-            <button mat-button (click)="removeProd(element)">Remove</button>
-          </div>
         </div>
       </td>
     </ng-container>
@@ -62,19 +59,19 @@
     <ng-container matColumnDef="details">
       <th mat-header-cell *matHeaderCellDef> Details </th>
       <td mat-cell *matCellDef="let element">
-        {{element?.details}}
+        <div *ngIf="editbtn !== element._id" >{{element?.details}}</div>
         <div *ngIf="ifAdmin">
-            <mat-form-field *ngIf="editbtn">
-                <input matInput placeholder="Details data" value="{{element?.details}}">
-              </mat-form-field>
+            <mat-form-field *ngIf="editbtn == element._id">
+              <input matInput placeholder="Details data" [(ngModel)]="prodDetails">
+            </mat-form-field>
             <div class="edit-button">
-              <button mat-button (click)="editProd(element)" *ngIf="!editbtn">Edit</button>
+              <button mat-button (click)="editProd(element)" *ngIf="editbtn != element._id">Edit</button>
             </div>
             <div class="save-button">
-              <button mat-button (click)="saveProd(element)" *ngIf="editbtn">Save</button>
+              <button mat-button (click)="saveProd(element)" *ngIf="editbtn == element._id">Save</button>
             </div>
             <div class="remove-button">
-              <button mat-button (click)="removeProd(element)" *ngIf="editbtn">Remove</button>
+              <button mat-button (click)="removeProd(element)" *ngIf="editbtn == element._id">Remove</button>
             </div>
           </div>
       </td>

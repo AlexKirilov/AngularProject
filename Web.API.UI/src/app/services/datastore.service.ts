@@ -4,8 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Headers } from '@angular/http';
 import { Observable ,  of } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment'
-
+import { environment } from '../../environments/environment';
 
 import { HandleErrorsService } from './handle-errors.service';
 import { UserCreds } from '../interfaces/user';
@@ -19,7 +18,7 @@ export class DatastoreService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private usersURI = 'api/users';  // URL to web api
-  private authURL = `${environment.path}/auth`
+  private authURL = `${environment.path}/auth`;
   private config = {
     headers : {
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -27,16 +26,39 @@ export class DatastoreService {
   };
 
   constructor(
-    private router: Router, 
-    private http: HttpClient, 
+    private router: Router,
+    private http: HttpClient,
     private errorHandler: HandleErrorsService,
   ) { }
 
   TOKEN_KEY = 'token';
-  get token () {
-    return !!localStorage.getItem(this.TOKEN_KEY)
+  SITEDATA_KEY = 'SiteData';
+  SITEID_KEY = 'WebSite';
+
+  get token() {
+    return localStorage.getItem(this.TOKEN_KEY);
   }
-  
+
+  get SiteData() {
+    return localStorage.getItem(this.SITEDATA_KEY);
+  }
+
+  get WebSite() {
+    return localStorage.getItem(this.SITEID_KEY);
+  }
+
+  setAuthorization(data) {
+    localStorage.setItem(this.TOKEN_KEY, data.token);
+    localStorage.setItem(this.SITEDATA_KEY, data.SiteData);
+    localStorage.setItem(this.SITEID_KEY, data.WebSite);
+  }
+
+  removeAuthorization() {
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.SITEDATA_KEY);
+    localStorage.removeItem(this.SITEID_KEY);
+  }
+
   createToken (token) {
     localStorage.setItem(this.TOKEN_KEY, token);
   }
@@ -61,7 +83,7 @@ export class DatastoreService {
   //   );
   // }
 
-  
+
 
   // searchForExistingUserData ( property, value, callback ) {
   //   const uri = this.usersURI; // + '/?' + property + '=' + value;
@@ -98,14 +120,17 @@ export class DatastoreService {
     this.http.post<NewUser>(`${this.authURL}/register`, newUser).subscribe(
       result => callback(result),
       err => errcallback(err)
-    )
+    );
   }
 
   getLogedIn(checkUser, callback, errcallback) {
     this.http.post<UserCreds>(`${this.authURL}/login`, checkUser).subscribe(
-      result => callback(result),
+      result => {
+        this.setAuthorization(result);
+        callback(result);
+      },
       err => errcallback(err)
-    )
+    );
   }
 
 

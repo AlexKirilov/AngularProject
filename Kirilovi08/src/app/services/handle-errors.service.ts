@@ -6,7 +6,7 @@ import { DatashareService } from './datashare.service';
   providedIn: 'root'
 })
 export class HandleErrorsService {
-  
+
   constructor(private router: Router, private data: DatashareService) { }
 
   errorMsg = '';
