@@ -30,7 +30,6 @@ export class ProductsComponent implements OnInit {
     this.data.getProducts('',
       data => {
         this.products = data;
-        this.dataSource = data;
       }
     );
   }
