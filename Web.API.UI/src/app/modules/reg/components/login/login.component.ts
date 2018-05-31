@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
     if (!this.btnDisbaled) {
       this.datastore.getLogedIn({ password: this.login.value.pass, email: this.login.value.email },
         (res) => {
-          this.datastore.createToken(res.token);
           this.router.navigate(['/dashboard']);
         },
         (err) => {

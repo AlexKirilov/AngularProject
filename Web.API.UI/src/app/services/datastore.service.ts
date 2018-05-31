@@ -4,7 +4,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Headers } from '@angular/http';
 import { Observable ,  of } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment'
+
 
 import { HandleErrorsService } from './handle-errors.service';
 import { UserCreds } from '../interfaces/user';
@@ -18,7 +19,7 @@ export class DatastoreService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private usersURI = 'api/users';  // URL to web api
-  private authURL = `${environment.path}/auth`;
+  private authURL = `${environment.path}/auth`
   private config = {
     headers : {
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -26,8 +27,8 @@ export class DatastoreService {
   };
 
   constructor(
-    private router: Router,
-    private http: HttpClient,
+    private router: Router, 
+    private http: HttpClient, 
     private errorHandler: HandleErrorsService,
   ) { }
 
@@ -59,21 +60,13 @@ export class DatastoreService {
     localStorage.removeItem(this.SITEID_KEY);
   }
 
-  createToken (token) {
-    localStorage.setItem(this.TOKEN_KEY, token);
-  }
-
-  removeToken () {
-    localStorage.removeItem(this.TOKEN_KEY);
-  }
-
   /////////////////////////////////////////
   //////////////// GET ////////////////////
   /////////////////////////////////////////
 
-  test(callback) {
-    this.http.get<UserCreds[]>(`http://localhost:3000/test`).subscribe(data => { callback(data); });
-  }
+  // test(callback) {
+  //   this.http.get<UserCreds[]>(`http://localhost:3000/test`).subscribe(data => { callback(data); });
+  // }
   // getListOfUsers (callback) {
   //   this.http.get<UserCreds[]>(`${this.authURL}/users`).subscribe(
   //     data => { callback(data); },
@@ -83,7 +76,7 @@ export class DatastoreService {
   //   );
   // }
 
-
+  
 
   // searchForExistingUserData ( property, value, callback ) {
   //   const uri = this.usersURI; // + '/?' + property + '=' + value;
@@ -110,6 +103,11 @@ export class DatastoreService {
   ////////// POST / PUT ///////////////////
   /////////////////////////////////////////
 
+  test(callback) {
+    this.http.post<any>(`http://localhost:3000/store/createproduct`, { name: 'names'}).subscribe(
+      result => callback(result)
+    );
+  }
   checkForExistingUserEmail (email, callback) {
     this.http.post<Boolean>(`${this.authURL}/checkForUser`, email).subscribe(
       result => callback(result)
@@ -120,17 +118,17 @@ export class DatastoreService {
     this.http.post<NewUser>(`${this.authURL}/register`, newUser).subscribe(
       result => callback(result),
       err => errcallback(err)
-    );
+    )
   }
 
   getLogedIn(checkUser, callback, errcallback) {
     this.http.post<UserCreds>(`${this.authURL}/login`, checkUser).subscribe(
       result => {
         this.setAuthorization(result);
-        callback(result);
+        callback(result)
       },
       err => errcallback(err)
-    );
+    )
   }
 
 
@@ -138,8 +136,8 @@ export class DatastoreService {
   ///////////// Log OUT ///////////////////
   /////////////////////////////////////////
   logout() {
-      this.removeToken();
-      this.router.navigate(['/login']);
+    this.removeAuthorization();
+    this.router.navigate(['/login']);
   }
 
 }

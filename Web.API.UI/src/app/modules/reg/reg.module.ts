@@ -16,7 +16,8 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatInputModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatStepperModule
 } from '@angular/material';
 
 import { DatastoreService } from '../../services/datastore.service';
@@ -31,6 +32,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistrationDetailsComponent } from './components/registration-details/registration-details.component';
 
 
 @NgModule({
@@ -52,11 +54,13 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatInputModule,
     MatFormFieldModule,
+    MatStepperModule
   ],
   declarations: [
     RegistrationComponent,
     LoginComponent,
     SignInComponent,
+    RegistrationDetailsComponent,
   ],
   providers: [AuthGuard, DatastoreService, DatashareService, UsersService, NewUserService, HandleErrorsService],
   bootstrap: [RegistrationComponent]

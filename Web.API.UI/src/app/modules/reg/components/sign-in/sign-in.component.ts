@@ -27,7 +27,7 @@ export class SignInComponent implements OnInit {
 
 
   public userData: NewUser = {
-    username: null,
+    siteName: null,
     password: null,
     firstname: null,
     lastname: null,
@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
 
   private errormessages = {
     password: 'Passwords doesn`t match!',
-    username: 'This username is already taken!',
+    // username: 'This username is already taken!',
     emailExists: 'This email is already used',
     emailValidation: 'This email is not in right form!',
   };
@@ -57,7 +57,7 @@ export class SignInComponent implements OnInit {
     public fb: FormBuilder,
   ) {
     this.signin = fb.group({
-      'username': ['', Validators.required],
+      'sitename': ['', Validators.required],
       'password': ['', Validators.required],
       'repassword': ['', Validators.required],
       'fname': ['', Validators.required],
@@ -107,7 +107,8 @@ export class SignInComponent implements OnInit {
   }
 
   validUserData() {
-    this.btnSubmitValidation = this.signin.value.username !== '' && this.signin.value.email !== '' && this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== ''
+    // this.btnSubmitValidation = this.signin.value.username !== '' && this.signin.value.email !== '' && this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== ''
+    this.btnSubmitValidation = this.signin.value.email !== '' && this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== ''
   }
 
   validate() {
@@ -116,15 +117,15 @@ export class SignInComponent implements OnInit {
 
   regNewCustmer(event) {
     if (this.validate()) {
-      this.userData.username = this.signin.value.username;
+      this.userData.siteName = this.signin.value.sitename;
       this.userData.firstname = this.signin.value.fname;
       this.userData.lastname = this.signin.value.lname;
       this.userData.email = this.signin.value.email;
       this.userData.password = this.signin.value.password;
       this.datastore.registry(this.userData,
         (res) => {
-          localStorage.setItem('token', res.token);
-          this.router.navigate(['/dashboard']);
+          this.datastore.setAuthorization(res);
+          this.router.navigate(['/registrationdetails']);
         },
         (err) => console.log('Err: ', err));
     }

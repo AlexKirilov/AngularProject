@@ -1,6 +1,6 @@
 export class UserCreds {
     id: number;
-    username: string;
+    // username: string;
     password: string;
     email: string;
     token: string;

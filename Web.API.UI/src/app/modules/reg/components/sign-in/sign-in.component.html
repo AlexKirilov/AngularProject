@@ -3,8 +3,8 @@
 
     <form [formGroup]="signin" (submit)="regNewCustmer($event)" id="signin-container">
         <mat-form-field>
-            <input matInput type="text" placeholder="Username" formControlName="username" (change)="this.validUserData()">
-            <mat-error *ngIf="signin.get('username')?.invalid">This field is required</mat-error>
+            <input matInput type="text" placeholder="Web Site Name" formControlName="sitename">
+            <mat-error *ngIf="signin.get('sitename')?.invalid">This field is required</mat-error>
         </mat-form-field>
 
         <mat-form-field>
