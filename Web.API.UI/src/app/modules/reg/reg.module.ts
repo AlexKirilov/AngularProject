@@ -54,7 +54,7 @@ import { RegistrationDetailsComponent } from './components/registration-details/
     MatSidenavModule,
     MatInputModule,
     MatFormFieldModule,
-    MatStepperModule
+    MatStepperModule,
   ],
   declarations: [
     RegistrationComponent,

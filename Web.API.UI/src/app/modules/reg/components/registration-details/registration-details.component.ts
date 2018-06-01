@@ -8,18 +8,45 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class RegistrationDetailsComponent implements OnInit {
 
+  // New 
+  authInvoiceDetails = false;
+  authContacts = false;
+  GDPR = false;
+
+  //Copied
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  isEditable: boolean = false;
+  contactsDetails: FormGroup;
+  invoiceDetails: FormGroup;
+  isEditable: boolean = false; // Delete me
+
+
 
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      companyCTRL: ['', Validators.required]
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+    this.contactsDetails = this._formBuilder.group({
+      phonesCtrl: [[], Validators.required],
+      facebookCtrl: ['', Validators.required],
+      twitterCtrl: ['', Validators.required],
+      linkedinCtrl: ['', Validators.required],
+      skypeCtrl: ['', Validators.required],
+      latitudeCtrl: ['', Validators.required],
+      longitudeCtrl: ['', Validators.required],
+      urlCtrl: ['', Validators.required],
+    });
+    this.invoiceDetails = this._formBuilder.group({
+      addressCtrl: ['', Validators.required],
+      eikCtrl: ['', Validators.required],
+      bulstatCtrl: ['', Validators.required],
+      citizenshipCtrl: ['', Validators.required],
+      countryCtrl: ['', Validators.required],
+      townCtrl: ['', Validators.required],
+      phoneCtrl: ['', Validators.required],
+      countryPhoneCodeCtrl: ['', Validators.required],
+      GDPRCtrl: [false, Validators.required], // We may not need this here
     });
   }
 }
