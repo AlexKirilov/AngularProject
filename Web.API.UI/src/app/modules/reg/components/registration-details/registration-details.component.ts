@@ -2,22 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'api-registration-details',
   templateUrl: './registration-details.component.html',
   styleUrls: ['./registration-details.component.scss']
 })
 export class RegistrationDetailsComponent implements OnInit {
 
-  // New 
+  // New
   authInvoiceDetails = false;
   authContacts = false;
   GDPR = false;
 
-  //Copied
+  // Copied
   firstFormGroup: FormGroup;
   contactsDetails: FormGroup;
   invoiceDetails: FormGroup;
-  isEditable: boolean = false; // Delete me
+  isEditable = false; // Delete me
 
 
 
@@ -45,8 +46,50 @@ export class RegistrationDetailsComponent implements OnInit {
       countryCtrl: ['', Validators.required],
       townCtrl: ['', Validators.required],
       phoneCtrl: ['', Validators.required],
+      postcodeCtrl: ['', Validators.required],
       countryPhoneCodeCtrl: ['', Validators.required],
       GDPRCtrl: [false, Validators.required], // We may not need this here
     });
   }
+
+  SaveData () {
+    console.log(this.GDPR);
+    console.log(this.contactsDetails);
+    console.log(this.invoiceDetails);
+
+    if (this.GDPR && this.authContacts) {
+      const tmpContacts = {
+        phones: this.contactsDetails.value.phonesCtrl.split(','),
+        connections: {
+          facebook: this.contactsDetails.value.facebookCtrl,
+          twitter: this.contactsDetails.value.twitterCtrl,
+          linkedin: this.contactsDetails.value.linkedinCtrl,
+          skype: this.contactsDetails.value.skypeCtrl
+        },
+        coordinates: {
+          latitude: this.contactsDetails.value.latitudeCtrl,
+          longitude: this.contactsDetails.value.longitudeCtrl,
+          url: this.contactsDetails.value.urlCtrl
+        }
+      };
+
+      console.log(tmpContacts);
+    }
+    if (this.GDPR && this.authInvoiceDetails) {
+      const tmpInvoice = {
+        address: this.invoiceDetails.value.addressCtrl,
+        eik: this.invoiceDetails.value.eikCtrl,
+        bulstat: this.invoiceDetails.value.bulstatCtrl,
+        citizenship: this.invoiceDetails.value.citizenshipCtrl,
+        town: this.invoiceDetails.value.townCtrl,
+        country: this.invoiceDetails.value.countryCtrl,
+        postcode: this.invoiceDetails.value.phoneCtrl,
+        phone: this.invoiceDetails.value.phoneCtrl,
+        countryPhoneCode: this.invoiceDetails.value.countryPhoneCodeCtrl,
+        GDPR: this.GDPR // this.invoiceDetails.value.GDPRCtrl
+      };
+      console.log(tmpInvoice);
+    }
+  }
+
 }

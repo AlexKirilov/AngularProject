@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
+import { NewUser } from '../../../app.model';
 
-import { NewUser } from '../../../interfaces/new-user';
 
 import { HandleErrorsService } from '../../../services/handle-errors.service';
 import { DatastoreService } from '../../../services/datastore.service';

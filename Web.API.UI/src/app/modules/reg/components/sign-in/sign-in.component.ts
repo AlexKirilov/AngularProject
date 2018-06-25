@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { debounce } from 'rxjs/operators';
 
-import { Data } from '@angular/router/src/config';
+import { NewUser } from '../../../../app.model';
 
 import { UsersService } from '../../services/users.service';
-import { NewUser } from '../../../../interfaces/new-user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatastoreService } from '../../../../services/datastore.service';
 
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'api-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
@@ -67,39 +66,41 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.datastore.token)
+    if (this.datastore.token) {
       this.router.navigate(['/dashboard']);
+    }
     this.wrongCreds = document.getElementById('login-error-msg');
   }
 
 
   emailValidation() {
-    if (this.signin.value.email.trim() != '') {
-      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      var tmp = re.test(this.signin.value.email);
-      this.emailNotValid = !tmp
+    if (this.signin.value.email.trim() !== '') {
+      // tslint:disable-next-line:max-line-length
+      const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const tmp = re.test(this.signin.value.email);
+      this.emailNotValid = !tmp;
       if (tmp) {
         this.checkingForExistingEmail();
         this.validUserData();
       }
       return tmp;
     } else {
-      this.emailNotValid = false
+      this.emailNotValid = false;
     }
   }
 
   checkingForExistingEmail() {
-    if (this.signin.value.email.trim() != '') {
+    if (this.signin.value.email.trim() !== '') {
       this.datastore.checkForExistingUserEmail({ email: this.signin.value.email },
-        (res) => { 
+        (res) => {
           this.emailIsTaken = res.exist; }
       );
     }
   }
 
   checkpass() {
-    if (this.signin.value.password != '' && this.signin.value.repassword != '') {
-      let tmp = this.signin.value.password === this.signin.value.repassword;
+    if (this.signin.value.password !== '' && this.signin.value.repassword !== '') {
+      const tmp = this.signin.value.password === this.signin.value.repassword;
       this.passNotMatch = !tmp;
       this.validUserData();
       return tmp;
@@ -107,12 +108,14 @@ export class SignInComponent implements OnInit {
   }
 
   validUserData() {
-    // this.btnSubmitValidation = this.signin.value.username !== '' && this.signin.value.email !== '' && this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== ''
-    this.btnSubmitValidation = this.signin.value.email !== '' && this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== ''
+    // tslint:disable-next-line:max-line-length
+    // this.btnSubmitValidation = this.signin.value.username !== '' && this.signin.value.email !== '' && this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== '';
+    // tslint:disable-next-line:max-line-length
+    this.btnSubmitValidation = this.signin.value.email !== '' && this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== '';
   }
 
   validate() {
-    return this.checkpass() && this.emailValidation()
+    return this.checkpass() && this.emailValidation();
   }
 
   regNewCustmer(event) {

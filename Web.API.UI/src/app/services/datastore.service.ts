@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { Headers } from '@angular/http';
-import { Observable ,  of } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment'
+import { environment } from '../../environments/environment';
 
 
 import { HandleErrorsService } from './handle-errors.service';
-import { UserCreds } from '../interfaces/user';
-import { Options } from 'selenium-webdriver';
-import { NewUser } from '../interfaces/new-user';
+import { UserCreds, NewUser } from '../app.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +15,7 @@ export class DatastoreService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private usersURI = 'api/users';  // URL to web api
-  private authURL = `${environment.path}/auth`
+  private authURL = `${environment.path}/auth`;
   private config = {
     headers : {
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -27,8 +23,8 @@ export class DatastoreService {
   };
 
   constructor(
-    private router: Router, 
-    private http: HttpClient, 
+    private router: Router,
+    private http: HttpClient,
     private errorHandler: HandleErrorsService,
   ) { }
 
@@ -76,7 +72,6 @@ export class DatastoreService {
   //   );
   // }
 
-  
 
   // searchForExistingUserData ( property, value, callback ) {
   //   const uri = this.usersURI; // + '/?' + property + '=' + value;
@@ -100,14 +95,9 @@ export class DatastoreService {
   // }
 
   /////////////////////////////////////////
-  ////////// POST / PUT ///////////////////
+  ////////// Registration /////////////////
   /////////////////////////////////////////
 
-  test(callback) {
-    this.http.post<any>(`http://localhost:3000/store/createproduct`, { name: 'names'}).subscribe(
-      result => callback(result)
-    );
-  }
   checkForExistingUserEmail (email, callback) {
     this.http.post<Boolean>(`${this.authURL}/checkForUser`, email).subscribe(
       result => callback(result)
@@ -118,20 +108,30 @@ export class DatastoreService {
     this.http.post<NewUser>(`${this.authURL}/register`, newUser).subscribe(
       result => callback(result),
       err => errcallback(err)
-    )
+    );
   }
 
   getLogedIn(checkUser, callback, errcallback) {
     this.http.post<UserCreds>(`${this.authURL}/login`, checkUser).subscribe(
       result => {
         this.setAuthorization(result);
-        callback(result)
+        callback(result);
       },
       err => errcallback(err)
-    )
+    );
   }
 
 
+  getsitecontacts () {
+
+  }
+  addOrEditSiteContacts() {
+
+  }
+
+  removeSiteContacts () {
+
+  }
   /////////////////////////////////////////
   ///////////// Log OUT ///////////////////
   /////////////////////////////////////////

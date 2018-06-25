@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 
-import { UserCreds } from '../../../interfaces/user';
 
 import { HandleErrorsService } from '../../../services/handle-errors.service';
 import { DatastoreService } from '../../../services/datastore.service';
 import { DatashareService } from '../../../services/datashare.service';
+import { UserCreds } from '../../../app.model';
 
 @Injectable()
 export class UsersService {

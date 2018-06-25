@@ -1,3 +1,22 @@
-<api-header></api-header>
-<api-home></api-home>
-<api-about></api-about>
+<section id="app-wrapper">
+  <section id="body-wrapper">
+
+  <api-header></api-header>
+
+  <section id="main-body-wrapper">
+    <api-home></api-home>
+    <api-about></api-about>
+    <div class="full-screen body" [class.hide]="!contentLoader">
+      <div class="relative">
+        <mat-spinner color="primary"></mat-spinner>
+      </div>
+    </div>
+  </section>
+
+  </section>
+  <div class="full-screen html" [class.hide]="!htmlLoader">
+    <div class="relative">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+  </div>
+</section>

@@ -32,6 +32,7 @@ import { HandleErrorsService } from './services/handle-errors.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MessageHandlerComponent } from './components/message-handler/message-handler.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AboutComponent,
     NotFoundComponent,
     NavMenuComponent,
-    DashboardComponent
+    DashboardComponent,
+    MessageHandlerComponent
   ],
   imports: [
     BrowserModule,
