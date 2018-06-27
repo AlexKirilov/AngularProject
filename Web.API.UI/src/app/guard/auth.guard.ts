@@ -11,7 +11,8 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    (!!this.datastore.token) ? '': this.router.navigate(['/login']);
+    // tslint:disable-next-line:no-unused-expression
+    (!!this.datastore.token) ? '' : this.router.navigate(['/login']);
       return !!this.datastore.token;
   }
 }

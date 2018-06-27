@@ -10,7 +10,14 @@ import { RegistrationDetailsComponent } from './components/registration-details/
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SignInComponent },
-  { path: 'registrationdetails', component: RegistrationDetailsComponent },
+  { path: 'registrationdetails', canActivate: [AuthGuard], component: RegistrationDetailsComponent },
+//   { path: 'home', component: SinglePageComponent, children: [
+//     { path: '', pathMatch: 'full', redirectTo: 'login' },
+//     { path: 'registrationdetails', component: RegistrationDetailsComponent },
+//     { path: 'login', component: LoginComponent },
+//     { path: 'signin', component: SignInComponent },
+//   ],
+// }
 ];
 
 @NgModule({

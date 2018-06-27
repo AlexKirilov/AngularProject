@@ -9,9 +9,17 @@ export class AppAuthInterceptor implements HttpInterceptor {
 
     }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const authReq = req.clone({
-            headers: req.headers.set('Authorization', 'token ' + this.data.token)
-        });
-        return next.handle(authReq);
-    }
+      const token: string = this.data.token;
+      const siteData: string = this.data.SiteData;
+      const website: string = this.data.WebSite;
+      if (token) {
+          req = req.clone({ headers: req.headers.set('Authorization', 'token ' + token) }); }
+      if (siteData) {
+          req = req.clone({ headers: req.headers.set('SiteData', siteData) }); }
+      if (website) {
+          req = req.clone({ headers: req.headers.set('WebSite', website) }); }
+
+      return next.handle(req);
+  }
 }
+

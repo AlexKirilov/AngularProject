@@ -15,7 +15,7 @@ export class DatastoreService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
   private usersURI = 'api/users';  // URL to web api
-  private authURL = `${environment.path}/auth`;
+  private url = `${environment.path}`;
   private config = {
     headers : {
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -99,25 +99,25 @@ export class DatastoreService {
   /////////////////////////////////////////
 
   checkForExistingUserEmail (email, callback) {
-    this.http.post<Boolean>(`${this.authURL}/checkForUser`, email).subscribe(
+    this.http.post<Boolean>(`${this.url}/auth/checkForUser`, email).subscribe(
       result => callback(result)
     );
   }
 
-  registry(newUser, callback, errcallback) {
-    this.http.post<NewUser>(`${this.authURL}/register`, newUser).subscribe(
+  registry(newUser, callback, errorcallback) {
+    this.http.post<NewUser>(`${this.url}/auth/register`, newUser).subscribe(
       result => callback(result),
-      err => errcallback(err)
+      err => errorcallback(err)
     );
   }
 
-  getLogedIn(checkUser, callback, errcallback) {
-    this.http.post<UserCreds>(`${this.authURL}/login`, checkUser).subscribe(
+  getLogedIn(checkUser, callback, errorcallback) {
+    this.http.post<UserCreds>(`${this.url}/auth/login`, checkUser).subscribe(
       result => {
         this.setAuthorization(result);
         callback(result);
       },
-      err => errcallback(err)
+      err => errorcallback(err)
     );
   }
 
@@ -125,13 +125,36 @@ export class DatastoreService {
   getsitecontacts () {
 
   }
-  addOrEditSiteContacts() {
 
+  addOrEditSiteContacts(contacts, callback, errorcallback) {
+    this.http.post(`${this.url}/sitedata/addOrEditSiteContacts`, contacts).subscribe(
+      result => callback(result),
+      err => errorcallback(err)
+    );
   }
 
   removeSiteContacts () {
 
   }
+
+  /////////////////////////////////////////
+  ////////////// Invoices
+
+  cusInvoiceDetails() {
+
+  }
+
+  addOrEditCusInvoiceDetails(invoice, callback, errorcallback) {
+    this.http.post(`${this.url}/invoicecustomersdata/addOrEditCusInvoiceDetails`, invoice).subscribe(
+      result => callback(result),
+      err => errorcallback(err)
+    );
+  }
+
+  removeCusInvoiceDetails () {
+
+  }
+
   /////////////////////////////////////////
   ///////////// Log OUT ///////////////////
   /////////////////////////////////////////

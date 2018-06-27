@@ -4,8 +4,9 @@
   <api-header></api-header>
 
   <section id="main-body-wrapper">
-    <api-home></api-home>
-    <api-about></api-about>
+    <!-- <api-home></api-home>
+    <api-about></api-about> -->
+    <router-outlet></router-outlet>
     <div class="full-screen body" [class.hide]="!contentLoader">
       <div class="relative">
         <mat-spinner color="primary"></mat-spinner>

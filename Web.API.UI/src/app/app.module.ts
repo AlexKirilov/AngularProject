@@ -33,6 +33,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MessageHandlerComponent } from './components/message-handler/message-handler.component';
+import { SinglePageComponent } from './components/single-page/single-page.component';
+import { ApiDataComponent } from './components/api-data/api-data.component';
 
 @NgModule({
   declarations: [
@@ -40,9 +42,11 @@ import { MessageHandlerComponent } from './components/message-handler/message-ha
     HomeComponent,
     HeaderComponent,
     AboutComponent,
+    ApiDataComponent,
     NotFoundComponent,
     NavMenuComponent,
     DashboardComponent,
+    SinglePageComponent,
     MessageHandlerComponent
   ],
   imports: [

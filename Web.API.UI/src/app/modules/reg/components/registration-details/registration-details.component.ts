@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DatastoreService } from '../../../../services/datastore.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -22,7 +23,10 @@ export class RegistrationDetailsComponent implements OnInit {
 
 
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(
+    private _formBuilder: FormBuilder,
+    private datastore: DatastoreService
+  ) { }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -59,7 +63,7 @@ export class RegistrationDetailsComponent implements OnInit {
 
     if (this.GDPR && this.authContacts) {
       const tmpContacts = {
-        phones: this.contactsDetails.value.phonesCtrl.split(','),
+        phones: this.contactsDetails.value.phonesCtrl.split(',').filter(v => v !== ''),
         connections: {
           facebook: this.contactsDetails.value.facebookCtrl,
           twitter: this.contactsDetails.value.twitterCtrl,
@@ -73,6 +77,11 @@ export class RegistrationDetailsComponent implements OnInit {
         }
       };
 
+      this.datastore.addOrEditSiteContacts(
+        tmpContacts,
+        (data) => console.log(data),
+        (err) => console.log(err)
+      );
       console.log(tmpContacts);
     }
     if (this.GDPR && this.authInvoiceDetails) {
@@ -89,6 +98,11 @@ export class RegistrationDetailsComponent implements OnInit {
         GDPR: this.GDPR // this.invoiceDetails.value.GDPRCtrl
       };
       console.log(tmpInvoice);
+      this.datastore.addOrEditCusInvoiceDetails(
+        tmpInvoice,
+        (data) => console.log(data),
+        (err) => console.log(err)
+      );
     }
   }
 
