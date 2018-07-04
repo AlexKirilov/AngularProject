@@ -1,13 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { AppRoutingModule } from './app-routing.module';
-
-import { AuthGuard } from './guard/auth.guard';
-// Add token to header
-import { AppAuthInterceptor } from './app.interceptor';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 import {
@@ -20,31 +13,26 @@ import {
   MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule
 } from '@angular/material';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
-import { AboutComponent } from './components/about/about.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MessageHandlerComponent } from './components/message-handler/message-handler.component';
-import { SinglePageComponent } from './components/single-page/single-page.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardComponent } from './dashboard.component';
+import { DashNavComponent } from './components/dash-nav/dash-nav.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { SiteDashboardComponent } from './components/site-dashboard/site-dashboard.component';
+import { SiteApiConnectionDataComponent } from './components/site-api-connection-data/site-api-connection-data.component';
+import { SiteDetailsComponent } from './components/site-details/site-details.component';
+import { SiteInvoiceDetailsComponent } from './components/site-invoice-details/site-invoice-details.component';
+import { SiteInvoicesComponent } from './components/site-invoices/site-invoices.component';
+import { SiteEmployeesComponent } from './components/site-employees/site-employees.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    HeaderComponent,
-    AboutComponent,
-    NotFoundComponent,
-    SinglePageComponent,
-    MessageHandlerComponent
-  ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpModule,
     FormsModule,
-    AppRoutingModule,
+    DashboardRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatMenuModule,
@@ -79,14 +67,15 @@ import { SinglePageComponent } from './components/single-page/single-page.compon
     MatToolbarModule,
     MatTooltipModule,
   ],
-  providers: [
-    AuthGuard,
-    { // Adding Interceptor
-      provide: HTTP_INTERCEPTORS,
-      useClass: AppAuthInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+  declarations: [
+    DashboardComponent,
+    DashNavComponent,
+    SiteDashboardComponent,
+    SiteApiConnectionDataComponent,
+    SiteDetailsComponent,
+    SiteInvoiceDetailsComponent,
+    SiteInvoicesComponent,
+    SiteEmployeesComponent
+  ]
 })
-export class AppModule { }
+export class DashboardModule { }

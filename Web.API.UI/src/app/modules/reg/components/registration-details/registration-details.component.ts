@@ -79,8 +79,8 @@ export class RegistrationDetailsComponent implements OnInit {
 
       this.datastore.addOrEditSiteContacts(
         tmpContacts,
-        (data) => console.log(data),
-        (err) => console.log(err)
+        (data) => console.log(data)
+        // (err) => console.log(err)
       );
       console.log(tmpContacts);
     }
@@ -101,7 +101,7 @@ export class RegistrationDetailsComponent implements OnInit {
       this.datastore.addOrEditCusInvoiceDetails(
         tmpInvoice,
         (data) => console.log(data),
-        (err) => console.log(err)
+        // (err) => console.log(err)
       );
     }
   }

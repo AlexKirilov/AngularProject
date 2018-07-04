@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DatastoreService } from '../../services/datastore.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -9,8 +8,9 @@ import { DatastoreService } from '../../services/datastore.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private data: DatastoreService) { }
+  constructor() { }
 
   ngOnInit() {
   }
+
 }

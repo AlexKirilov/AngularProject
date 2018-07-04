@@ -17,6 +17,11 @@
     font-family: 'DIN', Arial, Helvetica, sans-serif;
     font-size: 14px;
     outline: none !important;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+        width: 0 !important // Hide Scroll-bar
+    }
   }
 
   html {
@@ -25,6 +30,8 @@
     background: -webkit-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ee36fa', endColorstr='#6f3ede', GradientType=1);/* IE6-9 fallback on horizontal gradient */
+    background: #ee36fa;
+    background: linear-gradient(9deg, #ff0000 -10%, #72c1fd78 50%);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -83,3 +90,21 @@
     padding: 6px 10px;
   }
 
+
+.mat-expansion-panel {
+  background: rgba(255, 255, 255, 0.5);
+  .mat-expansion-panel-body {
+    margin-top: 10px;
+  }
+}
+.mat-toolbar.mat-primary {
+  background: transparent;
+}
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: white;
+}
+.mat-tab-label-active {
+  color: white;
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.1);
+}

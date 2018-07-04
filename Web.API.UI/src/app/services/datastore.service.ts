@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 
 
 import { HandleErrorsService } from './handle-errors.service';
-import { UserCreds, NewUser } from '../app.model';
+import { UserCreds, NewUser, Invoice, ContactsDate } from '../app.model';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +95,16 @@ export class DatastoreService {
   // }
 
   /////////////////////////////////////////
+  ////////////// Auth
+
+  getAuth(callback) {
+    this.http.get<any>(`${this.url}/auth/getAuth`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  /////////////////////////////////////////
   ////////// Registration /////////////////
   /////////////////////////////////////////
 
@@ -111,6 +121,13 @@ export class DatastoreService {
     );
   }
 
+  editAuth(editUser, callback, errorcallback) {
+    this.http.post<NewUser>(`${this.url}/auth/editAuth`, editUser).subscribe(
+      result => callback(result),
+      err => errorcallback(err)
+    );
+  }
+
   getLogedIn(checkUser, callback, errorcallback) {
     this.http.post<UserCreds>(`${this.url}/auth/login`, checkUser).subscribe(
       result => {
@@ -121,15 +138,20 @@ export class DatastoreService {
     );
   }
 
+  /////////////////////////////////////////
+  ////////////// Auth Contacts
 
-  getsitecontacts () {
-
+  getSiteContacts (callback) {
+    this.http.get(`${this.url}/sitedata/getAuthSiteContacts`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err) // errorcallback(err)
+    );
   }
 
-  addOrEditSiteContacts(contacts, callback, errorcallback) {
+  addOrEditSiteContacts(contacts, callback) {
     this.http.post(`${this.url}/sitedata/addOrEditSiteContacts`, contacts).subscribe(
       result => callback(result),
-      err => errorcallback(err)
+      err => this.errorHandler.handleError(err) // errorcallback(err)
     );
   }
 
@@ -140,20 +162,50 @@ export class DatastoreService {
   /////////////////////////////////////////
   ////////////// Invoices
 
-  cusInvoiceDetails() {
-
+  cusInvoiceDetails(callback) {
+    this.http.get<Invoice>(`${this.url}/invoicecustomersdata/cusInvoiceDetails`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
   }
 
-  addOrEditCusInvoiceDetails(invoice, callback, errorcallback) {
-    this.http.post(`${this.url}/invoicecustomersdata/addOrEditCusInvoiceDetails`, invoice).subscribe(
+  addOrEditCusInvoiceDetails(invoice, callback) { // errorcallback
+    this.http.post<Invoice>(`${this.url}/invoicecustomersdata/addOrEditCusInvoiceDetails`, invoice).subscribe(
       result => callback(result),
-      err => errorcallback(err)
+      err => this.errorHandler.handleError(err)
     );
   }
 
   removeCusInvoiceDetails () {
 
   }
+
+  /////////////////////////////////////////
+  ////////////// Customer
+
+  getCustomer(callback) {
+    this.http.get<ContactsDate>(`${this.url}/customers/getCustomer`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  getAuthCustomer(callback) {
+    this.http.get<ContactsDate>(`${this.url}/customers/getAuthCustomer`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  getEmployees (callback) { // TODO:
+    this.http.get<ContactsDate>(`${this.url}/customers/getAuthCustomer`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+
+
 
   /////////////////////////////////////////
   ///////////// Log OUT ///////////////////

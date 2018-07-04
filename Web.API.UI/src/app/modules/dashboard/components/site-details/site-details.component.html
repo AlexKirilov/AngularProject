@@ -1,0 +1,194 @@
+<mat-accordion class="example-headers-align" fxLayout="column" fxFlex fxLayout.md="row" fxLayout.lg="row" fxLayout.xl="row" xFlexAlign="stretch">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal Data
+        </mat-panel-title>
+        <mat-panel-description>
+          <!-- Type your name and age -->
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="firstFormGroup" style="display: inline-grid;">
+          <ng-template matStepLabel>Check you personal data</ng-template>
+
+        <!-- Company name -->
+        <mat-form-field>
+          <input matInput type="text" placeholder="Company Name" formControlName="companyCTRL" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="firstnameCTRL">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastnameCTRL">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Old Email" formControlName="emailCTRL">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="New Email" formControlName="newEmailCTRL">
+        </mat-form-field>
+
+      </form>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="SaveDataPersonal()">Save</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+
+    </mat-expansion-panel>
+
+
+
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Site Details
+        </mat-panel-title>
+        <mat-panel-description>
+          <mat-icon>map</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+    <form [formGroup]="contactsDetails" style="display: inline-grid;">
+      <ng-template matStepLabel>Fill out your website contacts details</ng-template>
+      <!-- Phones Array -->
+      <mat-form-field>
+        <input matInput placeholder="Phone numbers" formControlName="phonesCtrl" required>
+        <mat-hint>Separete all numbers with comma!</mat-hint>
+      </mat-form-field>
+
+      <div class="explanation-details">
+        <!-- Connections -->
+        <h5>Connections</h5>
+
+      <!-- Facebook  -->
+      <mat-form-field>
+        <input matInput placeholder="Facebook url" formControlName="facebookCtrl" required>
+      </mat-form-field>
+
+      <!-- Twitter -->
+      <mat-form-field>
+        <input matInput placeholder="Twitter url" formControlName="twitterCtrl" required>
+      </mat-form-field>
+
+      <!-- LinkedIn -->
+      <mat-form-field>
+        <input matInput placeholder="LinkedIn url" formControlName="linkedinCtrl" required>
+      </mat-form-field>
+
+      <!-- Skype -->
+      <mat-form-field>
+        <input matInput placeholder="Skype name" formControlName="skypeCtrl" required>
+      </mat-form-field>
+
+    </div>
+      <div class="explanation-details">
+        <!-- Coordinates -->
+        <h5>Coordinates</h5>
+        <p>Here you can put coordinates or the google map link</p>
+
+
+      <!-- Latitude -->
+      <mat-form-field>
+        <input matInput placeholder="Latitude" formControlName="latitudeCtrl" required>
+      </mat-form-field>
+
+      <!-- Longitude -->
+      <mat-form-field>
+        <input matInput placeholder="Longitude" formControlName="longitudeCtrl" required>
+      </mat-form-field>
+
+      <!-- URL -->
+      <mat-form-field>
+        <input matInput placeholder="Link" formControlName="urlCtrl" required>
+      </mat-form-field>
+    </div>
+    </form>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="SaveDataContacts()">Save</button>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+
+
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Invoice Details
+        </mat-panel-title>
+        <mat-panel-description>
+
+          <mat-icon>date_range</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="invoiceDetails" style="display: inline-grid;">
+          <div class="explanation-details">
+          <ng-template matStepLabel>Fill out your invoice details</ng-template>
+
+          <!-- Address -->
+          <mat-form-field>
+            <input matInput placeholder="Address" formControlName="addressCtrl" required>
+          </mat-form-field>
+
+          <!-- EIK -->
+          <mat-form-field>
+            <input matInput placeholder="EIK" formControlName="eikCtrl" required>
+          </mat-form-field>
+
+          <!-- Bulstat -->
+          <mat-form-field>
+            <input matInput placeholder="Bulstat" formControlName="bulstatCtrl" required>
+          </mat-form-field>
+
+          <!-- Citizenship -->
+          <mat-form-field>
+            <input matInput placeholder="Citizenship" formControlName="citizenshipCtrl" required>
+          </mat-form-field>
+
+          <!-- Country -->
+          <mat-form-field>
+            <input matInput placeholder="Country" formControlName="countryCtrl" required>
+          </mat-form-field>
+
+          <!-- Town -->
+          <mat-form-field>
+            <input matInput placeholder="Town" formControlName="townCtrl" required>
+          </mat-form-field>
+
+          <!-- Code -->
+          <mat-form-field>
+            <input matInput placeholder="Postcode" formControlName="postcodeCtrl" required>
+          </mat-form-field>
+
+          <!-- Phone number -->
+          <mat-form-field>
+            <input matInput placeholder="Phone number" formControlName="phoneCtrl" required>
+          </mat-form-field>
+
+          <!-- Code -->
+          <mat-form-field>
+            <input matInput placeholder="Phone code" formControlName="countryPhoneCodeCtrl" required>
+          </mat-form-field>
+          </div>
+      </form>
+      <mat-datepicker #picker></mat-datepicker>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="SaveDataInvoices()">Save</button>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">End</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </mat-accordion>

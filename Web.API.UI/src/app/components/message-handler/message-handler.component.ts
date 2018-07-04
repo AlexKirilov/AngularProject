@@ -13,6 +13,6 @@ export class MessageHandlerComponent {
     public dialogRef: MatDialogRef<MessageHandlerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // console.log('data.msgType: ', data.msgType);
+    console.log('data.msgType: ', data);
   }
 }
