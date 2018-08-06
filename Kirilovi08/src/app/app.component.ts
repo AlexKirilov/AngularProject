@@ -1,10 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { DatashareService } from './services/datashare.service';
+import { MatSnackBar } from '../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnDestroy {
+
+  contentLoader: boolean;
+  wrapperLoader: boolean;
+  modalWindow: boolean;
+  htmlLoader: boolean;
+
+  private unscSnackBar;
+  private unscSpinnerHMTL;
+  private unscSpinnerWrapper;
+  private unscSpinnerContent;
+
+  constructor(
+    private snackBar: MatSnackBar,
+    private datashare: DatashareService
+  ) {
+    this.unscSpinnerHMTL = this.datashare.spinnerHMTL.subscribe(bool => this.htmlLoader = bool);
+    this.unscSpinnerWrapper = this.datashare.spinnerWrapper.subscribe(bool => this.wrapperLoader = bool);
+    this.unscSpinnerContent = this.datashare.spinnerContent.subscribe(bool => this.contentLoader = bool);
+    this.unscSnackBar = this.datashare.snackbarData.subscribe(data => this.openSnackBar(data.message, data.action));
+  }
+
+  ngOnDestroy(): void {
+    if (this.unscSnackBar) { this.unscSnackBar.unscubscribe(); }
+    if (this.unscSpinnerHMTL) { this.unscSpinnerHMTL.unscubscribe(); }
+    if (this.unscSpinnerWrapper) { this.unscSpinnerWrapper.unscubscribe(); }
+    if (this.unscSpinnerContent) { this.unscSpinnerContent.unscubscribe(); }
+  }
+
+  openSnackBar(message: string, action: string) {
+    if (message !== '') {
+      this.snackBar.open(message, action, {
+        duration: 4000,
+      });
+    }
+  }
 }

@@ -67,7 +67,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     if (this.datastore.token) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/site']);
     }
     this.wrongCreds = document.getElementById('login-error-msg');
   }

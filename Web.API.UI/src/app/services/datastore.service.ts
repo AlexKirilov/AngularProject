@@ -162,6 +162,12 @@ export class DatastoreService {
   /////////////////////////////////////////
   ////////////// Invoices
 
+  authInvoicesAll(callback) {
+    this.http.get<Invoice>(`${this.url}/invoices/invoices`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
   cusInvoiceDetails(callback) {
     this.http.get<Invoice>(`${this.url}/invoicecustomersdata/cusInvoiceDetails`).subscribe(
       result => callback(result),
@@ -197,14 +203,41 @@ export class DatastoreService {
     );
   }
 
+
+  /////////////////////////////////////////
+  ////////////// Employees
+
   getEmployees (callback) { // TODO:
-    this.http.get<ContactsDate>(`${this.url}/customers/getAuthCustomer`).subscribe(
+    this.http.get<ContactsDate>(`${this.url}/customers/getEmployees`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  updateEmployee (data, callback ) {
+    this.http.post<ContactsDate>(`${this.url}/customers/updateEmployee`, data).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
     );
   }
 
 
+  /////////////////////////////////////////
+  ///////////// Logs    ///////////////////
+  /////////////////////////////////////////
+  getLogsBySiteOwner (filters, callback) {
+    this.http.post<any>(`${this.url}/logs/getSiteLogs`, filters).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  getLogsDateTypes (callback) {
+    this.http.get<any>(`${this.url}/logs/logDataFilter`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
 
 
   /////////////////////////////////////////

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.datastore.token) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/site']);
     }
   }
 
@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     if (!this.btnDisbaled) {
       this.datastore.getLogedIn({ password: this.login.value.pass, email: this.login.value.email },
         (res) => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/site']);
         },
         (err) => {
           // console.log('Log in error: ', err);

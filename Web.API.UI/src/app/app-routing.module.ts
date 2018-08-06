@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'home', component: SinglePageComponent },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: '/home' } // component: NotFoundComponent }
+  { path: '**', redirectTo: '/site' } // component: NotFoundComponent }
 ];
 
 @NgModule({

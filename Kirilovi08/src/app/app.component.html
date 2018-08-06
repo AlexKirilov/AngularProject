@@ -1,7 +1,35 @@
-<app-header></app-header>
-<section id="main-container">
-  <div class="inner-container">
-    <router-outlet></router-outlet>
+<section id="app-wrapper">
+  <section id="body-wrapper">
+
+    <app-header></app-header>
+
+    <section id="main-container">
+
+      <div class="inner-container">
+        <router-outlet></router-outlet>
+      </div>
+
+      <div class="full-screen body" [class.hide]="!contentLoader">
+        <div class="relative">
+          <mat-spinner color="primary"></mat-spinner>
+        </div>
+      </div>
+    </section>
+
+    <app-footer></app-footer>
+
+    <div class="full-screen wrapper" [class.hide]="!wrapperLoader">
+      <div class="relative">
+        <mat-spinner color="primary"></mat-spinner>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="full-screen html" [class.hide]="!htmlLoader">
+    <div class="relative">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
   </div>
+
 </section>
-<app-footer></app-footer>

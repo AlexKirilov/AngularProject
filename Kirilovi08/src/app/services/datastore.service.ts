@@ -8,6 +8,8 @@ import { HandleErrorsService } from './handle-errors.service';
 import { NewUser } from '../interfaces/new-user';
 import { User } from '../interfaces/user';
 import { Product } from '../interfaces/product';
+import { retryWhen, catchError } from '../../../node_modules/rxjs/operators';
+import { genericRetry } from './retry-functionality.service';
 
 @Injectable({
   providedIn: 'root'
@@ -61,7 +63,13 @@ export class DatastoreService {
   /////////////////////////////////////////
 
   getLogedIn(checkUser, callback, errcallback) {
-    this.http.post<User>(`${this.authURL}/customers/login`, checkUser).subscribe(
+    this.http.post<User>(`${this.authURL}/customers/login`, checkUser)
+    .pipe( // TODO: add retry to all GET Functions
+      retryWhen(genericRetry()),
+      catchError(err =>
+        this.errorHandler.handleError(err)
+      )
+    ).subscribe(
       result => {
         this.setAuthorization(result);
         callback(result);
@@ -186,11 +194,11 @@ export class DatastoreService {
   }
 
   // TODO: Change here // Check the API BE
-  addCategoryOrSubcategory(category, callback, errcallback) {
+  addCategoryOrSubcategory(category, callback) {
     // Required data { "name": "bmw", "parentId":"5b05149b8d9e8024cc528527"} for v2 will be included and "type":"5b0428384953411bd455bb90"
-    this.http.post<NewUser>(`${this.authURL}/customers/createcategory`, category).subscribe(
+    this.http.post<any>(`${this.authURL}/category/createcategory`, category).subscribe(
       result => callback(result),
-      err => errcallback(err)
+      err => this.errorHandler.handleError(err)
     );
   }
 

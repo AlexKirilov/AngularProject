@@ -5,9 +5,9 @@ import { SiteDashboardComponent } from './components/site-dashboard/site-dashboa
 import { SiteDetailsComponent } from './components/site-details/site-details.component';
 import { SiteEmployeesComponent } from './components/site-employees/site-employees.component';
 import { SiteInvoicesComponent } from './components/site-invoices/site-invoices.component';
-import { SiteInvoiceDetailsComponent } from './components/site-invoice-details/site-invoice-details.component';
 import { SiteApiConnectionDataComponent } from './components/site-api-connection-data/site-api-connection-data.component';
 import { DashboardComponent } from './dashboard.component';
+import { SiteLogsComponent } from './components/site-logs/site-logs.component';
 
 const routes: Routes = [
   { path: 'site', canActivate: [AuthGuard], component: DashboardComponent, children: [
@@ -16,8 +16,8 @@ const routes: Routes = [
     { path: 'details',  component: SiteDetailsComponent },
     { path: 'employees', component: SiteEmployeesComponent },
     { path: 'invoices', component: SiteInvoicesComponent },
-    { path: 'invoice-details', component: SiteInvoiceDetailsComponent },
-    { path: 'api-connection-details', component: SiteApiConnectionDataComponent }
+    { path: 'api-connection-details', component: SiteApiConnectionDataComponent },
+    { path: 'site-logs', component: SiteLogsComponent  }
   ] },
 ];
 

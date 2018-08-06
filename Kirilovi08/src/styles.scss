@@ -1,9 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import './variables.scss';
+$material-icons-font-path: '~material-icons/iconfont/';
+@import '~material-icons/iconfont/material-icons.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 * {
-    margin: 0;
-    padding: 0px;
+  margin: 0;
+  padding: 0px;
+}
+* {
+  // -ms-overflow-style: none;
+  // overflow: -moz-scrollbars-none;
+  &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 0px;
+  }
+  &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, .5);
+      -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.menu-icon-nav {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.mat-icon,
+svg {
+  color: $disabled-btn;
+  fill: $disabled-btn;
 }

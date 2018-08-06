@@ -19,6 +19,7 @@ import {
   MatListModule, MatGridListModule, MatExpansionModule, MatDividerModule, MatDialogModule,
   MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -29,6 +30,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MessageHandlerComponent } from './components/message-handler/message-handler.component';
 import { SinglePageComponent } from './components/single-page/single-page.component';
+import { SharedModule } from './shared-module/shared.module';
 
 @NgModule({
   declarations: [
@@ -38,15 +40,17 @@ import { SinglePageComponent } from './components/single-page/single-page.compon
     AboutComponent,
     NotFoundComponent,
     SinglePageComponent,
-    MessageHandlerComponent
+    MessageHandlerComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
+    SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FlexLayoutModule,
     MatMenuModule,
     MatButtonModule,
     MatCheckboxModule,

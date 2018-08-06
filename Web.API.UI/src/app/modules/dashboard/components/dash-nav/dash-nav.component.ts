@@ -17,8 +17,8 @@ export class DashNavComponent implements OnInit {
       {label: 'Employees', link: 'employees'},
       {label: 'Invoices', link: 'invoices'},
       {label: 'Site Details', link: 'details'},
-      {label: 'Invoice Details', link: 'invoice-details'},
       {label: 'API Data', link: 'api-connection-details'},
+      {label: 'Site Logs', link: 'site-logs'},
     ];
    }
 

@@ -1,0 +1,44 @@
+<section id="modal-window-wrapper" fxFlex="width">
+  <section id="modaw-container">
+
+    <section class="header" mat-dialog-title *ngIf="data.msgType !== 'prompt' && data.msgType !== 'import' ">
+      <div class="title">
+        {{ data.title }}
+      </div>
+    </section>
+
+    <section class="body-container">
+      <mat-dialog-content *ngIf="data.modal == 'table'">
+        <!-- <tools-data-table-template [class.hide]="data.dataSource.data.length == 0" [dataSource]="data.dataSource" [displayedColumns]="data.displayedColumns"
+          [tableColumnNames]="data.tableColumnNames" [dateTransformNames]="data.dateTransformNames" [displayedColumnsMedium]="data.displayedColumnsMedium"
+          [middleTableDataColumns]="data.middleTableDataColumns" [fullDate]="data.fullDate">
+        </tools-data-table-template> -->
+      </mat-dialog-content>
+
+      <mat-dialog-content *ngIf="data.msgType === 'status'">
+
+      </mat-dialog-content>
+
+      <mat-dialog-content *ngIf="data.msgType === 'shortkeys'">
+
+      </mat-dialog-content>
+    </section>
+
+    <section class="controls">
+      <mat-dialog-actions class="control-btns">
+        <div *ngIf="data.actions != 'OffshoreEqualisationFeed' && data.actions !== 'OffshoreUndistributedIncome' ">
+          <button mat-raised-button mat-dialog-close>OK</button>
+        </div>
+        <div *ngIf="data.actions == 'OffshoreEqualisationFeed' || data.actions == 'OffshoreUndistributedIncome' ">
+          <button mat-button [mat-dialog-close]="false">Cancel Imports</button>
+          <button mat-raised-button [mat-dialog-close]="true">Accept Imports</button>
+        </div>
+        <!-- <div *ngIf=" data.msgType == 'import' ">
+          <button mat-button [mat-dialog-close]="false">Cancel</button>
+          <button mat-raised-button [mat-dialog-close]="data.elements" cdkFocusInitial>Add</button>
+        </div> -->
+      </mat-dialog-actions>
+    </section>
+
+  </section>
+</section>

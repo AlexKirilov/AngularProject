@@ -23,6 +23,7 @@ import {
   MatListModule, MatGridListModule, MatExpansionModule, MatDividerModule, MatDialogModule,
   MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { NaviComponent } from './components/navi/navi.component';
@@ -38,6 +39,8 @@ import { SigninComponent } from './components/users/signin/signin.component';
 import { ForgetpassComponent } from './components/users/forgetpass/forgetpass.component';
 import { AccountComponent } from './components/account/account.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
 
 @NgModule({
   declarations: [
@@ -54,12 +57,15 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
     SigninComponent,
     ForgetpassComponent,
     AccountComponent,
-    PurchaseComponent
+    PurchaseComponent,
+    ModalWindowComponent,
+    ErrorHandlerComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
+    FlexLayoutModule,
     AppRoutingModule,
     ReactiveFormsModule,
     PasswordStrengthBarModule,
@@ -103,6 +109,8 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
       useClass: AppAuthInterceptor,
       multi: true
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorHandlerComponent, ModalWindowComponent],
+  // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

@@ -1,0 +1,180 @@
+<section id="table-template-wrapper">
+  <mat-card>
+    <mat-card-content>
+      <section id="result-table">
+        <div class="mat-elevation-z8">
+
+          <section class="results-paginator" id="top-pagination-menu" [class.hide]="dataSource.data.length < 25" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px"
+            *ngIf="serverPagging">
+
+            <div class="itemsPerPage">
+              <div class="mat-paginator-page-size ng-star-inserted">
+                <mat-form-field>
+                  <mat-select placeholder="Items per page:" [(value)]="itemsPerPageIn" (selectionChange)='changeItemsPerPage()'>
+                    <mat-option value="5">5</mat-option>
+                    <mat-option value="10">10</mat-option>
+                    <mat-option value="25">25</mat-option>
+                    <mat-option value="50">50</mat-option>
+                    <mat-option value="100">100</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="pagechange" style="display: flex;">
+              <div class="mat-paginator-range-label" fxShow fxHide.sm fxHide.xs>{{ paggingDetails }} </div>
+              <div class="mat-paginator-range-label" fxHide fxShow.sm>{{ paggingDetailsMd }} </div>
+
+              <button mat-icon-button class="firstPage" (click)="firstPage()" [class.disabled]="currentPageIn == 1" [disabled]="currentPageIn == 1">
+                <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+                  <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+                </svg>
+              </button>
+              <button mat-icon-button class="prevPage" (click)="prevPage()" [class.disabled]="currentPageIn == 1" [disabled]="currentPageIn == 1">
+                <span class="mat-button-wrapper">
+                  <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                  </svg>
+                </span>
+              </button>
+              <button mat-icon-button class="nextPage" (click)="nextPage()" [class.disabled]="currentPageIn == allPages" [disabled]="currentPageIn == allPages">
+                <span class="mat-button-wrapper">
+                  <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                  </svg>
+                </span>
+              </button>
+              <button mat-icon-button class="lastPage" (click)="lastPage()" [class.disabled]="currentPageIn == allPages" [disabled]="currentPageIn == allPages">
+                <span class="mat-button-wrapper">
+                  <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+                    <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Large Table -->
+          <table mat-table id="large-table" [dataSource]="dataSource" matSort fxShow fxHide.xs fxHide.sm>
+
+            <ng-container *ngFor="let item of displayedColumns" matColumnDef="{{item}}">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{tableColumnNames[item]}}</th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="!dateTransformNames.includes(item)">{{element[item]}}</span>
+                <span *ngIf="!fullDate && dateTransformNames.includes(item)"> {{element[item] | date:'dd-MM-yyyy' }}</span>
+                <span *ngIf="fullDate && dateTransformNames.includes(item)"> {{element[item] | date:'dd-MM-yyyy HH:mm:ss' }}</span>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRecord(row)" [class.active]="selectedRecord == row"></tr>
+          </table>
+
+          <!-- Middle Table -->
+          <table mat-table id="medium-table" *ngIf='ifMiddle()' [dataSource]="dataSource" fxHide fxShow.sm>
+
+            <ng-container *ngFor="let item of displayedColumnsMedium" matColumnDef="{{item}}">
+              <th mat-header-cell *matHeaderCellDef>
+                <span *ngIf="!isTableHasTwoColumns">{{item}}</span>
+                <span *ngIf="isTableHasTwoColumns">{{tableColumnNames[item]}}</span>
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <ul>
+                  <li *ngFor="let columnEl of middleTableDataColumns[item]">
+                    <span class="column-title" *ngIf="!isTableHasTwoColumns">{{ columnEl }}: </span>
+                    <span *ngIf="!dateTransformNames.includes(columnEl)">{{element[columnEl]}}</span>
+                    <span *ngIf="!fullDate && dateTransformNames.includes(columnEl)"> {{element[columnEl] | date:'dd-MM-yyyy' }}</span>
+                    <span *ngIf="fullDate && dateTransformNames.includes(columnEl)"> {{element[columnEl] | date:'dd-MM-yyyy HH:mm:ss' }}</span>
+                  </li>
+                </ul>
+
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsMedium"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsMedium;" (click)="selectRecord(row)"></tr>
+          </table>
+
+          <!-- Small table -->
+          <table mat-table id="small-table" [dataSource]="dataSource" fxHide fxShow.xs>
+
+            <ng-container *ngFor="let item of displayedColumnsSmall" matColumnDef="{{item}}">
+              <th mat-header-cell *matHeaderCellDef>{{item}}</th>
+              <td mat-cell *matCellDef="let element">
+                <ul>
+                  <li *ngFor="let columnElement of displayedColumns">
+                    <span class="column-title">{{ columnElement }}: </span>
+                    <span *ngIf="!dateTransformNames.includes(columnElement)">{{element[columnElement]}}</span>
+                    <span *ngIf="!fullDate && dateTransformNames.includes(columnElement)"> {{element[columnElement] | date:'dd-MM-yyyy' }}</span>
+                    <span *ngIf="fullDate && dateTransformNames.includes(columnElement)"> {{element[columnElement] | date:'dd-MM-yyyy HH:mm:ss' }}</span>
+                  </li>
+                </ul>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsSmall"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsSmall;" (click)="selectRecord(row)"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons [class.hide]="tablePagginationOnOff"></mat-paginator>
+
+          <!-- [class.hide]="dataSource.data.length < 25" -->
+          <section class="results-paginator second-pagination" id="bottom-pagination-menu"
+            fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" *ngIf="serverPagging">
+
+            <div class="itemsPerPage">
+              <div class="mat-paginator-page-size ng-star-inserted">
+                <mat-form-field>
+                  <mat-select placeholder="Items per page:" [(value)]="itemsPerPageIn" (selectionChange)='changeItemsPerPage()'>
+                    <mat-option value="5">5</mat-option>
+                    <mat-option value="10">10</mat-option>
+                    <mat-option value="25">25</mat-option>
+                    <mat-option value="50">50</mat-option>
+                    <mat-option value="100">100</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="pagechange" style="display: flex;">
+              <div class="mat-paginator-range-label" fxShow fxHide.sm fxHide.xs>{{ paggingDetails }} </div>
+              <div class="mat-paginator-range-label" fxHide fxShow.sm>{{ paggingDetailsMd }} </div>
+
+              <button mat-icon-button class="firstPage" (click)="firstPage()" [class.disabled]="currentPageIn == 1" [disabled]="currentPageIn == 1">
+                <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+                  <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+                </svg>
+              </button>
+
+              <button mat-icon-button class="prevPage" (click)="prevPage()" [class.disabled]="currentPageIn == 1" [disabled]="currentPageIn == 1">
+                <span class="mat-button-wrapper">
+                  <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+                  </svg>
+                </span>
+              </button>
+
+              <button mat-icon-button class="nextPage" (click)="nextPage()" [class.disabled]="currentPageIn == allPages" [disabled]="currentPageIn == allPages">
+                <span class="mat-button-wrapper">
+                  <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                  </svg>
+                </span>
+              </button>
+
+              <button mat-icon-button class="lastPage" (click)="lastPage()" [class.disabled]="currentPageIn == allPages" [disabled]="currentPageIn == allPages">
+                <span class="mat-button-wrapper">
+                  <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+                    <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </section>
+
+        </div>
+      </section>
+
+    </mat-card-content>
+  </mat-card>
+</section>

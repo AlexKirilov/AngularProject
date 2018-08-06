@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SiteApiConnectionDataComponent implements OnInit {
 
-  constructor() { }
+  code;
+  constructor() {
+    this.code = `/site-api-connection-data.component.html`;
+  }
 
   ngOnInit() {
   }

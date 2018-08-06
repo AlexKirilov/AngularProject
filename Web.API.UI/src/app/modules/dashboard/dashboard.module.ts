@@ -19,12 +19,14 @@ import { DashNavComponent } from './components/dash-nav/dash-nav.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '../../shared-module/shared.module';
+
 import { SiteDashboardComponent } from './components/site-dashboard/site-dashboard.component';
 import { SiteApiConnectionDataComponent } from './components/site-api-connection-data/site-api-connection-data.component';
 import { SiteDetailsComponent } from './components/site-details/site-details.component';
-import { SiteInvoiceDetailsComponent } from './components/site-invoice-details/site-invoice-details.component';
 import { SiteInvoicesComponent } from './components/site-invoices/site-invoices.component';
 import { SiteEmployeesComponent } from './components/site-employees/site-employees.component';
+import { SiteLogsComponent } from './components/site-logs/site-logs.component';
 
 @NgModule({
   imports: [
@@ -32,6 +34,7 @@ import { SiteEmployeesComponent } from './components/site-employees/site-employe
     BrowserModule,
     HttpModule,
     FormsModule,
+    SharedModule,
     DashboardRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -73,9 +76,9 @@ import { SiteEmployeesComponent } from './components/site-employees/site-employe
     SiteDashboardComponent,
     SiteApiConnectionDataComponent,
     SiteDetailsComponent,
-    SiteInvoiceDetailsComponent,
     SiteInvoicesComponent,
-    SiteEmployeesComponent
+    SiteEmployeesComponent,
+    SiteLogsComponent
   ]
 })
 export class DashboardModule { }
