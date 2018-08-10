@@ -18,6 +18,8 @@ export class ProductsComponent implements OnInit {
   public prodQuantity = 0;
   public prodPrice = 0;
   public prodClientQnt = 0;
+  public packageSize = '';
+  public imageURL = '';
   public editbtn;
   public basketArr = [];
   public ifAdmin = true;
@@ -70,6 +72,8 @@ export class ProductsComponent implements OnInit {
     this.editbtn = el._id;
     this.prodQuantity = el.quantity || 0;
     this.prodPrice = el.price || 0.00;
+    this.packageSize = el.pack || '';
+    this.imageURL = el.imgURL || '';
   }
   saveProd(el) {
     this.editbtn = '';
@@ -79,6 +83,8 @@ export class ProductsComponent implements OnInit {
     el.details = this.prodDetails;
     el.quantity = this.prodQuantity || 0;
     el.price = this.prodPrice || 0;
+    el.pack = this.packageSize || '';
+    el.imgURL = this.imageURL || '';
     this.data.addEditProducts(el, (data) => { console.log('Edit Product: ', data); } );
   }
   addProd() {

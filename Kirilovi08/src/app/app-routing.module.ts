@@ -17,12 +17,12 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'forgetpassword', component: ForgetpassComponent },
-  { path: 'home', canActivate:[AuthGuard], component: HomeComponent },
-  { path: 'products', canActivate:[AuthGuard], component: ProductsComponent },
-  { path: 'gallery', canActivate:[AuthGuard], component: GalleryComponent },
-  { path: 'contacts', canActivate:[AuthGuard], component: ContactsComponent },
-  { path: 'about', canActivate:[AuthGuard], component: AboutUsComponent },
-  { path: '**', redirectTo: '/home' },
+  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
+  { path: 'products', canActivate: [AuthGuard], component: ProductsComponent },
+  { path: 'gallery', canActivate: [AuthGuard], component: GalleryComponent },
+  { path: 'contacts', canActivate: [AuthGuard], component: ContactsComponent },
+  { path: 'about', canActivate: [AuthGuard], component: AboutUsComponent },
+  // { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({
