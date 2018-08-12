@@ -19,6 +19,24 @@ export class ModalHandlerService {
         this.datashare.stopSpinnerContent();
     }
 
+    openModalImage(
+      imgURL,
+      callback = null
+    ) {
+      this.stopSpinners();
+        const dialogRef = this.dialog.open(ModalWindowComponent, {
+            width: '500px',
+            data: {
+                title: '',
+                modal: 'image',
+                imgURL
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (callback != null) { callback(result); }
+        });
+    }
     openModalTable(
         title: string = '',
         actions,

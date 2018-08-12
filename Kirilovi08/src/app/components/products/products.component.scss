@@ -2,7 +2,7 @@
 #product-container {
   position: relative;
   .controllers {
-    width: 100;
+    // width: 100;
     text-align: right;
     margin-top: 20px;
   }
@@ -34,9 +34,14 @@
   }
 }
 
+.mat-form-field.max-input-size {
+  // max-width: 150px;
+  margin-top: 20px;
+}
 .numeric-input,
 .numeric-input .mat-form-field {
-  width: 70px;
+  width: 50px;
+  margin-top: 20px !important;
 }
 
 .table-image {
@@ -49,8 +54,8 @@
 
 .basket-container {
   position: absolute;
-  top: -43px;
-  right: 70px;
+  top: -64px;
+  right: 110px;
   margin: 0 auto;
   .mat-icon {
     width: 40px;

@@ -122,42 +122,46 @@ export class HandleErrorsService {
 
   handleError(err: any): any {
     this.error = err;
-    if (err.status === 401 || err.status === 403) { // if session has expired
+    if (err.status === 400) {
+      this.error.Title = 'error';
+      this.error.Type = 'error';
+      this.error.ErrorMessage = 'Bad Request';
+      this.openDialog(this.error);
+    } else if (err.status === 401 || err.status === 403) { // if session has expired
+      this.error.Title = 'error';
+      this.error.Type = 'error';
+      this.error.ErrorMessage = err.error.message;
       this.openDialog(this.error, () => {
-        // this.datastore.logout();
       });
     } else if (err.status === 404) { // Page or Data was/were not found
-      // TODO: how we should handle this?
-      // this.router.navigate(['/notfound']);
-      this.error = this.tmp;
-      this.error.ErrorMessage = err.message;
+      this.error = 'info';
+      this.error.ErrorMessage = 'Data was not found';
       this.openDialog(this.error, (res) => {
-        // this.datastore.logout();
       });
-    } else if (err.status === 400) {
-      // Default message only for unexpected /Unknown errors
-      this.error.Title = err.statusText;
+    } else if (err.status === 500) {
+      this.error.Title = 'error';
       this.error.Type = 'error';
-      this.error.ErrorMessage = err.message;
-
+      // tslint:disable-next-line:max-line-length
+      this.error.ErrorMessage = `Internal Server Error!
+          Please contact with your administrator or try again later.`;
       this.openDialog(this.error);
     } else if (err.status === 0 || err.statusText === 'Unknown Error') {
-      // Default message only for unexpected /Unknown errors
       this.error.Title = 'error';
       this.error.Type = 'error';
       // tslint:disable-next-line:max-line-length
-      this.error.ErrorMessage = 'Sorry! We could not load your data. There was an Internal Server Error! Please contact with your administrator or try again later.';
+      this.error.ErrorMessage = `Sorry! We could not load your data.
+          There was an Internal Server Error!
+          Please contact with your administrator or try again later.`;
       this.openDialog(this.error);
     } else if (err.status === 503 || err.statusText === 'Service Unavailable') {
-      // Default message only for unexpected /Unknown errors
       this.error.Title = 'error';
       this.error.Type = 'error';
       // tslint:disable-next-line:max-line-length
-      this.error.ErrorMessage = 'We are sorry, but this service is unavailable for the moment! Please contact with your administrator or try again later.';
+      this.error.ErrorMessage = `We are sorry, but this service is unavailable at the moment!
+          Please contact with your administrator or try again later.`;
       this.openDialog(this.error);
     } else {
       this.openDialog(this.error);
-      // return Promise.reject(error.message || error); TODO ....... or remove
     }
   }
 }

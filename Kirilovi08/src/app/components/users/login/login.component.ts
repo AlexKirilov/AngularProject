@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatastoreService } from '../../../services/datastore.service';
+import { DatashareService } from '../../../services/datashare.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,6 @@ import { DatastoreService } from '../../../services/datastore.service';
 })
 export class LoginComponent implements OnInit {
 
-  
   public warnMsg = '';
   public newPath: string;
   private loginErrorMsg = 'Wrong email or password';
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private datastore: DatastoreService,
+    private datashare: DatashareService,
     public fb: FormBuilder,
   ) {
     this.login = fb.group({
@@ -35,24 +36,27 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.datastore.token)
+    if (this.datastore.token) {
       this.router.navigate(['/home']);
+    }
   }
 
   onchange() {
-    this.btnDisbaled = !this.login.value.pass || !this.login.value.email || this.login.get('pass').invalid || this.login.get('email').invalid
+    // tslint:disable-next-line:max-line-length
+    this.btnDisbaled = !this.login.value.pass || !this.login.value.email ||
+                       this.login.get('pass').invalid || this.login.get('email').invalid;
   }
-
 
   loginUser() {
     if (!this.btnDisbaled) {
       this.datastore.getLogedIn({ password: this.login.value.pass, email: this.login.value.email },
         (res) => {
-          this.router.navigate(['/home']);
+          // tslint:disable-next-line:no-shadowed-variable
+          this.datastore.checkUser();
+          this.router.navigate(['/products']);
         },
         (err) => {
-          // console.log('Log in error: ', err);
-          this.warnMsg = this.loginErrorMsg
+          this.warnMsg = this.loginErrorMsg;
         });
     }
   }

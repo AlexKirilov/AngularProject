@@ -10,6 +10,7 @@ import { User } from '../interfaces/user';
 import { Product } from '../interfaces/product';
 import { retryWhen, catchError } from '../../../node_modules/rxjs/operators';
 import { genericRetry } from './retry-functionality.service';
+import { DatashareService } from './datashare.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +29,13 @@ export class DatastoreService {
     private router: Router,
     private http: HttpClient,
     private errorHandler: HandleErrorsService,
+    private datashare: DatashareService,
   ) { }
 
   TOKEN_KEY = 'token';
   SITEDATA_KEY = 'SiteData';
   SITEID_KEY = 'WebSite';
+  USERNAME = 'username';
 
   get token() {
     return localStorage.getItem(this.TOKEN_KEY);
@@ -46,16 +49,29 @@ export class DatastoreService {
     return localStorage.getItem(this.SITEID_KEY);
   }
 
+  get Username() {
+    return localStorage.getItem(this.USERNAME);
+  }
+
   setAuthorization(data) {
     localStorage.setItem(this.TOKEN_KEY, data.token);
     localStorage.setItem(this.SITEDATA_KEY, data.SiteData);
     localStorage.setItem(this.SITEID_KEY, data.WebSite);
+    localStorage.setItem(this.USERNAME, data.username);
   }
 
   removeAuthorization() {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.SITEDATA_KEY);
     localStorage.removeItem(this.SITEID_KEY);
+    localStorage.removeItem(this.USERNAME);
+
+  }
+
+  checkUser () {
+    this.getProductEditLevel( res => {
+      this.datashare.showIfAdmin(res === ((this.SiteData) ? this.SiteData.split(' ')[0] : null));
+    });
   }
 
   /////////////////////////////////////////
@@ -64,13 +80,9 @@ export class DatastoreService {
 
   getLogedIn(checkUser, callback, errcallback) {
     this.http.post<User>(`${this.authURL}/customers/login`, checkUser)
-    .pipe( // TODO: add retry to all GET Functions
-      retryWhen(genericRetry()),
-      catchError(err =>
-        this.errorHandler.handleError(err)
-      )
-    ).subscribe(
+    .subscribe(
       result => {
+        debugger;
         this.setAuthorization(result);
         callback(result);
       },
@@ -78,8 +90,22 @@ export class DatastoreService {
     );
   }
 
+  getProductEditLevel (callback) {
+    this.http.get(`${this.authURL}/store/geteditlevel`).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
   getProducts(items, callback) {
     if (items === void 0) { items = ''; }
+    if (items.sortBy.direction !== '') {
+      items.sortBy = `${items.sortBy.active}${(items.sortBy.direction === 'desc') ? items.sortBy.direction : ''}` || {};
+    } else {
+      items.sortBy = '';
+    }
     this.http.post<Product>(`${this.authURL}/store/products`, items).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
@@ -133,6 +159,15 @@ export class DatastoreService {
   getCustomerInvoices(callback) {
     // Only Customer can get
     this.http.get<any>(`${this.authURL}/invoicecustomersdata/cusInvoiceDetails`).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
+  getGallery(callback) {
+    this.http.get<any>(`${this.authURL}/gallery/get`).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
@@ -218,6 +253,15 @@ export class DatastoreService {
     // Required Data {GDPR == true}
     // Only Customer can update or create Invoice Data
     this.http.get<any>(`${this.authURL}/invoicecustomersdata/addOrEditCusInvoiceDetails`, invoiceData).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
+  addToGallery(images, callback) {
+    this.http.post<any>(`${this.authURL}/gallery/add`, images).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);

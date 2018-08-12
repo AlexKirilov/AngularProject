@@ -13,5 +13,9 @@ export class ModalWindowComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log('Modal window data: ', data);
+    if (data.modal === 'image') {
+      const newClass = document.getElementsByTagName('mat-dialog-container');
+      newClass[0].classList.add('image-transperant');
+    }
   }
 }

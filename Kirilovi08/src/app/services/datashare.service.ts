@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '../../../node_modules/@angular/router';
+import { DatastoreService } from './datastore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +72,21 @@ export class DatashareService {
 
   showSnackBar(data: SnackBarI) {
     this.snackbarSource.next(data);
+  }
+
+  //////////////   IfAdmin    //////////////
+  private ifAdminSource = new BehaviorSubject<Boolean>(false);
+  ifAdmin = this.ifAdminSource.asObservable();
+
+  showIfAdmin(is: Boolean) {
+    this.ifAdminSource.next(is);
+  }
+
+  private ifUserSource = new BehaviorSubject<Boolean>(false);
+  ifUser = this.ifUserSource.asObservable();
+
+  showIfUser(is: Boolean) {
+    this.ifUserSource.next(is);
   }
 
 }

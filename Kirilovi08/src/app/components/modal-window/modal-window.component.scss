@@ -1,8 +1,19 @@
 .controls {
-  width: 100%;
-  .control-btns {
-      width: auto;
-      display: block;
-      float: right;
-  }
+    width: 100%;
+    .control-btns {
+        width: auto;
+        display: block;
+        float: right;
+    }
+}
+
+.image-container {
+    .image-div {
+        width: 450px;
+        height: 400px;
+        margin: 0 auto;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: 50% 50% !important;
+    }
 }

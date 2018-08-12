@@ -17,11 +17,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'forgetpassword', component: ForgetpassComponent },
-  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
-  { path: 'products', canActivate: [AuthGuard], component: ProductsComponent },
-  { path: 'gallery', canActivate: [AuthGuard], component: GalleryComponent },
-  { path: 'contacts', canActivate: [AuthGuard], component: ContactsComponent },
-  { path: 'about', canActivate: [AuthGuard], component: AboutUsComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'gallery', component: GalleryComponent },
+  { path: 'contacts', component: ContactsComponent },
+  { path: 'about', component: AboutUsComponent },
   // { path: '**', redirectTo: '/home' },
 ];
 

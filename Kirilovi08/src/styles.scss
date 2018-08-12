@@ -45,3 +45,10 @@ svg {
   color: $disabled-btn;
   fill: $disabled-btn;
 }
+
+.image-transperant {
+  background:rgba(255,255,255,0.5) !important;
+  .mat-dialog-title {
+    display: none !important;
+  }
+}

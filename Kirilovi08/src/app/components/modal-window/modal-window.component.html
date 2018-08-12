@@ -1,13 +1,13 @@
 <section id="modal-window-wrapper" fxFlex="width">
   <section id="modaw-container">
 
-    <section class="header" mat-dialog-title *ngIf="data.msgType !== 'prompt' && data.msgType !== 'import' ">
+    <section class="header" mat-dialog-title *ngIf="data.modal !== 'images' && data.msgType !== 'import' ">
       <div class="title">
         {{ data.title }}
       </div>
     </section>
 
-    <section class="body-container">
+    <section class="body-container" [class.image-container]="data.modal === 'image'" >
       <mat-dialog-content *ngIf="data.modal == 'table'">
         <!-- <tools-data-table-template [class.hide]="data.dataSource.data.length == 0" [dataSource]="data.dataSource" [displayedColumns]="data.displayedColumns"
           [tableColumnNames]="data.tableColumnNames" [dateTransformNames]="data.dateTransformNames" [displayedColumnsMedium]="data.displayedColumnsMedium"
@@ -15,8 +15,8 @@
         </tools-data-table-template> -->
       </mat-dialog-content>
 
-      <mat-dialog-content *ngIf="data.msgType === 'status'">
-
+      <mat-dialog-content *ngIf="data.modal === 'image'">
+        <div class="image-div" [ngStyle]="{background: 'url(./images/gallery/' + data.imgURL + ')'}"></div>
       </mat-dialog-content>
 
       <mat-dialog-content *ngIf="data.msgType === 'shortkeys'">
@@ -24,7 +24,7 @@
       </mat-dialog-content>
     </section>
 
-    <section class="controls">
+    <section class="controls" *ngIf="data.modal !== 'image'">
       <mat-dialog-actions class="control-btns">
         <div *ngIf="data.actions != 'OffshoreEqualisationFeed' && data.actions !== 'OffshoreUndistributedIncome' ">
           <button mat-raised-button mat-dialog-close>OK</button>

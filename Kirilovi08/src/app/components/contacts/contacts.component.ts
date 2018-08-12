@@ -16,7 +16,6 @@ export class ContactsComponent implements OnInit {
       center: new google.maps.LatLng(42.3639561, 22.686734),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.HYBRID,
-    
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
   }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatastoreService } from '../../services/datastore.service';
 import { Product } from '../../interfaces/product';
 import { HandleErrorsService } from '../../services/handle-errors.service';
 import { DatashareService } from '../../services/datashare.service';
+import { MatSort, MatPaginator, MatTableDataSource } from '../../../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-products',
@@ -22,32 +23,76 @@ export class ProductsComponent implements OnInit {
   public imageURL = '';
   public editbtn;
   public basketArr = [];
-  public ifAdmin = true;
+  public ifAdmin;
+  public ifUser;
   public deleteConfirmation;
+  public serverPagging = true;
+  public toPage = 1;
+  public perPage = 5;
+  public lengthPag = 0;
+  public pageSizePag = 0;
+  public prodName = '';
+  public prodSorts = '';
+  public prodDetails = '';
+  public pageSizeOptions = [1, 5, 10, 25, 50, 100];
 
-  prodName = '';
-  prodSorts = '';
-  prodDetails = '';
 
-  displayedColumns = ['name', 'image', 'sort', 'price', 'quantity', 'details'];
-  dataSource;
+  displayedColumns = ['name', 'image', 'sort', 'details'];
+  dataSource = new MatTableDataSource<Product>([]);
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(
     private data: DatastoreService,
     private datashare: DatashareService,
     private errorHandler: HandleErrorsService
   ) {
+    this.datashare.ifUser.subscribe(bool => { this.ifUser = bool; if (bool) { this.changeTableColumns(); } });
+    this.datashare.ifAdmin.subscribe(bool => { this.ifAdmin = bool; if (bool) { this.changeTableColumns(); } });
+
     this.deleteConfirmation = {
       Type: 'prompt',
       ErrorMessage: `Are you sure that you wish to delete all records?`,
     };
   }
 
+  changeTableColumns () {
+    this.displayedColumns = ['name', 'image', 'sort', 'price', 'quantity'];
+    if (this.ifUser && !this.ifAdmin) { this.displayedColumns.push('qnt'); }
+    if (this.ifAdmin) { this.displayedColumns.push('controlers'); }
+  }
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewInit() {
+    if (this.serverPagging) {
+      this.sort.sortChange.subscribe(() => {
+        this.getProducts();
+      });
+    }
+  }
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+
+  onPageChanged(e) {
+    this.perPage = e.pageSize;
+    this.toPage = e.pageIndex + 1;
+    this.getProducts();
+  }
+
   getProducts() {
-    this.data.getProducts('',
+    this.data.getProducts({
+      sortBy: this.sort,
+      perPage: this.perPage,
+      page: this.toPage
+    },
       data => {
         // Adding Client Qnt saver
-        data.forEach(el => { el.prodClientQnt = 0; });
-        this.products = data;
+        data.results.forEach(el => { el.prodClientQnt = 0; });
+        this.dataSource.data = data.results;
+        this.pageSizePag =  data.perPage;
+        this.lengthPag = data.rows;
       }
     );
   }
@@ -65,6 +110,7 @@ export class ProductsComponent implements OnInit {
       }).length > 0) ? addProduct[1].selectors = data : addProduct.push(category[0]);
     });
   }
+
   editProd(el) {
     this.prodName = el.name;
     this.prodSorts = el.sort.toString();
@@ -75,6 +121,7 @@ export class ProductsComponent implements OnInit {
     this.packageSize = el.pack || '';
     this.imageURL = el.imgURL || '';
   }
+
   saveProd(el) {
     this.editbtn = '';
     el.name = this.prodName;
@@ -85,8 +132,11 @@ export class ProductsComponent implements OnInit {
     el.price = this.prodPrice || 0;
     el.pack = this.packageSize || '';
     el.imgURL = this.imageURL || '';
-    this.data.addEditProducts(el, (data) => { console.log('Edit Product: ', data); } );
+    this.data.addEditProducts(el, (data) => {
+      // console.log('Edit Product: ', data);
+    } );
   }
+
   addProd() {
       this.errorHandler.openDialogInputs({
         msg: 'Add new product',
@@ -113,6 +163,7 @@ export class ProductsComponent implements OnInit {
         }
       );
   }
+
   addCategory () {
     this.errorHandler.openDialogInputs({
       msg: 'Add new category',
@@ -136,13 +187,15 @@ export class ProductsComponent implements OnInit {
 
   showProtByCat() {
     this.data.getProducts({categoryID: this.selectedCat},
-      data => { this.products = data; }
+      data => { this.dataSource.data = data; }
     );
   }
 
   removeProd(item) {
     this.data.removeProductbyIdOrCategory(item,
-      data => { console.log(data); this.getProducts(); });
+      data => {
+        // console.log(data); this.getProducts();
+      });
   }
 
   removeProdByCat() {
@@ -165,8 +218,6 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-
-
 
   incrementQnt(product) {
     product.prodClientQnt++;
@@ -193,7 +244,7 @@ export class ProductsComponent implements OnInit {
       this.basketArr.forEach( item => {
          if (item === product) {
           item.prodClientQnt = product.prodClientQnt;
-          console.log(this.basketArr);
+          // console.log(this.basketArr);
          }
       });
     }
