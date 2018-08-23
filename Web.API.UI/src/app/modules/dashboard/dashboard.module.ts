@@ -27,6 +27,7 @@ import { SiteDetailsComponent } from './components/site-details/site-details.com
 import { SiteInvoicesComponent } from './components/site-invoices/site-invoices.component';
 import { SiteEmployeesComponent } from './components/site-employees/site-employees.component';
 import { SiteLogsComponent } from './components/site-logs/site-logs.component';
+import { SiteCustomersComponent } from './components/site-customers/site-customers.component';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import { SiteLogsComponent } from './components/site-logs/site-logs.component';
     SiteDetailsComponent,
     SiteInvoicesComponent,
     SiteEmployeesComponent,
-    SiteLogsComponent
+    SiteLogsComponent,
+    SiteCustomersComponent
   ]
 })
 export class DashboardModule { }

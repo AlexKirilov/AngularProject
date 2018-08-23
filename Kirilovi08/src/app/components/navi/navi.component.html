@@ -4,6 +4,11 @@
       [active]="rla.isActive">
       {{link.label}}
     </a>
+    <a mat-tab-link *ngIf="ifuser && ifBasketSize > 0" [routerLink]="'basket'" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+      Basket
+      <mat-icon class="small-screen menu-icon-nav" style="color:black; margin: 0 5px;">add_shopping_cart</mat-icon>
+      <span class="bucket-size" style="color: black;">x {{ ifBasketSize }} </span>
+    </a>
   </nav>
-  <button mat-raised-button color="primary" (click)="logout()" style="position: absolute; top: 5px; right: 10px;">{{ loginBtn }}</button>
+  <button mat-raised-button color="primary" (click)="logout()" style="position: absolute; top: -41px; right: 10px;">{{ loginBtn }}</button>
 </section>

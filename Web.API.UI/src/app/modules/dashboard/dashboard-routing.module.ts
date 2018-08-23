@@ -8,12 +8,14 @@ import { SiteInvoicesComponent } from './components/site-invoices/site-invoices.
 import { SiteApiConnectionDataComponent } from './components/site-api-connection-data/site-api-connection-data.component';
 import { DashboardComponent } from './dashboard.component';
 import { SiteLogsComponent } from './components/site-logs/site-logs.component';
+import { SiteCustomersComponent } from './components/site-customers/site-customers.component';
 
 const routes: Routes = [
   { path: 'site', canActivate: [AuthGuard], component: DashboardComponent, children: [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: SiteDashboardComponent },
     { path: 'details',  component: SiteDetailsComponent },
+    { path: 'customers', component: SiteCustomersComponent },
     { path: 'employees', component: SiteEmployeesComponent },
     { path: 'invoices', component: SiteInvoicesComponent },
     { path: 'api-connection-details', component: SiteApiConnectionDataComponent },

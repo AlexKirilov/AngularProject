@@ -12,14 +12,15 @@ export class NaviComponent implements OnInit {
 
   ifuser;
   loginBtn;
+  ifBasketSize = 0;
   routeLinks: any[];
   activeLinkIndex = 0;
-
   constructor(
     private router: Router,
     private datashare: DatashareService,
     private datastore: DatastoreService
   ) {
+    this.datashare.getBasket.subscribe( basket => this.ifBasketSize = basket.length);
     this.datashare.ifUser.subscribe( bool => {
       this.ifuser = bool;
       this.loginBtn = (bool) ? 'Logout' : 'login';
@@ -37,6 +38,7 @@ export class NaviComponent implements OnInit {
   }
 
   logout() {
+    this.datashare.showIfUser(false);
     // (this.ifuser) ? this.router.navigate(['/login']) :
     this.datastore.logout();
   }

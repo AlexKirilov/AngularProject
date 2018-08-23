@@ -1,9 +1,9 @@
 <section id="product-container" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="20px">
-  <div class="basket-container" *ngIf="basketArr.length > 0">
+  <!-- <div class="basket-container" *ngIf="basketArr.length > 0">
     <div class="basket-size left">{{ basketArr.length }}</div>
     <mat-icon style="font-size: 40px" class="small-screen menu-icon-nav" matTooltip="Basket" matTooltipPosition="above">add_shopping_cart
     </mat-icon>
-  </div>
+  </div> -->
   <div class="controllers" fxLayoutGap="20px">
     <section *ngIf="ifAdmin" class="right">
       <!-- <div class="basket-container" *ngIf="basketArr.length > 0">
@@ -79,7 +79,10 @@
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef  mat-sort-header>Price</th>
         <td mat-cell *matCellDef="let element">
-          <div *ngIf="editbtn !== element._id">{{element?.price}} BGN</div>
+          <div *ngIf="editbtn !== element._id && !element.discount">{{element?.price}} BGN</div>
+          <div *ngIf="editbtn !== element._id && element.discount">
+            <span class="old-price">{{element?.price }} </span>
+            <span class="discount">{{ element?.price - element?.discount}}</span> BGN</div>
           <div *ngIf="editbtn == element._id">
             <mat-form-field class="numeric-input">
               <input matInput type="number" placeholder="Price" [(ngModel)]="prodPrice">

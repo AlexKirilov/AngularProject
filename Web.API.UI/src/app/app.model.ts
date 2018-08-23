@@ -32,7 +32,7 @@ export class Invoice {
   flag: number;
 }
 
-export class ContactsDate {
+export class ContactsData {
   email: string;
   firstname: string;
   lastname: string;

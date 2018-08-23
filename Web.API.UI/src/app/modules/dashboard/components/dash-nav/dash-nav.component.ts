@@ -14,6 +14,7 @@ export class DashNavComponent implements OnInit {
   constructor( ) {
     this.routeLinks = [
       {label: 'Dashboard', link: 'dashboard'},
+      {label: 'Customers', link: 'customers'},
       {label: 'Employees', link: 'employees'},
       {label: 'Invoices', link: 'invoices'},
       {label: 'Site Details', link: 'details'},

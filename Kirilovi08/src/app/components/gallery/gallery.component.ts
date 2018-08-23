@@ -28,8 +28,12 @@ export class GalleryComponent implements OnInit {
 
   getData () {
     this.datastore.getGallery( (images) => {
+      if (images.length > 0) {
       this.imageNames = images[0].images;
       this.images = images[0].images.join(', ');
+      } else {
+        this.images = this.imageNames = images;
+      }
     });
   }
 

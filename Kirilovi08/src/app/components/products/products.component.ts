@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
   ) {
     this.datashare.ifUser.subscribe(bool => { this.ifUser = bool; if (bool) { this.changeTableColumns(); } });
     this.datashare.ifAdmin.subscribe(bool => { this.ifAdmin = bool; if (bool) { this.changeTableColumns(); } });
-
+    this.datashare.getBasket.subscribe(basket => this.basketArr = basket);
     this.deleteConfirmation = {
       Type: 'prompt',
       ErrorMessage: `Are you sure that you wish to delete all records?`,
@@ -89,7 +89,13 @@ export class ProductsComponent implements OnInit {
     },
       data => {
         // Adding Client Qnt saver
-        data.results.forEach(el => { el.prodClientQnt = 0; });
+        data.results.forEach(el => {
+          const tmp  = this.basketArr.find( item => {
+            return item._id === el._id;
+          });
+          el.prodClientQnt = (this.basketArr.length === 0) ? 0 : tmp ? tmp.prodClientQnt : 0;
+        });
+        console.log(data);
         this.dataSource.data = data.results;
         this.pageSizePag =  data.perPage;
         this.lengthPag = data.rows;
@@ -220,12 +226,15 @@ export class ProductsComponent implements OnInit {
   }
 
   incrementQnt(product) {
-    product.prodClientQnt++;
-    this.basket(product);
+    if (product.prodClientQnt < product.quantity) {
+      product.prodClientQnt++;
+      this.basket(product);
+    }
   }
   decrementQnt(product) {
     if (product.prodClientQnt > 0) {
       product.prodClientQnt--;
+      this.basket(product);
     }
     if (product.prodClientQnt === 0) {
       this.basket(product);
@@ -233,21 +242,25 @@ export class ProductsComponent implements OnInit {
   }
 
   basket(product) {
+    console.log(product);
     if (product.prodClientQnt === 0) {
-      const index = this.basketArr.indexOf(product, 0);
-      this.basketArr.splice(index, 1);
+      this.basketArr = this.basketArr.filter(item => {
+        return item._id !== product._id;
+      });
+      console.log(this.basketArr);
     } else if (!this.basketArr.find( item => {
-      return item === product;
+      return item._id === product._id;
       }) ) {
       this.basketArr.push(product);
     } else {
       this.basketArr.forEach( item => {
-         if (item === product) {
+         if (item._id === product._id) {
           item.prodClientQnt = product.prodClientQnt;
           // console.log(this.basketArr);
          }
       });
     }
+    this.datashare.changeBasket(this.basketArr);
   }
 }
 

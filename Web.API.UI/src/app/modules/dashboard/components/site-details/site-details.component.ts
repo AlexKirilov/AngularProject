@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatastoreService } from '../../../../services/datastore.service';
-import { ContactsDate, Invoice } from '../../../../app.model';
+import { ContactsData, Invoice } from '../../../../app.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -67,7 +67,7 @@ export class SiteDetailsComponent implements OnInit {
       });
     });
 
-    this.datastore.getAuth( (data: ContactsDate) => {
+    this.datastore.getAuth( (data: ContactsData) => {
       this.firstFormGroup.reset({
         firstnameCTRL: data.firstname,
         lastnameCTRL: data.lastname,

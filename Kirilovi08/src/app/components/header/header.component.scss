@@ -1,6 +1,6 @@
 #header-container {
     // height: 27vh;
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     .top-section {
         position: relative;
@@ -15,7 +15,7 @@
             // background-size: contain;
             width: 220px;
             height: 120px;
-            background: url('../../../images/logo.png') 50% 50% no-repeat;
+            background: url("../../../images/logo.png") 50% 50% no-repeat;
             background-size: contain;
         }
         h1 {
@@ -26,5 +26,19 @@
             font-size: 42px;
             width: 100%;
         }
+        .user-name {
+            position: absolute;
+            right: 130px;
+            top: 10px;
+            color: #e67c47;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: capitalize;
+        }
+        // .small-screen {
+        //     position: relative;
+        //     top: 6px;
+        //     left: 5px;
+        // }
     }
 }

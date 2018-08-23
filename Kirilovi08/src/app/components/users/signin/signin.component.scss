@@ -1,6 +1,11 @@
-.custome-valid {
-    position: absolute; bottom: -20px;
-}
-.custome-invalid {
-    position: absolute; bottom: -38px;
+#registration-form {
+  margin: 10vh auto;
+    .custome-valid {
+        position: absolute;
+        bottom: -20px;
+    }
+    .custome-invalid {
+        position: absolute;
+        bottom: -38px;
+    }
 }

@@ -86,6 +86,7 @@ export class SiteLogsComponent implements OnInit, OnDestroy {
   getLogsFilter() {
     this.datastore.getLogsDateTypes((res) => (this.logLevels = res.level, this.logTypes = res.type));
   }
+
   reload() {
     this.timer = 60;
     this.getData();

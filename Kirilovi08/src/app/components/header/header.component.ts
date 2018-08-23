@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DatashareService } from '../../services/datashare.service';
+import { DatastoreService } from '../../services/datastore.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  isUser;
+  username: String;
+  constructor(
+    private datashare: DatashareService,
+    private datastore: DatastoreService,
+  ) {
+    this.datashare.ifUser.subscribe( (bool) => {
+      this.isUser = bool;
+      this.username = this.datastore.Username;
+    });
+  }
 
   ngOnInit() {
   }

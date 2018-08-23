@@ -65,7 +65,8 @@ export class DatastoreService {
     localStorage.removeItem(this.SITEDATA_KEY);
     localStorage.removeItem(this.SITEID_KEY);
     localStorage.removeItem(this.USERNAME);
-
+    this.datashare.showIfAdmin(false);
+    this.datashare.showIfUser(false);
   }
 
   checkUser () {
@@ -82,7 +83,7 @@ export class DatastoreService {
     this.http.post<User>(`${this.authURL}/customers/login`, checkUser)
     .subscribe(
       result => {
-        debugger;
+        console.log(result);
         this.setAuthorization(result);
         callback(result);
       },
@@ -166,6 +167,15 @@ export class DatastoreService {
     );
   }
 
+  editCustomerInvoices(invoiceDetails, callback) {
+    this.http.post<any>(`${this.authURL}/invoicecustomersdata/addOrEditCusInvoiceDetails`, invoiceDetails).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
   getGallery(callback) {
     this.http.get<any>(`${this.authURL}/gallery/get`).subscribe(
       result => callback(result),
@@ -190,6 +200,45 @@ export class DatastoreService {
       }
     );
   }
+
+  /////////////////////////////////////////
+  ////////////// Customer
+  getClientData(callback) {
+    this.http.get<any>(`${this.authURL}/customers/getCustomer`).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
+  editClientData(data, callback) {
+    this.http.post<any>(`${this.authURL}/customers/editcustomer`, data).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
+  getOrders(callback) {
+    this.http.get<any>(`${this.authURL}/orders/getorders`).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
+  addOrder(order, callback) {
+    this.http.post<any>(`${this.authURL}/orders/addOrder`, order).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
 
   /////////////////////////////////////////
   ////////// POST / PUT ///////////////////
@@ -335,8 +384,11 @@ export class DatastoreService {
   ///////////// Log OUT ///////////////////
   /////////////////////////////////////////
   logout() {
-    this.removeAuthorization();
-    this.router.navigate(['/login']);
+    if (this.Username === null) {
+      this.router.navigate(['/login']);
+    } else {
+      this.removeAuthorization();
+    }
   }
 
 }

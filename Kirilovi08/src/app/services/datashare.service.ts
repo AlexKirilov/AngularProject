@@ -45,21 +45,27 @@ export class DatashareService {
   stopSpinnerContent() { this.showSpinnerContent(false); }
   stopSpinnerHTML() { this.showSpinnerHTML(false); }
 
+  // tslint:disable-next-line:member-ordering
   private spinnerWrapperSource = new BehaviorSubject<boolean>(false);
+  // tslint:disable-next-line:member-ordering
   spinnerWrapper = this.spinnerWrapperSource.asObservable();
 
   showSpinnerWrapper(bool: boolean) {
     this.spinnerWrapperSource.next(bool);
   }
 
+  // tslint:disable-next-line:member-ordering
   private spinnerBodySource = new BehaviorSubject<boolean>(false);
+  // tslint:disable-next-line:member-ordering
   spinnerContent = this.spinnerBodySource.asObservable();
 
   showSpinnerContent(bool: boolean) {
     this.spinnerBodySource.next(bool);
   }
 
+  // tslint:disable-next-line:member-ordering
   private spinnerHMTLSource = new BehaviorSubject<boolean>(false);
+  // tslint:disable-next-line:member-ordering
   spinnerHMTL = this.spinnerHMTLSource.asObservable();
 
   showSpinnerHTML(bool: boolean) {
@@ -67,7 +73,9 @@ export class DatashareService {
   }
 
   //////////////   SNACK BAR    //////////////
+  // tslint:disable-next-line:member-ordering
   private snackbarSource = new BehaviorSubject<SnackBarI>({ message: '', action: '' });
+  // tslint:disable-next-line:member-ordering
   snackbarData = this.snackbarSource.asObservable();
 
   showSnackBar(data: SnackBarI) {
@@ -75,20 +83,41 @@ export class DatashareService {
   }
 
   //////////////   IfAdmin    //////////////
+  // tslint:disable-next-line:member-ordering
   private ifAdminSource = new BehaviorSubject<Boolean>(false);
+  // tslint:disable-next-line:member-ordering
   ifAdmin = this.ifAdminSource.asObservable();
 
   showIfAdmin(is: Boolean) {
     this.ifAdminSource.next(is);
   }
 
+  // tslint:disable-next-line:member-ordering
   private ifUserSource = new BehaviorSubject<Boolean>(false);
+  // tslint:disable-next-line:member-ordering
   ifUser = this.ifUserSource.asObservable();
 
   showIfUser(is: Boolean) {
     this.ifUserSource.next(is);
   }
 
+   // tslint:disable-next-line:member-ordering
+   private basketSource = new BehaviorSubject<Array<object>>([]);
+   // tslint:disable-next-line:member-ordering
+   getBasket = this.basketSource.asObservable();
+
+   changeBasket(basket: Array<object>) {
+     this.basketSource.next(basket);
+   }
+
+      // tslint:disable-next-line:member-ordering
+      private persDiscountSource = new BehaviorSubject<number>(0);
+      // tslint:disable-next-line:member-ordering
+      getDiscount = this.persDiscountSource.asObservable();
+
+      changeDiscount(discount: number) {
+        this.persDiscountSource.next(discount);
+      }
 }
 
 export class SnackBarI {

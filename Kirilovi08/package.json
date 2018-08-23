@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:iis": "ng build --prod --base-href http://local-kirilovi08.com",
+    "site": "ng build --base-href '/site/'' --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

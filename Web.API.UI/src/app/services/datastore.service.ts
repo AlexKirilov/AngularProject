@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 
 
 import { HandleErrorsService } from './handle-errors.service';
-import { UserCreds, NewUser, Invoice, ContactsDate } from '../app.model';
+import { UserCreds, NewUser, Invoice, ContactsData } from '../app.model';
 
 @Injectable({
   providedIn: 'root'
@@ -190,14 +190,45 @@ export class DatastoreService {
   ////////////// Customer
 
   getCustomer(callback) {
-    this.http.get<ContactsDate>(`${this.url}/customers/getCustomer`).subscribe(
+    this.http.get<ContactsData>(`${this.url}/customers/getCustomer`).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
     );
   }
 
   getAuthCustomer(callback) {
-    this.http.get<ContactsDate>(`${this.url}/customers/getAuthCustomer`).subscribe(
+    this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomer`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  getAuthCustomers(callback) {
+    this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomers`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  updateCustomerDiscount (data, callback) {
+    this.http.post<any>(`${this.url}/authdata/cudiscount`, data).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  /////////////////////////////////////////
+  ////////////// Employees
+
+  getEmployees (callback) { // TODO:
+    this.http.get<ContactsData>(`${this.url}/authdata/getEmployees`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  updateEmployee (data, callback ) {
+    this.http.post<ContactsData>(`${this.url}/authdata/updateEmployee`, data).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
     );
@@ -205,21 +236,14 @@ export class DatastoreService {
 
 
   /////////////////////////////////////////
-  ////////////// Employees
+  ////////////// Orders
 
-  getEmployees (callback) { // TODO:
-    this.http.get<ContactsDate>(`${this.url}/customers/getEmployees`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
-  }
-
-  updateEmployee (data, callback ) {
-    this.http.post<ContactsDate>(`${this.url}/customers/updateEmployee`, data).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
-  }
+  // getOrders (callback) {
+  //   this.http.post<ContactsData>(`${this.url}/orders/updateEmployee`, data).subscribe(
+  //     result => callback(result),
+  //     err => this.errorHandler.handleError(err)
+  //   );
+  // }
 
 
   /////////////////////////////////////////

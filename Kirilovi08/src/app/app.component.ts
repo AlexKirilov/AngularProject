@@ -25,9 +25,9 @@ export class AppComponent implements OnDestroy {
     private datastore: DatastoreService,
     private datashare: DatashareService
   ) {
-    this.datashare.showIfUser(this.datastore.Username !== '');
+    console.log(this.datastore.Username, 'ds');
+    this.datashare.showIfUser(this.datastore.Username !== '' && this.datastore.Username !== null);
     this.datastore.checkUser();
-    console.log("this.datastore.Username !== ''", this.datastore.Username !== '');
     // tslint:disable-next-line:no-unused-expression
     this.unscSpinnerHMTL = this.datashare.spinnerHMTL.subscribe(bool => this.htmlLoader = bool);
     this.unscSpinnerWrapper = this.datashare.spinnerWrapper.subscribe(bool => this.wrapperLoader = bool);

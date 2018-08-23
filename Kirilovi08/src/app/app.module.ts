@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,7 @@ import {
   MatSlideToggleModule, MatSliderModule, MatSelectModule, MatRippleModule, MatRadioModule,
   MatProgressSpinnerModule, MatProgressBarModule, MatPaginatorModule, MatNativeDateModule,
   MatListModule, MatGridListModule, MatExpansionModule, MatDividerModule, MatDialogModule,
-  MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule
+  MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule, MatAutocompleteModule, MatFormFieldModule ,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -41,6 +41,10 @@ import { AccountComponent } from './components/account/account.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
+import { BasketComponent } from './components/basket/basket.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { PurchaseHistoryComponent } from './components/purchase-history/purchase-history.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +63,11 @@ import { ErrorHandlerComponent } from './components/error-handler/error-handler.
     AccountComponent,
     PurchaseComponent,
     ModalWindowComponent,
-    ErrorHandlerComponent
+    ErrorHandlerComponent,
+    BasketComponent,
+    OrdersComponent,
+    SettingsComponent,
+    PurchaseHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -73,11 +81,13 @@ import { ErrorHandlerComponent } from './components/error-handler/error-handler.
     BrowserAnimationsModule,
     MatMenuModule,
     MatButtonModule,
+    MatFormFieldModule,
     MatCheckboxModule,
     MatIconModule,
     MatCardModule,
     MatInputModule,
     MatButtonToggleModule,
+    MatAutocompleteModule,
     MatChipsModule,
     MatDatepickerModule,
     MatDialogModule,
@@ -111,6 +121,6 @@ import { ErrorHandlerComponent } from './components/error-handler/error-handler.
     }],
   bootstrap: [AppComponent],
   entryComponents: [ErrorHandlerComponent, ModalWindowComponent],
-  // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA], // NO_ERRORS_SCHEMA,
 })
 export class AppModule { }
