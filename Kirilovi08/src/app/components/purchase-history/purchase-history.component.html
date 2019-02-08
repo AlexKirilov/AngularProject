@@ -1,3 +1,32 @@
-<p>
-  purchase-history works!
-</p>
+<section id="purchase-wrapper">
+    <mat-accordion class="example-headers-align" fxlayout="column" fxflex="fxFlex" fxlayout.md="row" fxlayout.lg="row" fxlayout.xl="row" xflexalign="stretch">
+        <mat-expansion-panel *ngFor="let item of dataaa; let i = index" data-index="i" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <div class="ex-title" *ngIf="item.flag === -1">Canceled</div>
+                    <div class="ex-title" *ngIf="item.flag === 0">To be approved</div>
+                    <div class="ex-title" *ngIf="item.flag === 1">Approved</div>
+                    <div class="ex-title" *ngIf="item.flag === 2">Delivering...</div>
+                    <div class="ex-title" *ngIf="item.flag === 3">Delivered</div>
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{item.date | date: 'medium'}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <app-data-table
+              [dataSource]="item.order"
+              [displayedColumns]="displayedColumns"
+              [tableColumnNames]="tableColumnNames"
+              [dateTransformNames]="dateTransformNames"
+              [total]="item.total"
+              ></app-data-table>
+
+            <mat-action-row>
+                <button mat-button="mat-button" *ngIf="step !== 0" (click)="prevStep()">Previous</button>
+                <button mat-button="mat-button" *ngIf="step !== dataaa.lenght" (click)="nextStep()">Next</button>
+            </mat-action-row>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+</section>

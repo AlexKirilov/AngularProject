@@ -1,0 +1,46 @@
+<mat-accordion class="example-headers-align" fxLayout="column" fxFlex fxLayout.md="row" fxLayout.lg="row" fxLayout.xl="row" xFlexAlign="stretch">
+  <mat-expansion-panel *ngFor="let customer of customers; let i = index" data-index="i" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <!-- Employee -->
+        <!-- {{ employee.lastname }} {{employee.firstname}} -->
+        {{ customer.type }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ customer.lastname }} {{customer.firstname}}
+        <!-- <b>{{ employee.type }}</b> -->
+        <mat-icon style="margin-right: 0px;">account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <section fxFlex fxLayoutGap="10px">
+
+      <mat-form-field>
+        <input matInput type="number" placeholder="Personal Discount" [(ngModel)]="customer.personalDiscount">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Email" [(ngModel)]="customer.email" disabled>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Level" [(ngModel)]="customer.levelAuth">
+          <mat-option value="">--</mat-option>
+          <mat-option value="MN">Manager</mat-option>
+          <mat-option value="EE">Employee</mat-option>
+          <mat-option value="CU">Customer</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <label placeholder="Last login"> {{ customer.lastLogin | date: 'medium'}}</label>
+
+    </section>
+
+    <mat-action-row>
+      <button mat-button color="primary" >Save</button>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+
+  </mat-expansion-panel>
+
+</mat-accordion>

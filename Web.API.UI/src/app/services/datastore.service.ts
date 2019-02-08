@@ -238,12 +238,12 @@ export class DatastoreService {
   /////////////////////////////////////////
   ////////////// Orders
 
-  // getOrders (callback) {
-  //   this.http.post<ContactsData>(`${this.url}/orders/updateEmployee`, data).subscribe(
-  //     result => callback(result),
-  //     err => this.errorHandler.handleError(err)
-  //   );
-  // }
+  getOrders (callback) {
+    this.http.get<any>(`${this.url}/orders/getordersforapproval`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
 
 
   /////////////////////////////////////////

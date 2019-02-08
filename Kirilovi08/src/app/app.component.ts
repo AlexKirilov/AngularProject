@@ -25,7 +25,6 @@ export class AppComponent implements OnDestroy {
     private datastore: DatastoreService,
     private datashare: DatashareService
   ) {
-    console.log(this.datastore.Username, 'ds');
     this.datashare.showIfUser(this.datastore.Username !== '' && this.datastore.Username !== null);
     this.datastore.checkUser();
     // tslint:disable-next-line:no-unused-expression

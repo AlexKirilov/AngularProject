@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatashareService } from '../../services/datashare.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '../../../../node_modules/@angular/material';
 import { DatastoreService } from '../../services/datastore.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-basket',
@@ -17,6 +18,7 @@ export class BasketComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+    private router: Router,
     private datashare: DatashareService,
     private datastore: DatastoreService
   ) {
@@ -27,7 +29,7 @@ export class BasketComponent implements OnInit {
         item.total = (item.price - item.discount) * (item.prodClientQnt * packDig);
         this.totalAmount += item.total;
       });
-      this.dataSource.data = basket;
+      basket.length === 0 ? this.router.navigate(['/products']) : this.dataSource.data = basket;
     });
   }
 
@@ -37,7 +39,8 @@ export class BasketComponent implements OnInit {
   sendForConfirmation() {
     console.log(this.dataSource.data);
     this.datastore.addOrder(this.dataSource.data, (res) => {
-console.log('Result Order', res);
+      this.datashare.changeBasket([]); // Empty the basket
+      this.router.navigate(['/products']); // relocating the user to products page
     });
   }
 }

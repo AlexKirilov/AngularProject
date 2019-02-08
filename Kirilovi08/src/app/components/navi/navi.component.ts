@@ -11,6 +11,7 @@ import { DatashareService } from '../../services/datashare.service';
 export class NaviComponent implements OnInit {
 
   ifuser;
+  ifadmin;
   loginBtn;
   ifBasketSize = 0;
   routeLinks: any[];
@@ -25,6 +26,7 @@ export class NaviComponent implements OnInit {
       this.ifuser = bool;
       this.loginBtn = (bool) ? 'Logout' : 'login';
     });
+    this.datashare.ifAdmin.subscribe( bool => this.ifadmin = bool);
     this.routeLinks = [
       // { label: 'Home', link: 'home' },
       { label: 'Products', link: 'products' },

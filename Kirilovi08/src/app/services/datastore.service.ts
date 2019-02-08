@@ -17,13 +17,7 @@ import { DatashareService } from './datashare.service';
 })
 export class DatastoreService {
 
-  private headers = new Headers({ 'Content-Type': 'application/json' });
   private authURL = `${environment.path}`;
-  private config = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-    }
-  };
 
   constructor(
     private router: Router,
@@ -230,6 +224,15 @@ export class DatastoreService {
     );
   }
 
+  getOrdersToConfirm(callback) {
+    this.http.get<any>(`${this.authURL}/orders/getordersforapproval`).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
+
   addOrder(order, callback) {
     this.http.post<any>(`${this.authURL}/orders/addOrder`, order).subscribe(
       result => callback(result),
@@ -239,6 +242,14 @@ export class DatastoreService {
     );
   }
 
+  editOrder(order, callback) {
+    this.http.post<any>(`${this.authURL}/orders/editOrder`, order).subscribe(
+      result => callback(result),
+      (err: HttpErrorResponse) => {
+        this.errorHandler.handleError(err);
+      }
+    );
+  }
 
   /////////////////////////////////////////
   ////////// POST / PUT ///////////////////
@@ -324,7 +335,7 @@ export class DatastoreService {
 
   removeCustomer(customer, callback) {
     // DELETE Customer can delete his account no additional data needed {}
-    // DELETE fCrom Admin or Manager by CustomersID or ustomers Email required data {customerID or email}
+    // DELETE from Admin or Manager by CustomersID or customers Email required data {customerID or email}
     this.http.post<Product>(`${this.authURL}/store/deletecustomer`, customer).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
@@ -334,7 +345,7 @@ export class DatastoreService {
   }
 
   removeProductbyIdOrCategory(productid, callback) {
-    this.http.post<Product>(`${this.authURL}/store/removeproducts`, productid).subscribe(
+    this.http.delete<Product>(`${this.authURL}/store/removeproducts`, productid).subscribe(
       result => callback(result),
       (err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
@@ -342,17 +353,17 @@ export class DatastoreService {
     );
   }
 
-  removeProductbyCustomer(callback) {
-    this.http.post<Product>(`${this.authURL}/store/removeAllproductsByCustomer`, '').subscribe(
-      result => callback(result),
-      (err: HttpErrorResponse) => {
-        this.errorHandler.handleError(err);
-      }
-    );
-  }
+  // removeProductbyCustomer(callback) {
+  //   this.http.post<Product>(`${this.authURL}/store/removeAllproductsByCustomer`, '').subscribe(
+  //     result => callback(result),
+  //     (err: HttpErrorResponse) => {
+  //       this.errorHandler.handleError(err);
+  //     }
+  //   );
+  // }
 
-  // removeAllProductbyCategory(cat, callback) { // For future development
-  //   this.http.post<Product>(`${this.authURL}/store/removeAllproductsByCustomer`, cat).subscribe(
+  // removeAllProductbyCategory(cat, callback) {
+  //   this.http.post<Product>(`${this.authURL}/store/removeAllProductByCategory`, cat).subscribe(
   //     result => callback(result),
   //     (err: HttpErrorResponse) => {
   //       this.errorHandler.handleError(err);
@@ -388,6 +399,7 @@ export class DatastoreService {
       this.router.navigate(['/login']);
     } else {
       this.removeAuthorization();
+      this.router.navigate(['/products']);
     }
   }
 

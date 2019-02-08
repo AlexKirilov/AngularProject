@@ -138,8 +138,10 @@ export class ProductsComponent implements OnInit {
     el.price = this.prodPrice || 0;
     el.pack = this.packageSize || '';
     el.imgURL = this.imageURL || '';
+    alert('');
     this.data.addEditProducts(el, (data) => {
-      // console.log('Edit Product: ', data);
+      console.log(data);
+      this.datashare.showSnackBar({ message: '"' + el.name + '" product was updated', action: 'successfully' });
     } );
   }
 
@@ -200,7 +202,8 @@ export class ProductsComponent implements OnInit {
   removeProd(item) {
     this.data.removeProductbyIdOrCategory(item,
       data => {
-        // console.log(data); this.getProducts();
+        this.getProducts();
+        this.datashare.showSnackBar({ message: '"' + item.name + '" product was removed', action: 'successfully' });
       });
   }
 
@@ -210,19 +213,22 @@ export class ProductsComponent implements OnInit {
         this.data.removeProductbyIdOrCategory({categoryID: this.selectedCat},
           data => {
             this.getProducts();
+            this.datashare.showSnackBar({ message: 'All Products were removed', action: 'successfully' });
             this.selectedCat = '';
           });
       }
     });
-    // this.data.removeProductbyIdOrCategory({categoryID: this.selectedCat},
-    //   data => { console.log(data); this.getProducts(); });
   }
+
   removeAllProd() {
-    this.errorHandler.openDialogPrompt(this.deleteConfirmation, (res) => {
-      if (res) {
-        // this.data.removeAllProductbyCategory(data => { console.log(data); this.getProducts(); })
-      }
-    });
+    // this.errorHandler.openDialogPrompt(this.deleteConfirmation, (res) => {
+    //   if (res) {
+    //     this.data.removeProductbyCustomer(data => {
+    //       this.datashare.showSnackBar({ message: 'All Products were removed', action: 'successfully' });
+    //       this.getProducts();
+    //     });
+    //   }
+    // });
   }
 
   incrementQnt(product) {
@@ -242,12 +248,10 @@ export class ProductsComponent implements OnInit {
   }
 
   basket(product) {
-    console.log(product);
     if (product.prodClientQnt === 0) {
       this.basketArr = this.basketArr.filter(item => {
         return item._id !== product._id;
       });
-      console.log(this.basketArr);
     } else if (!this.basketArr.find( item => {
       return item._id === product._id;
       }) ) {
@@ -256,7 +260,6 @@ export class ProductsComponent implements OnInit {
       this.basketArr.forEach( item => {
          if (item._id === product._id) {
           item.prodClientQnt = product.prodClientQnt;
-          // console.log(this.basketArr);
          }
       });
     }

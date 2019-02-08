@@ -42,9 +42,9 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
 import { BasketComponent } from './components/basket/basket.component';
-import { OrdersComponent } from './components/orders/orders.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PurchaseHistoryComponent } from './components/purchase-history/purchase-history.component';
+import { DataTableComponent } from './template/data-table/data-table.component';
 
 @NgModule({
   declarations: [
@@ -65,9 +65,9 @@ import { PurchaseHistoryComponent } from './components/purchase-history/purchase
     ModalWindowComponent,
     ErrorHandlerComponent,
     BasketComponent,
-    OrdersComponent,
     SettingsComponent,
-    PurchaseHistoryComponent
+    PurchaseHistoryComponent,
+    DataTableComponent
   ],
   imports: [
     BrowserModule,

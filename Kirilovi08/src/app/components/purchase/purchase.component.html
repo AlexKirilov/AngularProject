@@ -1,3 +1,39 @@
-<p>
-  purchase works!
-</p>
+<section id="purchases-wrapper">
+    <section id="purchase-wrapper">
+        <mat-accordion class="example-headers-align" fxlayout="column" fxflex="fxFlex" fxlayout.md="row" fxlayout.lg="row" fxlayout.xl="row" xflexalign="stretch">
+            <mat-expansion-panel *ngFor="let item of dataaa; let i = index" data-index="i" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span *ngIf="item.flag === -1">Canceled</span>
+                        <span *ngIf="item.flag === 0">To be approved</span>
+                        <span *ngIf="item.flag === 1">Approved</span>
+                        <span *ngIf="item.flag === 2">Delivering...</span>
+                        <span *ngIf="item.flag === 3">Delivered</span>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <div><b>{{ item.company }}</b></div>
+                        <div><b>{{ item.name }}</b></div>
+                        <div>{{item.date | date: 'medium'}}</div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <app-data-table
+                  [dataSource]="item.order"
+                  [displayedColumns]="displayedColumns"
+                  [tableColumnNames]="tableColumnNames"
+                  [dateTransformNames]="dateTransformNames"
+                  [total]="item.total"
+                  ></app-data-table>
+
+                <mat-action-row>
+                    <button mat-button="mat-button" (click)="decline(item)">Decline</button>
+                    <button mat-button="mat-button" (click)="accept(item)">Accept</button>
+                    <button mat-button="mat-button" *ngIf="step !== 0" (click)="prevStep()">Previous</button>
+                    <button mat-button="mat-button" *ngIf="step !== dataaa.lenght" (click)="nextStep()">Next</button>
+                </mat-action-row>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </section>
+
+</section>

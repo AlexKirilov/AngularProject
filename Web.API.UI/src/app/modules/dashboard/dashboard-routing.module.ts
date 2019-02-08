@@ -9,6 +9,7 @@ import { SiteApiConnectionDataComponent } from './components/site-api-connection
 import { DashboardComponent } from './dashboard.component';
 import { SiteLogsComponent } from './components/site-logs/site-logs.component';
 import { SiteCustomersComponent } from './components/site-customers/site-customers.component';
+import { SiteOrdersComponent } from './components/site-orders/site-orders.component';
 
 const routes: Routes = [
   { path: 'site', canActivate: [AuthGuard], component: DashboardComponent, children: [
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'details',  component: SiteDetailsComponent },
     { path: 'customers', component: SiteCustomersComponent },
     { path: 'employees', component: SiteEmployeesComponent },
+    { path: 'orders', component: SiteOrdersComponent },
     { path: 'invoices', component: SiteInvoicesComponent },
     { path: 'api-connection-details', component: SiteApiConnectionDataComponent },
     { path: 'site-logs', component: SiteLogsComponent  }

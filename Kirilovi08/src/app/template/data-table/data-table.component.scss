@@ -1,0 +1,22 @@
+.mat-elevation-z8 {
+    box-shadow: none;
+    display: flow-root;
+    width: 100%;
+}
+mat-card {
+    background: rgba(255, 255, 255, 0.2);
+    margin: 20px auto;
+}
+#table-template-wrapper table {
+    width: 100%;
+}
+
+.product-images {
+    width: 150px;
+    height: 150px;
+    margin: 10px auto;
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    margin-left: 0;
+}
