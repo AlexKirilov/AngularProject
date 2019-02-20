@@ -4,7 +4,7 @@ import { DatastoreService } from '../../../../services/datastore.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-registration-details',
+  selector: 'app-registration-details',
   templateUrl: './registration-details.component.html',
   styleUrls: ['./registration-details.component.scss']
 })

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-site-employees',
+  selector: 'app-site-employees',
   templateUrl: './site-employees.component.html',
   styleUrls: ['./site-employees.component.scss']
 })

@@ -1,16 +1,20 @@
-<section id="logs-wrapper">
-  <section id="top-container" fxLayout="column" fxLayoutAlign="center  stretch">
+<section id="logs-wrapper" fxLayout="column" fxLayoutAlign="center stretch">
+  <section id="top-container" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
 
-    <div class="row" fxLayout="row" fxLayoutAlign="space-around center" fxLayout.sm="column" fxLayout.xs="column">
+    <div class="row" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
 
-      <div class="control-btns">
+      <div class="control-btns left" fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="100%" fxLayoutGap="20px">
         <!-- fxLayout.xs="column" -->
         <button mat-raised-button class="reload" (click)="reload()">
           <span>Reload
             <span *ngIf="timer < 10">0</span>{{ timer }}</span>
         </button>
+
         <button mat-raised-button class="toggleReload" (click)="toggleReload()">
           <span>{{ reloadControlLabel }}</span>
+        </button>
+
+        <button mat-raised-button class="toggleReload" (click)="clearLogs()"> Clear Logs
         </button>
       </div>
 
@@ -63,7 +67,7 @@
         (currentPageOut)="changeCurrentPage($event)" (itemsPerPageOut)="changeItemsPerPage($event)"
         (clearAllFilters)="clearAllFilters()">
       </tools-data-table-template> -->
-    <api-data-table-template
+    <app-data-table-template
       [class.hide]="dataSource.data.length == 0"
       [dataSource]="dataSource"
       [displayedColumns]="displayedColumns"
@@ -73,7 +77,7 @@
       [middleTableDataColumns]="middleTableDataColumns"
       [serverPagging]="false"
       [fullDate]="true">
-    </api-data-table-template>
+    </app-data-table-template>
 
   </section>
 

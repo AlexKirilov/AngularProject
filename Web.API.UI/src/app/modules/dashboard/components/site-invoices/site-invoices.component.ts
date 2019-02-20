@@ -3,7 +3,7 @@ import { DatastoreService } from '../../../../services/datastore.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-site-invoices',
+  selector: 'app-site-invoices',
   templateUrl: './site-invoices.component.html',
   styleUrls: ['./site-invoices.component.scss']
 })

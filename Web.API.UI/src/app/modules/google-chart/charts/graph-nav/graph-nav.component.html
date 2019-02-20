@@ -1,0 +1,9 @@
+<section id="file-imp-nav-container" style="overflow: auto">
+  <mat-toolbar color="primary" style="background: #f7f7f7">
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let link of routeLinks; let i = index" [routerLink]="link.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+          {{link.label}}
+        </a>
+      </nav>
+  </mat-toolbar>
+</section>

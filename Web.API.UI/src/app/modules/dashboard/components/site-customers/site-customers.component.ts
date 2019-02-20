@@ -4,14 +4,14 @@ import { DatastoreService } from '../../../../services/datastore.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-site-customers',
+  selector: 'app-site-customers',
   templateUrl: './site-customers.component.html',
   styleUrls: ['./site-customers.component.scss']
 })
 export class SiteCustomersComponent implements OnInit {
 
   step = null;
-  customers;
+  customers = [];
   employeesGroup: FormGroup;
 
   constructor(
@@ -23,7 +23,7 @@ export class SiteCustomersComponent implements OnInit {
   }
 
   getData() {
-    this.datastore.getAuthCustomers( (data) => {
+    this.datastore.getAuthCustomers( (data: any) => {
       console.log('Site-Customers: ', data);
       this.customers = data;
     });

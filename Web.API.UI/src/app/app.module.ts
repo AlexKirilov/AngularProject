@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './guard/auth.guard';
 // Add token to header
 import { AppAuthInterceptor } from './app.interceptor';
-
 
 import {
   MatButtonModule, MatCheckboxModule, MatIconModule, MatCardModule,
@@ -41,6 +40,7 @@ import { SharedModule } from './shared-module/shared.module';
     NotFoundComponent,
     SinglePageComponent,
     MessageHandlerComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -82,6 +82,7 @@ import { SharedModule } from './shared-module/shared.module';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+
   ],
   providers: [
     AuthGuard,
@@ -91,6 +92,7 @@ import { SharedModule } from './shared-module/shared.module';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

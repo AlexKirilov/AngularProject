@@ -1,0 +1,14 @@
+<section id="chart-wrapper">
+  <section id="chart-container">
+
+
+    <app-pie-chart *ngIf="chartType == 'pie'" id="pie-chart" [pie_ChartData]="chartData" [settings]="chartSettings">
+    </app-pie-chart>
+
+    <app-bar-chart *ngIf="chartType == 'bar'" id="bar-chart" [pie_ChartData]="chartData" [settings]="chartSettings">
+    </app-bar-chart>
+
+    <h2 *ngIf="chartType == null">Select Chart!</h2>
+
+  </section>
+</section>

@@ -13,6 +13,10 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DataTableTemplateComponent } from '../templates/data-table-template/data-table-template.component';
+import { GoogleChartTemplateComponent } from '../modules/google-chart/google-chart.component';
+import { PieChartComponent } from '../modules/google-chart/charts/pie-chart/pie-chart.component';
+import { GoogleChartComponent } from '../modules/google-chart/charts/google-chart/google-chart.component';
+import { BarChartComponent } from '../modules/google-chart/charts/bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -55,9 +59,17 @@ import { DataTableTemplateComponent } from '../templates/data-table-template/dat
   ],
   declarations: [
     DataTableTemplateComponent,
+    GoogleChartTemplateComponent,
+    GoogleChartComponent,
+    PieChartComponent,
+    BarChartComponent,
   ],
   exports: [
     DataTableTemplateComponent,
+    GoogleChartTemplateComponent,
+    GoogleChartComponent,
+    PieChartComponent,
+    BarChartComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

@@ -5,7 +5,7 @@ import { DefaultVariablesService } from '../../../../services/default.variables.
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-site-logs',
+  selector: 'app-site-logs',
   templateUrl: './site-logs.component.html',
   styleUrls: ['./site-logs.component.scss']
 })
@@ -120,6 +120,11 @@ export class SiteLogsComponent implements OnInit, OnDestroy {
 
   changeCurrentPage(page) {
     // this.datashare.changePageNumber(page);
+    this.getData();
+  }
+
+  clearLogs() {
+    this.datastore.clearLogs((res: any) => ( console.log(res) ));
     this.getData();
   }
 

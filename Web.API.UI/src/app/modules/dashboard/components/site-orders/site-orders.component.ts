@@ -4,14 +4,14 @@ import { DatastoreService } from 'src/app/services/datastore.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-site-orders',
+  selector: 'app-site-orders',
   templateUrl: './site-orders.component.html',
   styleUrls: ['./site-orders.component.scss']
 })
 export class SiteOrdersComponent implements OnInit {
 
   step = null;
-  customers;
+  customers = [];
   employeesGroup: FormGroup;
 
   constructor(
@@ -24,8 +24,8 @@ export class SiteOrdersComponent implements OnInit {
 
   getData() {
     this.datastore.getOrders( (data) => {
-      console.log('Site-Orders: ', data);
-      this.customers = data;
+      console.log('Site-Orders: ', data.results);
+      this.customers = data.results;
     });
   }
 

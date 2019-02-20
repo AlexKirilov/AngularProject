@@ -10,7 +10,7 @@ import { DatastoreService } from '../../../../services/datastore.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-sign-in',
+  selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })

@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-message-handler',
+  selector: 'app-message-handler',
   templateUrl: './message-handler.component.html',
   styleUrls: ['./message-handler.component.scss']
 })

@@ -1,0 +1,26 @@
+#pie-chart-container {
+    .mat-card {
+        width: 100%;
+        display: inline-block;
+        padding: 100px 0;
+        mat-card-content {
+            width: 48%;
+            float: left;
+            .chart-row {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #pie-chart-container {
+        .mat-card {
+            padding: 100px 5%;
+            display: inline-block;
+            mat-card-content {
+                width: 100%;
+            }
+        }
+    }
+}

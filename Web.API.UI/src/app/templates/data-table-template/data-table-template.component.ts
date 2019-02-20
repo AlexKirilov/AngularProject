@@ -4,7 +4,7 @@ import { of, merge } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
 @Component({
-  selector: 'api-data-table-template',
+  selector: 'app-data-table-template',
   templateUrl: './data-table-template.component.html',
   styleUrls: ['./data-table-template.component.scss']
 })

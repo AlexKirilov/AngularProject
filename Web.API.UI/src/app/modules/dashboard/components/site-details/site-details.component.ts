@@ -5,7 +5,7 @@ import { ContactsData, Invoice } from '../../../../app.model';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'api-site-details',
+  selector: 'app-site-details',
   templateUrl: './site-details.component.html',
   styleUrls: ['./site-details.component.scss']
 })

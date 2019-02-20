@@ -13,14 +13,7 @@ import { UserCreds, NewUser, Invoice, ContactsData } from '../app.model';
 })
 export class DatastoreService {
 
-  private headers = new Headers({'Content-Type': 'application/json'});
-  private usersURI = 'api/users';  // URL to web api
   private url = `${environment.path}`;
-  private config = {
-    headers : {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-    }
-  };
 
   constructor(
     private router: Router,
@@ -263,6 +256,12 @@ export class DatastoreService {
     );
   }
 
+  clearLogs (callback) {
+    this.http.delete<any>(`${this.url}/logs/`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
 
   /////////////////////////////////////////
   ///////////// Log OUT ///////////////////
