@@ -1,5 +1,111 @@
-<p>
-  site-dashboard works!
-</p>
+<section id="dashboard-wrapper">
+  <section id="dashboard-container" fxLayout="column" fxLayoutAlign="space-around stretch">
 
-<app-google-chart [chartType]="'pie'" [chartData]="" [chartSettings]=""></app-google-chart>
+    <div class="page-settings-container" fxLayout="column" fxLayoutAlign="space-around stretch">
+
+      <div class="page-settings" fxLayoutAlign="space-around stretch" [@slideInOut] *ngIf="!toggleChartSettings">
+
+        <mat-checkbox [formControl]="charts.salesStat" [checked]="charts.salesStat.value" id="sales"
+          (change)="getSales()">Sales Statistics
+        </mat-checkbox>
+
+        <mat-checkbox [formControl]="charts.salesMost" [checked]="charts.salesMost.value" id="salesMost"
+          (change)="getSalesTopBottomList()">
+          Most Sales Products
+        </mat-checkbox>
+
+        <mat-checkbox [formControl]="charts.salesLeast" [checked]="charts.salesLeast.value" id="salesLeast"
+          (change)="getSalesTopBottomList()">
+          Least Sales Products
+        </mat-checkbox>
+
+        <mat-checkbox [formControl]="charts.productsQnt" [checked]="charts.productsQnt.value" id="productsQnt"
+          (change)="getProdcuts()">Products Qnt List
+        </mat-checkbox>
+
+        <mat-checkbox [formControl]="charts.orderStat" [checked]="charts.orderStat.value" id="orderStat"
+          (change)="getOrderStat()">Order Status
+        </mat-checkbox>
+
+      </div>
+
+      <div class="settings-toggle">
+        <div id="settings-btn" (click)="toggleChartSettings = !toggleChartSettings">
+          <mat-icon class="small-screen menu-icon-nav black active">settings</mat-icon>
+          <mat-icon>{{toggleChartSettings  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <section id="dashboard-content" fxLayout="column" fxLayoutAlign="center stretch">
+
+      <div class="api-log-chart" *ngIf="charts.salesStat.value" fxLayout="column"
+        fxLayoutAlign="space-between stretch" style="margin-bottom: 30px;">
+        <div style="margin-bottom: 15px;" fxLayoutGap="5px">
+          <button mat-raised-button (click)="getSales(7)">Weekly</button>
+          <button mat-raised-button (click)="getSales(30)">Monthly</button>
+          <button mat-raised-button (click)="getSales(90)">3 Month</button>
+          <button mat-raised-button (click)="getSales(180)">6 Month</button>
+          <button mat-raised-button (click)="getSales(356)">1 Year</button>
+          <!-- <button mat-raised-button (click)="getSales(1068)">3 Years</button> -->
+        </div>
+
+        <app-google-chart [chartType]="'line'" [chartData]="sales" [chartSettings]="line_ChartSettings"
+          [elementID]="'sales'">
+        </app-google-chart>
+
+      </div>
+
+      <section fxLayout="row wrap" fxLayoutAlign="stretch stretch" >
+        
+        <div class="api-log-chart" fxFlex="" *ngIf="charts.productsQnt.value" fxLayout="row wrap"
+          fxLayoutAlign="start stretch">
+
+          <mat-card *ngIf="depletedProductsList.length" style="margin: 0;">
+            <h4>Depleted Products</h4>
+
+            <mat-list dense>
+              <mat-list-item *ngFor="let prod of depletedProductsList">{{prod.name}}</mat-list-item>
+            </mat-list>
+
+          </mat-card>
+
+          <app-google-chart style="margin: 0" fxFlex="" [chartType]="'pie'" [chartData]="productsChartData"
+            [chartSettings]="prodPie_ChartSettings" [elementID]="'prodChart'">
+          </app-google-chart>
+        </div>
+
+        <div class="api-log-chart" fxFlex="" *ngIf="charts.salesMost.value">
+          <app-google-chart [chartType]="'pie'" [chartData]="upToTopTen" [chartSettings]="upToTopTenSettings"
+            [elementID]="'upToTopTen'">
+          </app-google-chart>
+        </div>
+
+        <div class="api-log-chart" fxFlex="" *ngIf="charts.salesLeast.value">
+          <app-google-chart [chartType]="'pie'" [chartData]="upToBottomTen" [chartSettings]="upToBottomTenSettings"
+            [elementID]="'upToBottomTen'">
+          </app-google-chart>
+        </div>
+
+        <div class="api-log-chart" fxFlex="" *ngIf="charts.orderStat.value">
+          <app-google-chart [chartType]="'pie'" [chartData]="orderStat" [chartSettings]="orderStatSettings"
+            [elementID]="'orderStat'">
+          </app-google-chart>
+        </div>
+
+      </section>
+    </section>
+  </section>
+</section>
+
+<!--
+// Employees logging time line
+// Customer logging time line
+// API UI Accessed time line and profile
+
+// Products List Pie chart quantity       -- Done
+// The Most selled products
+
+// Sales Charts Line                      -- Done
+// Sales  Done, Processing, Delivering
+-->

@@ -11,7 +11,8 @@ export class BarChartComponent implements OnInit, OnChanges {
 
   @Input() bar_ChartData;
   @Input() bar_ChartSettings: IBarSettings;
-
+  @Input() elementID: string;
+  
   public bar_ChartOptions;
   public barGroupWidth: FormGroup;
 

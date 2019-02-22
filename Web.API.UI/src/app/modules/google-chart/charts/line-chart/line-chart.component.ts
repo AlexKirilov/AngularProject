@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { GoogleChartComponent } from '../google-chart/google-chart.component';
-import { debug } from 'util';
+import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
+import { ILineSettings } from '../../google-charts.models';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-line-chart',
@@ -9,28 +9,77 @@ import { debug } from 'util';
 })
 export class LineChartComponent implements OnInit {
 
-  public line_ChartData;
-  public line_ChartOptions;
+  @Input() line_ChartData: any;
+  @Input() settings: ILineSettings;
+  @Input() elementID: string;
+  
+  public line_ChartOptions: any;
+  public isSettings = false;
+  public settingsFields: FormGroup;
 
-  private default_line_ChartData = {
-    columns: [
-      { type: 'timeofday', name: 'Time of Day' },
-      { type: 'number', name: 'Rating' },
-      // { type: 'number', name: 'annotations' },
-    ],
-    rows: [
-      [{ v: [0, 0, 0], f: '12 am' }, .5],
-      [{ v: [18, 0, 0], f: '6 pm' }, .6],
-      [{ v: [21, 0, 0], f: '9 pm' }, .2],
-      [{ v: [24, 0, 0], f: '12 am' }, .5],
-      [{ v: [27, 0, 0], f: '3 am' }, .1],
-      [{ v: [30, 0, 0], f: '6 am' }, .5],
-      [{ v: [33, 0, 0], f: '9 am' }, .9],
-    ]
+  constructor(
+    public fb: FormBuilder
+  ) {
+    this.line_ChartData = default_line_ChartData; // Default values
+    this.line_ChartOptions = this.default_line_ChartOptions(); // Default values
+    this.settingsFields = fb.group({
+      'width': '',
+      'height': '',
+      'titlePosition': '',
+      'legendAlign': '',
+      'legendPos': '',
+    });
+
   }
 
-  default_line_ChartOptions() {
-    let width = 1000, height = 600;
+  ngOnInit(): void { }
+
+  default_line_ChartOptions(
+    title = 'Motivation and Energy Level Throughout the Day',
+    titlePosition: 'in' | 'out' | 'none' = 'in',
+    legend: Object = {
+      alignment: 'start',
+      position: 'in',
+    },
+    width: number = 1000,
+    height = 600,
+    selectionMode: 'single' | 'multiple' = 'single',
+    annotations: Object = {
+      alwaysOutside: true,
+      textStyle: {
+        fontSize: 14,
+        color: '#000',
+        auraColor: 'none'
+      }
+    },
+    tooltip: Object = {
+      trigger: 'none',
+    },
+    hAxis: Object = {
+      title: 'Time of Day',
+      format: 'h:mm a',
+      viewWindow: {
+        min: [17, 0, 0],
+        max: [33, 0, 0]
+      },
+      gridlines: {
+        count: 5,
+      },
+      direction: -1
+    },
+    vAxis: Object = {
+      title: 'Rating (scale of 1-10)',
+      viewWindow: {
+        min: 0,
+        max: 1
+      },
+    },
+    reverseCategories = true,
+    pointShape: 'circle' | 'triangle' | 'square' | 'diamond' | 'star' | 'polygon' = 'circle',
+    pointSize = 20,
+    pointsVisible = true,
+    orientation: 'vertical' | 'horizontal' = 'horizontal'
+  ) {
     if (window.innerWidth < 400) {
       width = 350, height = 300;
     } else if (window.innerWidth < 500) {
@@ -47,52 +96,67 @@ export class LineChartComponent implements OnInit {
       width = 900
     }
     return {
-      title: 'Motivation and Energy Level Throughout the Day',
-      legend: 'none',
+      title,
+      titlePosition,
+      legend,
       width,
       height,
-      annotations: {
-        alwaysOutside: true,
-        textStyle: {
-          fontSize: 14,
-          color: '#000',
-          auraColor: 'none'
-        }
-      },
-      tooltip: { trigger: 'selection' },
+      selectionMode,
+      annotations,
+      tooltip,
       aggregationTarget: 'category',
-      hAxis: {
-        title: 'Time of Day',
-        format: 'h:mm a',
-        viewWindow: {
-          min: [17, 0, 0],
-          max: [33, 0, 0]
-        },
-        gridlines: {
-          count: 5,
-        },
-        direction: -1
-      },
-      vAxis: {
-        title: 'Rating (scale of 1-10)',
-        viewWindow: {
-          min: 0,
-          max: 1
-        },
-      },
-      reverseCategories: true,
-      pointShape: 'circle',
-      pointSize: 20,
-      pointsVisible: true,
-      // orientation: 'vertical',
+      hAxis,
+      vAxis,
+      reverseCategories,
+      pointShape,
+      pointSize,
+      pointsVisible,
+      orientation
     };
   }
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.line_ChartData = this.default_line_ChartData; // Default values
-    this.line_ChartOptions = this.default_line_ChartOptions(); // Default values
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.line_ChartData) {
+      this.line_ChartData = default_line_ChartData; // Default values
+    }
+    if (!this.settings) {
+      this.line_ChartOptions = this.default_line_ChartOptions(); // Default values
+    } else {
+      this.line_ChartOptions = this.default_line_ChartOptions(
+        this.settings.title,
+        this.settings.titlePosition,
+        this.settings.legend,
+        this.settings.width,
+        this.settings.height,
+        this.settings.selectionMode,
+        this.settings.annotations,
+        this.settings.tooltip,
+        this.settings.hAxis,
+        this.settings.vAxis,
+        this.settings.reverseCategories,
+        this.settings.pointShape,
+        this.settings.pointSize,
+        this.settings.pointsVisible,
+        this.settings.orientation
+      );
+    }
   }
+}
 
+
+const default_line_ChartData = {
+  columns: [
+    { type: 'timeofday', name: 'Time of Day' },
+    { type: 'number', name: 'Rating' },
+    // { type: 'number', name: 'annotations' },
+  ],
+  rows: [
+    [{ v: [0, 0, 0], f: '12 am' }, .5],
+    [{ v: [18, 0, 0], f: '6 pm' }, .6],
+    [{ v: [21, 0, 0], f: '9 pm' }, .2],
+    [{ v: [24, 0, 0], f: '12 am' }, .5],
+    [{ v: [27, 0, 0], f: '3 am' }, .1],
+    [{ v: [30, 0, 0], f: '6 am' }, .5],
+    [{ v: [33, 0, 0], f: '9 am' }, .9],
+  ]
 }

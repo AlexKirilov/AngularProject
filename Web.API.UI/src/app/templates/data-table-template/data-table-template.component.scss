@@ -4,8 +4,9 @@
     display: flow-root;
     width: 100%;
 }
+
 #table-template-wrapper table {
-  width: 100%;
+    width: 100%;
 }
 
 #result-table {
@@ -18,8 +19,7 @@
             margin-top: 30px;
         }
         .itemsPerPage,
-        .mat-paginator-range-label,
-            {
+        .mat-paginator-range-label {
             margin: 0 10px;
         }
         svg {

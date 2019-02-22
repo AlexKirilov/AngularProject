@@ -1,14 +1,20 @@
 <section id="chart-wrapper">
-  <section id="chart-container">
-
-
-    <app-pie-chart *ngIf="chartType == 'pie'" id="pie-chart" [pie_ChartData]="chartData" [settings]="chartSettings">
-    </app-pie-chart>
-
-    <app-bar-chart *ngIf="chartType == 'bar'" id="bar-chart" [pie_ChartData]="chartData" [settings]="chartSettings">
-    </app-bar-chart>
-
-    <h2 *ngIf="chartType == null">Select Chart!</h2>
-
+    <section id="chart-container">
+  
+  
+      <app-pie-chart *ngIf="chartType == 'pie'" id="pie-chart-{{elementID}}" [pie_ChartData]="chartData" [settings]="chartSettings" [elementID]="elementID">
+      </app-pie-chart>
+  
+      <app-bar-chart *ngIf="chartType == 'bar'" id="bar-chart-{{elementID}}" [bar_ChartData]="chartData" [settings]="chartSettings" [elementID]="elementID">
+      </app-bar-chart>
+  
+      <app-line-chart *ngIf="chartType == 'line'" id="line-chart-{{elementID}}" [line_ChartData]="chartData" [settings]="chartSettings" [elementID]="elementID">
+      </app-line-chart>
+  
+      <app-combo-chart *ngIf="chartType == 'combo'" id="combo-chart-{{elementID}}" [combo_ChartData]="chartData" [settings]="chartSettings" [elementID]="elementID">
+      </app-combo-chart>
+  
+      <h2 *ngIf="chartType == null">Select Chart!</h2>
+  
+    </section>
   </section>
-</section>

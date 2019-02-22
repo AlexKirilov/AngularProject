@@ -1,14 +1,16 @@
 <section id="combo-chart-container">
     <mat-card>
         <mat-card-content id="chart">
-            <div id="combo_chart" [chartData]="combo_ChartData" [chartOptions]="combo_ChartOptions" chartType="ComboChart" GoogleChart>
+            <div id="combo_chart-{{elementID}}" [chartData]="combo_ChartData" [chartOptions]="combo_ChartOptions"
+                chartType="ComboChart" GoogleChart>
             </div>
         </mat-card-content>
 
         <mat-card-content id="controller">
             <div class="chart-row">
                 <mat-form-field>
-                    <mat-select placeholder="Chart Style" [formControl]="chartSize" (selectionChange)="onChartChange()" [value]="chartSize.value" id="chart-style">
+                    <mat-select placeholder="Chart Style" [formControl]="chartSize" (selectionChange)="onChartChange()"
+                        [value]="chartSize.value" id="chart-style">
                         <mat-option value="s">Small</mat-option>
                         <mat-option value="m">Medium</mat-option>
                         <mat-option value="l">Large</mat-option>
@@ -16,7 +18,8 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-select placeholder="Legend Text Alignment" [formControl]="seriesType" (selectionChange)="onChartChange()" [value]="seriesType.value" id="legent-txt-align-type">
+                    <mat-select placeholder="Legend Text Alignment" [formControl]="seriesType"
+                        (selectionChange)="onChartChange()" [value]="seriesType.value" id="legent-txt-align-type">
                         <mat-option value="line">Lines</mat-option>
                         <mat-option value="area">Area</mat-option>
                         <mat-option value="bars">Bars</mat-option>
@@ -26,18 +29,20 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                        <mat-select placeholder="Legend Text Alignment" [formControl]="seriesAVG" (selectionChange)="onChartChange()" [value]="seriesAVG.value" id="legend-txt-align-avg">
-                            <mat-option value="line">Lines</mat-option>
-                            <mat-option value="area">Area</mat-option>
-                            <mat-option value="bars">Bars</mat-option>
-                            <mat-option value="candlesticks">Candlesticks</mat-option>
-                            <mat-option value="steppedArea">SteppedArea</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <mat-select placeholder="Legend Text Alignment" [formControl]="seriesAVG"
+                        (selectionChange)="onChartChange()" [value]="seriesAVG.value" id="legend-txt-align-avg">
+                        <mat-option value="line">Lines</mat-option>
+                        <mat-option value="area">Area</mat-option>
+                        <mat-option value="bars">Bars</mat-option>
+                        <mat-option value="candlesticks">Candlesticks</mat-option>
+                        <mat-option value="steppedArea">SteppedArea</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="chart-row">
                 <mat-form-field>
-                    <mat-select placeholder="Tooltip" [formControl]="tooltipTrigger" (selectionChange)="onChartChange()" [value]="tooltipTrigger.value" id="tooltip">
+                    <mat-select placeholder="Tooltip" [formControl]="tooltipTrigger" (selectionChange)="onChartChange()"
+                        [value]="tooltipTrigger.value" id="tooltip">
                         <mat-option value="focus">On Focus</mat-option>
                         <mat-option value="none">None</mat-option>
                         <mat-option value="selection">On Selection</mat-option>
@@ -45,7 +50,8 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-select placeholder="Legend Position" [formControl]="legendPos" (selectionChange)="onChartChange()" [value]="legendPos.value" id="tooltip-position">
+                    <mat-select placeholder="Legend Position" [formControl]="legendPos"
+                        (selectionChange)="onChartChange()" [value]="legendPos.value" id="tooltip-position">
                         <mat-option value="top">Top</mat-option>
                         <mat-option value="left">Left</mat-option>
                         <mat-option value="bottom">Bottom</mat-option>
@@ -57,10 +63,12 @@
 
             </div>
             <div class="chart-row">
-                <mat-checkbox class="" [formControl]="reverse" [checked]="reverse.value" (change)="onChartChange()" id="reverse">Reverse chart</mat-checkbox>
+                <mat-checkbox class="" [formControl]="reverse" [checked]="reverse.value" (change)="onChartChange()"
+                    id="reverse">Reverse chart</mat-checkbox>
             </div>
             <div class="chart-row">
-                <mat-radio-group [formControl]="orientation" [value]="orientation.value" (change)="onChartChange()" id="orientation">
+                <mat-radio-group [formControl]="orientation" [value]="orientation.value" (change)="onChartChange()"
+                    id="orientation">
                     <mat-radio-button class="example-margin" value="horizontal">Horizontal</mat-radio-button>
                     <mat-radio-button class="example-margin" value="vertical">Vertical</mat-radio-button>
                 </mat-radio-group>

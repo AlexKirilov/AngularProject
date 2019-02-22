@@ -1,14 +1,20 @@
 <section id="header-nav-menu">
-  <div id="site-title-and-logo" class="left">
-      <div class="title" routerLink="/home">API</div>
-      <div id="site-logo" routerLink="/home">Logo</div>
-  </div>
-  <div id="navi-menu" class="right">
-      <div id="customers-name">customer</div>
-      <ul id="navi">
-          <li><a routerLink="signin">Sign in</a></li>
-          <li><a routerLink="login">Log in</a></li>
-          <li (click)="logout()" style="cursor: pointer;">Log out</li>
-      </ul>
-  </div>
+    <div id="site-title-and-logo" class="left">
+        <div class="title" routerLink="/home">API</div>
+        <div id="site-logo" routerLink="/home">Logo</div>
+    </div>
+    <div id="navi-menu" class="right">
+        <div id="customers-name">customer</div>
+        <ul id="navi">
+            <li><a routerLink="signin">Sign in</a></li>
+            <li><a routerLink="login">Log in</a></li>
+            <li (click)="logout()" style="cursor: pointer;">Log out</li>
+        </ul>
+    </div>
+</section>
+
+
+
+<section [@scrollAnimation]="state" id="user-content-nav-wrapper">
+    <api-dash-nav-icons></api-dash-nav-icons>
 </section>

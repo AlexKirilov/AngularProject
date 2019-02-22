@@ -17,6 +17,11 @@ import { GoogleChartTemplateComponent } from '../modules/google-chart/google-cha
 import { PieChartComponent } from '../modules/google-chart/charts/pie-chart/pie-chart.component';
 import { GoogleChartComponent } from '../modules/google-chart/charts/google-chart/google-chart.component';
 import { BarChartComponent } from '../modules/google-chart/charts/bar-chart/bar-chart.component';
+import { LineChartComponent } from '../modules/google-chart/charts/line-chart/line-chart.component';
+import { ComboChartComponent } from '../modules/google-chart/charts/combo-chart/combo-chart.component';
+import { GraphNavComponent } from '../modules/google-chart/charts/graph-nav/graph-nav.component';
+import { TableChartComponent } from '../modules/google-chart/charts/table-chart/table-chart.component';
+import { PaginatorComponent } from '../templates/paginator/paginator.component';
 
 
 @NgModule({
@@ -56,6 +61,8 @@ import { BarChartComponent } from '../modules/google-chart/charts/bar-chart/bar-
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatIconModule,
+    MatExpansionModule,
   ],
   declarations: [
     DataTableTemplateComponent,
@@ -63,13 +70,23 @@ import { BarChartComponent } from '../modules/google-chart/charts/bar-chart/bar-
     GoogleChartComponent,
     PieChartComponent,
     BarChartComponent,
+    LineChartComponent,
+    ComboChartComponent,
+    // GraphNavComponent,
+    TableChartComponent,
+    PaginatorComponent,
   ],
   exports: [
     DataTableTemplateComponent,
     GoogleChartTemplateComponent,
     GoogleChartComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    LineChartComponent,
+    ComboChartComponent,
+    // GraphNavComponent,
+    TableChartComponent,
+    PaginatorComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

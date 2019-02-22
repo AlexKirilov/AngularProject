@@ -1,9 +1,9 @@
-<section id="logs-wrapper" fxLayout="column" fxLayoutAlign="center stretch">
-  <section id="top-container" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+<section id="logs-wrapper" fxLayout="column">
+  <section id="top-container" fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="50px">
 
-    <div class="row" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
 
-      <div class="control-btns left" fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="100%" fxLayoutGap="20px">
+      <div class="control-btns left" fxLayout="row" fxLayoutGap="10px">
         <!-- fxLayout.xs="column" -->
         <button mat-raised-button class="reload" (click)="reload()">
           <span>Reload
@@ -18,7 +18,7 @@
         </button>
       </div>
 
-      <div fxLayout.xs="column">
+      <div fxLayout="row wrap" fxLayout="row" fxLayoutAlign="start stretch">
         <!-- <span class="filter-label" fxHide.xs> Filters: </span> -->
         <!-- Tools filter -->
         <mat-form-field>

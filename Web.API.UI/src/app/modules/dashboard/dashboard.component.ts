@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef  } from '@angular/core';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  state = 'hide'
+  constructor(public el: ElementRef) { }
 
   ngOnInit() {
+  
   }
 
+  @HostListener('window:scroll', ['$event'])
+    checkScroll() {
+      const componentPosition = this.el.nativeElement.offsetTop // + 45; // 45 height of the header
+      const scrollPosition = window.pageYOffset
+
+      if (scrollPosition >= componentPosition) {
+        this.state = 'show'
+      } else {
+        this.state = 'hide'
+      }
+
+    }
 }

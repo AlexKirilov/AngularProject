@@ -1,6 +1,6 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {MatSnackBar} from '@angular/material';
-import {DatashareService} from './services/datashare.service';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+import { DatashareService } from './services/datashare.service';
 import devtools from 'devtools-detect/index.js';
 
 @Component({
@@ -10,7 +10,7 @@ import devtools from 'devtools-detect/index.js';
   styleUrls: [
     './app.component.scss',
     '../../node_modules/shepherd.js/dist/css/shepherd-theme-default.css'
-]
+  ]
 })
 export class AppComponent {
   contentLoader: boolean;
@@ -49,7 +49,7 @@ export class AppComponent {
 
   openSnackBar(message: string, action: string) {
     if (message !== ' ') {
-      this.snackBar.open(message, action, {duration: 4000});
+      this.snackBar.open(message, action, { duration: 4000 });
     }
   }
 }

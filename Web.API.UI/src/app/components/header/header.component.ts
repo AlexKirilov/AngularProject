@@ -1,19 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { DatastoreService } from '../../services/datastore.service';
 import { DatashareService } from '../../services/datashare.service';
 import { Unsubscribable } from 'rxjs';
 import { Router, NavigationStart, NavigationCancel, NavigationEnd, NavigationError } from '@angular/router';
 import { distinctUntilChanged } from 'rxjs/operators';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  animations: [
+    trigger('scrollAnimation', [
+      state('show', style({
+        opacity: 1,
+        transform: "translateX(0)"
+      })),
+      state('hide', style({
+        opacity: 0,
+        transform: "translateX(-100%)"
+      })),
+      transition('show => hide', animate('700ms ease-out')),
+      transition('hide => show', animate('700ms ease-in'))
+    ])
+  ]
 })
 export class HeaderComponent implements OnInit {
 
   private unscRouterEvents: Unsubscribable;
+  state = 'hide'
+
+  @HostListener('window:scroll', ['$event'])
+  checkScroll() {
+    const componentPosition = this.el.nativeElement.offsetTop + 60; // 45 height of the header
+    const scrollPosition = window.pageYOffset
+
+    if (scrollPosition >= componentPosition) {
+      this.state = 'show'
+    } else {
+      this.state = 'hide'
+    }
+  }
+
   constructor(
+    public el: ElementRef,
     private router: Router,
     private datastore: DatastoreService,
     private datashare: DatashareService

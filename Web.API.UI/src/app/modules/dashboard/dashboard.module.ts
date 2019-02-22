@@ -20,6 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../shared-module/shared.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { SiteDashboardComponent } from './components/site-dashboard/site-dashboard.component';
 import { SiteApiConnectionDataComponent } from './components/site-api-connection-data/site-api-connection-data.component';
@@ -29,6 +30,8 @@ import { SiteEmployeesComponent } from './components/site-employees/site-employe
 import { SiteLogsComponent } from './components/site-logs/site-logs.component';
 import { SiteCustomersComponent } from './components/site-customers/site-customers.component';
 import { SiteOrdersComponent } from './components/site-orders/site-orders.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { DashNavIconsComponent } from './components/dash-nav-icons/dash-nav-icons.component';
 
 @NgModule({
   imports: [
@@ -37,7 +40,9 @@ import { SiteOrdersComponent } from './components/site-orders/site-orders.compon
     HttpModule,
     FormsModule,
     SharedModule,
+    FlexLayoutModule,
     DashboardRoutingModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatMenuModule,
@@ -82,7 +87,8 @@ import { SiteOrdersComponent } from './components/site-orders/site-orders.compon
     SiteEmployeesComponent,
     SiteLogsComponent,
     SiteCustomersComponent,
-    SiteOrdersComponent
+    SiteOrdersComponent,
+    // DashNavIconsComponent
   ]
 })
 export class DashboardModule { }

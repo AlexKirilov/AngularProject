@@ -101,7 +101,7 @@ export class DatastoreService {
   ////////// Registration /////////////////
   /////////////////////////////////////////
 
-  checkForExistingUserEmail (email, callback) {
+  checkForExistingUserEmail(email, callback) {
     this.http.post<Boolean>(`${this.url}/auth/checkForUser`, email).subscribe(
       result => callback(result)
     );
@@ -132,9 +132,42 @@ export class DatastoreService {
   }
 
   /////////////////////////////////////////
+  ///////////// Orders ////////////////////
+  /////////////////////////////////////////
+
+  getAllOrders(filters, callback) {
+    this.http.get<any>(`${this.url}/orders/getorders${filters}`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  getOrdersToConfirm(callback: any) {
+    this.http.get<any>(`${this.url}/orders/getordersforapproval`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  addOrder(order: any, callback: any) {
+    this.http.post<any>(`${this.url}/orders/addOrder`, order).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  editOrder(order: any, callback: any) {
+    this.http.post<any>(`${this.url}/orders/editOrder`, order).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+  
+
+  /////////////////////////////////////////
   ////////////// Auth Contacts
 
-  getSiteContacts (callback) {
+  getSiteContacts(callback) {
     this.http.get(`${this.url}/sitedata/getAuthSiteContacts`).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err) // errorcallback(err)
@@ -148,7 +181,7 @@ export class DatastoreService {
     );
   }
 
-  removeSiteContacts () {
+  removeSiteContacts() {
 
   }
 
@@ -175,7 +208,7 @@ export class DatastoreService {
     );
   }
 
-  removeCusInvoiceDetails () {
+  removeCusInvoiceDetails() {
 
   }
 
@@ -203,7 +236,7 @@ export class DatastoreService {
     );
   }
 
-  updateCustomerDiscount (data, callback) {
+  updateCustomerDiscount(data, callback) {
     this.http.post<any>(`${this.url}/authdata/cudiscount`, data).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
@@ -213,14 +246,14 @@ export class DatastoreService {
   /////////////////////////////////////////
   ////////////// Employees
 
-  getEmployees (callback) { // TODO:
+  getEmployees(callback) { // TODO:
     this.http.get<ContactsData>(`${this.url}/authdata/getEmployees`).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
     );
   }
 
-  updateEmployee (data, callback ) {
+  updateEmployee(data, callback) {
     this.http.post<ContactsData>(`${this.url}/authdata/updateEmployee`, data).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
@@ -231,7 +264,7 @@ export class DatastoreService {
   /////////////////////////////////////////
   ////////////// Orders
 
-  getOrders (callback) {
+  getOrders(callback) {
     this.http.get<any>(`${this.url}/orders/getordersforapproval`).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
@@ -242,26 +275,71 @@ export class DatastoreService {
   /////////////////////////////////////////
   ///////////// Logs    ///////////////////
   /////////////////////////////////////////
-  getLogsBySiteOwner (filters, callback) {
+  getLogsBySiteOwner(filters, callback) {
     this.http.post<any>(`${this.url}/logs/getSiteLogs`, filters).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
     );
   }
 
-  getLogsDateTypes (callback) {
+  getLogsDateTypes(callback) {
     this.http.get<any>(`${this.url}/logs/logDataFilter`).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
     );
   }
 
-  clearLogs (callback) {
+  clearLogs(callback) {
     this.http.delete<any>(`${this.url}/logs/`).subscribe(
       result => callback(result),
       err => this.errorHandler.handleError(err)
     );
   }
+
+  /////////////////////////////////////////
+  ///////////// Dashboard    //////////////
+  /////////////////////////////////////////
+  getSalesChartData(days: any, callback: any) {
+    this.http.post<any>(`${this.url}/dashboard/sales`, { days }).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  getProductsChartData(callback: any) {
+    this.http.get<any>(`${this.url}/dashboard/products`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  getSalesTopBottomList(callback: any) {
+    this.http.get<any>(`${this.url}/dashboard/saleslist`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  getOrdersStatistics(callback: any) {
+    this.http.get<any>(`${this.url}/dashboard/orders`).subscribe(
+      result => callback(result),
+      err => this.errorHandler.handleError(err)
+    );
+  }
+
+  // getLogsDateTypes (callback) {
+  //   this.http.get<any>(`${this.url}/logs/logDataFilter`).subscribe(
+  //     result => callback(result),
+  //     err => this.errorHandler.handleError(err)
+  //   );
+  // }
+
+  // clearLogs (callback) {
+  //   this.http.delete<any>(`${this.url}/logs/`).subscribe(
+  //     result => callback(result),
+  //     err => this.errorHandler.handleError(err)
+  //   );
+  // }
 
   /////////////////////////////////////////
   ///////////// Log OUT ///////////////////
@@ -270,5 +348,6 @@ export class DatastoreService {
     this.removeAuthorization();
     this.router.navigate(['/login']);
   }
+
 
 }

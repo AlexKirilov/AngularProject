@@ -12,14 +12,18 @@ export class GoogleChartComponent implements OnInit {
   @Input('chartType') public chartType: string;
   @Input('chartOptions') public chartOptions: Object;
   @Input('chartData') public chartData: Object;
+  @Input('elementID') public elementID: Object;
 
   constructor(public element: ElementRef) {
     this._element = this.element.nativeElement;
+    console.log('Elements for Chart: ', this._element)
   }
   ngOnInit() { }
 
   ngOnChanges(changes) {
     google.charts.load('current', { 'packages': ['corechart', 'bar', 'table', 'line'] });
+    console.log('ngOnChanges elementRef ', this._element);
+    // console.log('ngOnChanges elementID ', this.elementID);
     this.drawGraph(
       this.chartOptions,
       this.chartType,

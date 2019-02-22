@@ -11,6 +11,7 @@ export class PieChartComponent implements OnInit, OnChanges {
 
   @Input() pie_ChartData: any;
   @Input() settings: IPieSettings;
+  @Input() elementID: string;
 
   public addActivityControl: FormGroup;
 
@@ -25,6 +26,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   public pieSliceTextType = new FormControl('value', [Validators.required]);
   public pieSliceTextColor = new FormControl('#000', [Validators.required]);
   public legendPosition = new FormControl('labeled', [Validators.required]);
+  public isSettings = false;
 
   private default_pie_ChartData = [['Task', 'Delegate Status'], ['Walk', 5], ['Run', 5], ['Eat', 5]];
 
@@ -45,14 +47,13 @@ export class PieChartComponent implements OnInit, OnChanges {
     if (!this.pie_ChartData) {
       this.pie_ChartData = this.default_pie_ChartData; // Default values
     }
-
     if (!this.settings) {
       this.pie_ChartOptions = this.pie_ChartOptionsChange(); // Default values
     } else {
       this.pie_ChartOptions = this.pie_ChartOptionsChange(
-        this.settings.is3DBool || true, this.settings.pieHoleSize, this.settings.pieSliceTextType, this.settings.pieSliceTextColor,
-        this.settings.tooltipType, this.settings.tooltipDataType, this.settings.legend.legendPosition,
-        this.settings.legend.textStyle.color, this.settings.fontsize
+        this.settings.title, this.settings.is3DBool, this.settings.pieHoleSize, this.settings.pieSliceTextType, this.settings.pieSliceTextColor,
+        this.settings.tooltipType, this.settings.tooltipDataType, (this.settings.legend) ? this.settings.legend.legendPosition : null,
+        (this.settings.legend) ? this.settings.legend.textStyle.color : null, this.settings.fontsize
       );
     }
   }
@@ -72,7 +73,7 @@ export class PieChartComponent implements OnInit, OnChanges {
         return !item.includes(this.addActivityControl.value.activityTxt);
       });
       this.pie_ChartData = JSON.parse(JSON.stringify(this.default_pie_ChartData));
-    } else if (this.default_pie_ChartData.filter( item => {
+    } else if (this.default_pie_ChartData.filter(item => {
       if (item.includes(this.addActivityControl.value.activityTxt)) {
         return true;
       } else {
@@ -82,8 +83,8 @@ export class PieChartComponent implements OnInit, OnChanges {
       this.default_pie_ChartData.push([this.addActivityControl.value.activityTxt, this.addActivityControl.value.activityNum]);
       this.pie_ChartData = JSON.parse(JSON.stringify(this.default_pie_ChartData)); // WHY
     } else {
-      if (this.default_pie_ChartData.filter( item => {
-        if (item.includes(this.addActivityControl.value.activityTxt) && !item.includes(this.addActivityControl.value.activityNum) ) {
+      if (this.default_pie_ChartData.filter(item => {
+        if (item.includes(this.addActivityControl.value.activityTxt) && !item.includes(this.addActivityControl.value.activityNum)) {
           item[1] = this.addActivityControl.value.activityNum;
           return true;
         }
@@ -96,6 +97,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   }
 
   pie_ChartOptionsChange(
+    title: string = 'My Daily Activities',
     is3DBool: Boolean = true,
     pieHoleSize: number = 0.5, // between 0 and 1
     pieSliceTextType: any = 'value', // 'percentage', 'value', 'label', 'none',
@@ -116,7 +118,7 @@ export class PieChartComponent implements OnInit, OnChanges {
       height = 250;
     }
     return {
-      title: 'My Daily Activities',
+      title,
       width,
       height,
       // colors: ['#4fa7dc', '#a6d9f4', '#eeedee'],

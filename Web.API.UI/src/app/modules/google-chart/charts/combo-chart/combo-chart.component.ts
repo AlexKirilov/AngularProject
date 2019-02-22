@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GoogleChartComponent } from '../google-chart/google-chart.component';
 import { debug } from 'util';
 import { FormControl, Validators } from '@angular/forms';
@@ -10,6 +10,8 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class ComboChartComponent implements OnInit {
 
+  @Input() elementID: string;
+  
   public combo_ChartData;
   public combo_ChartOptions;
   public combo_title;

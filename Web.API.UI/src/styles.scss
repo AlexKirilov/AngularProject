@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 @font-face {
     font-family: 'Din-bold';
     src: url('app/fonts/font.eot');
@@ -9,9 +9,9 @@
     font-family: 'DIN';
     src: url('app/fonts/dinregularwebfont.eot');
     src: local('DIN'), url('app/fonts/dinregularwebfont.woff') format('woff'), url('app/fonts/dinregularwebfont.ttf') format('truetype');
-  }
+}
 
-  * {
+* {
     margin: 0 auto;
     padding: 0;
     font-family: 'DIN', Arial, Helvetica, sans-serif;
@@ -22,13 +22,17 @@
     &::-webkit-scrollbar {
         width: 0 !important // Hide Scroll-bar
     }
-  }
+}
 
-  html {
-    background: #ee36fa;/* Old browsers */
-    background: -moz-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* FF3.6-15 */
-    background: -webkit-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+html {
+    background: #ee36fa;
+    /* Old browsers */
+    background: -moz-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ee36fa', endColorstr='#6f3ede', GradientType=1);/* IE6-9 fallback on horizontal gradient */
     background: #ee36fa;
     background: linear-gradient(9deg, #ff0000 -10%, #72c1fd78 50%);
@@ -37,77 +41,128 @@
     background-attachment: fixed;
     width: 100%;
     height: 100%;
-  }
+}
 
-  body {
-      margin: 0 auto;
-      padding: 0px;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-  }
+body {
+    margin: 0 auto;
+    padding: 0px;
+    width: 100%;
+    height: auto; // 100%;
+    text-align: center;
+}
 
-  .left {
-      float: left;
-  }
+.left {
+    float: left;
+}
 
-  .right {
-      float: right;
-  }
+.right {
+    float: right;
+}
 
-  .hide {
-    display: none;
-  }
-  .btn-style {
-      font-weight: bold;
-      padding: 10px 30px;
-      text-transform: uppercase;
-      color: white;
-      box-shadow: 2px 2px 9px 0px #d5d5d5;
-      border-radius: 10px;
-      text-decoration: none;
-      background: transparent;
-      border: none;
-  }
+.hide {
+    display: none !important;
+}
 
-  .btn-style:hover {
-      box-shadow: none;
-      margin-top: 2px;
-      margin-left: 2px;
-      border: 1px solid #d5d5d5;
-  }
+app-header {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    z-index: 1;
+}
 
-  #home-container,
-  #about-container {
+api-dash-nav-icons {
+    position: fixed;
+    top: -59px;
+    width: 100%;
+    left: 0;
+}
+
+#main-body-wrapper {
+    margin-top: 45px;
+}
+.btn-style {
+    font-weight: bold;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    color: white;
+    box-shadow: 2px 2px 9px 0px #d5d5d5;
+    border-radius: 10px;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+}
+
+.btn-style:hover {
+    box-shadow: none;
+    margin-top: 2px;
+    margin-left: 2px;
+    border: 1px solid #d5d5d5;
+}
+
+#home-container,
+#about-container {
     width: 90%;
     min-height: 100vh;
     background-color: rgba(220, 220, 220, 0.5);
     padding: 20px;
-  }
+}
 
-  .input {
+.input {
     margin: 10px 0;
-  }
+}
 
-  .input input {
+.input input {
     padding: 6px 10px;
-  }
-
+}
 
 .mat-expansion-panel {
-  background: rgba(255, 255, 255, 0.5);
-  .mat-expansion-panel-body {
-    margin-top: 10px;
-  }
+    background: rgba(255, 255, 255, 0.5);
+    .mat-expansion-panel-body {
+        margin-top: 10px;
+        width: 90%;
+        app-data-table-template {
+            width: 100%;
+        }
+    }
 }
+
 .mat-toolbar.mat-primary {
-  background: transparent;
+    background: transparent;
 }
-.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: white;
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: white;
 }
+
 .mat-tab-label-active {
-  color: white;
-  opacity: 1 !important;
-  background: rgba(255, 255, 255, 0.1);
+    color: white;
+    opacity: 1 !important;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#purchases-wrapper {
+    .mat-card {
+        background: rgba(255, 255, 255, 0.4);
+    }
+    .mat-table,
+    .mat-paginator {
+        background: transparent;
+    }
+    mat-panel-title {
+        line-height: 36px;
+        height: 36px;
+    }
+    .mat-expansion-panel-header-title {
+        flex-grow: initial;
+        min-width: 45%;
+    }
+}
+
+api-paginator {
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 20px;
 }

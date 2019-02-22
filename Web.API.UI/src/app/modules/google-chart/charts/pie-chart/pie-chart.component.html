@@ -1,102 +1,106 @@
-<section id="pie-chart-container">
-  <mat-card>
-    <mat-card-content>
-      <div id="pie_chart" [chartData]="pie_ChartData" [chartOptions]="pie_ChartOptions" chartType="PieChart" GoogleChart>
-      </div>
-    </mat-card-content>
+<section id="pie-chart-container" fxLayout="row wrap" fxFlex="100" fxLayoutAlign="center center" fxLayoutGap="20px">
 
-    <mat-card-content>
-
-      <div class="chart-row">
-        <mat-form-field>
-          <mat-select placeholder="3D View" [formControl]="is3DBool" (selectionChange)="onChartChange()" [value]="is3DBool.value" id="3dview">
-            <mat-option value="true">True</mat-option>
-            <mat-option value="false">False</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="Donut whole size" type="number" min="0" max="1" step="0.1" value="0.5" [formControl]="pieHoleSize"
-            (change)="onChartChange()" [disabled]="this.is3DBool.value" id="donut-holl-size">
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-select placeholder="Font Size" [formControl]="fontsize" (selectionChange)="onChartChange()" [value]="fontsize.value" id="font-size">
-            <mat-option value="12">12</mat-option>
-            <mat-option value="14">14</mat-option>
-            <mat-option value="16">16</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-
-      <div class="chart-row">
-        <mat-form-field>
-          <mat-select placeholder="Slice Text Type" [formControl]="pieSliceTextType" (selectionChange)="onChartChange()" [value]="pieSliceTextType.value" id="slice-type">
-            <mat-option value="none">None</mat-option>
-            <mat-option value="value">Value</mat-option>
-            <mat-option value="label">Label</mat-option>
-            <mat-option value="percentage">Percentage</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="text" placeholder="Slice Text Color" [formControl]="pieSliceTextColor" (change)="onChartChange()" [value]="pieSliceTextColor.value" id="slice-txt-color">
-        </mat-form-field>
-      </div>
-
-      <div class="chart-row">
-        <mat-form-field>
-          <mat-select placeholder="Vissible Tooltip" [formControl]="isTooltip" (selectionChange)="onChartChange()" [value]="isTooltip.value" if="tooltip-visibillity">
-            <mat-option value="focus">focus</mat-option>
-            <mat-option value="none">none</mat-option>
-            <mat-option value="selection">selection</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-select placeholder="Tooltip type" [formControl]="tooltipDataType" (selectionChange)="onChartChange()" [value]="tooltipDataType.value" id="tooltip-type">
-            <mat-option value="both">both</mat-option>
-            <mat-option value="value">value</mat-option>
-            <mat-option value="percentage">percentage</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="chart-row">
-        <mat-form-field>
-          <mat-select placeholder="Legend Type" [formControl]="legendPosition" (selectionChange)="onChartChange()" [value]="legendPosition.value" id="legend-type">
-            <mat-option value="none">none</mat-option>
-            <mat-option value="labeled">labeled</mat-option>
-            <mat-option value="top">top</mat-option>
-            <mat-option value="left">left</mat-option>
-            <mat-option value="right">right</mat-option>
-            <mat-option value="bottom">bottom</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="text" placeholder="Legend Text Color" [formControl]="legendTxtStyle" (change)="onChartChange()" [value]="legendTxtStyle.value" id="legend-txt-color">
-        </mat-form-field>
-      </div>
-
-      <div class="chart-row" [formGroup]="addActivityControl">
-        <mat-form-field>
-          <input matInput type="text" placeholder="Add Activity" formControlName="activityTxt" id="activityTxt">
-          <mat-error *ngIf="addActivityControl.get('activityTxt').hasError('required')">This Field is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput type="number" min="-1" max="100" placeholder="Add Activity" formControlName="activityNum" id="activityNum">
-          <mat-error *ngIf="addActivityControl.get('activityNum').hasError('required')">This Field is required</mat-error>
-          <mat-error *ngIf="!addActivityControl.get('activityNum').hasError('required') &&
-                            addActivityControl.get('activityNum').hasError('max')">Please enter number less than 100</mat-error>
-        </mat-form-field>
-
-        <mat-card-actions>
-          <button mat-raised-button (click)="addActivity()" id="add-activity" [disabled]="!(addActivityControl.value.activityTxt && addActivityControl.value.activityNum) || (addActivityControl.get('activityTxt').hasError('required') || addActivityControl.get('activityNum').hasError('required') || addActivityControl.get('activityNum').hasError('max'))">Add Activity</button>
-        </mat-card-actions>
-      </div>
-
-
-    </mat-card-content>
-  </mat-card>
-</section>
+    <mat-card>
+      
+      <mat-card-content [class.left]="isSettings">
+        <div id="pie_chart-{{elementID}}" [chartData]="pie_ChartData" [chartOptions]="pie_ChartOptions" chartType="PieChart" GoogleChart>
+        </div>
+        <mat-icon class="small-screen menu-icon-nav black active settings" matTooltip="Settings" matTooltipPosition="above" (click)="isSettings = !isSettings">settings</mat-icon>
+      </mat-card-content>
+  
+      <mat-card-content *ngIf="isSettings" fxLayoutGap="20px">
+  
+        <div class="chart-row" fxLayoutGap="20px">
+          <mat-form-field>
+            <mat-select placeholder="3D View" [formControl]="is3DBool" (selectionChange)="onChartChange()" [value]="is3DBool.value" id="3dview">
+              <mat-option value="true">True</mat-option>
+              <mat-option value="false">False</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input matInput placeholder="Donut whole size" type="number" min="0" max="1" step="0.1" value="0.5" [formControl]="pieHoleSize"
+              (change)="onChartChange()" [disabled]="this.is3DBool.value" id="donut-holl-size">
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-select placeholder="Font Size" [formControl]="fontsize" (selectionChange)="onChartChange()" [value]="fontsize.value" id="font-size">
+              <mat-option value="12">12</mat-option>
+              <mat-option value="14">14</mat-option>
+              <mat-option value="16">16</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="chart-row" fxLayoutGap="20px">
+          <mat-form-field>
+            <mat-select placeholder="Slice Text Type" [formControl]="pieSliceTextType" (selectionChange)="onChartChange()" [value]="pieSliceTextType.value" id="slice-type">
+              <mat-option value="none">None</mat-option>
+              <mat-option value="value">Value</mat-option>
+              <mat-option value="label">Label</mat-option>
+              <mat-option value="percentage">Percentage</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input matInput type="text" placeholder="Slice Text Color" [formControl]="pieSliceTextColor" (change)="onChartChange()" [value]="pieSliceTextColor.value" id="slice-txt-color">
+          </mat-form-field>
+        </div>
+  
+        <div class="chart-row" fxLayoutGap="20px">
+          <mat-form-field>
+            <mat-select placeholder="Vissible Tooltip" [formControl]="isTooltip" (selectionChange)="onChartChange()" [value]="isTooltip.value" if="tooltip-visibillity">
+              <mat-option value="focus">focus</mat-option>
+              <mat-option value="none">none</mat-option>
+              <mat-option value="selection">selection</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-select placeholder="Tooltip type" [formControl]="tooltipDataType" (selectionChange)="onChartChange()" [value]="tooltipDataType.value" id="tooltip-type">
+              <mat-option value="both">both</mat-option>
+              <mat-option value="value">value</mat-option>
+              <mat-option value="percentage">percentage</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="chart-row" fxLayoutGap="20px">
+          <mat-form-field>
+            <mat-select placeholder="Legend Type" [formControl]="legendPosition" (selectionChange)="onChartChange()" [value]="legendPosition.value" id="legend-type">
+              <mat-option value="none">none</mat-option>
+              <mat-option value="labeled">labeled</mat-option>
+              <mat-option value="top">top</mat-option>
+              <mat-option value="left">left</mat-option>
+              <mat-option value="right">right</mat-option>
+              <mat-option value="bottom">bottom</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input matInput type="text" placeholder="Legend Text Color" [formControl]="legendTxtStyle" (change)="onChartChange()" [value]="legendTxtStyle.value" id="legend-txt-color">
+          </mat-form-field>
+        </div>
+  
+        <div class="chart-row" [formGroup]="addActivityControl" fxLayoutGap="20px">
+          <mat-form-field>
+            <input matInput type="text" placeholder="Add Activity" formControlName="activityTxt" id="activityTxt">
+            <mat-error *ngIf="addActivityControl.get('activityTxt').hasError('required')">This Field is required</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input matInput type="number" min="-1" max="100" placeholder="Add Activity" formControlName="activityNum" id="activityNum">
+            <mat-error *ngIf="addActivityControl.get('activityNum').hasError('required')">This Field is required</mat-error>
+            <mat-error *ngIf="!addActivityControl.get('activityNum').hasError('required') &&
+                              addActivityControl.get('activityNum').hasError('max')">Please enter number less than 100</mat-error>
+          </mat-form-field>
+  
+          <mat-card-actions>
+            <button mat-raised-button (click)="addActivity()" id="add-activity" [disabled]="!(addActivityControl.value.activityTxt && addActivityControl.value.activityNum) || (addActivityControl.get('activityTxt').hasError('required') || addActivityControl.get('activityNum').hasError('required') || addActivityControl.get('activityNum').hasError('max'))">Add Activity</button>
+          </mat-card-actions>
+        </div>
+  
+  
+      </mat-card-content>
+    </mat-card>
+  </section>

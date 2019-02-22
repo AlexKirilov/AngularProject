@@ -1,8 +1,95 @@
 <section id="bar-chart-container">
-  <mat-card>
-      <mat-card-content>
-          <div id="line_chart" [chartData]="line_ChartData" [chartOptions]="line_ChartOptions" chartType="LineChart" GoogleChart>
-          </div>
-      </mat-card-content>
-  </mat-card>
-</section>
+    <mat-card>
+  
+        <mat-card-content>
+            <div id="line_chart-{{elementID}}" [chartData]="line_ChartData" [chartOptions]="line_ChartOptions" chartType="LineChart" GoogleChart>
+            </div>
+  
+            <mat-icon class="small-screen menu-icon-nav black active settings" matTooltip="Settings" matTooltipPosition="above" (click)="isSettings = !isSettings">settings</mat-icon>
+        </mat-card-content>
+  
+        <mat-card-content class="chart-row-container" *ngIf="isSettings" fxLayoutGap="20px">
+            <!-- <div class="chart-row" fxLayoutGap="20px">
+                <mat-form-field>
+                    <mat-select placeholder="Chart Style" [formControl]="barChartSyle"
+                        (selectionChange)="changeBarChartStyle()" [value]="barChartSyle.value" id="chart-style">
+                        <mat-option value="0">Style 1</mat-option>
+                        <mat-option value="1">Style 2</mat-option>
+                        <mat-option value="2">Style 3</mat-option>
+                        <mat-option value="3">Style 4</mat-option>
+                        <mat-option value="4">Style 5</mat-option>
+                    </mat-select>
+                </mat-form-field>
+  
+                <mat-form-field>
+                    <mat-select placeholder="Legend Text Alignment" [formControl]="legendTxtAlignment"
+                        (selectionChange)="onChartChange()" [value]="legendTxtAlignment.value" id="chart-txt-align">
+                        <mat-option value="start">Start</mat-option>
+                        <mat-option value="center">Center</mat-option>
+                        <mat-option value="end">End</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+  
+            <div class="chart-row" fxLayoutGap="20px">
+                <mat-form-field>
+                    <mat-select placeholder="Tooltip" [formControl]="tooltipTrigger" (selectionChange)="onChartChange()"
+                        [value]="tooltipTrigger.value" id="tooltip">
+                        <mat-option value="focus">On Focus</mat-option>
+                        <mat-option value="none">None</mat-option>
+                        <mat-option value="selection">On Selection</mat-option>
+                    </mat-select>
+                </mat-form-field>
+  
+                <mat-form-field>
+                    <mat-select placeholder="Legend Position" [formControl]="legendPosition"
+                        (selectionChange)="onChartChange()" [value]="legendPosition.value" id="legendPosition">
+                        <mat-option value="top">Top</mat-option>
+                        <mat-option value="left">Left</mat-option>
+                        <mat-option value="bottom">Bottom</mat-option>
+                        <mat-option value="right">Right</mat-option>
+                        <mat-option value="in">In</mat-option>
+                        <mat-option value="none">None</mat-option>
+                    </mat-select>
+                </mat-form-field>
+  
+                <div [formGroup]="barGroupWidth">
+                    <mat-form-field>
+                        <input matInput type="number" min="20" max="100" placeholder="Bar Group Width"
+                            formControlName="width" (change)="onChartChange()" id="barGroupWidth">
+                        <mat-hint>Number between 20% and 100%</mat-hint>
+                        <mat-error *ngIf="barGroupWidth.get('width').hasError('required')">This Field is required
+                        </mat-error>
+                        <mat-error
+                            *ngIf="!barGroupWidth.get('width').hasError('required') && !barGroupWidth.get('width').hasError('max') && barGroupWidth.get('width').hasError('min')">
+                            Please enter number bigger than 10</mat-error>
+                        <mat-error
+                            *ngIf="!barGroupWidth.get('width').hasError('required') && !barGroupWidth.get('width').hasError('min') && barGroupWidth.get('width').hasError('max')">
+                            Please enter number less than 100</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+  
+            <div class="chart-row" fxLayout="row wrap" fxLayoutGap="50px">
+                <div fxLayout="column">
+                    <mat-checkbox class="" [formControl]="reverse" [checked]="reverse.value" (change)="onChartChange()"
+                        id="reverse">Reverse chart</mat-checkbox>
+                    <mat-checkbox class="" [formControl]="tooltipIsHtml" [checked]="tooltipIsHtml.value"
+                        (change)="onChartChange()" id="tooltipIsHtml">Tooltip as Html</mat-checkbox>
+                    <mat-checkbox class="" [formControl]="isStacked" [checked]="isStacked.value"
+                        (change)="onChartChange()" disabled id="isStacked">isStacked</mat-checkbox>
+                </div>
+  
+                <div>
+                    <mat-radio-group [formControl]="barsType" [value]="barsType.value" (change)="onChartChange()"
+                        id="barsType" fxLayout="column" fxLayoutGap="5px">
+                        <mat-radio-button class="example-margin" value="horizontal" id="horizontal">Horizontal
+                        </mat-radio-button>
+                        <mat-radio-button class="example-margin" value="vertical" id="vertical">Vertical
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div> -->
+        </mat-card-content>
+    </mat-card>
+  </section>

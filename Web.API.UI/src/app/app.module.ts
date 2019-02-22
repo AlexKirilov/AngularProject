@@ -30,6 +30,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MessageHandlerComponent } from './components/message-handler/message-handler.component';
 import { SinglePageComponent } from './components/single-page/single-page.component';
 import { SharedModule } from './shared-module/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashNavIconsComponent } from './components/dash-nav-icons/dash-nav-icons.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { SharedModule } from './shared-module/shared.module';
     NotFoundComponent,
     SinglePageComponent,
     MessageHandlerComponent,
+    DashNavIconsComponent
 
   ],
   imports: [
@@ -49,6 +52,7 @@ import { SharedModule } from './shared-module/shared.module';
     SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FlexLayoutModule,
     MatMenuModule,
@@ -82,7 +86,8 @@ import { SharedModule } from './shared-module/shared.module';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-
+    MatIconModule,
+    MatExpansionModule,
   ],
   providers: [
     AuthGuard,

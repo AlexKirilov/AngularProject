@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IPie, IPieSettings } from './google-charts.models';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { IChart, IPieSettings } from './google-charts.models';
 
 @Component({
   selector: 'app-google-chart',
@@ -44,13 +44,17 @@ export class GoogleChartTemplateComponent implements OnInit {
 
   */
 
-  @Input() chartType: null | 'pie' = null;
-  @Input() chartData: IPie;
+  @Input() chartType: null | 'pie' | 'bar' | 'line' | 'combo' = null;
+  @Input() chartData: IChart;
   @Input() chartSettings: IPieSettings;
+  @Input() elementID: string = Math.random().toString();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('elementID ', this.elementID)
+  }
 }
