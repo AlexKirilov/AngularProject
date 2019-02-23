@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatastoreService } from '../../../../services/datastore.service';
+import { Unsubscribable } from 'rxjs';
+import { HandleErrorsService } from '../../../../services/handle-errors.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,7 +10,7 @@ import { DatastoreService } from '../../../../services/datastore.service';
   templateUrl: './registration-details.component.html',
   styleUrls: ['./registration-details.component.scss']
 })
-export class RegistrationDetailsComponent implements OnInit {
+export class RegistrationDetailsComponent implements OnInit, OnDestroy {
 
   // New
   authInvoiceDetails = false;
@@ -21,14 +23,76 @@ export class RegistrationDetailsComponent implements OnInit {
   invoiceDetails: FormGroup;
   isEditable = false; // Delete me
 
-
+  private unsUpdateSiteCont: Unsubscribable;
+  private unsUpdateCUInvoice: Unsubscribable;
 
   constructor(
     private _formBuilder: FormBuilder,
-    private datastore: DatastoreService
-  ) { }
+    private datastore: DatastoreService,
+    private errorHandler: HandleErrorsService,
+  ) {
+    this.setDefaultVar();
+  }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ngOnDestroy(): void {
+    if (this.unsUpdateSiteCont) { this.unsUpdateSiteCont.unsubscribe(); }
+    if (this.unsUpdateCUInvoice) { this.unsUpdateCUInvoice.unsubscribe(); }
+  }
+
+  SaveData () {
+    if (this.GDPR && this.authContacts) {
+      const tmpContacts = {
+        phones: this.contactsDetails.value.phonesCtrl.split(',').filter(v => v !== ''),
+        connections: {
+          facebook: this.contactsDetails.value.facebookCtrl,
+          twitter: this.contactsDetails.value.twitterCtrl,
+          linkedin: this.contactsDetails.value.linkedinCtrl,
+          skype: this.contactsDetails.value.skypeCtrl
+        },
+        coordinates: {
+          latitude: this.contactsDetails.value.latitudeCtrl,
+          longitude: this.contactsDetails.value.longitudeCtrl,
+          url: this.contactsDetails.value.urlCtrl
+        }
+      };
+
+      this.editSiteData(tmpContacts);
+    }
+
+    if (this.GDPR && this.authInvoiceDetails) {
+      const tmpInvoice = {
+        address: this.invoiceDetails.value.addressCtrl,
+        eik: this.invoiceDetails.value.eikCtrl,
+        bulstat: this.invoiceDetails.value.bulstatCtrl,
+        citizenship: this.invoiceDetails.value.citizenshipCtrl,
+        town: this.invoiceDetails.value.townCtrl,
+        country: this.invoiceDetails.value.countryCtrl,
+        postcode: this.invoiceDetails.value.phoneCtrl,
+        phone: this.invoiceDetails.value.phoneCtrl,
+        countryPhoneCode: this.invoiceDetails.value.countryPhoneCodeCtrl,
+        GDPR: this.GDPR // this.invoiceDetails.value.GDPRCtrl
+      };
+      this.editCUInvoises(tmpInvoice);
+    }
+  }
+
+  editSiteData(tmpContacts: object) {
+    this.unsUpdateSiteCont = this.datastore.addOrEditSiteContacts(tmpContacts).subscribe(
+      (data) => console.log(data),
+      (err: any) => this.errorHandler.handleError(err)
+    );
+  }
+
+  editCUInvoises(tmpInvoice: object) {
+    this.unsUpdateCUInvoice = this.datastore.addOrEditCusInvoiceDetails(tmpInvoice).subscribe(
+      (data: any) => console.log(data),
+      (err: any) => this.errorHandler.handleError(err)
+    );
+  }
+
+  setDefaultVar() {
     this.firstFormGroup = this._formBuilder.group({
       companyCTRL: ['', Validators.required]
     });
@@ -55,55 +119,4 @@ export class RegistrationDetailsComponent implements OnInit {
       GDPRCtrl: [false, Validators.required], // We may not need this here
     });
   }
-
-  SaveData () {
-    console.log(this.GDPR);
-    console.log(this.contactsDetails);
-    console.log(this.invoiceDetails);
-
-    if (this.GDPR && this.authContacts) {
-      const tmpContacts = {
-        phones: this.contactsDetails.value.phonesCtrl.split(',').filter(v => v !== ''),
-        connections: {
-          facebook: this.contactsDetails.value.facebookCtrl,
-          twitter: this.contactsDetails.value.twitterCtrl,
-          linkedin: this.contactsDetails.value.linkedinCtrl,
-          skype: this.contactsDetails.value.skypeCtrl
-        },
-        coordinates: {
-          latitude: this.contactsDetails.value.latitudeCtrl,
-          longitude: this.contactsDetails.value.longitudeCtrl,
-          url: this.contactsDetails.value.urlCtrl
-        }
-      };
-
-      this.datastore.addOrEditSiteContacts(
-        tmpContacts,
-        (data) => console.log(data)
-        // (err) => console.log(err)
-      );
-      console.log(tmpContacts);
-    }
-    if (this.GDPR && this.authInvoiceDetails) {
-      const tmpInvoice = {
-        address: this.invoiceDetails.value.addressCtrl,
-        eik: this.invoiceDetails.value.eikCtrl,
-        bulstat: this.invoiceDetails.value.bulstatCtrl,
-        citizenship: this.invoiceDetails.value.citizenshipCtrl,
-        town: this.invoiceDetails.value.townCtrl,
-        country: this.invoiceDetails.value.countryCtrl,
-        postcode: this.invoiceDetails.value.phoneCtrl,
-        phone: this.invoiceDetails.value.phoneCtrl,
-        countryPhoneCode: this.invoiceDetails.value.countryPhoneCodeCtrl,
-        GDPR: this.GDPR // this.invoiceDetails.value.GDPRCtrl
-      };
-      console.log(tmpInvoice);
-      this.datastore.addOrEditCusInvoiceDetails(
-        tmpInvoice,
-        (data) => console.log(data),
-        // (err) => console.log(err)
-      );
-    }
-  }
-
 }

@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { NewUser } from '../../../../app.model';
-
-import { UsersService } from '../../services/users.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DatastoreService } from '../../../../services/datastore.service';
-
+import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Router} from "@angular/router";
+import {NewUser} from "../../../../app.model";
+import {UsersService} from "../../services/users.service";
+import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {DatastoreService} from "../../../../services/datastore.service";
+import {Unsubscribable} from "rxjs";
+import {HandleErrorsService} from "../../../../services/handle-errors.service";
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -14,9 +13,7 @@ import { DatastoreService } from '../../../../services/datastore.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit {
-
-
+export class SignInComponent implements OnInit, OnDestroy {
 
   public signin: FormGroup;
   public btnSubmitValidation = false;
@@ -24,13 +21,12 @@ export class SignInComponent implements OnInit {
   public emailNotValid = false;
   public emailIsTaken = false;
 
-
   public userData: NewUser = {
     siteName: null,
     password: null,
     firstname: null,
     lastname: null,
-    email: null,
+    email: null
     // secretPIN: null
   };
 
@@ -42,26 +38,30 @@ export class SignInComponent implements OnInit {
 
   private errormessages = {
     password: 'Passwords doesn`t match!',
-    // username: 'This username is already taken!',
     emailExists: 'This email is already used',
-    emailValidation: 'This email is not in right form!',
+    emailValidation: 'This email is not in right form!'
   };
+
   private emailPattern = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
   private isUserNameTaken: boolean;
+
+  private unsCheckExistingEmail: Unsubscribable;
+  private unsRegistry: Unsubscribable;
 
   constructor(
     private userService: UsersService,
     private router: Router,
     private datastore: DatastoreService,
     public fb: FormBuilder,
-  ) {
+    private errorHandler: HandleErrorsService
+    ) {
     this.signin = fb.group({
-      'sitename': ['', Validators.required],
-      'password': ['', Validators.required],
-      'repassword': ['', Validators.required],
-      'fname': ['', Validators.required],
-      'lname': ['', Validators.required],
-      'email': ['', Validators.required],
+      sitename: ['', Validators.required],
+      password: ['', Validators.required],
+      repassword: ['', Validators.required],
+      fname: ['', Validators.required],
+      lname: ['', Validators.required],
+      email: ['', Validators.required]
     });
   }
 
@@ -72,6 +72,11 @@ export class SignInComponent implements OnInit {
     this.wrongCreds = document.getElementById('login-error-msg');
   }
 
+  ngOnDestroy(): void {
+    if (this.unsCheckExistingEmail) {
+      this.unsCheckExistingEmail.unsubscribe();
+    }
+  }
 
   emailValidation() {
     if (this.signin.value.email.trim() !== '') {
@@ -91,10 +96,11 @@ export class SignInComponent implements OnInit {
 
   checkingForExistingEmail() {
     if (this.signin.value.email.trim() !== '') {
-      this.datastore.checkForExistingUserEmail({ email: this.signin.value.email },
-        (res) => {
-          this.emailIsTaken = res.exist; }
-      );
+      this.unsCheckExistingEmail = this.datastore.checkForExistingUserEmail({email: this.signin.value.email})
+      .subscribe(
+        (res: any) => {
+        this.emailIsTaken = res.exist;
+       }, err => this.errorHandler.handleError(err));
     }
   }
 
@@ -125,13 +131,10 @@ export class SignInComponent implements OnInit {
       this.userData.lastname = this.signin.value.lname;
       this.userData.email = this.signin.value.email;
       this.userData.password = this.signin.value.password;
-      this.datastore.registry(this.userData,
-        (res) => {
-          this.datastore.setAuthorization(res);
-          this.router.navigate(['/registrationdetails']);
-        },
-        (err) => console.log('Err: ', err));
+      this.unsRegistry = this.datastore.registry(this.userData).subscribe(res => {
+        this.datastore.setAuthorization(res);
+        this.router.navigate(['/registrationdetails']);
+      }, err => console.log('Err: ', err));
     }
   }
-
 }

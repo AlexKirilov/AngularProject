@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, HostListener, ElementRef, OnDestroy } from '@angular/core';
 import { DatastoreService } from '../../services/datastore.service';
 import { DatashareService } from '../../services/datashare.service';
 import { Unsubscribable } from 'rxjs';
@@ -14,31 +14,31 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     trigger('scrollAnimation', [
       state('show', style({
         opacity: 1,
-        transform: "translateX(0)"
+        transform: 'translateX(0)'
       })),
       state('hide', style({
         opacity: 0,
-        transform: "translateX(-100%)"
+        transform: 'translateX(-100%)'
       })),
       transition('show => hide', animate('700ms ease-out')),
       transition('hide => show', animate('700ms ease-in'))
     ])
   ]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnDestroy {
 
   private unscRouterEvents: Unsubscribable;
-  state = 'hide'
+  state = 'hide';
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
     const componentPosition = this.el.nativeElement.offsetTop + 60; // 45 height of the header
-    const scrollPosition = window.pageYOffset
+    const scrollPosition = window.pageYOffset;
 
     if (scrollPosition >= componentPosition) {
-      this.state = 'show'
+      this.state = 'show';
     } else {
-      this.state = 'hide'
+      this.state = 'hide';
     }
   }
 
@@ -68,10 +68,11 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
   logout() {
     this.datastore.logout();
+  }
+
+  ngOnDestroy(): void {
+    if (this.unscRouterEvents) { this.unscRouterEvents.unsubscribe(); }
   }
 }

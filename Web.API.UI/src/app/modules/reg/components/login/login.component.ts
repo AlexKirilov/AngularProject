@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UsersService } from '../../services/users.service';
 import { DatashareService } from '../../../../services/datashare.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatastoreService } from '../../../../services/datastore.service';
+import { Unsubscribable } from 'rxjs';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -12,14 +13,15 @@ import { DatastoreService } from '../../../../services/datastore.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   public warnMsg = '';
   public newPath: string;
-  private loginErrorMsg = 'Wrong email or password';
-
   public login: FormGroup;
   public btnDisbaled = true;
+
+  private unsLogin: Unsubscribable;
+  private loginErrorMsg = 'Wrong email or password';
 
   constructor(
     private router: Router,
@@ -30,11 +32,6 @@ export class LoginComponent implements OnInit {
       'email': ['', Validators.required],
       'pass': ['', Validators.required],
     });
-
-    // this.datashare.newPath.subscribe(path => {
-    //   if(path !== '') this.newPath = path;
-    //   else this.newPath = '/home'
-    // });
   }
 
   ngOnInit() {
@@ -43,15 +40,24 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.unsLogin) { this.unsLogin.unsubscribe(); }
+  }
+
   onchange() {
-    // tslint:disable-next-line:max-line-length
-    this.btnDisbaled = !this.login.value.pass || !this.login.value.email || this.login.get('pass').invalid || this.login.get('email').invalid;
+    this.btnDisbaled = !this.login.value.pass ||
+                      !this.login.value.email ||
+                      this.login.get('pass').invalid ||
+                      this.login.get('email').invalid;
   }
 
   loginUser() {
     if (!this.btnDisbaled) {
-      this.datastore.getLogedIn({ password: this.login.value.pass, email: this.login.value.email },
-        (res) => {
+      this.unsLogin = this.datastore.getLogedIn(
+        { password: this.login.value.pass, email: this.login.value.email }
+      ).subscribe(
+        (result) => {
+          this.datastore.setAuthorization(result);
           this.router.navigate(['/site']);
         },
         (err) => {

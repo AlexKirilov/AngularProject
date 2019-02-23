@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -10,9 +10,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class MessageHandlerComponent {
 
   constructor(
+    // private router: Router,
     public dialogRef: MatDialogRef<MessageHandlerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-    console.log('data.msgType: ', data);
+  ) { }
+
+  navigateTo(link) {
+    // this.router.navigateByUrl(`/${link}?LogLevel=error&ApplicationType=market-value`);
   }
 }

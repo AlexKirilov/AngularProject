@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { DatastoreService } from '../../../../services/datastore.service';
 import { MatSort, MatPaginator, MatTableDataSource } from '../../../../../../node_modules/@angular/material';
 import { DefaultVariablesService } from '../../../../services/default.variables.service';
+import { Unsubscribable } from 'rxjs';
+import { HandleErrorsService } from '../../../../services/handle-errors.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,6 +13,7 @@ import { DefaultVariablesService } from '../../../../services/default.variables.
 })
 export class SiteLogsComponent implements OnInit, OnDestroy {
 
+  // TODO: Requires deep clean
   SearchDate: any; // Date;
   noRecords = 'There are no logs found!';
   ///////////////////////////
@@ -43,18 +46,10 @@ export class SiteLogsComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  private unsubscribe;
-  private unsubscribeIssuer;
-  private unsubscribeSpinner;
-  private unsubscribeMatched;
-    /////////////////////////
-  // Unsubscribe variables
-  private unsubscribeURL;
-  private unscubsrcribeSearchDate;
-  private unsubscribePageNumber;
-  private unsubscribeItemsPerPage;
-  private unsubscribeTool;
-  private unsubscribeLevel;
+  private unsGetLogs: Unsubscribable;
+  private unsLogsTypes: Unsubscribable;
+  private unsClearLogs: Unsubscribable;
+
   private timercountdown;
 
   tableColumnNames = { logDateTime: 'Date', level: 'Level', message: 'Message' };
@@ -65,6 +60,7 @@ export class SiteLogsComponent implements OnInit, OnDestroy {
   constructor(
     private datastore: DatastoreService,
     private defaultVar: DefaultVariablesService,
+    private errorHandler: HandleErrorsService,
   ) {}
 
   ngOnInit() {
@@ -80,11 +76,20 @@ export class SiteLogsComponent implements OnInit, OnDestroy {
       level: (this.selectedLevel !== '') ? this.selectedLevel : null,
     };
 
-    this.datastore.getLogsBySiteOwner(by, (logs) => (this.dataSource.data = logs, console.log(logs) ) );
+    this.unsGetLogs = this.datastore.getLogsBySiteOwner(by).subscribe(
+      (logs: any) => this.dataSource.data = logs,
+      (err: any) => this.errorHandler.handleError(err)
+    );
   }
 
   getLogsFilter() {
-    this.datastore.getLogsDateTypes((res) => (this.logLevels = res.level, this.logTypes = res.type));
+    this.unsLogsTypes = this.datastore.getLogsDateTypes().subscribe(
+      (res) => {
+        this.logLevels = res.level;
+        this.logTypes = res.type;
+      },
+      (err: any) => this.errorHandler.handleError(err)
+    );
   }
 
   reload() {
@@ -124,11 +129,18 @@ export class SiteLogsComponent implements OnInit, OnDestroy {
   }
 
   clearLogs() {
-    this.datastore.clearLogs((res: any) => ( console.log(res) ));
+    this.unsClearLogs = this.datastore.clearLogs().subscribe(
+      (res: any) => console.log(res),
+      (err: any) => this.errorHandler.handleError(err)
+    );
+
     this.getData();
   }
 
   ngOnDestroy() {
+    if (this.unsGetLogs) { this.unsGetLogs.unsubscribe(); }
+    if (this.unsLogsTypes) { this.unsLogsTypes.unsubscribe(); }
+    if (this.unsClearLogs) { this.unsClearLogs.unsubscribe(); }
     // if (this.unsubscribeItemsPerPage) this.unsubscribeItemsPerPage.unsubscribe();
     // if (this.unscubsrcribeSearchDate) this.unscubsrcribeSearchDate.unsubscribe();
     // if (this.unsubscribePageNumber) this.unsubscribePageNumber.unsubscribe();

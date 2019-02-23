@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatastoreService } from '../../../../services/datastore.service';
+import { Unsubscribable } from 'rxjs';
+import { HandleErrorsService } from '../../../../services/handle-errors.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -7,19 +9,27 @@ import { DatastoreService } from '../../../../services/datastore.service';
   templateUrl: './site-invoices.component.html',
   styleUrls: ['./site-invoices.component.scss']
 })
-export class SiteInvoicesComponent implements OnInit {
+export class SiteInvoicesComponent implements OnInit, OnDestroy {
+
+  private unsgeTdata: Unsubscribable;
 
   constructor(
-    private datastore: DatastoreService
+    private datastore: DatastoreService,
+    private errorHandler: HandleErrorsService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getData();
   }
 
+  ngOnDestroy(): void {
+    if (this.unsgeTdata) { this.unsgeTdata.unsubscribe(); }
+  }
+
   getData() {
-    this.datastore.authInvoicesAll( (data) => {
-      console.log('All Invoices', data);
-    });
+    this.unsgeTdata = this.datastore.authInvoicesAll().subscribe(
+      (data) => console.log('All Invoices', data),
+      (err: any) => this.errorHandler.handleError(err)
+    );
   }
 }

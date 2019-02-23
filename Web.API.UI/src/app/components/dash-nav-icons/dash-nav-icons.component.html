@@ -1,10 +1,24 @@
-<section id="main-nav-container-icons-top" style="overflow: auto">
-  <mat-toolbar color="primary">
-    <nav mat-tab-nav-bar>
-      <a mat-tab-link *ngFor="let link of routeLinks; let i = index" [routerLink]="link.link" routerLinkActive
-        #rla="routerLinkActive" [active]="rla.isActive">
-        {{link.label}}
-      </a>
-    </nav>
-  </mat-toolbar>
+<section id="dash-header-nav">
+  <section id="main-nav-container-icons-top" style="overflow: auto">
+    <mat-toolbar color="primary">
+      <nav mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let link of routeLinks; let i = index" [routerLink]="link.link" routerLinkActive
+          #rla="routerLinkActive" [active]="rla.isActive" matTooltip="{{ link.label }}" matTooltipPosition="below">
+            <mat-icon class="small-screen menu-icon-nav black active">
+              {{
+                link.icon == 'dashboard' ? 'dashboard' :
+                  link.icon == 'person' ? 'person' :
+                  link.icon == 'shopping_cart' ? 'shopping_cart' :
+                  link.icon == 'contacts' ? 'contacts' :
+                  link.icon == 'details' ? 'details' :
+                  link.icon == 'settings_applications' ? 'settings_applications' :
+                  link.icon == 'notes' ? 'notes' :
+                  link.icon == 'face' ? 'face' : 'help'
+              }}
+            </mat-icon>
+        </a>
+      </nav>
+    </mat-toolbar>
+
+  </section>
 </section>

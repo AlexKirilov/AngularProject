@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Http } from '@angular/http';
-
-
 import { HandleErrorsService } from '../../../services/handle-errors.service';
 import { DatastoreService } from '../../../services/datastore.service';
 import { DatashareService } from '../../../services/datashare.service';
 import { UserCreds } from '../../../app.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UsersService {
@@ -15,7 +13,7 @@ export class UsersService {
 
   constructor (
     private router: Router,
-    private http: Http,
+    private http: HttpClient,
     private errorHandler: HandleErrorsService,
     private datastore: DatastoreService,
     private datashare: DatashareService

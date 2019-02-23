@@ -5,6 +5,10 @@ import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class DatashareService {
+
+  spinnerCountDown = 90;
+  timercountdown: any;
+
   constructor(private router: Router) {}
 
   private logedIn: boolean;
@@ -47,18 +51,21 @@ export class DatashareService {
   // tslint:disable-next-line:member-ordering
   spinnerHMTL = this.spinnerHMTLSource.asObservable();
 
+  private spinnerModelWindowSource = new BehaviorSubject<boolean>(false);
+  spinnerModal = this.spinnerModelWindowSource.asObservable();
+
   // tslint:disable-next-line:member-ordering
   private currentPageSource = new BehaviorSubject<string>('home');
   // tslint:disable-next-line:member-ordering
   currentPage = this.currentPageSource.asObservable();
 
-  //////////////   SNACK BAR    ////////////
+  //////////////   SNACK BAR    ////////
   // tslint:disable-next-line:member-ordering
   private snackbarSource = new BehaviorSubject<SnackBarI>({message: '', action: ''});
   // tslint:disable-next-line:member-ordering
   snackbarData = this.snackbarSource.asObservable();
 
-  ///////////// Trigger UI Tour ///////////
+  ///////////// Trigger UI Tour ///////
   // tslint:disable-next-line:member-ordering
   private triggerTourSource = new BehaviorSubject<string>(null);
   // tslint:disable-next-line:member-ordering
@@ -72,6 +79,10 @@ export class DatashareService {
   private userLoggedInSource = new BehaviorSubject<boolean>(true);
   userLoggedIn = this.userLoggedInSource.asObservable();
 
+  // Check if Error Handler is already used
+  private openErrorSource = new BehaviorSubject<boolean>(false);
+  isErrorHandleDisplayed = this.openErrorSource.asObservable();
+
   changeErrorMsg(error: string): void {
     this.errorMsgTypeSource.next({message: error, showMsg: true});
   }
@@ -84,27 +95,65 @@ export class DatashareService {
     this.userLoggedInSource.next(bool);
   }
 
-  ///////////// Loader / Spinner ///////////
+  ///////////// Loader / Spinner ///////
+
+  emergancySpinnerStop() {
+    this.timercountdown = setInterval(() => {
+      if (this.spinnerCountDown === 1) {
+        this.stopSpinnerContent();
+        this.stopSpinnerWrapper();
+        this.stopSpinnerHTML();
+        clearInterval(this.timercountdown);
+        this.showSnackBar({message: 'There is a issue with loading the data', action: 'Try again later!'});
+      } else {
+        this.spinnerCountDown--;
+      }
+    }, 1000);
+    clearInterval(this.timercountdown);
+  }
+
+  stopSpinnerCoundDown() {
+    clearInterval(this.timercountdown);
+  }
 
   // Start Spinners
   startSpinnerWrapper() {
     this.showSpinnerWrapper(true);
+    this.emergancySpinnerStop();
   }
   startSpinnerContent() {
     this.showSpinnerContent(true);
+    this.emergancySpinnerStop();
   }
   startSpinnerHTML() {
     this.showSpinnerHTML(true);
+    this.emergancySpinnerStop();
   }
+  startSpinnerModal() {
+    this.showSpinnerModal(true);
+    this.emergancySpinnerStop();
+  }
+
   // Stop Spinner
   stopSpinnerWrapper() {
     this.showSpinnerWrapper(false);
+    this.stopSpinnerCoundDown();
   }
   stopSpinnerContent() {
     this.showSpinnerContent(false);
+    this.stopSpinnerCoundDown();
   }
   stopSpinnerHTML() {
     this.showSpinnerHTML(false);
+    this.stopSpinnerCoundDown();
+  }
+  stopSpinnerModal() {
+    this.showSpinnerModal(false);
+    this.stopSpinnerCoundDown();
+  }
+
+  showSpinnerModal(bool: boolean) {
+    this.spinnerModelWindowSource.next(bool);
   }
 
   showSpinnerWrapper(bool: boolean) {
@@ -137,27 +186,31 @@ export class DatashareService {
   }
 
   changeTourPage(): void {
-    switch (this.currentTourPage) {
-      case 'home':
-        this.router.navigate(['/reports']);
-        this.startUITour('');
-        break;
-      case 'reports':
-        this.router.navigate(['/v-clients']);
-        this.startUITour('');
-        break;
-      case 'v-clients':
-        document.body.classList.remove('full-tour');
-        this.router.navigate(['/home']);
-        break; // this.router.navigate(['/about-us']); this.startUITour(''); break;
-      case 'about-us':
-        this.router.navigate(['/customise']);
-        this.startUITour('');
-        break;
-      case 'customise':
-        document.body.classList.remove('full-tour');
-        this.router.navigate(['/home']);
-        break;
-    }
+    // switch (this.currentTourPage) {
+    //   case 'home':
+    //     this.router.navigate(['/reports']);
+    //     this.startUITour('');
+    //     break;
+    //   case 'reports':
+    //     this.router.navigate(["/v-clients"]);
+    //     this.startUITour('');
+    //     break;
+    //   case 'v-clients':
+    //     document.body.classList.remove('full-tour');
+    //     this.router.navigate(['/home']);
+    //     break; // this.router.navigate(['/about-us']); this.startUITour(''); break;
+    //   case 'about-us':
+    //     this.router.navigate(["/customise"]);
+    //     this.startUITour("");
+    //     break;
+    //   case "customise":
+    //     document.body.classList.remove("full-tour");
+    //     this.router.navigate(["/home"]);
+    //     break;
+    // }
   }
+
+    changeIsErrorHandler(bool: boolean): void {
+      this.openErrorSource.next(bool);
+    }
 }

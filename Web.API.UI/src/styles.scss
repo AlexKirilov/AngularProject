@@ -72,7 +72,7 @@ app-header {
     z-index: 1;
 }
 
-api-dash-nav-icons {
+app-dash-nav-icons {
     position: fixed;
     top: -59px;
     width: 100%;
@@ -165,4 +165,29 @@ api-paginator {
     width: 90%;
     max-width: 1200px;
     margin-top: 20px;
+}
+
+#dash-header-nav {
+  .mat-tab-link {
+      color: white;
+      opacity: 1;
+      padding: 0px 3%;
+      margin: 0px 10px;
+      min-width: 35px;
+      width: 35px;
+      height: 35px;
+      top: 5px;
+      overflow: hidden;
+      &:hover {
+        color: orange;
+      }
+  }
+
+  .mat-tab-label-active {
+    color: darkorange !important;
+  }
+
+  .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: darkorange;
+  }
 }

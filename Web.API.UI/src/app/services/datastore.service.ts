@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-
+import { map } from 'rxjs/operators';
 
 import { HandleErrorsService } from './handle-errors.service';
 import { UserCreds, NewUser, Invoice, ContactsData } from '../app.model';
@@ -18,7 +17,7 @@ export class DatastoreService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private errorHandler: HandleErrorsService,
+    // private errorHandler: HandleErrorsService,
   ) { }
 
   TOKEN_KEY = 'token';
@@ -90,95 +89,62 @@ export class DatastoreService {
   /////////////////////////////////////////
   ////////////// Auth
 
-  getAuth(callback) {
-    this.http.get<any>(`${this.url}/auth/getAuth`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getAuth() {
+    return this.http.get<any>(`${this.url}/auth/getAuth`);
   }
 
   /////////////////////////////////////////
   ////////// Registration /////////////////
   /////////////////////////////////////////
 
-  checkForExistingUserEmail(email, callback) {
-    this.http.post<Boolean>(`${this.url}/auth/checkForUser`, email).subscribe(
-      result => callback(result)
-    );
+  checkForExistingUserEmail(email: any) {
+    return this.http.post<Boolean>(`${this.url}/auth/checkForUser`, email);
   }
 
-  registry(newUser, callback, errorcallback) {
-    this.http.post<NewUser>(`${this.url}/auth/register`, newUser).subscribe(
-      result => callback(result),
-      err => errorcallback(err)
-    );
+  registry(newUser: any) {
+    return this.http.post<NewUser>(`${this.url}/auth/register`, newUser);
   }
 
-  editAuth(editUser, callback, errorcallback) {
-    this.http.post<NewUser>(`${this.url}/auth/editAuth`, editUser).subscribe(
-      result => callback(result),
-      err => errorcallback(err)
-    );
+  editAuth(editUser: any) {
+    return this.http.post<NewUser>(`${this.url}/auth/editAuth`, editUser);
   }
 
-  getLogedIn(checkUser, callback, errorcallback) {
-    this.http.post<UserCreds>(`${this.url}/auth/login`, checkUser).subscribe(
-      result => {
-        this.setAuthorization(result);
-        callback(result);
-      },
-      err => errorcallback(err)
-    );
+  getLogedIn(checkUser: any) {
+    return this.http.post<UserCreds>(`${this.url}/auth/login`, checkUser);
   }
 
   /////////////////////////////////////////
   ///////////// Orders ////////////////////
   /////////////////////////////////////////
 
-  getAllOrders(filters, callback) {
-    this.http.get<any>(`${this.url}/orders/getorders${filters}`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getAllOrders(filters: any) {
+    return this.http.get<any>(`${this.url}/orders/getorders${filters}`);
   }
 
-  getOrdersToConfirm(callback: any) {
-    this.http.get<any>(`${this.url}/orders/getordersforapproval`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  // TODO: Unused function;
+  getOrdersToConfirm() {
+    return this.http.get<any>(`${this.url}/orders/getordersforapproval`);
   }
 
+  // TODO: Unused function;
   addOrder(order: any, callback: any) {
-    this.http.post<any>(`${this.url}/orders/addOrder`, order).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+    return this.http.post<any>(`${this.url}/orders/addOrder`, order);
   }
 
-  editOrder(order: any, callback: any) {
-    this.http.post<any>(`${this.url}/orders/editOrder`, order).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  editOrder(order: any) {
+    return this.http.post<any>(`${this.url}/orders/editOrder`, order);
   }
-  
+
 
   /////////////////////////////////////////
   ////////////// Auth Contacts
 
-  getSiteContacts(callback) {
-    this.http.get(`${this.url}/sitedata/getAuthSiteContacts`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err) // errorcallback(err)
-    );
+  getSiteContacts() {
+    return this.http.get(`${this.url}/sitedata/getAuthSiteContacts`);
   }
 
-  addOrEditSiteContacts(contacts, callback) {
-    this.http.post(`${this.url}/sitedata/addOrEditSiteContacts`, contacts).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err) // errorcallback(err)
-    );
+  addOrEditSiteContacts(contacts: any) {
+    return this.http.post(`${this.url}/sitedata/addOrEditSiteContacts`, contacts);
   }
 
   removeSiteContacts() {
@@ -188,26 +154,19 @@ export class DatastoreService {
   /////////////////////////////////////////
   ////////////// Invoices
 
-  authInvoicesAll(callback) {
-    this.http.get<Invoice>(`${this.url}/invoices/invoices`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
-  }
-  cusInvoiceDetails(callback) {
-    this.http.get<Invoice>(`${this.url}/invoicecustomersdata/cusInvoiceDetails`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  authInvoicesAll() {
+    return this.http.get<Invoice>(`${this.url}/invoices/invoices`);
   }
 
-  addOrEditCusInvoiceDetails(invoice, callback) { // errorcallback
-    this.http.post<Invoice>(`${this.url}/invoicecustomersdata/addOrEditCusInvoiceDetails`, invoice).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  cusInvoiceDetails() {
+    return this.http.get<Invoice>(`${this.url}/invoicecustomersdata/cusInvoiceDetails`);
   }
 
+  addOrEditCusInvoiceDetails(invoice: any) { // errorcallback
+    return this.http.post<Invoice>(`${this.url}/invoicecustomersdata/addOrEditCusInvoiceDetails`, invoice);
+  }
+
+  // TODO: remove or set
   removeCusInvoiceDetails() {
 
   }
@@ -215,131 +174,79 @@ export class DatastoreService {
   /////////////////////////////////////////
   ////////////// Customer
 
-  getCustomer(callback) {
-    this.http.get<ContactsData>(`${this.url}/customers/getCustomer`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  // TODO: Unused function;
+  getCustomer() {
+    return this.http.get<ContactsData>(`${this.url}/customers/getCustomer`);
   }
 
-  getAuthCustomer(callback) {
-    this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomer`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  // TODO: Unused function;
+  getAuthCustomer() {
+    return this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomer`);
   }
 
-  getAuthCustomers(callback) {
-    this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomers`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getAuthCustomers() {
+    return this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomers`);
   }
 
-  updateCustomerDiscount(data, callback) {
-    this.http.post<any>(`${this.url}/authdata/cudiscount`, data).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  updateCustomerDiscount(data: any) {
+    return this.http.post<any>(`${this.url}/authdata/cudiscount`, data);
   }
 
   /////////////////////////////////////////
   ////////////// Employees
 
-  getEmployees(callback) { // TODO:
-    this.http.get<ContactsData>(`${this.url}/authdata/getEmployees`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getEmployees() {
+    return this.http.get<ContactsData>(`${this.url}/authdata/getEmployees`);
   }
 
-  updateEmployee(data, callback) {
-    this.http.post<ContactsData>(`${this.url}/authdata/updateEmployee`, data).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  updateEmployee(data: any) {
+    return this.http.post<ContactsData>(`${this.url}/authdata/updateEmployee`, data);
   }
 
 
   /////////////////////////////////////////
   ////////////// Orders
 
-  getOrders(callback) {
-    this.http.get<any>(`${this.url}/orders/getordersforapproval`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  // TODO: Unused function;
+  getOrders() {
+    return this.http.get<any>(`${this.url}/orders/getordersforapproval`);
   }
 
 
   /////////////////////////////////////////
   ///////////// Logs    ///////////////////
   /////////////////////////////////////////
-  getLogsBySiteOwner(filters, callback) {
-    this.http.post<any>(`${this.url}/logs/getSiteLogs`, filters).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getLogsBySiteOwner(filters: any) {
+    return this.http.post<any>(`${this.url}/logs/getSiteLogs`, filters);
   }
 
-  getLogsDateTypes(callback) {
-    this.http.get<any>(`${this.url}/logs/logDataFilter`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getLogsDateTypes() {
+    return this.http.get<any>(`${this.url}/logs/logDataFilter`);
   }
 
-  clearLogs(callback) {
-    this.http.delete<any>(`${this.url}/logs/`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  clearLogs() {
+    return this.http.delete<any>(`${this.url}/logs/`);
   }
 
   /////////////////////////////////////////
   ///////////// Dashboard    //////////////
   /////////////////////////////////////////
-  getSalesChartData(days: any, callback: any) {
-    this.http.post<any>(`${this.url}/dashboard/sales`, { days }).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+
+  getSalesChartData(days: any) {
+    return this.http.post<any>(`${this.url}/dashboard/sales`, { days });
   }
 
-  getProductsChartData(callback: any) {
-    this.http.get<any>(`${this.url}/dashboard/products`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getProductsChartData() {
+    return this.http.get<any>(`${this.url}/dashboard/products`);
   }
 
-  getSalesTopBottomList(callback: any) {
-    this.http.get<any>(`${this.url}/dashboard/saleslist`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getSalesTopBottomList() {
+    return this.http.get<any>(`${this.url}/dashboard/saleslist`);
   }
 
-  getOrdersStatistics(callback: any) {
-    this.http.get<any>(`${this.url}/dashboard/orders`).subscribe(
-      result => callback(result),
-      err => this.errorHandler.handleError(err)
-    );
+  getOrdersStatistics() {
+    return this.http.get<any>(`${this.url}/dashboard/orders`);
   }
-
-  // getLogsDateTypes (callback) {
-  //   this.http.get<any>(`${this.url}/logs/logDataFilter`).subscribe(
-  //     result => callback(result),
-  //     err => this.errorHandler.handleError(err)
-  //   );
-  // }
-
-  // clearLogs (callback) {
-  //   this.http.delete<any>(`${this.url}/logs/`).subscribe(
-  //     result => callback(result),
-  //     err => this.errorHandler.handleError(err)
-  //   );
-  // }
 
   /////////////////////////////////////////
   ///////////// Log OUT ///////////////////

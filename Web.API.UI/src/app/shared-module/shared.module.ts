@@ -72,7 +72,7 @@ import { PaginatorComponent } from '../templates/paginator/paginator.component';
     BarChartComponent,
     LineChartComponent,
     ComboChartComponent,
-    // GraphNavComponent,
+    GraphNavComponent,
     TableChartComponent,
     PaginatorComponent,
   ],
@@ -84,7 +84,7 @@ import { PaginatorComponent } from '../templates/paginator/paginator.component';
     BarChartComponent,
     LineChartComponent,
     ComboChartComponent,
-    // GraphNavComponent,
+    GraphNavComponent,
     TableChartComponent,
     PaginatorComponent
   ],

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { DatastoreService } from '../../../../services/datastore.service';
-import { DatashareService } from '../../../../services/datashare.service';
+import { Unsubscribable } from 'rxjs';
+import { HandleErrorsService } from '../../../../services/handle-errors.service';
+import { ServiceProvider } from '../../../../services/services.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -9,7 +10,7 @@ import { DatashareService } from '../../../../services/datashare.service';
   templateUrl: './site-orders.component.html',
   styleUrls: ['./site-orders.component.scss']
 })
-export class SiteOrdersComponent implements OnInit {
+export class SiteOrdersComponent implements OnInit, OnDestroy {
 
   step = null;
   ordersForApproval = [];
@@ -25,34 +26,45 @@ export class SiteOrdersComponent implements OnInit {
   public currentPage = 1;
   public itemsPerPage = '25';
   public endRow = this.itemsPerPage;
+
+  private datashare: any;
+  private datastore: any;
+  private unsgetData: Unsubscribable;
+  private unsEditOrder: Unsubscribable;
+
   constructor(
-    private datashare: DatashareService,
-    private datastore: DatastoreService,
-  ) { }
+    private errorHandler: HandleErrorsService,
+    private service: ServiceProvider,
+  ) {
+    this.datashare = this.service.datashare;
+    this.datastore = this.service.datastore;
+  }
 
   ngOnInit() {
     this.getData();
   }
 
-  getData() {
-    // let filters = {
-    //   perPage: this.itemsPerPage,
-    //   page: this.currentPage,
-    //   sortBy: {date: 'asc'},
-    // }
-    this.datashare.startSpinnerContent();
-    let by = `?perPage=${this.itemsPerPage}&page=${this.currentPage}`;
-    this.datastore.getAllOrders(by, (data: any) => {
-      this.allPages = data.pages;
-      this.allRecords = data.rows;
-      this.currentPage = data.page;
-      this.itemsPerPage = data.perPage + '';
-      this.endRow = data.lastRowOnPage;
-      this.startRow = data.firstrowOnPage;
-      this.ordersForApproval = data.results;
-      this.datashare.stopSpinnerContent();
-    });
+  ngOnDestroy(): void {
+    if (this.unsgetData) { this.unsgetData.unsubscribe(); }
+    if (this.unsEditOrder) { this.unsEditOrder.unsubscribe(); }
+  }
 
+  getData() {
+    this.datashare.startSpinnerContent();
+    const by = `?perPage=${this.itemsPerPage}&page=${this.currentPage}`;
+    this.unsgetData = this.datastore.getAllOrders(by).subscribe(
+      (data: any) => {
+        this.allPages = data.pages;
+        this.allRecords = data.rows;
+        this.currentPage = data.page;
+        this.itemsPerPage = data.perPage + '';
+        this.endRow = data.lastRowOnPage;
+        this.startRow = data.firstrowOnPage;
+        this.ordersForApproval = data.results;
+        this.datashare.stopSpinnerContent();
+      },
+      (err: Error) => this.errorHandler.handleError(err)
+    );
   }
 
   setStep(index: number) {
@@ -68,10 +80,13 @@ export class SiteOrdersComponent implements OnInit {
   }
 
   editOrder(flag: number, orderId: string) {
-    this.datastore.editOrder({ flag, orderId }, (res: any) => {
-      this.getData();
-      console.log('REEESS', res);
-    });
+    this.unsEditOrder = this.datastore.editOrder({ flag, orderId }).subscribe(
+      (res: any) => {
+        this.getData();
+        console.log('REEESS', res);
+      },
+      (err: Error) => this.errorHandler.handleError(err)
+    );
   }
 
   decline(order: any) {

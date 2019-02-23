@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatastoreService } from '../../../../services/datastore.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Unsubscribable } from 'rxjs';
+import { HandleErrorsService } from '../../../../services/handle-errors.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,26 +9,33 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './site-employees.component.html',
   styleUrls: ['./site-employees.component.scss']
 })
-export class SiteEmployeesComponent implements OnInit {
+export class SiteEmployeesComponent implements OnInit, OnDestroy {
 
-  step = null;
-  employees;
-  employeesGroup: FormGroup;
+  public step = null;
+  public employees: any;
+
+  private unsGetDate: Unsubscribable;
+  private unsUpdateEmployee: Unsubscribable;
 
   constructor(
-    private fb: FormBuilder,
     private datastore: DatastoreService,
+    private errorHandler: HandleErrorsService
   ) { }
 
   ngOnInit() {
     this.getData();
   }
 
+  ngOnDestroy(): void {
+    if (this.unsGetDate) { this.unsGetDate.unsubscribe(); }
+    if (this.unsUpdateEmployee) { this.unsUpdateEmployee.unsubscribe(); }
+  }
+
   getData() {
-    this.datastore.getEmployees( (data) => {
-      console.log('Employees: ', data);
-      this.employees = data;
-    });
+    this.unsGetDate = this.datastore.getEmployees().subscribe(
+      (data) => this.employees = data,
+      (err: any) => this.errorHandler.handleError(err)
+    );
   }
 
   setStep(index: number) {
@@ -42,10 +50,15 @@ export class SiteEmployeesComponent implements OnInit {
     this.step--;
   }
 
-  SaveEmployeesData(employee) {
-    // tslint:disable-next-line:max-line-length
-    employee.type = (employee.levelAuth === 'EE') ? 'Employee' : (employee.levelAuth === 'MN') ? 'Manager' : (employee.levelAuth === 'CU') ? 'Customer' : '';
-    this.datastore.updateEmployee(employee, res => console.log('User is updated', res) ); // TODO Add SnackBar
+  SaveEmployeesData(employee: any) {
+    employee.type = (employee.levelAuth === 'EE') ? 'Employee' :
+                    (employee.levelAuth === 'MN') ? 'Manager' :
+                    (employee.levelAuth === 'CU') ? 'Customer' : '';
+
+    this.unsUpdateEmployee = this.datastore.updateEmployee(employee).subscribe(
+      (res: any) => console.log('User is updated', res),
+      (err: any) => this.errorHandler.handleError(err)
+    );
     console.log('Save employee: ', employee);
   }
 }
