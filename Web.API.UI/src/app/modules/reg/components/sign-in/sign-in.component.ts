@@ -1,11 +1,12 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
-import {Router} from "@angular/router";
-import {NewUser} from "../../../../app.model";
-import {UsersService} from "../../services/users.service";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {DatastoreService} from "../../../../services/datastore.service";
-import {Unsubscribable} from "rxjs";
-import {HandleErrorsService} from "../../../../services/handle-errors.service";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Router} from '@angular/router';
+import {NewUser} from '../../../../app.model';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {DatastoreService} from '../../../../services/datastore.service';
+import {Unsubscribable} from 'rxjs';
+import {HandleErrorsService} from '../../../../services/handle-errors.service';
+import { Title } from '@angular/platform-browser';
+import { DatashareService } from '../../../../services/datashare.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -49,12 +50,16 @@ export class SignInComponent implements OnInit, OnDestroy {
   private unsRegistry: Unsubscribable;
 
   constructor(
-    private userService: UsersService,
     private router: Router,
-    private datastore: DatastoreService,
     public fb: FormBuilder,
+    private titleService: Title,
+    private datastore: DatastoreService,
+    private datashare: DatashareService,
     private errorHandler: HandleErrorsService
     ) {
+    this.titleService.setTitle('Sign In');
+    this.datashare.changeCurrentPage('signin');
+
     this.signin = fb.group({
       sitename: ['', Validators.required],
       password: ['', Validators.required],

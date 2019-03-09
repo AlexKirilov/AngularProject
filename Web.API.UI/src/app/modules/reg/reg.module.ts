@@ -29,10 +29,10 @@ import { NewUserService } from './services/new-user.service';
 import { RegistrationComponent } from './registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationDetailsComponent } from './components/registration-details/registration-details.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { RegistrationDetailsComponent } from './components/registration-details/
     CommonModule,
     FormsModule,
     BrowserModule,
-    HttpModule,
+    FlexLayoutModule,
     HttpClientModule,
     PasswordStrengthBarModule,
     RegRoutingModule,

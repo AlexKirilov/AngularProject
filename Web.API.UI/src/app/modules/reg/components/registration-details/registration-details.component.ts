@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DatastoreService } from '../../../../services/datastore.service';
 import { Unsubscribable } from 'rxjs';
 import { HandleErrorsService } from '../../../../services/handle-errors.service';
+import { DatashareService } from '../../../../services/datashare.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -27,11 +29,15 @@ export class RegistrationDetailsComponent implements OnInit, OnDestroy {
   private unsUpdateCUInvoice: Unsubscribable;
 
   constructor(
+    private titleService: Title,
     private _formBuilder: FormBuilder,
     private datastore: DatastoreService,
+    private datashare: DatashareService,
     private errorHandler: HandleErrorsService,
   ) {
     this.setDefaultVar();
+    this.titleService.setTitle('Sign In');
+    this.datashare.changeCurrentPage('signin');
   }
 
   ngOnInit() { }

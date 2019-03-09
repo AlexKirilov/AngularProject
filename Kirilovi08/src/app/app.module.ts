@@ -45,6 +45,7 @@ import { BasketComponent } from './components/basket/basket.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { PurchaseHistoryComponent } from './components/purchase-history/purchase-history.component';
 import { DataTableComponent } from './template/data-table/data-table.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { DataTableComponent } from './template/data-table/data-table.component';
     BasketComponent,
     SettingsComponent,
     PurchaseHistoryComponent,
-    DataTableComponent
+    DataTableComponent,
+    ComingSoonComponent
   ],
   imports: [
     BrowserModule,

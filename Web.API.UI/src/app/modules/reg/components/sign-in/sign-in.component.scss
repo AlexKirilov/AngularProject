@@ -4,3 +4,15 @@
 .custome-invalid {
     position: absolute; bottom: -38px;
 }
+
+#registration-form {
+  width: 60%;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 30px 0;
+  border: 2px solid rgb(220, 220, 220);
+}
+
+.submit-btn {
+  margin-bottom: 30px !important;
+}

@@ -1,28 +1,30 @@
-<section id="login-container">
-    <header id="login-page">
-        <div class="logo-container">
-            <div id="logo-background-image"></div>
-            <div id="logo-image"></div>
-        </div>
-    </header>
-    <form [formGroup]="login" (submit)="loginUser()" class="login-form">
-        <mat-form-field>
-            <input matInput type="text" placeholder="Email" formControlName="email" min="4" (keyup)="onchange()">
-            <mat-error *ngIf="login.get('email')?.invalid">This field is required</mat-error>
-        </mat-form-field>
+<section id="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <section id="login-container" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-between center">
+      <header id="login-page">
+          <div class="logo-container">
+              <div id="logo-background-image"></div>
+              <div id="logo-image"></div>
+          </div>
+      </header>
+      <form [formGroup]="login" (submit)="loginUser()" class="login-form" >
+          <mat-form-field>
+              <input matInput type="text" placeholder="Email" formControlName="email" min="4" (keyup)="onchange()">
+              <mat-error *ngIf="login.get('email')?.invalid">This field is required</mat-error>
+          </mat-form-field>
 
-        <mat-form-field>
-            <input matInput type="password" placeholder="Password" formControlName="pass" min="3" (keyup)="onchange()">
-            <mat-error *ngIf="login.get('pass')?.invalid">This field is required</mat-error>
-        </mat-form-field>
+          <mat-form-field>
+              <input matInput type="password" placeholder="Password" formControlName="pass" min="3" (keyup)="onchange()">
+              <mat-error *ngIf="login.get('pass')?.invalid">This field is required</mat-error>
+          </mat-form-field>
 
-        <div class="input error-label">
-            <div for="" id="login-error-msg"> {{warnMsg}}</div>
-        </div>
-        <button mat-raised-button type="submit" [disabled]="btnDisbaled">Login</button>
-    </form>
-    <div class="blue additinal-login-options">
-        <a [routerLink]="['/forgotpass']">Forgot password</a>
-        <a [routerLink]="['/signin']">Sign In</a>
-    </div>
+          <div class="input error-label">
+              <div for="" id="login-error-msg"> {{warnMsg}}</div>
+          </div>
+          <button mat-raised-button type="submit" [disabled]="btnDisbaled">Login</button>
+      </form>
+      <div class="blue additinal-login-options" fxLayout="row" fxLayoutAlign="space-between center">
+          <a [routerLink]="['/forgotpass']">Forgot password</a>
+          <a [routerLink]="['/signin']">Sign In</a>
+      </div>
+  </section>
 </section>

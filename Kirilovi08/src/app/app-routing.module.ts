@@ -14,10 +14,12 @@ import { BasketComponent } from './components/basket/basket.component';
 import { AccountComponent } from './components/account/account.component';
 import { PurchaseHistoryComponent } from './components/purchase-history/purchase-history.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', component: ComingSoonComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'forgetpassword', component: ForgetpassComponent },
@@ -29,7 +31,7 @@ const routes: Routes = [
   { path: 'purchase', canActivate: [AuthGuard], component: PurchaseComponent },
   { path: 'purchase-history', canActivate: [AuthGuard], component: PurchaseHistoryComponent },
   { path: 'about', component: AboutUsComponent },
-  { path: '**', redirectTo: '/products' },
+  // { path: '**', redirectTo: '/products' },
 ];
 
 @NgModule({

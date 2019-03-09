@@ -1,7 +1,7 @@
-<section class="newApiClientForm" id="registration-form">
+<section class="newApiClientForm" id="registration-form" fxLayout="column" fxLayoutAlign="center stretch">
     <h2>Registration form</h2>
 
-    <form [formGroup]="signin" (submit)="regNewCustmer($event)" id="signin-container">
+    <form [formGroup]="signin" (submit)="regNewCustmer($event)" id="signin-container" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-around stretch" >
         <mat-form-field>
             <input matInput type="text" placeholder="Web Site Name" formControlName="sitename">
             <mat-error *ngIf="signin.get('sitename')?.invalid">This field is required</mat-error>
@@ -44,6 +44,12 @@
             <div for="" id="signin-error-msg"></div>
         </div>
 
-        <button mat-raised-button type="submit" [disabled]="!this.btnSubmitValidation">Sign In</button>
+        <button mat-raised-button type="submit" class="submit-btn" [disabled]="!this.btnSubmitValidation">Sign In</button>
+        <a [routerLink]="['/login']" >
+          <button mat-raised-button type="submit">
+            <i class="material-icons" style="transform: rotate(180deg);">arrow_right_alt</i>
+            Back to login
+          </button>
+          </a>
     </form>
 </section>

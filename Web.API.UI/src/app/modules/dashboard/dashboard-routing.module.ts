@@ -14,14 +14,14 @@ import { SiteOrdersComponent } from './components/site-orders/site-orders.compon
 const routes: Routes = [
   { path: 'site', canActivate: [AuthGuard], component: DashboardComponent, children: [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: SiteDashboardComponent },
-    { path: 'details',  component: SiteDetailsComponent },
-    { path: 'customers', component: SiteCustomersComponent },
-    { path: 'employees', component: SiteEmployeesComponent },
-    { path: 'orders', component: SiteOrdersComponent },
-    { path: 'invoices', component: SiteInvoicesComponent },
-    { path: 'api-connection-details', component: SiteApiConnectionDataComponent },
-    { path: 'site-logs', component: SiteLogsComponent  }
+    { path: 'dashboard', canActivate: [AuthGuard], component: SiteDashboardComponent },
+    { path: 'details', canActivate: [AuthGuard],  component: SiteDetailsComponent },
+    { path: 'customers', canActivate: [AuthGuard], component: SiteCustomersComponent },
+    { path: 'employees', canActivate: [AuthGuard], component: SiteEmployeesComponent },
+    { path: 'orders', canActivate: [AuthGuard], component: SiteOrdersComponent },
+    { path: 'invoices', canActivate: [AuthGuard], component: SiteInvoicesComponent },
+    { path: 'api-connection-details', canActivate: [AuthGuard], component: SiteApiConnectionDataComponent },
+    { path: 'site-logs', canActivate: [AuthGuard], component: SiteLogsComponent  }
   ] },
 ];
 

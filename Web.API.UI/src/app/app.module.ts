@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -47,7 +46,6 @@ import { DashNavIconsComponent } from './components/dash-nav-icons/dash-nav-icon
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     FormsModule,
     SharedModule,
     AppRoutingModule,

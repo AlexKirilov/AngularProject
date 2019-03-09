@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DatashareService } from './services/datashare.service';
 import devtools from 'devtools-detect/index.js';
+import { DatastoreService } from './services/datastore.service';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +17,22 @@ export class AppComponent {
   contentLoader: boolean;
   wrapperLoader: boolean;
   htmlLoader: boolean;
+  auth: boolean;
 
-  constructor(private snackBar: MatSnackBar, private datashare: DatashareService) {
-    this.datashare.spinnerWrapper.subscribe(bool => (this.wrapperLoader = bool));
+  constructor(
+    private snackBar: MatSnackBar,
+    private datashare: DatashareService,
+    private datastore: DatastoreService
+    ) {
+    this.datashare.spinnerWrapper.subscribe(bool => (this.wrapperLoader = bool)).unsubscribe();
     this.datashare.spinnerContent.subscribe(bool => (this.contentLoader = bool));
     this.datashare.spinnerHMTL.subscribe(bool => (this.htmlLoader = bool));
     this.datashare.snackbarData.subscribe(data => this.openSnackBar(data.message, data.action));
     console.log(devtools.orientation);
     console.log(devtools.open);
+    this.datashare.currentPage.subscribe( (page: string) =>
+        this.auth = (page === 'login' || page === 'signin' || page === 'forgetpass') ? false : true
+    );
 
     window.addEventListener('devtoolschange', e => {
       // stateEl.textContent = e.detail.open ? 'yes' : 'no';

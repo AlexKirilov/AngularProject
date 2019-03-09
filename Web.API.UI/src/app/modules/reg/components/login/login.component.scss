@@ -1,8 +1,11 @@
+#login-wrapper {
+  height: 100%;
+}
 #login-container {
-    float: right;
+    // float: right;
     width: 60%;
     height: auto;
-    background-color: rgba(220, 220, 220, 0.8);
+    background-color: rgba(0, 0, 0, 0.35);
     padding: 25px;
     border: 2px solid rgb(220, 220, 220);
     .login-form {
@@ -20,3 +23,15 @@
         }
     }
 }
+.additinal-login-options {
+  width: calc(100% + 50px);
+  margin: 20px 0 0 -25px;
+  a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      color: orange;
+    }
+  }
+}
+

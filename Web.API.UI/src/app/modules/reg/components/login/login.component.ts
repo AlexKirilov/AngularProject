@@ -6,6 +6,7 @@ import { DatashareService } from '../../../../services/datashare.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatastoreService } from '../../../../services/datastore.service';
 import { Unsubscribable } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -25,13 +26,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private titleService: Title,
     private datastore: DatastoreService,
+    private datashare: DatashareService,
     public fb: FormBuilder,
   ) {
+    this.titleService.setTitle('Login');
+
     this.login = fb.group({
       'email': ['', Validators.required],
       'pass': ['', Validators.required],
     });
+
+    this.datashare.changeCurrentPage('login');
   }
 
   ngOnInit() {
