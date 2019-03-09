@@ -93,7 +93,7 @@ import { DashNavIconsComponent } from './components/dash-nav-icons/dash-nav-icon
       provide: HTTP_INTERCEPTORS,
       useClass: AppAuthInterceptor,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent],
   // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

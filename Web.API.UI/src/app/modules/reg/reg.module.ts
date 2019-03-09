@@ -33,6 +33,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationDetailsComponent } from './components/registration-details/registration-details.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ForgotpassComponent } from './components/forgotpass/forgotpass.component';
+import { ResetpassComponent } from './components/resetpass/resetpass.component';
 
 
 @NgModule({
@@ -61,6 +63,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LoginComponent,
     SignInComponent,
     RegistrationDetailsComponent,
+    ForgotpassComponent,
+    ResetpassComponent,
   ],
   providers: [AuthGuard, DatastoreService, DatashareService, UsersService, NewUserService, HandleErrorsService],
   bootstrap: [RegistrationComponent]
