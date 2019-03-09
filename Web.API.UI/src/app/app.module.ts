@@ -31,6 +31,21 @@ import { SinglePageComponent } from './components/single-page/single-page.compon
 import { SharedModule } from './shared-module/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashNavIconsComponent } from './components/dash-nav-icons/dash-nav-icons.component';
+import { ForgotpassComponent } from './auth/forgotpass/forgotpass.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ResetpassComponent } from './auth/resetpass/resetpass.component';
+import { RegistrationDetailsComponent } from './auth/registration-details/registration-details.component';
+import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
+import { DashNavComponent } from './pages/dash-nav/dash-nav.component';
+import { SiteDashboardComponent } from './pages/site-dashboard/site-dashboard.component';
+import { SiteApiConnectionDataComponent } from './pages/site-api-connection-data/site-api-connection-data.component';
+import { SiteDetailsComponent } from './pages/site-details/site-details.component';
+import { SiteInvoicesComponent } from './pages/site-invoices/site-invoices.component';
+import { SiteEmployeesComponent } from './pages/site-employees/site-employees.component';
+import { SiteLogsComponent } from './pages/site-logs/site-logs.component';
+import { SiteCustomersComponent } from './pages/site-customers/site-customers.component';
+import { SiteOrdersComponent } from './pages/site-orders/site-orders.component';
 
 @NgModule({
   declarations: [
@@ -41,8 +56,23 @@ import { DashNavIconsComponent } from './components/dash-nav-icons/dash-nav-icon
     NotFoundComponent,
     SinglePageComponent,
     MessageHandlerComponent,
-    DashNavIconsComponent
+    DashNavIconsComponent,
 
+    LoginComponent,
+    SignInComponent,
+    ResetpassComponent,
+    ForgotpassComponent,
+    RegistrationDetailsComponent,
+
+    DashNavComponent,
+    SiteDashboardComponent,
+    SiteApiConnectionDataComponent,
+    SiteDetailsComponent,
+    SiteInvoicesComponent,
+    SiteEmployeesComponent,
+    SiteLogsComponent,
+    SiteCustomersComponent,
+    SiteOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +83,7 @@ import { DashNavIconsComponent } from './components/dash-nav-icons/dash-nav-icon
     BrowserAnimationsModule,
     HttpClientModule,
     FlexLayoutModule,
+    PasswordStrengthBarModule,
     MatMenuModule,
     MatButtonModule,
     MatCheckboxModule,
@@ -96,6 +127,6 @@ import { DashNavIconsComponent } from './components/dash-nav-icons/dash-nav-icon
     },
   ],
   bootstrap: [AppComponent],
-  // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

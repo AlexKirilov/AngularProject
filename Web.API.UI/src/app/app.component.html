@@ -1,18 +1,21 @@
 <section id="app-wrapper">
   <section id="body-wrapper">
 
-  <app-header *ngIf="auth"></app-header>
+    <app-header *ngIf="auth"></app-header>
 
-  <section id="main-body-wrapper">
-    <!-- <app-home></app-home>
-    <app-about></app-about> -->
-    <router-outlet></router-outlet>
-    <div class="full-screen body" [class.hide]="!contentLoader">
-      <div class="relative">
-        <mat-spinner color="primary"></mat-spinner>
+    <section id="main-body-wrapper">
+
+      <div *ngIf="auth">
+        <site-nav-menu></site-nav-menu>
       </div>
-    </div>
-  </section>
+
+      <router-outlet></router-outlet>
+      <div class="full-screen body" [class.hide]="!contentLoader">
+        <div class="relative">
+          <mat-spinner color="primary"></mat-spinner>
+        </div>
+      </div>
+    </section>
 
   </section>
   <div class="full-screen html" [class.hide]="!htmlLoader">
