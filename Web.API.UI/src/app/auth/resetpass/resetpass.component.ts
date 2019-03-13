@@ -15,7 +15,9 @@ export class ResetpassComponent implements OnInit {
   public signin: FormGroup;
   private data: any = {};
   public btnSubmitValidation = false;
-
+  public barLabel = '';
+  public myColors = ['#DD2C00', '#FF6D00', '#FFD600', '#AEEA00', '#00C853'];
+  
   constructor(
     private fb: FormBuilder,
     private titleService: Title,
@@ -53,7 +55,6 @@ export class ResetpassComponent implements OnInit {
       this.data.cid = params.value.cid;
       this.data.sd = params.value.sd;
       this.data.sid = params.value.sid;
-  debugger
       this.datastore.resetPass({
         data: this.data,
         newpass: this.signin.value.repassword
