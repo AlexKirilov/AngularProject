@@ -1,7 +1,7 @@
 <section id="error-modal-wrapper">
     <section id="modaw-container">
 
-      <section class="header" mat-dialog-title *ngIf="data.msgType !== 'prompt' && data.msgType !== 'import' ">
+      <section class="header" mat-dialog-title *ngIf="data.msgType !== 'prompt' && data.msgType !== 'import' && data.msgType !== 'passreset'">
         <div class="icons">
           <i class="large material-icons" *ngIf="data.msgType == 'error'" [class.error]="data.msgType == 'error'">error</i>
           <i class="large material-icons" *ngIf="data.msgType == 'warning'" [class.warning]="data.msgType == 'warning'">warning</i>
@@ -48,6 +48,12 @@
               <div class="file-status">{{ item.details }}</div>
             </li>
           </ul>
+        </mat-dialog-content>
+
+        <mat-dialog-content *ngIf="data.msgType === 'passreset'" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="space-between center">
+          <h4>Reset Password</h4>
+          <p>To reset your password, click on the link below!</p>
+          <a mat-dialog-close (click)="navigateTo('resetpassword')"><button mat-raised-button [mat-dialog-close]="false"> Reset Link</button></a>
         </mat-dialog-content>
       </section>
 

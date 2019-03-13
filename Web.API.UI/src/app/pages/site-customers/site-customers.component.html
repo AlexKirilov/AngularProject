@@ -1,4 +1,4 @@
-<mat-accordion class="example-headers-align" fxLayout="column" fxFlex fxFlexAlign="stretch">
+<mat-accordion class="example-headers-align" id="customers-wraper" fxLayout="column" fxFlex fxFlexAlign="stretch">
   <mat-expansion-panel *ngFor="let customer of customers; let i = index" data-index="i" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { MessageHandlerComponent } from '../components/message-handler/message-handler.component';
 import { ServiceProvider } from './services.service';
@@ -10,7 +10,7 @@ import { Unsubscribable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class HandleErrorsService {
+export class HandleErrorsService implements OnDestroy {
 
   tmp: any;
   promptTest: any;
@@ -111,6 +111,24 @@ export class HandleErrorsService {
     this.unsubscribeDialogRef = dialogRef.afterClosed().pipe(distinctUntilChanged()).subscribe(result => {
       if (result === void 0) { result = false; }
       callback(result);
+    });
+  }
+
+  openDialogReset(data: string, callback = null) {
+    this.stopSpinners();
+    const dialogRef = this.dialog.open(MessageHandlerComponent, {
+      width: this.modalWidth,
+      data: {
+        title: 'Password reset',
+        msgType: 'passreset',
+        cid: data
+      }
+    });
+
+    this.unsubscribeDialogRef = dialogRef.afterClosed().pipe(distinctUntilChanged()).subscribe(result => {
+      if (callback != null) {
+        callback(result);
+      }
     });
   }
 

@@ -1,3 +1,53 @@
-<p>
-  forgotpass works!
-</p>
+<section
+    id="forgotpass-wrapper"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+>
+    <section
+        id="fotgotpass-container"
+        fxLayoutGap="20px"
+        fxLayout="column"
+        fxLayoutAlign="space-between center"
+    >
+
+        <h1>Forgot Password</h1>
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="Company Name"
+                [(ngModel)]="companyName"
+            >
+        </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="Email"
+                min="4"
+                [(ngModel)]="emailSub"
+            >
+        </mat-form-field>
+        <button
+            mat-raised-button="mat-raised-button"
+            class="submit-btn"
+            (click)="resetPass()"
+        >
+            Submit
+        </button>
+        <a [routerLink]="['/login']">
+            <button
+                mat-raised-button="mat-raised-button"
+                type="submit"
+            >
+                <i
+                    class="material-icons"
+                    style="transform: rotate(180deg);"
+                >
+                    arrow_right_alt
+                </i>
+                Back to login
+            </button>
+        </a>
+    </section>
+</section>

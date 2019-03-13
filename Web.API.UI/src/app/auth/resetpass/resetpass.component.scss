@@ -1,0 +1,15 @@
+#resetpass-wrapper {
+    height: 100%;
+  
+    #resetpass-container {
+      width: 60%;
+      height: auto;
+      background-color: rgba(0, 0, 0, 0.35);
+      padding: 25px;
+      border: 2px solid rgb(220, 220, 220); 
+      *:not(button):not(i) {
+          color: white;
+      }
+    }
+  }
+  

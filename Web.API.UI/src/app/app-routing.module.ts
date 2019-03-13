@@ -14,12 +14,16 @@ import { SiteOrdersComponent } from './pages/site-orders/site-orders.component';
 import { SiteInvoicesComponent } from './pages/site-invoices/site-invoices.component';
 import { SiteApiConnectionDataComponent } from './pages/site-api-connection-data/site-api-connection-data.component';
 import { SiteLogsComponent } from './pages/site-logs/site-logs.component';
+import { ForgotpassComponent } from './auth/forgotpass/forgotpass.component';
+import { ResetpassComponent } from './auth/resetpass/resetpass.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SignInComponent },
+  { path: 'forgotpassword', component: ForgotpassComponent },
+  { path: 'resetpassword', component: ResetpassComponent },
   { path: 'registrationdetails', canActivate: [AuthGuard], component: RegistrationDetailsComponent },
   { path: 'home', component: SinglePageComponent },
 

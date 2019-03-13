@@ -18,6 +18,11 @@ import {
   MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HighlightModule } from 'ngx-highlightjs';
+
+import scss from 'highlight.js/lib/languages/scss';
+import typescript from 'highlight.js/lib/languages/typescript';
+import javascript from 'highlight.js/lib/languages/javascript';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -47,6 +52,14 @@ import { SiteLogsComponent } from './pages/site-logs/site-logs.component';
 import { SiteCustomersComponent } from './pages/site-customers/site-customers.component';
 import { SiteOrdersComponent } from './pages/site-orders/site-orders.component';
 
+
+export function hljsLanguages() {
+  return [
+    {name: 'typescript', func: typescript},
+    {name: 'javascript', func: javascript},
+    {name: 'scss', func: scss}
+  ];
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,6 +130,7 @@ import { SiteOrdersComponent } from './pages/site-orders/site-orders.component';
     MatTooltipModule,
     MatIconModule,
     MatExpansionModule,
+    HighlightModule.forRoot({ languages: hljsLanguages })
   ],
   providers: [
     AuthGuard,
@@ -126,6 +140,7 @@ import { SiteOrdersComponent } from './pages/site-orders/site-orders.component';
       multi: true
     },
   ],
+  entryComponents: [MessageHandlerComponent],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

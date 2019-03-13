@@ -114,6 +114,18 @@ export class DatastoreService {
   }
 
   /////////////////////////////////////////
+  ////////// Forgot Pass //////////////////
+  /////////////////////////////////////////
+
+  forgotPass(data: object) {
+    return this.http.post<any>(`${this.url}/auth/forgotpass`, data);
+  }
+
+  resetPass(newData: any) {
+    return this.http.post<any>(`${this.url}/auth/resetpass`, newData);
+  }
+
+  /////////////////////////////////////////
   ///////////// Orders ////////////////////
   /////////////////////////////////////////
 
@@ -150,6 +162,7 @@ export class DatastoreService {
   removeSiteContacts() {
 
   }
+  
 
   /////////////////////////////////////////
   ////////////// Invoices

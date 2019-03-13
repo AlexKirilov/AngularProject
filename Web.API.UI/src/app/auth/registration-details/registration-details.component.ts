@@ -36,8 +36,8 @@ export class RegistrationDetailsComponent implements OnInit, OnDestroy {
     private errorHandler: HandleErrorsService,
   ) {
     this.setDefaultVar();
-    this.titleService.setTitle('Sign In');
-    this.datashare.changeCurrentPage('signin');
+    this.titleService.setTitle('Reg Details');
+    this.datashare.changeCurrentPage('reg-details');
   }
 
   ngOnInit() { }

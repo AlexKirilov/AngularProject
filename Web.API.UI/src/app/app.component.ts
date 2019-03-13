@@ -19,6 +19,8 @@ export class AppComponent {
   htmlLoader: boolean;
   auth: boolean;
 
+  private authListExp = ['resetpass', 'login', 'signin', 'forgotpass', 'reg-details'];
+
   constructor(
     private snackBar: MatSnackBar,
     private datashare: DatashareService,
@@ -31,7 +33,7 @@ export class AppComponent {
     console.log(devtools.orientation);
     console.log(devtools.open);
     this.datashare.currentPage.subscribe( (page: string) =>
-        this.auth = (page === 'login' || page === 'signin' || page === 'forgetpass') ? false : true
+        this.auth = (this.authListExp.includes(page)) ? false : true
     );
 
     window.addEventListener('devtoolschange', e => {
