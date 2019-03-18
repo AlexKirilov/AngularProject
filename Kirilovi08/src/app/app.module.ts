@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AuthGuard } from './guard/auth.guard';
-// Add token to header
+
 import { AppAuthInterceptor } from './app.interceptor';
 
 import { DatastoreService } from './services/datastore.service';
@@ -23,29 +22,33 @@ import {
   MatListModule, MatGridListModule, MatExpansionModule, MatDividerModule, MatDialogModule,
   MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule, MatAutocompleteModule, MatFormFieldModule ,
 } from '@angular/material';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
+
+import { DataTableComponent } from './template/data-table/data-table.component';
+
 import { NaviComponent } from './components/navi/navi.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './components/home/home.component';
-import { AboutUsComponent } from './components/about-us/about-us.component';
-import { ContactsComponent } from './components/contacts/contacts.component';
-import { ProductsComponent } from './components/products/products.component';
-import { GalleryComponent } from './components/gallery/gallery.component';
 import { LoginComponent } from './components/users/login/login.component';
 import { SigninComponent } from './components/users/signin/signin.component';
-import { ForgetpassComponent } from './components/users/forgetpass/forgetpass.component';
-import { AccountComponent } from './components/account/account.component';
-import { PurchaseComponent } from './components/purchase/purchase.component';
-import { ModalWindowComponent } from './components/modal-window/modal-window.component';
-import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
-import { BasketComponent } from './components/basket/basket.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { PurchaseHistoryComponent } from './components/purchase-history/purchase-history.component';
-import { DataTableComponent } from './template/data-table/data-table.component';
 import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { ForgetpassComponent } from './components/users/forgetpass/forgetpass.component';
+import { ErrorHandlerComponent } from './components/error-handler/error-handler.component';
+
+import { HomeComponent } from './pages/home/home.component';
+import { BasketComponent } from './pages/basket/basket.component';
+import { GalleryComponent } from './pages/gallery/gallery.component';
+import { AccountComponent } from './pages/account/account.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { ContactsComponent } from './pages/contacts/contacts.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { PurchaseComponent } from './pages/purchase/purchase.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 
 @NgModule({
   declarations: [
@@ -73,13 +76,12 @@ import { ComingSoonComponent } from './components/coming-soon/coming-soon.compon
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     FormsModule,
+    HttpClientModule,
     FlexLayoutModule,
     AppRoutingModule,
     ReactiveFormsModule,
     PasswordStrengthBarModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatMenuModule,
     MatButtonModule,

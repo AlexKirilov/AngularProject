@@ -34,6 +34,13 @@ html {
   // background-size: cover;
   // background-attachment: fixed;
 }
+body {
+  background: url('https://images.pexels.com/photos/325944/pexels-photo-325944.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
+  background-repeat: no-repeat !important;
+  background-position: 50% 50% !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
 
 .hide {
   display: none;
@@ -70,6 +77,10 @@ svg {
   background: rgba(255,255,255,.5);
 }
 
+mat-expansion-panel {
+  background: rgba(255,255,255,.7) !important;
+}
+
 .mat-icon {
   &:hover {
     color: black;
@@ -89,4 +100,33 @@ app-coming-soon {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+app-home,
+app-basket,
+app-account,
+app-gallery,
+app-about-us,
+app-products,
+app-contacts,
+app-purchase,
+app-settings,
+app-purchase-history {
+  width: 100%;
+}
+
+mat-paginator {
+  svg {
+    fill: #673ab7;
+    color: #673ab7;
+  }
+}
+
+.mat-paginator-container {
+  font-weight: bold;
+  color: black;
+}
+
+a.mat-tab-link.ng-star-inserted:hover {
+  color: #673ab7;
 }

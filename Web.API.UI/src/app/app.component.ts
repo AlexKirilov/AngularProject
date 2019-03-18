@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { DatashareService } from './services/datashare.service';
 import devtools from 'devtools-detect/index.js';
@@ -13,7 +13,7 @@ import { DatastoreService } from './services/datastore.service';
     '../../node_modules/shepherd.js/dist/css/shepherd-theme-default.css'
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   contentLoader: boolean;
   wrapperLoader: boolean;
   htmlLoader: boolean;
@@ -62,5 +62,19 @@ export class AppComponent {
     if (message !== ' ') {
       this.snackBar.open(message, action, { duration: 4000 });
     }
+  }
+  // Delete me
+
+  ngOnInit (): void {
+    // this.changeBodyBackground();
+  }
+  changeBodyBackground() {
+    let counter = 1;
+    const tmp = document.body;
+    const interval = setInterval( () => {
+      tmp.id = `back${counter}`;
+      counter++;
+      if (counter === 12) { clearInterval(interval); }
+    }, 10000);
   }
 }

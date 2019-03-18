@@ -1,83 +1,326 @@
 <section id="error-modal-wrapper">
     <section id="modaw-container">
 
-      <section class="header" mat-dialog-title *ngIf="data.msgType !== 'prompt' && data.msgType !== 'import' && data.msgType !== 'passreset'">
-        <div class="icons">
-          <i class="large material-icons" *ngIf="data.msgType == 'error'" [class.error]="data.msgType == 'error'">error</i>
-          <i class="large material-icons" *ngIf="data.msgType == 'warning'" [class.warning]="data.msgType == 'warning'">warning</i>
-          <i class="large material-icons" *ngIf="data.msgType == 'info'" [class.info]="data.msgType == 'info'">error_outline</i>
-          <i class="large material-icons" *ngIf="data.msgType == 'status'" [class.status]="data.msgType == 'status'">notification_important</i>
-          <i class="large material-icons" *ngIf="data.msgType == 'debug'" [class.debug]="data.msgType == 'debug'">bug_report</i>
-          <i class="large material-icons" *ngIf="data.msgType == 'shortkeys'" [class.shortkeys]="data.msgType == 'shortkeys'">keyboard</i>
-          <!-- feedback -->
-          <i class="large material-icons" *ngIf="data.msgType == 'prompt'" [class.debug]="data.msgType == 'prompt'">help</i>
-        </div>
-        <div class="title">
-          {{ data.title }}
-        </div>
-      </section>
-
-      <section class="body-container">
-        <mat-dialog-content *ngIf="data.msgType !== 'status' && data.msgType !== 'shortkeys'">
-          <p>{{ data.message }}</p>
-          <div class="import-content" *ngIf="data.msgType == 'import'">
-            <div *ngFor="let element of data.elements">
-              <mat-form-field>
-                <input matInput type="{{element.type}}" placeholder="{{element.placeholder}}" [(ngModel)]="element.value" required>
-              </mat-form-field>
+        <section
+            class="header"
+            mat-dialog-title
+            *ngIf="data.msgType !== 'prompt' && data.msgType !== 'import' && data.msgType !== 'passreset'"
+        >
+            <div class="icons">
+                <i
+                    class="large material-icons"
+                    *ngIf="data.msgType == 'error'"
+                    [class.error]="data.msgType == 'error'"
+                >
+                    error
+                </i>
+                <i
+                    class="large material-icons"
+                    *ngIf="data.msgType == 'warning'"
+                    [class.warning]="data.msgType == 'warning'"
+                >
+                    warning
+                </i>
+                <i
+                    class="large material-icons"
+                    *ngIf="data.msgType == 'info'"
+                    [class.info]="data.msgType == 'info'"
+                >
+                    error_outline
+                </i>
+                <i
+                    class="large material-icons"
+                    *ngIf="data.msgType == 'status'"
+                    [class.status]="data.msgType == 'status'"
+                >
+                    notification_important
+                </i>
+                <i
+                    class="large material-icons"
+                    *ngIf="data.msgType == 'debug'"
+                    [class.debug]="data.msgType == 'debug'"
+                >
+                    bug_report
+                </i>
+                <i
+                    class="large material-icons"
+                    *ngIf="data.msgType == 'shortkeys'"
+                    [class.shortkeys]="data.msgType == 'shortkeys'"
+                >
+                    keyboard
+                </i>
+                <!-- feedback -->
+                <i
+                    class="large material-icons"
+                    *ngIf="data.msgType == 'prompt'"
+                    [class.debug]="data.msgType == 'prompt'"
+                >
+                    help
+                </i>
             </div>
-          </div>
-        </mat-dialog-content>
+            <div class="title">{{ data.title }}</div>
+        </section>
 
-        <mat-dialog-content *ngIf="data.msgType === 'status'">
-          <ul id="status-list">
-            <li class="status-element success" *ngFor="let item of data.elements" [class.fail]="!item.ok" matTooltip="{{item.message}}"
-              matTooltipPosition="above">
-              <span class="file-name">{{ item.fileName }}</span>
-              <span class="file-status" *ngIf="item.ok"> success </span>
-              <span class="file-status" *ngIf="!item.ok"> fail </span>
-            </li>
-          </ul>
-        </mat-dialog-content>
+        <section class="body-container">
+            <mat-dialog-content *ngIf="data.msgType !== 'status' && data.msgType !== 'shortkeys'">
+                <p>{{ data.message }}</p>
+                <div
+                    class="import-content"
+                    *ngIf="data.msgType == 'import'"
+                >
+                    <div *ngFor="let element of data.elements">
+                        <mat-form-field>
+                            <input
+                                matInput
+                                type="{{element.type}}"
+                                placeholder="{{element.placeholder}}"
+                                [(ngModel)]="element.value"
+                                required
+                            >
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-dialog-content>
 
-        <mat-dialog-content *ngIf="data.msgType === 'shortkeys'">
-          <h4>{{ data.message }}</h4>
-          <ul id="shortkeys-list">
-            <li class="status-element" *ngFor="let item of data.elements" matTooltipPosition="above">
-              <div class="file-name left">{{ item.key }}</div>
-              <div class="file-status">{{ item.details }}</div>
-            </li>
-          </ul>
-        </mat-dialog-content>
+            <mat-dialog-content *ngIf="data.msgType === 'status'">
+                <ul id="status-list">
+                    <li
+                        class="status-element success"
+                        *ngFor="let item of data.elements"
+                        [class.fail]="!item.ok"
+                        matTooltip="{{item.message}}"
+                        matTooltipPosition="above"
+                    >
+                        <span class="file-name">{{ item.fileName }}</span>
+                        <span
+                            class="file-status"
+                            *ngIf="item.ok"
+                        >
+                            success
+                        </span>
+                        <span
+                            class="file-status"
+                            *ngIf="!item.ok"
+                        >
+                            fail
+                        </span>
+                    </li>
+                </ul>
+            </mat-dialog-content>
 
-        <mat-dialog-content *ngIf="data.msgType === 'passreset'" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="space-between center">
-          <h4>Reset Password</h4>
-          <p>To reset your password, click on the link below!</p>
-          <a mat-dialog-close (click)="navigateTo('resetpassword')"><button mat-raised-button [mat-dialog-close]="false"> Reset Link</button></a>
-        </mat-dialog-content>
-      </section>
+            <mat-dialog-content *ngIf="data.msgType === 'shortkeys'">
+                <h4>{{ data.message }}</h4>
+                <ul id="shortkeys-list">
+                    <li
+                        class="status-element"
+                        *ngFor="let item of data.elements"
+                        matTooltipPosition="above"
+                    >
+                        <div class="file-name left">{{ item.key }}</div>
+                        <div class="file-status">{{ item.details }}</div>
+                    </li>
+                </ul>
+            </mat-dialog-content>
 
-      <section class="controls">
-        <mat-dialog-actions class="control-btns">
-          <button mat-raised-button mat-dialog-close *ngIf=" data.msgType !== 'prompt' && data.msgType !== 'import' ">OK</button>
-          <div *ngIf=" data.msgType == 'prompt' ">
-            <button mat-button [mat-dialog-close]="false">NO</button>
-            <button mat-raised-button [mat-dialog-close]="true">YES</button>
-          </div>
-          <div *ngIf=" data.msgType == 'import' ">
-            <button mat-button [mat-dialog-close]="false">Cancel</button>
-            <button mat-raised-button [mat-dialog-close]="data.elements" cdkFocusInitial>Add</button>
-          </div>
-        </mat-dialog-actions>
-      </section>
+            <mat-dialog-content
+                *ngIf="data.msgType === 'clientAddressRequest'"
+                fxLayout="column"
+                fxLayoutAlign="start stretch"
+                fxLayoutGap="20px"
+            >
+
+                <div *ngIf="!setManually">
+                    <h2>
+                        Client address was not found into our records.
+                    </h2>
+                    <p>
+                        Send request to the clients email or if you know the address You can put it manually
+                    </p>
+                </div>
+                <div class="enterClientAddress" *ngIf="setManually">
+                    <h2>
+                        Manually adding the client(s) address for
+                        <b>{{data.firstname}} {{data.lastname}}</b>
+                    </h2>
+                    <mat-form-field>
+                        <input
+                            matInput
+                            type="text"
+                            placeholder="address"
+                            [(ngModel)]="data.address.address"
+                        >
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input
+                            matInput
+                            type="text"
+                            placeholder="Town"
+                            [(ngModel)]="data.address.town"
+                        >
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input
+                            matInput
+                            type="text"
+                            placeholder="Postcode"
+                            [(ngModel)]="data.address.postcode"
+                        >
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input
+                            matInput
+                            type="text"
+                            placeholder="Country"
+                            [(ngModel)]="data.address.country"
+                        >
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input
+                            matInput
+                            type="text"
+                            placeholder="Phone"
+                            [(ngModel)]="data.address.phone"
+                        >
+                    </mat-form-field>
+                </div>
+            </mat-dialog-content>
+
+            <mat-dialog-content
+                *ngIf="data.msgType === 'clientAddress'"
+                fxLayout="column"
+                fxLayoutAlign="start stretch"
+                id="clientDetails"
+            >
+                <h1 style="margin: 0 0 40px;  text-align: left; font-size: 16px;">To be delivered to:</h1>
+
+                <table>
+                  <tr>
+                    <td><span class="contantDetails">Name:</span></td>
+                    <td><b>{{data.firstname}} {{data.lastname}}</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="contantDetails">Address:</span></td>
+                    <td><b>{{data.address.address}}</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="contantDetails">Town:</span></td>
+                    <td><b>{{data.address.town}}</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="contantDetails">Postcode:</span></td>
+                    <td><b>{{data.address.postcode}}</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="contantDetails">Phone:</span></td>
+                    <td><b>{{data.address.phone}}</b></td>
+                  </tr>
+                </table>
+
+            </mat-dialog-content>
+
+            <mat-dialog-content
+                *ngIf="data.msgType === 'passreset'"
+                fxLayoutGap="20px"
+                fxLayout="column"
+                fxLayoutAlign="space-between center"
+            >
+                <h4>Reset Password</h4>
+                <p>
+                    To reset your password, click on the link below!
+                </p>
+                <a
+                    mat-dialog-close
+                    (click)="navigateTo('resetpassword')"
+                >
+                    <button
+                        mat-raised-button
+                        [mat-dialog-close]="false"
+                    >
+                        Reset Link
+                    </button>
+                </a>
+            </mat-dialog-content>
+        </section>
+
+        <section class="controls">
+            <mat-dialog-actions class="control-btns">
+                <button
+                    mat-raised-button
+                    mat-dialog-close
+                    *ngIf=" data.msgType !== 'prompt' && data.msgType !== 'import' && data.msgType !== 'clientAddressRequest' "
+                >
+                    OK
+                </button>
+                <div *ngIf="data.msgType === 'clientAddressRequest'">
+                    <button
+                        mat-button
+                        [mat-dialog-close]="false"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        mat-button
+                        (click)="setManually = !setManually"
+                        *ngIf="!setManually"
+                    >
+                        Manually
+                    </button>
+                    <button
+                        mat-raised-button
+                        [mat-dialog-close]="data"
+                        (click)="data.sendReq = !data.sendReq"
+                        *ngIf="!setManually"
+                    >
+                        Send request
+                    </button>
+                    <button
+                        mat-raised-button
+                        [mat-dialog-close]="data"
+                        *ngIf="setManually"
+                    >
+                        Save
+                    </button>
+                </div>
+                <div *ngIf=" data.msgType == 'prompt' ">
+                    <button
+                        mat-button
+                        [mat-dialog-close]="false"
+                    >
+                        NO
+                    </button>
+                    <button
+                        mat-raised-button
+                        [mat-dialog-close]="true"
+                    >
+                        YES
+                    </button>
+                </div>
+                <div *ngIf=" data.msgType == 'import' ">
+                    <button
+                        mat-button
+                        [mat-dialog-close]="false"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        mat-raised-button
+                        [mat-dialog-close]="data.elements"
+                        cdkFocusInitial
+                    >
+                        Add
+                    </button>
+                </div>
+            </mat-dialog-actions>
+        </section>
 
     </section>
-  </section>
+</section>
 
-  <!-- Examples:
+<!-- Examples:
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">No Thanks</button>
       <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-    </div>
-
-  -->
+    </div> -->

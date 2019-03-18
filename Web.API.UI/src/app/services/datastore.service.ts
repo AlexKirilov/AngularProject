@@ -52,39 +52,6 @@ export class DatastoreService {
   //////////////// GET ////////////////////
   /////////////////////////////////////////
 
-  // test(callback) {
-  //   this.http.get<UserCreds[]>(`http://localhost:3000/test`).subscribe(data => { callback(data); });
-  // }
-  // getListOfUsers (callback) {
-  //   this.http.get<UserCreds[]>(`${this.authURL}/users`).subscribe(
-  //     data => { callback(data); },
-  //     (err: HttpErrorResponse) => {
-  //       this.errorHandler.handleError(this.errorType(err));
-  //     }
-  //   );
-  // }
-
-
-  // searchForExistingUserData ( property, value, callback ) {
-  //   const uri = this.usersURI; // + '/?' + property + '=' + value;
-  //   const dta = { email : value };
-  //   this.http.post<UserCreds[]>(uri, dta, this.config).subscribe(
-  //     data => { callback(data); },
-  //     (err: HttpErrorResponse) => {
-  //       this.errorHandler.handleError(this.errorType(err));
-  //     }
-  //   );
-  // }
-
-  // checkUser ( userdata, callback ) {
-  //   const uri = this.usersURI + '/?username=' + userdata.username + '&password=' + userdata.password;
-  //   this.http.get<UserCreds[]>(uri).subscribe(
-  //     data => { callback(data); },
-  //     (err: HttpErrorResponse) => {
-  //       this.errorHandler.handleError(this.errorType(err));
-  //     }
-  //   );
-  // }
 
   /////////////////////////////////////////
   ////////////// Auth
@@ -133,16 +100,6 @@ export class DatastoreService {
     return this.http.get<any>(`${this.url}/orders/getorders${filters}`);
   }
 
-  // TODO: Unused function;
-  getOrdersToConfirm() {
-    return this.http.get<any>(`${this.url}/orders/getordersforapproval`);
-  }
-
-  // TODO: Unused function;
-  addOrder(order: any, callback: any) {
-    return this.http.post<any>(`${this.url}/orders/addOrder`, order);
-  }
-
   editOrder(order: any) {
     return this.http.post<any>(`${this.url}/orders/editOrder`, order);
   }
@@ -158,11 +115,6 @@ export class DatastoreService {
   addOrEditSiteContacts(contacts: any) {
     return this.http.post(`${this.url}/sitedata/addOrEditSiteContacts`, contacts);
   }
-
-  removeSiteContacts() {
-
-  }
-  
 
   /////////////////////////////////////////
   ////////////// Invoices
@@ -197,6 +149,10 @@ export class DatastoreService {
     return this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomer`);
   }
 
+  getCustomerAddress(user: any) {
+    return this.http.get<ContactsData>(`${this.url}/customers/getCustomerAddress`, user);
+  }
+
   getAuthCustomers() {
     return this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomers`);
   }
@@ -204,6 +160,7 @@ export class DatastoreService {
   updateCustomerDiscount(data: any) {
     return this.http.post<any>(`${this.url}/authdata/cudiscount`, data);
   }
+  
 
   /////////////////////////////////////////
   ////////////// Employees

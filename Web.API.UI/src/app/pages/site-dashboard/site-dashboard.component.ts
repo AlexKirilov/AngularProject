@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ILineSettings, IPieSettings } from '../../modules/google-chart/google-charts.models';
 import { DatashareService } from '../../services/datashare.service';
-import { UITourService } from '../../services/ui-tour.service';
+// import { UITourService } from '../../services/ui-tour.service';
 import { HandleErrorsService } from '../../services/handle-errors.service';
 import { DatastoreService } from '../../services/datastore.service';
 
@@ -59,7 +59,7 @@ export class SiteDashboardComponent implements OnInit, OnDestroy {
     private titleService: Title,
     private tourData: DashboardTourData,
     private datashare: DatashareService,
-    private uiTourService: UITourService,
+    // private uiTourService: UITourService,
     private datastore: DatastoreService,
     private errorHandler: HandleErrorsService
   ) {
@@ -76,9 +76,9 @@ export class SiteDashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.unsubscribePageTour = this.datashare.pageTourTrigger.subscribe((tourPage) => {
-      if (tourPage === 'dashboard') { this.startTour(); }
-    });
+    // this.unsubscribePageTour = this.datashare.pageTourTrigger.subscribe((tourPage) => {
+    //   if (tourPage === 'dashboard') { this.startTour(); }
+    // });
 
     this.getData();
   }
@@ -91,9 +91,9 @@ export class SiteDashboardComponent implements OnInit, OnDestroy {
   }
 
   startTour() {
-    this.uiTourService.startTour(this.tourData.TourSteps, this.tourData.TourRequirements, (selection: string) => {
-      this.tourData.onShow(selection);
-    });
+    // this.uiTourService.startTour(this.tourData.TourSteps, this.tourData.TourRequirements, (selection: string) => {
+    //   this.tourData.onShow(selection);
+    // });
   }
 
   getData() {

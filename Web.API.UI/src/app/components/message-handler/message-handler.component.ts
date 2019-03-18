@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class MessageHandlerComponent implements OnInit {
 
+  public setManually = false;
   private externalData = '';
   constructor(
     private router: Router,

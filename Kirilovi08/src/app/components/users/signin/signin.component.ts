@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DatastoreService } from '../../../services/datastore.service';
 import { Router } from '@angular/router';
 import { NewUser } from '../../../interfaces/new-user';
+import { HttpErrorResponse } from '@angular/common/http';
+import { HandleErrorsService } from 'src/app/services/handle-errors.service';
+import { Unsubscribable } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
 
 
 
@@ -27,7 +30,7 @@ export class SigninComponent implements OnInit {
     lastname: null,
     email: null,
     // secretPIN: null
-        // username: null,
+    // username: null,
   };
 
   public repassword: string;
@@ -45,9 +48,11 @@ export class SigninComponent implements OnInit {
   private emailPattern = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
   private isUserNameTaken: boolean;
 
+  private unscCheckEmail: Unsubscribable;
   constructor(
     private router: Router,
     private datastore: DatastoreService,
+    private errorHandler: HandleErrorsService,
     public fb: FormBuilder,
   ) {
     this.signin = fb.group({
@@ -67,6 +72,9 @@ export class SigninComponent implements OnInit {
     this.wrongCreds = document.getElementById('login-error-msg');
   }
 
+  ngOnDestroy(): void {
+    if (this.unscCheckEmail) { this.unscCheckEmail.unsubscribe(); }
+  }
 
   emailValidation() {
     if (this.signin.value.email.trim() !== '') {
@@ -86,9 +94,14 @@ export class SigninComponent implements OnInit {
 
   checkingForExistingEmail() {
     if (this.signin.value.email.trim() !== '') {
-      this.datastore.checkForExistingUserEmail({ email: this.signin.value.email },
-        (res) => {
-          this.emailIsTaken = res.exist; }
+      this.unscCheckEmail = this.datastore.checkForExistingUserEmail({ email: this.signin.value.email }).subscribe(
+        (res: any) => {
+          this.emailIsTaken = res.exist;
+        },
+        (err: HttpErrorResponse) => {
+          this.errorHandler.handleError(err);
+        }
+
       );
     }
   }
@@ -104,28 +117,29 @@ export class SigninComponent implements OnInit {
 
   validUserData() {
     this.btnSubmitValidation =
-    // this.signin.value.username !== '' &&
-    this.signin.value.email !== '' &&
-    this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== '';
+      // this.signin.value.username !== '' &&
+      this.signin.value.email !== '' &&
+      this.signin.value.fname !== '' && this.signin.value.lname !== '' && this.signin.value.password !== '';
   }
 
   validate() {
     return this.checkpass() && this.emailValidation();
   }
 
-  regNewCustmer(event) {
+  regNewCustmer(event: any) {
     if (this.validate()) {
       // this.userData.username = this.signin.value.username;
       this.userData.firstname = this.signin.value.fname;
       this.userData.lastname = this.signin.value.lname;
       this.userData.email = this.signin.value.email;
       this.userData.password = this.signin.value.password;
-      this.datastore.registry(this.userData,
+      this.datastore.registry(this.userData).subscribe(
         (res) => {
           // localStorage.setItem('token', res.token);
           this.router.navigate(['/login']);
         },
-        (err) => console.log('Err: ', err));
+        (err) => console.log('Err: ', err)
+      );
     }
   }
 

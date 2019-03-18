@@ -17,7 +17,7 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                       </table>
-                      <div *ngIf="total" class="total"><b>Total: </b> {{total}}</div>
+                      <div *ngIf="total" class="total" color="primary"><b>Total: </b> {{total}}</div>
                 </div>
             </section>
         <!-- </mat-card-content>

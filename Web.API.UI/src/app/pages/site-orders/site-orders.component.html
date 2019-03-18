@@ -1,66 +1,219 @@
 <section id="purchases-wrapper">
-  <section id="purchase-container" fxLayout="column" fxLayoutAlign="stretch center">
+    <section
+        id="purchase-container"
+        fxLayout="column"
+        fxLayoutAlign="stretch center"
+    >
+        <div
+            class="page-settings-container"
+            fxLayout="column"
+            fxLayoutAlign="space-around stretch"
+        >
 
-    <api-paginator class="right"
-      [startRow]="startRow"
-      [endRow]="endRow"
-      [currentPageIn]="currentPage" 
-      [allPages]="allPages" 
-      [itemsPerPageIn]="itemsPerPage" 
-      [allRecords]="allRecords"
-      (currentPageOut)="changePageTo($event)"
-      (itemsPerPageOut)="changeItemsPerPage($event)"
-      *ngIf="ordersForApproval.length > 0"
-    ></api-paginator>
+            <div
+                class="page-settings"
+                fxLayoutAlign="space-around stretch"
+                [@slideInOut]
+                *ngIf="!toggleOptionalSettings"
+            >
 
-    <mat-accordion class="example-headers-align" fxlayout="column" fxlayoutAlign="center stretch">
-      <mat-expansion-panel *ngFor="let item of ordersForApproval; let i = index" data-index="i" [expanded]="step === i"
-        (opened)="setStep(i)" hideToggle style="position: relative;">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <div fxLayout="row" fxLayoutAlign="start center" style="margin: 0 0 0 100px;">
-              <!-- [className]="item.flag === -1 ? 'status-red': item.flag === 0 ? 'status-yellow' : item.flag === 1 ? 'status-orange': item.flag === 2 ? 'status-blue': item.flag === 3 ? 'status-green': 'status-none'" -->
-              <div class="status-marker" [ngClass]="{ 
-              'status-red': item.flag === -1,
-              'status-yellow': item.flag === 0,
-              'status-orange': item.flag === 1,
-              'status-blue': item.flag === 2,
-              'status-green': item.flag === 3}">
-              </div>
-              <div *ngIf="item.flag === -1">Canceled</div>
-              <div *ngIf="item.flag === 0">Need to be approved</div>
-              <div *ngIf="item.flag === 1">Approved</div>
-              <div *ngIf="item.flag === 2">Send to client</div>
-              <div *ngIf="item.flag === 3">Delivered</div>
+                <mat-checkbox
+                    [formControl]="optional.canceled"
+                    [checked]="optional.canceled.value"
+                    id="canceled"
+                    (change)="getData()"
+                >
+                    Canceled
+                </mat-checkbox>
+
+                <mat-checkbox
+                    [formControl]="optional.needApprove"
+                    [checked]="optional.needApprove.value"
+                    id="needApprove"
+                    (change)="getData()"
+                >
+                    Need To be Approved
+                </mat-checkbox>
+
+                <mat-checkbox
+                    [formControl]="optional.approved"
+                    [checked]="optional.approved.value"
+                    id="approved"
+                    (change)="getData()"
+                >
+                    Approved
+                </mat-checkbox>
+
+                <mat-checkbox
+                    [formControl]="optional.toClient"
+                    [checked]="optional.toClient.value"
+                    id="toClient"
+                    (change)="getData()"
+                >
+                    Send to client
+                </mat-checkbox>
+
+                <mat-checkbox
+                    [formControl]="optional.delivered"
+                    [checked]="optional.delivered.value"
+                    id="delivered"
+                    (change)="getData()"
+                >
+                    Delivered
+                </mat-checkbox>
             </div>
-          </mat-panel-title>
-          <mat-panel-description fxLayout="row" fxLayoutAlign="start center">
-            <div><b>{{ item.company }}</b></div>
-            <div><b>{{ item.name }}</b></div>
-            <div>{{item.date | date: 'medium'}}</div>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
 
-        <section id="order-table-container" fxLayout="column" fxLayoutAlign="center stretch">
-          <app-data-table-template [class.hide]="item.order.length == 0" [dataSource]="item.order"
-            [displayedColumns]="displayedColumns" [tableColumnNames]="tableColumnNames"
-            [dateTransformNames]="dateTransformNames" [serverPagging]="false" [fullDate]="true">
-          </app-data-table-template>
-          <!-- [displayedColumnsMedium]="displayedColumnsMedium"
-              [middleTableDataColumns]="middleTableDataColumns" -->
-          <mat-action-row>
-            <button mat-button="mat-button" *ngIf="step !== 0" (click)="prevStep()">Previous</button>
-            <button mat-button="mat-button" *ngIf="item.flag == 0" (click)="decline(item)">Decline</button>
-            <button mat-button="mat-button" *ngIf="item.flag == 0" (click)="accept(item)">Accept</button>
-            <button mat-button="mat-button" *ngIf="item.flag == 1" (click)="sendToClient(item)">On the way</button>
-            <button mat-button="mat-button" *ngIf="item.flag == 2" (click)="deliveredToClient(item)">Set as
-              delivered</button>
-            <button mat-button="mat-button" *ngIf="step !== ordersForApproval.lenght" (click)="nextStep()">Next</button>
-          </mat-action-row>
-        </section>
+            <div class="settings-toggle">
+                <div
+                    id="settings-btn"
+                    (click)="toggleOptionalSettings = !toggleOptionalSettings"
+                >
+                    <mat-icon class="small-screen menu-icon-nav black active">settings</mat-icon>
+                    <mat-icon>
+                        {{toggleOptionalSettings  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+                    </mat-icon>
+                </div>
+            </div>
+        </div>
 
-      </mat-expansion-panel>
-    </mat-accordion>
-  </section>
+        <api-paginator
+            class="right"
+            [startRow]="startRow"
+            [endRow]="endRow"
+            [currentPageIn]="currentPage"
+            [allPages]="allPages"
+            [itemsPerPageIn]="itemsPerPage"
+            [allRecords]="allRecords"
+            (currentPageOut)="changePageTo($event)"
+            (itemsPerPageOut)="changeItemsPerPage($event)"
+            *ngIf="ordersForApproval.length > 0"
+        ></api-paginator>
 
+        <mat-accordion
+            class="example-headers-align"
+            fxlayout="column"
+            fxlayoutAlign="center stretch"
+        >
+            <mat-expansion-panel
+                *ngFor="let item of ordersForApproval; let i = index"
+                data-index="i"
+                [expanded]="step === i"
+                (opened)="setStep(i)"
+                hideToggle
+                style="position: relative;"
+            >
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div
+                            fxLayout="row"
+                            fxLayoutAlign="start center"
+                            style="margin: 0 0 0 100px;"
+                        >
+                            <!-- [className]="item.flag === -1 ? 'status-red': item.flag === 0 ? 'status-yellow' : item.flag === 1 ? 'status-orange': item.flag === 2 ? 'status-blue': item.flag === 3 ? 'status-green': 'status-none'" -->
+                            <div
+                                class="status-marker"
+                                [ngClass]="{ 
+                                  'status-red': item.flag === -1,
+                                  'status-yellow': item.flag === 0,
+                                  'status-orange': item.flag === 1,
+                                  'status-blue': item.flag === 2,
+                                  'status-green': item.flag === 3
+                                }"
+                            >
+                            </div>
+                            <div *ngIf="item.flag === -1">Canceled</div>
+                            <div *ngIf="item.flag === 0">Need to be approved</div>
+                            <div *ngIf="item.flag === 1">Approved</div>
+                            <div *ngIf="item.flag === 2">Send to client</div>
+                            <div *ngIf="item.flag === 3">Delivered</div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description
+                        fxLayout="row"
+                        fxLayoutAlign="start center"
+                    >
+                        <button
+                            mat-button
+                            (click)="getCustomersAddress(item)"
+                        >
+                            Address
+                        </button>
+
+                        <div>
+                            <b>{{ item.company }}</b>
+                        </div>
+                        <div>
+                            <b>{{ item.name }}</b>
+                        </div>
+                        <div>{{item.date | date: 'medium'}}</div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <section
+                    id="order-table-container"
+                    fxLayout="column"
+                    fxLayoutAlign="center stretch"
+                >
+                    <app-data-table-template
+                        [class.hide]="item.order.length == 0"
+                        [dataSource]="item.order"
+                        [displayedColumns]="displayedColumns"
+                        [tableColumnNames]="tableColumnNames"
+                        [dateTransformNames]="dateTransformNames"
+                        [serverPagging]="false"
+                        [fullDate]="true"
+                    >
+                    </app-data-table-template>
+                    <!-- [displayedColumnsMedium]="displayedColumnsMedium"
+                [middleTableDataColumns]="middleTableDataColumns" -->
+                    <mat-action-row>
+                        <button
+                            mat-button="mat-button"
+                            *ngIf="step !== 0"
+                            (click)="prevStep()"
+                        >
+                            Previous
+                        </button>
+                        <button
+                            mat-button="mat-button"
+                            *ngIf="item.flag == 0"
+                            (click)="decline(item)"
+                        >
+                            Decline
+                        </button>
+                        <button
+                            mat-button="mat-button"
+                            *ngIf="item.flag == 0"
+                            (click)="accept(item)"
+                        >
+                            Accept
+                        </button>
+                        <button
+                            mat-button="mat-button"
+                            *ngIf="item.flag == 1"
+                            (click)="sendToClient(item)"
+                        >
+                            On the way
+                        </button>
+                        <button
+                            mat-button="mat-button"
+                            *ngIf="item.flag == 2"
+                            (click)="deliveredToClient(item)"
+                        >
+                            Set as
+                delivered
+                        </button>
+                        <button
+                            mat-button="mat-button"
+                            *ngIf="step !== ordersForApproval.lenght"
+                            (click)="nextStep()"
+                        >
+                            Next
+                        </button>
+                    </mat-action-row>
+                </section>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </section>
 </section>

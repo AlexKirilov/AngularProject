@@ -1,0 +1,31 @@
+<section id="gallery-wrapper" fxLayout="row">
+  <div id="gallery-container" fxLayout="column" fxLayoutAlign="space-around stretch">
+
+      <div fxLayout="row" fxLayoutGap="20px" *ngIf="ifAdmin" fxLayoutAlign="space-between center">
+        <textarea type="text" [(ngModel)]="images"></textarea>
+    
+        <div fxLayout="row" fxLayoutGap="20px">
+          <button mat-raised-button type="button" (click)="save()">Save</button>
+          <button mat-raised-button type="button" (click)="preview()">Preview</button>
+        </div>
+      </div>
+    
+      <section fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <div class="left" *ngFor="let image of imageNames" (click)="openImage(image)">
+          <div class="gallery-img" [ngStyle]="{background: 'url(./images/gallery/' + image + ')'}"></div>
+        </div>
+      </section>
+    
+      <!-- <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+          <mat-card class="card-picture" *ngFor="let picture of imageNames">
+            <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+              <mat-icon fxFlex="10%">mode_edit</mat-icon>
+              <mat-icon fxFlex="10%">delete</mat-icon>
+            </mat-card-title>
+            <img mat-card-image [src]="'./images/gallery/' + picture">
+          </mat-card>
+        </div> -->
+    
+      </div>
+</section>
+

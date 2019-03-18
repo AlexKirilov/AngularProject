@@ -1,0 +1,172 @@
+<section id="products-wrapper">
+  <section id="product-container" fxLayout="column" fxLayoutAlign="stretch" fxLayoutGap="20px">
+    <!-- <div class="basket-container" *ngIf="basketArr.length > 0">
+      <div class="basket-size left">{{ basketArr.length }}</div>
+      <mat-icon style="font-size: 40px" class="small-screen menu-icon-nav" matTooltip="Basket" matTooltipPosition="above">add_shopping_cart
+      </mat-icon>
+    </div> -->
+    <div class="controllers" fxLayoutGap="20px">
+      <section *ngIf="ifAdmin" class="right">
+        <!-- <div class="basket-container" *ngIf="basketArr.length > 0">
+          <mat-icon style="font-size: 40px" class="small-screen menu-icon-nav" matTooltip="Basket" matTooltipPosition="above">add_shopping_cart
+          </mat-icon>
+        </div> -->
+      </section>
+      <section *ngIf="ifAdmin">
+        <mat-form-field>
+          <mat-select placeholder="Category" [(ngModel)]="selectedCat">
+            <mat-option value="">All</mat-option>
+            <mat-option *ngFor="let cat of categories" value="{{cat._id}}">{{cat?.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-icon class="small-screen menu-icon-nav" matTooltip="Search by category" matTooltipPosition="above" (click)="showProtByCat()">search
+        </mat-icon>
+
+        <mat-icon class="small-screen menu-icon-nav" matTooltip="Add new category" matTooltipPosition="above" (click)="addCategory()">add_circle_outline
+        </mat-icon>
+
+        <mat-icon class="small-screen menu-icon-nav" matTooltip="Remove by category" matTooltipPosition="above" (click)="removeProdByCat()">delete_outline
+        </mat-icon>
+
+        <mat-icon class="small-screen menu-icon-nav" matTooltip="Remove all products" matTooltipPosition="above" (click)="removeAllProd()">delete_forever
+        </mat-icon>
+      </section>
+    </div>
+    <section class="mat-elevation-z8" style="position: relative;">
+      <div class="add-new" style="position: absolute; right: 25px; top: 13px; ">
+        <mat-icon style="font-size: 30px" *ngIf="ifAdmin" class="small-screen menu-icon-nav" matTooltip="Add" matTooltipPosition="above" (click)="addProd()">add
+        </mat-icon>
+      </div>
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="editbtn != element._id">{{element?.name}}</div>
+            <mat-form-field *ngIf="editbtn == element._id" [class.max-input-size]="editbtn == element._id">
+              <input matInput placeholder="Product name" [(ngModel)]="prodName">
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef class="table-image"> Image </th>
+          <td mat-cell *matCellDef="let element">
+            <!-- {{element?.imageURL}} -->
+            <div *ngIf="editbtn !== element._id" class="product-images" [ngStyle]="{background: 'url(./images/products/' + element.imgURL + ')'}"></div>
+            <div *ngIf="editbtn == element._id">
+              <mat-form-field *ngIf="editbtn" [class.max-input-size]="editbtn == element._id">
+                <input matInput placeholder="Image address" [(ngModel)]="imageURL">
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sort">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sorts </th>
+          <td mat-cell *matCellDef="let element">
+            <ul *ngIf="editbtn !== element._id">
+              <li *ngFor="let item of element?.sort"> - {{item}}</li>
+            </ul>
+            <div *ngIf="editbtn == element._id">
+              <mat-form-field [class.max-input-size]="editbtn == element._id">
+                <input matInput placeholder="Sorts" [(ngModel)]="prodSorts">
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header>Price</th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="editbtn !== element._id && !element.discount">{{element?.price}} BGN</div>
+            <div *ngIf="editbtn !== element._id && element.discount">
+              <span class="old-price">{{element?.price }} </span>
+              <span class="discount">{{ element?.price - element?.discount}}</span> BGN</div>
+            <div *ngIf="editbtn == element._id">
+              <mat-form-field class="numeric-input">
+                <input matInput type="number" placeholder="Price" [(ngModel)]="prodPrice">
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> In Stock </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="editbtn !== element._id">{{element?.quantity}} <span *ngIf="element.pack !== '' ">/</span> {{element?.pack}}</div>
+            <div *ngIf="editbtn == element._id">
+              <mat-form-field class="numeric-input">
+                <input matInput type="number" placeholder="Qnt" [(ngModel)]="prodQuantity">
+              </mat-form-field> /
+              <mat-form-field class="numeric-input">
+                <input matInput type="text" placeholder="Pack" [(ngModel)]="packageSize">
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Details </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element?.details }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="qnt">
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Qnt </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="ifAdmin || ifUser" [class.hide]="editbtn === element._id">
+              <mat-icon class="small-screen menu-icon-nav" matTooltip="+ 1" matTooltipPosition="above" (click)="incrementQnt(element)">add
+              </mat-icon>
+              <mat-form-field class="numeric-input">
+                <input matInput type="number" min="0" [(ngModel)]="element.prodClientQnt" disabled>
+              </mat-form-field>
+              <mat-icon class="small-screen menu-icon-nav" matTooltip="- 1" matTooltipPosition="above" (click)="decrementQnt(element)">remove
+              </mat-icon>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="controlers">
+          <th mat-header-cell *matHeaderCellDef>
+            <div *ngIf="ifAdmin">Controlers</div>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <!-- <div *ngIf="editbtn !== element._id">{{element?.details}}</div> -->
+            <div *ngIf="ifAdmin">
+              <mat-form-field *ngIf="editbtn == element._id" [class.max-input-size]="editbtn == element._id">
+                <input matInput placeholder="Details data" [(ngModel)]="prodDetails">
+              </mat-form-field>
+              <div class="right" fxLayoutGap="20px">
+                <div class="edit-button">
+                  <mat-icon *ngIf="editbtn != element._id" class="small-screen menu-icon-nav" matTooltip="Edit" matTooltipPosition="above"
+                    (click)="editProd(element)">edit
+                  </mat-icon>
+                </div>
+                <div class="save-button">
+                  <mat-icon *ngIf="editbtn == element._id" style="margin-top: 25px;" class="small-screen menu-icon-nav" matTooltip="Save" matTooltipPosition="above"
+                    (click)="saveProd(element)">save
+                  </mat-icon>
+                </div>
+                <div class="remove-button">
+                  <mat-icon *ngIf="editbtn == element._id" style="margin-top: 25px;" class="small-screen menu-icon-nav" matTooltip="Delete" matTooltipPosition="above"
+                    (click)="removeProd(element)">delete
+                  </mat-icon>
+                </div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="pageSizeOptions"
+      [length]="lengthPag" [pageSize]="pageSizePag" showFirstLastButtons (page)="onPageChanged($event)"></mat-paginator>
+
+    </section>
+  </section>
+</section>

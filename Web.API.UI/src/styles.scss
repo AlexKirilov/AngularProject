@@ -29,17 +29,18 @@
 }
 
 html {
-  background: #ee36fa;
-  /* Old browsers */
-  background: -moz-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ee36fa', endColorstr='#6f3ede', GradientType=1);/* IE6-9 fallback on horizontal gradient */
-  background: #ee36fa;
-  background: linear-gradient(9deg, #ff0000 -10%, #72c1fd78 50%);
+  // background: #ee36fa;
+  // /* Old browsers */
+  // background: -moz-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
+  // /* FF3.6-15 */
+  // background: -webkit-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
+  // /* Chrome10-25,Safari5.1-6 */
+  // background: linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
+  // /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  // //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ee36fa', endColorstr='#6f3ede', GradientType=1);/* IE6-9 fallback on horizontal gradient */
+  // background: #ee36fa;
+  // background: linear-gradient(9deg, #ff0000 -10%, #72c1fd78 50%);
+  background: url('./app/images/test/18.jpg') 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -215,5 +216,49 @@ api-paginator {
   .mat-tab-group.mat-primary .mat-ink-bar,
   .mat-tab-nav-bar.mat-primary .mat-ink-bar {
     background-color: darkorange;
+  }
+}
+#main-nav-container {
+  .mat-tab-link {
+    color: white !important;
+  }
+}
+
+body {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: 50% 50% !important;
+  &#back1 {
+    background: url('./app/images/test/1.jpg');
+  }
+  &#back2 {
+    background: url('./app/images/test/6.jpg');
+  }
+  &#back3 {
+    background: url('./app/images/test/7.jpg'); 
+  }
+  &#back4 {
+    background: url('./app/images/test/8.jpg');
+  }
+  &#back5 {
+    background: url('./app/images/test/9.jpg');
+  }
+  &#back6 {
+    background: url('./app/images/test/11.jpg');
+  }
+  &#back7 {
+    background: url('./app/images/test/13.jpg');
+  }
+  &#back8 {
+    background: url('./app/images/test/14.jpg');
+  }
+  &#back9 {
+    background: url('./app/images/test/16.jpg');
+  }
+  &#back10 {
+    background: url('./app/images/test/18.jpg');
+  }
+  &#back11 {
+    background: url('./app/images/test/20.jpg');
   }
 }
