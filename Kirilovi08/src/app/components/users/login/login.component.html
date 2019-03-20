@@ -1,4 +1,4 @@
-<section id="login-container" fxLayout="column" fxLayoutAlign="center center">
+<section id="login-container" fxLayout="column" fxLayoutAlign="center center" fxFlex="100%">
   <header id="login-page">
       <div class="logo-container">
           <div id="logo-background-image"></div>
@@ -24,7 +24,7 @@
     </div>
       <button mat-raised-button type="submit" [disabled]="btnDisbaled">Login</button>
   </form>
-  <div class="blue additinal-login-options" fxLayoutGap="20px" fx-layout-align="end">
+  <div class="blue additinal-login-options" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" fx-layout-align="end">
       <a [routerLink]="['/forgotpass']">Forgot password</a>
       <a [routerLink]="['/signin']">Sign In</a>
   </div>

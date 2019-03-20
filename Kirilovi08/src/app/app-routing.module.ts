@@ -19,8 +19,8 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
 
 
 const routes: Routes = [
-  // { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '', component: ComingSoonComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // { path: '', component: ComingSoonComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'forgetpassword', component: ForgetpassComponent },

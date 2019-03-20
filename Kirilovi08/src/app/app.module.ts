@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -20,7 +21,7 @@ import {
   MatSlideToggleModule, MatSliderModule, MatSelectModule, MatRippleModule, MatRadioModule,
   MatProgressSpinnerModule, MatProgressBarModule, MatPaginatorModule, MatNativeDateModule,
   MatListModule, MatGridListModule, MatExpansionModule, MatDividerModule, MatDialogModule,
-  MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule, MatAutocompleteModule, MatFormFieldModule ,
+  MatDatepickerModule, MatChipsModule, MatButtonToggleModule, MatMenuModule, MatAutocompleteModule, MatFormFieldModule,
 } from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -49,6 +50,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,7 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
     ReactiveFormsModule,
     PasswordStrengthBarModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
     MatMenuModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -116,6 +119,9 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD37sTWDS64-IteZwC4YsPv9e_ZpRpHXjs'
+    }),
   ],
   providers: [DatastoreService, AuthGuard, HandleErrorsService,
     { // Adding Interceptor
@@ -125,6 +131,6 @@ import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-hist
     }],
   bootstrap: [AppComponent],
   entryComponents: [ErrorHandlerComponent, ModalWindowComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA], // NO_ERRORS_SCHEMA,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // NO_ERRORS_SCHEMA,
 })
 export class AppModule { }

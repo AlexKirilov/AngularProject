@@ -1,36 +1,98 @@
 <section id="contacts-wrapper">
-    <section id="contacts-container" fxLayout="row" fxLayoutAlign="space-around center">
+    <section
+        id="contacts-container"
+        fxLayout="row"
+        fxLayoutAlign="space-around center"
+    >
 
         <div id="details-container">
 
-            <div class="dataDetailsSec" *ngIf="contacts?.address?.address != ''">
+            <div
+                class="dataDetailsSec"
+                *ngIf="contacts?.address?.address != ''"
+            >
                 <h3>Address</h3>
                 <span>
-                    {{ contacts?.address?.address }}<br/>
-                    {{ contacts?.address?.postcode }} {{ contacts?.address?.town }}<br/>
+                    {{ contacts?.address?.address }}
+                    <br>
+                    {{ contacts?.address?.postcode }} {{ contacts?.address?.town }}
+                    <br>
                     {{ contacts?.address?.country }}
                 </span>
             </div>
 
-            <div class="dataDetailsSec" *ngIf="contacts?.phones.length > 0">
+            <div
+                class="dataDetailsSec"
+                *ngIf="contacts?.phones.length > 0"
+            >
                 <h3>Phones</h3>
-                <div *ngFor="let phone of contacts.phones">{{ phone }}</div><br/>
+                <div *ngFor="let phone of contacts.phones">{{ phone }}</div>
+                <br>
             </div>
 
-            <div class="dataDetailsSec" *ngIf="contacts?.connections?.facebook != ''">
+            <div
+                class="dataDetailsSec"
+                *ngIf="contacts?.connections?.facebook != ''"
+            >
                 <h3>Connections</h3>
-                <div>
-                    <i class="fab fa-facebook"></i><br/>
-                    <a href="contacts?.connections?.twitter" target="_blank" *ngIf="contacts?.connections && contacts.connections.twitter"><i class="fab fa-twitter-square"></i></a><br/>
-                    <a href="contacts?.connections?.linkedin" target="_blank" *ngIf="contacts?.connections && contacts.connections.linkedin"><i class="fab fa-linkedin"></i></a><br/>
-                    <a href="contacts?.connections?.skype" target="_blank" *ngIf="contacts?.connections && contacts.connections.skype"><i class="fab fa-skype"></i></a><br/>
+                <div
+                    fxLayout="row"
+                    fxLayoutAlign="space-around center"
+                >
+                    <mat-icon *ngIf="contacts?.connections && contacts.connections.facebook">
+                        <a
+                            href="contacts?.connections?.twitter"
+                            target="_blank"
+                        >
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </mat-icon>
+                    <br>
+                    <mat-icon *ngIf="contacts?.connections && contacts.connections.twitter">
+                        <a
+                            href="contacts?.connections?.twitter"
+                            target="_blank"
+                        >
+                            <i class="fab fa-twitter-square"></i>
+                        </a>
+
+                    </mat-icon>
+                    <br>
+                    <mat-icon *ngIf="contacts?.connections && contacts.connections.linkedin">
+                        <a
+                            href="contacts?.connections?.linkedin"
+                            target="_blank"
+                        >
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+
+                    </mat-icon>
+                    <br>
+                    <mat-icon *ngIf="contacts?.connections && contacts.connections.skype">
+                        <a
+                            href="contacts?.connections?.skype"
+                            target="_blank"
+                        >
+                            <i class="fab fa-skype"></i>
+                        </a>
+
+                    </mat-icon>
+                    <br>
                 </div>
             </div>
 
         </div>
 
         <div id="map-container">
-            <div #gmap style="width:600px;height:400px"></div>
+            <agm-map
+                [latitude]="42.3639561"
+                [longitude]="22.686734"
+            >
+                <agm-marker
+                    [latitude]="42.3639561"
+                    [longitude]="22.686734"
+                ></agm-marker>
+            </agm-map>
         </div>
 
     </section>

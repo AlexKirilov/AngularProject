@@ -9,9 +9,6 @@ import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 })
 export class ContactsComponent implements OnInit {
 
-  @ViewChild('gmap') gmapElement: any;
-  map: google.maps.Map;
-
   public contacts: any;
 
   constructor (
@@ -21,28 +18,16 @@ export class ContactsComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    this.setMap();
   }
 
   getData() {
     this.datastore.getWebSiteData().subscribe(
       (data: any) => {
         this.contacts = data;
-        console.log(data);
       },
       (err: ErrorEventHandler) => {
         this.errorhandler.openDialog(err);
       }
     );
   }
-
-  setMap () {
-    const mapProp = {
-      center: new google.maps.LatLng(42.3639561, 22.686734),
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.HYBRID,
-    };
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
-  }
-
 }

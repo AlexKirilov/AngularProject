@@ -42,20 +42,11 @@
             <span class="file-status" *ngIf="!item.ok"> fail </span>
           </li>
         </ul>
-        <p>For more details please visit the
+        <!-- <p>For more details please visit the
           <button mat-button id="check-logs" (click)="navigateTo('logs')" [mat-dialog-close]="false">Logs page</button>
-        </p>
+        </p> -->
       </mat-dialog-content>
 
-      <mat-dialog-content *ngIf="data.msgType === 'shortkeys'">
-        <h4>{{ data.message }}</h4>
-        <ul id="shortkeys-list">
-          <li class="status-element" *ngFor="let item of data.elements" matTooltipPosition="above">
-            <div class="file-name left">{{ item.key }}</div>
-            <div class="file-status">{{ item.details }}</div>
-          </li>
-        </ul>
-      </mat-dialog-content>
     </section>
 
     <section class="controls">

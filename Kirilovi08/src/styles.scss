@@ -19,21 +19,21 @@ $material-icons-font-path: '~material-icons/iconfont/';
   &::-webkit-scrollbar-thumb {
       border-radius: 4px;
       background-color: rgba(0, 0, 0, .5);
-      -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+      // -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
   }
 }
-html {
-  // background: #ee36fa;/* Old browsers */
-  // background: -moz-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* FF3.6-15 */
-  // background: -webkit-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* Chrome10-25,Safari5.1-6 */
-  // background: linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  // //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ee36fa', endColorstr='#6f3ede', GradientType=1);/* IE6-9 fallback on horizontal gradient */
-  // background: #ee36fa;
-  // background: linear-gradient(9deg, #ff0000 -10%, #72c1fd78 50%);
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // background-attachment: fixed;
-}
+// html {
+//   // background: #ee36fa;/* Old browsers */
+//   // background: -moz-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* FF3.6-15 */
+//   // background: -webkit-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* Chrome10-25,Safari5.1-6 */
+//   // background: linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+//   // //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ee36fa', endColorstr='#6f3ede', GradientType=1);/* IE6-9 fallback on horizontal gradient */
+//   // background: #ee36fa;
+//   // background: linear-gradient(9deg, #ff0000 -10%, #72c1fd78 50%);
+//   // background-repeat: no-repeat;
+//   // background-size: cover;
+//   // background-attachment: fixed;
+// }
 body {
   background: url('https://images.pexels.com/photos/325944/pexels-photo-325944.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
   background-repeat: no-repeat !important;
@@ -61,8 +61,8 @@ body {
 
 .mat-icon,
 svg {
-  color: $disabled-btn;
-  fill: $disabled-btn;
+  color: #673AB7; //$disabled-btn;
+  fill: #673AB7; //$disabled-btn;
 }
 
 .image-transperant {
@@ -121,6 +121,19 @@ mat-paginator {
     color: #673ab7;
   }
 }
+app-login {
+  padding: 0px 120px 0px;
+  background: rgba(255,255,255,0.7);
+  min-width: 250px;
+  margin-top: 60px;
+  border-radius: 10px;
+  box-shadow: 1px 3px 23px #5aa951;
+}
+
+agm-map {
+  width: 700px;
+  height: 400px;
+}
 
 .mat-paginator-container {
   font-weight: bold;
@@ -129,4 +142,8 @@ mat-paginator {
 
 a.mat-tab-link.ng-star-inserted:hover {
   color: #673ab7;
+}
+
+.mat-tab-link {
+  font-weight: bold;
 }

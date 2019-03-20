@@ -60,6 +60,7 @@ export class AppComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     if (message !== ' ') {
+      debugger;
       this.snackBar.open(message, action, { duration: 4000 });
     }
   }

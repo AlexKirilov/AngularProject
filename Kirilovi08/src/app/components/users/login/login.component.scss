@@ -5,9 +5,10 @@
     padding: 25px;
     // border: 2px solid rgb(220, 220, 220);
     margin: 10vh auto;
+    position: relative;
     .login-form {
         mat-form-field {
-            margin: 5px 10px;
+            margin: 0px 40px;
         }
         input {
             padding: 5px 0;
@@ -18,5 +19,17 @@
             color: red;
             margin-bottom: 20px;
         }
+    }
+}
+
+.additinal-login-options {
+    position: absolute;
+    bottom: -30px;
+    width: 70%;
+    font-family: cursive;
+    a {
+        text-decoration: none;
+        color: #673AB7;
+        cursor: pointer;
     }
 }

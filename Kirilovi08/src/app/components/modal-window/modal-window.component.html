@@ -8,19 +8,9 @@
     </section>
 
     <section class="body-container" [class.image-container]="data.modal === 'image'" >
-      <mat-dialog-content *ngIf="data.modal == 'table'">
-        <!-- <tools-data-table-template [class.hide]="data.dataSource.data.length == 0" [dataSource]="data.dataSource" [displayedColumns]="data.displayedColumns"
-          [tableColumnNames]="data.tableColumnNames" [dateTransformNames]="data.dateTransformNames" [displayedColumnsMedium]="data.displayedColumnsMedium"
-          [middleTableDataColumns]="data.middleTableDataColumns" [fullDate]="data.fullDate">
-        </tools-data-table-template> -->
-      </mat-dialog-content>
 
       <mat-dialog-content *ngIf="data.modal === 'image'">
         <div class="image-div" [ngStyle]="{background: 'url(./images/gallery/' + data.imgURL + ')'}"></div>
-      </mat-dialog-content>
-
-      <mat-dialog-content *ngIf="data.msgType === 'shortkeys'">
-
       </mat-dialog-content>
     </section>
 

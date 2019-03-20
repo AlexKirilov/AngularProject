@@ -16,8 +16,4 @@ export class ErrorHandlerComponent {
   ) {
     console.log(data);
   }
-
-  navigateTo(link) {
-    // this.router.navigateByUrl(`/${link}?LogLevel=error&ApplicationType=market-value`);
-  }
 }
