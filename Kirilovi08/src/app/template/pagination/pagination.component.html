@@ -1,0 +1,51 @@
+<section class="results-paginator" id="top-pagination-menu" fxLayout="row" fxLayoutAlign="end center">
+
+    <div class="itemsPerPage">
+      <div class="mat-paginator-page-size ng-star-inserted">
+        <mat-form-field>
+          <mat-select placeholder="Items per page:" [(value)]="itemsPerPageIn" [(ngModel)]="itemsPerPageIn" (selectionChange)='changeItemsPerPage()'>
+            <mat-option value="5">5</mat-option>
+            <mat-option value="10">10</mat-option>
+            <mat-option value="25">25</mat-option>
+            <mat-option value="50">50</mat-option>
+            <mat-option value="100">100</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <div class="pagechange" style="display: flex;">
+      <div class="mat-paginator-range-label" fxShow fxHide.sm fxHide.xs>{{ paggingDetails }} </div>
+  
+      <button mat-icon-button class="firstPage" (click)="firstPage()" [class.disabled]="currentPageIn == 1"
+        [disabled]="currentPageIn == 1">
+        <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+          <path d="M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"></path>
+        </svg>
+      </button>
+      <button mat-icon-button class="prevPage" (click)="prevPage()" [class.disabled]="currentPageIn == 1"
+        [disabled]="currentPageIn == 1">
+        <span class="mat-button-wrapper">
+          <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+          </svg>
+        </span>
+      </button>
+      <button mat-icon-button class="nextPage" (click)="nextPage()" [class.disabled]="currentPageIn == allPages"
+        [disabled]="currentPageIn == allPages">
+        <span class="mat-button-wrapper">
+          <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+          </svg>
+        </span>
+      </button>
+      <button mat-icon-button class="lastPage" (click)="lastPage()" [class.disabled]="currentPageIn == allPages"
+        [disabled]="currentPageIn == allPages">
+        <span class="mat-button-wrapper">
+          <svg class="mat-paginator-icon" focusable="false" viewBox="0 0 24 24">
+            <path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </section>

@@ -15,14 +15,20 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  purchases;
-  dataaa;
-  public step = 0;
+  public step = null;
+  public totalAmount = 0;
+  public purchasesList = [];
+  public dateTransformNames = [];
   public displayedColumns = ['name', 'image', 'price', 'prodClientQnt', 'total'];
   public tableColumnNames = { name: 'Name', image: '', price: 'Price', prodClientQnt: 'Qnt', total: 'Total' };
-  public totalAmount = 0;
-  public dateTransformNames = [];
 
+  public filter = null;
+  public startRow = 1;
+  public allPages = 0;
+  public allRecords = 0;
+  public currentPage = 1;
+  public itemsPerPage = '10';
+  public endRow = this.itemsPerPage;
 
   private unscEditOrder: Unsubscribable;
   private unscGetOrderToConfirm: Unsubscribable;
@@ -42,9 +48,16 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    this.unscGetOrderToConfirm = this.datastore.getOrdersToConfirm().subscribe(
+    let by = `?perPage=${this.itemsPerPage}&page=${this.currentPage}&flags=AE`;
+    this.unscGetOrderToConfirm = this.datastore.getAllOrders(by).subscribe( // this.datastore.getOrdersToConfirm().subscribe(
       data => {
-        this.dataaa = data.results;
+        this.startRow = data.firstrowOnPage;
+        this.allPages = data.pages;
+        this.allRecords = data.rows;
+        this.currentPage = data.page;
+        this.itemsPerPage = data.perPage + '';
+        this.endRow = data.lastRowOnPage;
+        this.purchasesList = data.results;
       },
       (err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
@@ -82,5 +95,15 @@ export class PurchaseComponent implements OnInit, OnDestroy {
         this.errorHandler.handleError(err);
       }
     );
+  }
+
+  changePageTo(page: number) {
+    this.currentPage = page;
+    this.getData();
+  }
+
+  changeItemsPerPage(perPage: any) {
+    this.itemsPerPage = perPage;
+    this.getData();
   }
 }

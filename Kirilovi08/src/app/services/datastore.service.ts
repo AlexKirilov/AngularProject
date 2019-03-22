@@ -242,6 +242,10 @@ export class DatastoreService {
     return this.http.post<any>(`${this.authURL}/gallery/add`, images);
   }
 
+  getAllOrders(filters: any) {
+    return this.http.get<any>(`${this.authURL}/orders/getorders${filters}`);
+  }
+
   /////////////////////////////////////////
   ////////////// DELETE ///////////////////
   /////////////////////////////////////////

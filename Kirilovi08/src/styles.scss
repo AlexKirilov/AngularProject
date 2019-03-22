@@ -147,3 +147,45 @@ a.mat-tab-link.ng-star-inserted:hover {
 .mat-tab-link {
   font-weight: bold;
 }
+
+
+.status-marker {
+  height: 20px;
+  width: 20px; // position: absolute;
+  margin-top: 0px;
+  margin-left: 20px;
+  margin-right: 50px;
+  float: none; // top: 16px;
+  // left: 130px;
+  border-radius: 100%;
+  box-shadow: 0px 0px 10px 3px #2f394d;
+}
+
+.status-red {
+  background: red;
+}
+
+.status-orange {
+  background: #f88639;
+}
+
+.status-blue {
+  background: #2e8ec1;
+}
+
+.status-yellow {
+  background: #f4c712;
+}
+
+.status-green {
+  background: #00a553;
+}
+
+.status-none {
+  background: grey;
+}
+
+.mat-expansion-panel-header {
+  line-height: 36px;
+  min-height: 36px;
+}

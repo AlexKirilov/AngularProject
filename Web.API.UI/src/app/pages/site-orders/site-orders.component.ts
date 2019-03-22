@@ -125,7 +125,6 @@ export class SiteOrdersComponent implements OnInit, OnDestroy {
             }
           });
         } else {
-          console.log(details);
           this.errorHandler.openDialogClientAddress(details, (d: any) => console.log('Address', d));
         }
       });
