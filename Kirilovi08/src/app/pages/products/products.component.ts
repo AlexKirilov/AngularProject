@@ -6,6 +6,7 @@ import { Product } from '../../interfaces/product';
 import { DatastoreService } from '../../services/datastore.service';
 import { DatashareService } from '../../services/datashare.service';
 import { HandleErrorsService } from '../../services/handle-errors.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-products',
@@ -49,10 +50,14 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   private unscGetProducts: Unsubscribable;
 
   constructor(
+    private titleService: Title,
     private datastore: DatastoreService,
     private datashare: DatashareService,
     private errorHandler: HandleErrorsService
   ) {
+    this.titleService.setTitle('Products');
+    this.datashare.changeCurrentPage('products');
+
     this.datashare.ifUser.subscribe(bool => { this.ifUser = bool; if (bool) { this.changeTableColumns(); } });
     this.datashare.ifAdmin.subscribe(bool => { this.ifAdmin = bool; if (bool) { this.changeTableColumns(); } });
     this.datashare.getBasket.subscribe(basket => this.basketArr = basket);

@@ -7,10 +7,52 @@
       </div>
     </section>
 
-    <section class="body-container" [class.image-container]="data.modal === 'image'" >
+    <section class="body-container" [class.image-container]="data.modal === 'image'">
 
       <mat-dialog-content *ngIf="data.modal === 'image'">
         <div class="image-div" [ngStyle]="{background: 'url(./images/gallery/' + data.imgURL + ')'}"></div>
+      </mat-dialog-content>
+
+      <mat-dialog-content *ngIf="data.msgType === 'clientAddress'" fxLayout="column" fxLayoutAlign="start stretch"
+        id="clientDetails">
+        <h1 style="margin: 0 0 40px;  text-align: left; font-size: 16px;">To be delivered to:</h1>
+
+        <table>
+          <tr>
+            <td><span class="contantDetails">Name:</span></td>
+            <td><b>{{data.firstname}} {{data.lastname}}</b></td>
+          </tr>
+          <tr>
+            <td><span class="contantDetails">Address:</span></td>
+            <td><b>{{data.address.address}}</b></td>
+          </tr>
+          <tr>
+            <td><span class="contantDetails">Town:</span></td>
+            <td><b>{{data.address.town}}</b></td>
+          </tr>
+          <tr>
+            <td><span class="contantDetails">Postcode:</span></td>
+            <td><b>{{data.address.postcode}}</b></td>
+          </tr>
+          <tr>
+            <td><span class="contantDetails">Phone:</span></td>
+            <td><b>{{data.address.phone}}</b></td>
+          </tr>
+        </table>
+
+      </mat-dialog-content>
+
+      <mat-dialog-content *ngIf="data.msgType === 'passreset'" fxLayoutGap="20px" fxLayout="column"
+        fxLayoutAlign="space-between center">
+        <h4>Reset Password</h4>
+        <p>
+          To reset your password, click on the link below!
+        </p>
+        <a mat-dialog-close (click)="navigateTo('resetpassword')">
+          <button mat-raised-button [mat-dialog-close]="false">
+            Reset Link
+          </button>
+        </a>
       </mat-dialog-content>
     </section>
 

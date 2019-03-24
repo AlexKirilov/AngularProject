@@ -6,6 +6,8 @@ import { NewUser } from '../../../interfaces/new-user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 import { Unsubscribable } from 'rxjs';
+import { DatashareService } from 'src/app/services/datashare.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signin',
@@ -51,10 +53,14 @@ export class SigninComponent implements OnInit, OnDestroy {
   private unscCheckEmail: Unsubscribable;
   constructor(
     private router: Router,
+    private titleService: Title,
+    private datashare: DatashareService,
     private datastore: DatastoreService,
     private errorHandler: HandleErrorsService,
     public fb: FormBuilder,
   ) {
+    this.titleService.setTitle('Sign In');
+    this.datashare.changeCurrentPage('sign-in');
     this.signin = fb.group({
       // 'username': ['', Validators.required],
       'password': ['', Validators.required],

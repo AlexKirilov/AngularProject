@@ -1,0 +1,19 @@
+<section id="navi-container" style="position: relative;" fxLayout="column" fxLayoutAlign="stretch center">
+  <nav mat-tab-nav-bar fxLayoutAlign="stretch center">
+    <a mat-tab-link *ngFor="let link of routeLinks; let i = index" [routerLink]="link.link" routerLinkActive
+      #rla="routerLinkActive" [active]="rla.isActive">
+      {{link.label}}
+    </a>
+    <a mat-tab-link *ngIf="ifuser && ifBasketSize > 0" [routerLink]="'basket'" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      Basket
+      <mat-icon class="small-screen menu-icon-nav" style="margin: 0 5px;" color="primary">add_shopping_cart</mat-icon>
+      <span class="bucket-size" color="primary">x {{ ifBasketSize }} </span>
+    </a>
+    <a mat-tab-link *ngIf="ifadmin" [routerLink]="'purchase'" routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      Purchase
+      <div class="bucket-size" style="margin-left: 5px;" color="primary"> {{ ifBasketSize }} </div>
+    </a>
+  </nav>
+</section>

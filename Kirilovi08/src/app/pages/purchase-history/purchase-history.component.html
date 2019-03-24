@@ -9,7 +9,7 @@
 
 
         <section>
-            <mat-accordion class="example-headers-align" fxLayout="column" fxFlex="" fxFlexAlign="center stretch">
+            <mat-accordion fxLayout="column" fxFlex="" fxFlexAlign="center stretch">
                 <mat-expansion-panel *ngFor="let item of purchasesList; let i = index" data-index="i"
                     [expanded]="step === i" (opened)="setStep(i)" hideToggle>
                     <mat-expansion-panel-header>
@@ -32,9 +32,12 @@
                             </div>
                         </mat-panel-title>
                         <mat-panel-description>
-                            <div><b>{{ item.company }}</b></div>
-                            <div><b>{{ item.name }}</b></div>
-                            <div>{{item.date | date: 'medium'}}</div>
+                            <button mat-icon-button (click)="getAddress(item.customerID)"
+                                onclick="event.stopPropagation()" matTooltip="To be delivered to:"
+                                matTooltipPosition="above">
+                                <mat-icon>home</mat-icon>
+                            </button>
+                            <div class="purchase-date">{{item.date | date: 'medium'}}</div>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DatastoreService } from '../../../services/datastore.service';
 import { DatashareService } from '../../../services/datashare.service';
 import { Unsubscribable } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +23,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   private unscLogin: Unsubscribable;
 
   constructor(
+    private fb: FormBuilder,
     private router: Router,
+    private titleService: Title,
     private datastore: DatastoreService,
     private datashare: DatashareService,
-    public fb: FormBuilder,
   ) {
+    this.titleService.setTitle('Login');
+    this.datashare.changeCurrentPage('login');
+
     this.login = fb.group({
       'email': ['', Validators.required],
       'pass': ['', Validators.required],
