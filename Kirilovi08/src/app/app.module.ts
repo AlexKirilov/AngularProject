@@ -51,8 +51,6 @@ import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PaginationComponent } from './template/pagination/pagination.component';
-import { ResetpassComponent } from './components/users/resetpass/resetpass.component';
 
 @NgModule({
   declarations: [
@@ -76,9 +74,7 @@ import { ResetpassComponent } from './components/users/resetpass/resetpass.compo
     SettingsComponent,
     PurchaseHistoryComponent,
     DataTableComponent,
-    ComingSoonComponent,
-    PaginationComponent,
-    ResetpassComponent
+    ComingSoonComponent
   ],
   imports: [
     BrowserModule,

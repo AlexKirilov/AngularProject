@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
 
+import { LoginComponent } from './components/users/login/login.component';
+import { SigninComponent } from './components/users/signin/signin.component';
+import { ComingSoonComponent } from './components/coming-soon/coming-soon.component';
+import { ForgetpassComponent } from './components/users/forgetpass/forgetpass.component';
+
 import { HomeComponent } from './pages/home/home.component';
 import { BasketComponent } from './pages/basket/basket.component';
 import { AccountComponent } from './pages/account/account.component';
@@ -12,18 +17,13 @@ import { ContactsComponent } from './pages/contacts/contacts.component';
 import { PurchaseComponent } from './pages/purchase/purchase.component';
 import { PurchaseHistoryComponent } from './pages/purchase-history/purchase-history.component';
 
-import { LoginComponent } from './components/users/login/login.component';
-import { SigninComponent } from './components/users/signin/signin.component';
-import { ForgetpassComponent } from './components/users/forgetpass/forgetpass.component';
-import { ResetpassComponent } from './components/users/resetpass/resetpass.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   // { path: '', component: ComingSoonComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signin', component: SigninComponent },
-  { path: 'forgotpass', component: ForgetpassComponent },
-  { path: 'resetpassword', component: ResetpassComponent },
+  { path: 'forgetpassword', component: ForgetpassComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'contacts', component: ContactsComponent },

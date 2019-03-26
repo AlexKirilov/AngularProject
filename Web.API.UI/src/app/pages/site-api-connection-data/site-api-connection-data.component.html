@@ -1,34 +1,9 @@
 <section id="api-con-data-wrapper">
-    <section
-        id="api-con-container"
-        fxLayout="column"
-        fxFlex
-        fxFlexAlign="center stretch"
-        fxLayoutGap="20px"
-    >
-        <mat-tab-group>
-            <mat-tab label="API Calls">
-                <div highlightChildren>
-                  <pre>
-                    <code [highlight]="apiCalls"></code>
-                  </pre>
-                </div>
-            </mat-tab>
-            <mat-tab label="Header Details">
-                <div highlightChildren>
-                  <pre>
-                    <code [highlight]="apiHeader"></code>
-                  </pre>
-                </div>
-            </mat-tab>
-            <mat-tab label="Interfaces">
-                <div highlightChildren>
-                  <pre>  
-                    <code [highlight]="apiModels"></code>
-                  </pre>
-                </div>
-            </mat-tab>
-        </mat-tab-group>
+  <section id="api-con-container" >
 
-    </section>
+      <div highlightChildren>
+        <pre><code [highlight]="code"></code></pre>
+      </div>
+
+  </section>
 </section>

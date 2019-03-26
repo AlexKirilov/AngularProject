@@ -5,7 +5,6 @@ import { DatastoreService } from '../../services/datastore.service';
 import { DatashareService } from '../../services/datashare.service';
 import { ModalHandlerService } from '../../services/modal-handler.service';
 import { HandleErrorsService } from 'src/app/services/handle-errors.service';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-gallery',
@@ -22,14 +21,11 @@ export class GalleryComponent implements OnInit, OnDestroy {
   private unscGetGallery: Unsubscribable;
 
   constructor(
-    private titleService: Title,
     private datastore: DatastoreService,
     private datashare: DatashareService,
     private modalwindow: ModalHandlerService,
     private errorHandler: HandleErrorsService,
   ) {
-    this.titleService.setTitle('Gallery');
-    this.datashare.changeCurrentPage('gallery');
     this.datashare.ifAdmin.subscribe((bool) => {
       this.ifAdmin = bool;
     });

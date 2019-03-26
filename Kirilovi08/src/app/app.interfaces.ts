@@ -20,12 +20,4 @@ export class ContactsData {
     company: string;
     levelAuth: string;
     type: string; // Level only for users
-    address: {
-        country: string,
-        town: string,
-        postcode: string,
-        address: string,
-        address1: string,
-        phone: string,
-    }
 }

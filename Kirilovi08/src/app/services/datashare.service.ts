@@ -101,34 +101,23 @@ export class DatashareService {
     this.ifUserSource.next(is);
   }
 
-  // tslint:disable-next-line:member-ordering
-  private basketSource = new BehaviorSubject<Array<object>>([]);
-  // tslint:disable-next-line:member-ordering
-  getBasket = this.basketSource.asObservable();
+   // tslint:disable-next-line:member-ordering
+   private basketSource = new BehaviorSubject<Array<object>>([]);
+   // tslint:disable-next-line:member-ordering
+   getBasket = this.basketSource.asObservable();
 
-  changeBasket(basket: Array<object>) {
-    this.basketSource.next(basket);
-  }
+   changeBasket(basket: Array<object>) {
+     this.basketSource.next(basket);
+   }
 
-  // tslint:disable-next-line:member-ordering
-  private persDiscountSource = new BehaviorSubject<number>(0);
-  // tslint:disable-next-line:member-ordering
-  getDiscount = this.persDiscountSource.asObservable();
+      // tslint:disable-next-line:member-ordering
+      private persDiscountSource = new BehaviorSubject<number>(0);
+      // tslint:disable-next-line:member-ordering
+      getDiscount = this.persDiscountSource.asObservable();
 
-  changeDiscount(discount: number) {
-    this.persDiscountSource.next(discount);
-  }
-
-
-  // tslint:disable-next-line:member-ordering
-  private currentPageSource = new BehaviorSubject<string>('home');
-  // tslint:disable-next-line:member-ordering
-  currentPage = this.currentPageSource.asObservable();
-
-  // Check if Modal Handler is already used
-  changeCurrentPage(element: string): void {
-    this.currentPageSource.next(element);
-  }
+      changeDiscount(discount: number) {
+        this.persDiscountSource.next(discount);
+      }
 }
 
 export class SnackBarI {

@@ -5,8 +5,6 @@ import { Unsubscribable } from 'rxjs';
 import { DatastoreService } from '../../services/datastore.service';
 import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 import { Invoice, ContactsData } from '../../app.interfaces';
-import { Title } from '@angular/platform-browser';
-import { DatashareService } from 'src/app/services/datashare.service';
 
 @Component({
   selector: 'app-account',
@@ -17,7 +15,6 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   public step = 0;
   public firstFormGroup: FormGroup;
-  public addressesGroup: FormGroup;
   public invoiceDetails: FormGroup;
 
   private unscEditClient: Unsubscribable;
@@ -26,15 +23,11 @@ export class AccountComponent implements OnInit, OnDestroy {
   private unscGetCustmInvoices: Unsubscribable;
 
   constructor(
-    private titleService: Title,
     private _formBuilder: FormBuilder,
     private datastore: DatastoreService,
-    private datashare: DatashareService,
     private errorHandler: HandleErrorsService
   ) {
     this.prepareFGroupsModules();
-    this.titleService.setTitle('Account');
-    this.datashare.changeCurrentPage('account');
   }
 
   ngOnInit() {
@@ -71,14 +64,6 @@ export class AccountComponent implements OnInit, OnDestroy {
           newEmailCTRL: '',
           companyCTRL: data.company
         });
-
-        this.addressesGroup.reset({
-          addressCTRL: data.address.address || '',
-          townCTRL: data.address.town || '',
-          countryCTRL: data.address.country || '',
-          postcodeCTRL: data.address.postcode || '',
-          phoneCTRL: data.address.phone || '',
-        });
       },
       (err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
@@ -112,26 +97,16 @@ export class AccountComponent implements OnInit, OnDestroy {
 
 
   SaveDataPersonal() {
-
-    const addressDetails = {
-      address: this.addressesGroup.value.addressCTRL || '',
-      town: this.addressesGroup.value.townCTRL || '',
-      country: this.addressesGroup.value.countryCTRL || '',
-      postcode: this.addressesGroup.value.postcodeCTRL || '',
-      phone: this.addressesGroup.value.phoneCTRL || '',
-    };
-
     const user = {
       newEmail: this.firstFormGroup.value.newEmailCTRL,
       email: this.firstFormGroup.value.emailCTRL,
       firstname: this.firstFormGroup.value.firstnameCTRL,
       lastname: this.firstFormGroup.value.lastnameCTRL,
       company: this.firstFormGroup.value.companyCTRL,
-      address: addressDetails
     };
 
     this.unscEditClient = this.datastore.editClientData(user).subscribe(
-      (res: any) => this.datashare.showSnackBar({ message: res.message, action: '' }),
+      (res: any) => console.log('Edit Auth Data: ', res),
       (err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
       }
@@ -152,7 +127,9 @@ export class AccountComponent implements OnInit, OnDestroy {
     };
 
     this.unscEditCustInvoices = this.datastore.editCustomerInvoices(invoice).subscribe(
-      (res) => this.datashare.showSnackBar({ message: res.message, action: '' }),
+      (res) => {
+        console.log('Invoices Edit Result: ', res);
+      },
       (err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
       }
@@ -167,14 +144,6 @@ export class AccountComponent implements OnInit, OnDestroy {
       lastnameCTRL: [''],
       emailCTRL: ['', Validators.required],
       newEmailCTRL: ['', Validators.required]
-    });
-
-    this.addressesGroup = this._formBuilder.group({
-      addressCTRL: ['', Validators.required],
-      countryCTRL: [''],
-      townCTRL: [''],
-      postcodeCTRL: ['', Validators.required],
-      phoneCTRL: ['']
     });
 
     this.invoiceDetails = this._formBuilder.group({

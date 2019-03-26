@@ -1,66 +1,52 @@
-<section class="newApiClientForm" id="registration-form" fxLayout="column" fxLayoutAlign="space-around center"
-    fxLayoutGap="20px">
-    <h2>Registration form</h2>
+<section class="newApiClientForm" id="registration-form" fxLayout="column" fxLayoutAlign="space-around center"  fxLayoutGap="20px">
+  <h2>Registration form</h2>
 
-    <form [formGroup]="signin" (submit)="regNewCustmer($event)" id="signin-container" fxLayout="column"
-        fxLayoutAlign="space-around center" fxLayoutGap="0px">
-        <!-- <mat-form-field>
+  <form [formGroup]="signin" (submit)="regNewCustmer($event)" id="signin-container" fxLayout="column" fxLayoutGap="20px">
+      <!-- <mat-form-field>
           <input matInput type="text" placeholder="Username" formControlName="username" (change)="this.validUserData()">
           <mat-error *ngIf="signin.get('username')?.invalid">This field is required</mat-error>
       </mat-form-field> -->
 
-        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="0px">
-            <mat-form-field>
-                <input matInput type="password" placeholder="Password" formControlName="password"
-                    (change)="this.checkpass()">
-                <mat-error *ngIf="signin.get('password')?.invalid">This field is required</mat-error>
-            </mat-form-field>
-            <ng2-password-strength-bar [passwordToCheck]="signin.value.password" [barLabel]="barLabel"
-                [barColors]="myColors"></ng2-password-strength-bar>
+      <div fxLayoutAlign="space-around center" fxLayoutGap="20px">
+      <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" (change)="this.checkpass()">
+          <mat-error *ngIf="signin.get('password')?.invalid">This field is required</mat-error>
+      </mat-form-field>
+      <ng2-password-strength-bar [passwordToCheck]="signin.value.password" [barLabel]="barLabel" [barColors]="myColors"></ng2-password-strength-bar>
 
-            <mat-form-field [class.mat-form-field-invalid]="signin.get('repassword')?.invalid || passNotMatch">
-                <input matInput type="password" placeholder="Re-Password" formControlName="repassword"
-                    (change)="this.checkpass()">
-                <mat-error *ngIf="signin.get('repassword')?.invalid">This field is required</mat-error>
-                <div
-                    [ngClass]="{'custome-valid': !signin.get('repassword')?.invalid, 'custome-invalid': signin.get('repassword')?.invalid}">
-                    <div class="mat-error" *ngIf="passNotMatch">Password doesn`t match</div>
-                </div>
-            </mat-form-field>
-        </div>
+      <mat-form-field  [class.mat-form-field-invalid]="signin.get('repassword')?.invalid || passNotMatch">
+          <input matInput type="password" placeholder="Re-Password" formControlName="repassword" (change)="this.checkpass()">
+          <mat-error *ngIf="signin.get('repassword')?.invalid">This field is required</mat-error>
+          <div [ngClass]="{'custome-valid': !signin.get('repassword')?.invalid, 'custome-invalid': signin.get('repassword')?.invalid}">
+                  <div class="mat-error" *ngIf="passNotMatch">Password doesn`t match</div>
+              </div>
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="space-around center" fxLayoutGap="20px">
+      <mat-form-field>
+          <input matInput type="text" placeholder="First Name" formControlName="fname" (change)="this.validUserData()">
+          <mat-error *ngIf="signin.get('fname')?.invalid">This field is required</mat-error>
+      </mat-form-field>
 
-        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="0px">
-            <mat-form-field>
-                <input matInput type="text" placeholder="First Name" formControlName="fname"
-                    (change)="this.validUserData()">
-                <mat-error *ngIf="signin.get('fname')?.invalid">This field is required</mat-error>
-            </mat-form-field>
+      <mat-form-field>
+          <input matInput type="text" placeholder="Last Name" formControlName="lname" (change)="this.validUserData()">
+          <mat-error *ngIf="signin.get('lname')?.invalid">This field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="space-around center" fxLayoutGap="20px">
+      <mat-form-field [class.mat-form-field-invalid]="signin.get('email')?.invalid || emailNotValid || emailIsTaken">
+          <input matInput type="email" placeholder="Email" formControlName="email" (change)="this.emailValidation()">
+          <div [ngClass]="{'custome-valid': !signin.get('email')?.invalid, 'custome-invalid': signin.get('email')?.invalid}">
+              <div class="mat-error" *ngIf="emailNotValid">Enter valid email format</div>
+              <div class="mat-error" *ngIf="emailIsTaken">This email is already taken</div>
+          </div>
+          <mat-error *ngIf="signin.get('email')?.invalid">This field is required</mat-error>
+      </mat-form-field>
+    </div>
+      <div class="input error-label">
+          <div for="" id="signin-error-msg"></div>
+      </div>
 
-            <mat-form-field>
-                <input matInput type="text" placeholder="Last Name" formControlName="lname"
-                    (change)="this.validUserData()">
-                <mat-error *ngIf="signin.get('lname')?.invalid">This field is required</mat-error>
-            </mat-form-field>
-        </div>
-
-        <div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="0px">
-            <mat-form-field
-                [class.mat-form-field-invalid]="signin.get('email')?.invalid || emailNotValid || emailIsTaken">
-                <input matInput type="email" placeholder="Email" formControlName="email"
-                    (change)="this.emailValidation()">
-                <div
-                    [ngClass]="{'custome-valid': !signin.get('email')?.invalid, 'custome-invalid': signin.get('email')?.invalid}">
-                    <div class="mat-error" *ngIf="emailNotValid">Enter valid email format</div>
-                    <div class="mat-error" *ngIf="emailIsTaken">This email is already taken</div>
-                </div>
-                <mat-error *ngIf="signin.get('email')?.invalid">This field is required</mat-error>
-            </mat-form-field>
-        </div>
-
-        <div class="input error-label">
-            <div for="" id="signin-error-msg"></div>
-        </div>
-
-        <button mat-raised-button type="submit" [disabled]="!this.btnSubmitValidation">Sign In</button>
-    </form>
+      <button mat-raised-button type="submit" [disabled]="!this.btnSubmitValidation">Sign In</button>
+  </form>
 </section>

@@ -137,10 +137,7 @@
                         Send request to the clients email or if you know the address You can put it manually
                     </p>
                 </div>
-                <div
-                    class="enterClientAddress"
-                    *ngIf="setManually"
-                >
+                <div class="enterClientAddress" *ngIf="setManually">
                     <h2>
                         Manually adding the client(s) address for
                         <b>{{data.firstname}} {{data.lastname}}</b>
@@ -200,48 +197,26 @@
                 <h1 style="margin: 0 0 40px;  text-align: left; font-size: 16px;">To be delivered to:</h1>
 
                 <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <span class="contantDetails">Name:</span>
-                            </td>
-                            <td>
-                                <b>{{data.firstname}} {{data.lastname}}</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="contantDetails">Address:</span>
-                            </td>
-                            <td>
-                                <b>{{data.address.address}}</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="contantDetails">Town:</span>
-                            </td>
-                            <td>
-                                <b>{{data.address.town}}</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="contantDetails">Postcode:</span>
-                            </td>
-                            <td>
-                                <b>{{data.address.postcode}}</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="contantDetails">Phone:</span>
-                            </td>
-                            <td>
-                                <b>{{data.address.phone}}</b>
-                            </td>
-                        </tr>
-                    </tbody>
+                  <tr>
+                    <td><span class="contantDetails">Name:</span></td>
+                    <td><b>{{data.firstname}} {{data.lastname}}</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="contantDetails">Address:</span></td>
+                    <td><b>{{data.address.address}}</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="contantDetails">Town:</span></td>
+                    <td><b>{{data.address.town}}</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="contantDetails">Postcode:</span></td>
+                    <td><b>{{data.address.postcode}}</b></td>
+                  </tr>
+                  <tr>
+                    <td><span class="contantDetails">Phone:</span></td>
+                    <td><b>{{data.address.phone}}</b></td>
+                  </tr>
                 </table>
 
             </mat-dialog-content>
