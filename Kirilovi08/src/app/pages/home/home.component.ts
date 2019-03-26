@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatashareService } from '../../services/datashare.service';
-import { DatastoreService } from '../../services/datastore.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,13 @@ import { DatastoreService } from '../../services/datastore.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private datashare: DatashareService, private datastore: DatastoreService) { }
+  constructor(
+    private titleService: Title,
+    private datashare: DatashareService
+    ) {
+      this.titleService.setTitle('Home');
+      this.datashare.changeCurrentPage('home');
+    }
 
   ngOnInit() {
   }

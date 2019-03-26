@@ -1,27 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatashareService } from '../../services/datashare.service';
 import { DatastoreService } from '../../services/datastore.service';
+import { Unsubscribable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
-  isUser;
-  username: String;
+  public isUser: Boolean;
+  public loginBtn = 'Login'
+  public username: String;
+
+  private unscIfUser: Unsubscribable;
+  
   constructor(
     private datashare: DatashareService,
     private datastore: DatastoreService,
   ) {
-    this.datashare.ifUser.subscribe( (bool) => {
+    this.unscIfUser = this.datashare.ifUser.subscribe( (bool) => {
       this.isUser = bool;
+      this.loginBtn = (bool) ? 'Logout' : 'login';
       this.username = this.datastore.Username;
     });
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+  ngOnDestroy():void {
+    if (this.unscIfUser) { this.unscIfUser.unsubscribe(); }
   }
 
+  
+  logout() {
+    this.datashare.showIfUser(false);
+    this.datastore.logout();
+  }
 }

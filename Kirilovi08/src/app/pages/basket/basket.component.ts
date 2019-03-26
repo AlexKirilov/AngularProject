@@ -6,6 +6,7 @@ import { DatastoreService } from '../../services/datastore.service';
 import { DatashareService } from '../../services/datashare.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HandleErrorsService } from 'src/app/services/handle-errors.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-basket',
@@ -26,10 +27,14 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private titleService: Title,
     private datashare: DatashareService,
     private datastore: DatastoreService,
     private errorHandler: HandleErrorsService
-  ) { }
+  ) {
+    this.titleService.setTitle('Basket');
+    this.datashare.changeCurrentPage('basket');
+  }
 
   ngOnInit() {
     this.getBasketData();

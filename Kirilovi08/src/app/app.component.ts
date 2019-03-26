@@ -15,10 +15,12 @@ export class AppComponent implements OnDestroy {
   wrapperLoader: boolean;
   modalWindow: boolean;
   htmlLoader: boolean;
+  showHeader: boolean = true;
 
   private body = document.body.style;
   private unscSnackBar: Unsubscribable;
   private unscSpinnerHMTL: Unsubscribable;
+  private unscCurrentPage: Unsubscribable;
   private unscSpinnerWrapper: Unsubscribable;
   private unscSpinnerContent: Unsubscribable;
 
@@ -35,13 +37,15 @@ export class AppComponent implements OnDestroy {
     this.unscSpinnerWrapper = this.datashare.spinnerWrapper.subscribe(bool => this.wrapperLoader = bool);
     this.unscSpinnerContent = this.datashare.spinnerContent.subscribe(bool => this.contentLoader = bool);
     this.unscSnackBar = this.datashare.snackbarData.subscribe(data => this.openSnackBar(data.message, data.action));
-
+    // this.unscCurrentPage = this.datashare.currentPage.subscribe(page => { this.showHeader =
+    //   (page == 'login' || page == 'forget-pass' || page == 'sign-in') ? false : true; });
     this.backgroundChange();
   }
 
   ngOnDestroy(): void {
     if (this.unscSnackBar) { this.unscSnackBar.unsubscribe(); }
     if (this.unscSpinnerHMTL) { this.unscSpinnerHMTL.unsubscribe(); }
+    if (this.unscCurrentPage) { this.unscCurrentPage.unsubscribe(); }
     if (this.unscSpinnerWrapper) { this.unscSpinnerWrapper.unsubscribe(); }
     if (this.unscSpinnerContent) { this.unscSpinnerContent.unsubscribe(); }
   }

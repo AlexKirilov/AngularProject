@@ -4,6 +4,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DatastoreService } from '../../services/datastore.service';
 import { HandleErrorsService } from '../../services/handle-errors.service';
 import { Unsubscribable } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+import { DatashareService } from 'src/app/services/datashare.service';
+import { ModalHandlerService } from 'src/app/services/modal-handler.service';
 
 @Component({
   selector: 'app-purchase',
@@ -15,22 +18,34 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  purchases;
-  dataaa;
-  public step = 0;
+  public step = null;
+  public totalAmount = 0;
+  public purchasesList = [];
+  public dateTransformNames = [];
   public displayedColumns = ['name', 'image', 'price', 'prodClientQnt', 'total'];
   public tableColumnNames = { name: 'Name', image: '', price: 'Price', prodClientQnt: 'Qnt', total: 'Total' };
-  public totalAmount = 0;
-  public dateTransformNames = [];
 
+  public filter = null;
+  public startRow = 1;
+  public allPages = 0;
+  public allRecords = 0;
+  public currentPage = 1;
+  public itemsPerPage = '10';
+  public endRow = this.itemsPerPage;
 
   private unscEditOrder: Unsubscribable;
   private unscGetOrderToConfirm: Unsubscribable;
-
+  private unscGetCustomerAddress: Unsubscribable;
   constructor(
+    private titleService: Title,
+    private datashare: DatashareService,
     private datastore: DatastoreService,
     private errorHandler: HandleErrorsService,
-  ) { }
+    private modalHandler: ModalHandlerService,
+  ) {
+    this.titleService.setTitle('Purchases');
+    this.datashare.changeCurrentPage('purchases');
+  }
 
   ngOnInit() {
     this.getData();
@@ -39,12 +54,30 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.unscEditOrder) { this.unscEditOrder.unsubscribe(); }
     if (this.unscGetOrderToConfirm) { this.unscGetOrderToConfirm.unsubscribe(); }
+    if (this.unscGetCustomerAddress) { this.unscGetCustomerAddress.unsubscribe(); }
   }
 
   getData() {
-    this.unscGetOrderToConfirm = this.datastore.getOrdersToConfirm().subscribe(
+    let by = `?perPage=${this.itemsPerPage}&page=${this.currentPage}&flags=BCD`;
+    this.unscGetOrderToConfirm = this.datastore.getAllOrders(by).subscribe( // this.datastore.getOrdersToConfirm().subscribe(
       data => {
-        this.dataaa = data.results;
+        this.startRow = data.firstrowOnPage;
+        this.allPages = data.pages;
+        this.allRecords = data.rows;
+        this.currentPage = data.page;
+        this.itemsPerPage = data.perPage + '';
+        this.endRow = data.lastRowOnPage;
+        // Calc Total for earch Order
+        let total: number;
+        data.results.forEach( (orders: any) => {
+          total = 0;
+          orders.order.forEach( (order: any) => {
+            total += order.total
+          });
+          orders.total = total;
+        });
+
+        this.purchasesList = data.results;
       },
       (err: HttpErrorResponse) => {
         this.errorHandler.handleError(err);
@@ -64,23 +97,45 @@ export class PurchaseComponent implements OnInit, OnDestroy {
     this.step--;
   }
 
-  decline(order: any) {
-    this.unscEditOrder = this.datastore.editOrder({ flag: -1, orderId: order.id }).subscribe(
-      (res) => {
-        console.log('REEESS', res);
+  
+  editOrder(flag: number, orderId: string) {
+    this.unscEditOrder = this.datastore.editOrder({ flag, orderId }).subscribe(
+      (res: any) => {
+        this.getData();
       },
-      (err: HttpErrorResponse) => {
-        this.errorHandler.handleError(err);
-      }
+      (err: Error) => this.errorHandler.handleError(err)
     );
   }
 
+  decline(order: any) {
+    this.editOrder(-1, order._id);
+  }
+
   accept(order: any) {
-    this.unscEditOrder = this.datastore.editOrder({ flag: 1, orderId: order.id }).subscribe(
-      result => console.log('REEESS', result),
-      (err: HttpErrorResponse) => {
-        this.errorHandler.handleError(err);
-      }
-    );
+    this.editOrder(1, order._id);
+  }
+
+  sendToClient(order: any) {
+    this.editOrder(2, order._id);
+  }
+
+  deliveredToClient(order: any) {
+    this.editOrder(3, order._id);
+  }
+
+  changePageTo(page: number) {
+    this.currentPage = page;
+    this.getData();
+  }
+
+  changeItemsPerPage(perPage: any) {
+    this.itemsPerPage = perPage;
+    this.getData();
+  }
+
+  getAddress(clientID: string) {
+    this.unscGetCustomerAddress = this.datastore.getCustomerAddress({ userId: clientID }).subscribe(address => {
+      this.modalHandler.openDialogClientAddress(address, (d: any) => console.log('Address', d));
+    });
   }
 }

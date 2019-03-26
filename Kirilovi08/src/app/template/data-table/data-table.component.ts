@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, SimpleChanges } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -22,6 +22,12 @@ export class DataTableComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.dataSource);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('total', this.total);
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    
   }
 
 }

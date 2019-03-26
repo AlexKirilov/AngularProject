@@ -80,6 +80,10 @@ export class DatastoreService {
     return this.http.post<UserCreds>(`${this.url}/auth/login`, checkUser);
   }
 
+  getClientSiteID() {
+    return this.http.get<any>(`${this.url}/auth/clientSiteID`);
+  }
+
   /////////////////////////////////////////
   ////////// Forgot Pass //////////////////
   /////////////////////////////////////////

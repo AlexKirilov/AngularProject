@@ -125,7 +125,6 @@ export class SiteOrdersComponent implements OnInit, OnDestroy {
             }
           });
         } else {
-          console.log(details);
           this.errorHandler.openDialogClientAddress(details, (d: any) => console.log('Address', d));
         }
       });
@@ -134,15 +133,15 @@ export class SiteOrdersComponent implements OnInit, OnDestroy {
   filterList() {
     this.filter = '';
 
-    if (!this.optional.canceled.value) {
+    if (this.optional.canceled.value) {
       this.filter += 'A';
-    } if (!this.optional.needApprove.value) {
+    } if (this.optional.needApprove.value) {
       this.filter += 'B';
-    } if (!this.optional.approved.value) {
+    } if (this.optional.approved.value) {
       this.filter += 'C';
-    } if (!this.optional.toClient.value) {
+    } if (this.optional.toClient.value) {
       this.filter += 'D';
-    } if (!this.optional.delivered.value) {
+    } if (this.optional.delivered.value) {
       this.filter += 'E';
     } if (this.filter === '') { this.filter = null; }
 

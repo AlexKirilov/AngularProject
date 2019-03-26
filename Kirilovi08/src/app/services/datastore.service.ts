@@ -17,7 +17,7 @@ import { Unsubscribable } from 'rxjs';
 export class DatastoreService {
 
   private authURL = `${environment.path}`;
-  
+
   private unscProd: Unsubscribable;
   constructor(
     private router: Router,
@@ -64,7 +64,7 @@ export class DatastoreService {
   }
 
   checkUser() {
-    this.unscProd =  this.getProductEditLevel().subscribe(
+    this.unscProd = this.getProductEditLevel().subscribe(
       res => {
         this.datashare.showIfAdmin(res === ((this.SiteData) ? this.SiteData.split(' ')[0] : null));
         this.unscProd.unsubscribe();
@@ -73,6 +73,18 @@ export class DatastoreService {
         this.errorHandler.handleError(err);
       }
     );
+  }
+
+  /////////////////////////////////////////
+  ////////// Forgot Pass //////////////////
+  /////////////////////////////////////////
+
+  forgotPass(data: object) {
+    return this.http.post<any>(`${this.authURL}/auth/forgotpass`, data);
+  }
+
+  resetPass(newData: any) {
+    return this.http.post<any>(`${this.authURL}/auth/resetpass`, newData);
   }
 
   /////////////////////////////////////////
@@ -190,6 +202,10 @@ export class DatastoreService {
     return this.http.post<any>(`${this.authURL}/orders/editOrder`, order);
   }
 
+  getCustomerAddress(clientId: any) {
+    return this.http.get<any>(`${this.authURL}/customers/getCustomerAddress`, clientId);
+  }
+
   /////////////////////////////////////////
   ////////// POST / PUT ///////////////////
   /////////////////////////////////////////
@@ -240,6 +256,10 @@ export class DatastoreService {
 
   addToGallery(images: any) {
     return this.http.post<any>(`${this.authURL}/gallery/add`, images);
+  }
+
+  getAllOrders(filters: any) {
+    return this.http.get<any>(`${this.authURL}/orders/getorders${filters}`);
   }
 
   /////////////////////////////////////////

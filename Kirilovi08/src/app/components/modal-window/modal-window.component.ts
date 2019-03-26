@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '../../../../node_modules/@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-window',
@@ -9,6 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '../../../../node_modules/@angular
 export class ModalWindowComponent {
 
   constructor(
+    private router: Router,
     public dialogRef: MatDialogRef<ModalWindowComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -17,5 +19,10 @@ export class ModalWindowComponent {
       const newClass = document.getElementsByTagName('mat-dialog-container');
       newClass[0].classList.add('image-transperant');
     }
+  }
+
+  navigateTo(link: string) {
+    link = this.data.cid ? link += `${this.data.cid}` : link;
+    this.router.navigateByUrl(`/${link}`);
   }
 }

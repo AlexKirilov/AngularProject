@@ -1,7 +1,9 @@
 <section id="app-wrapper">
   <section id="body-wrapper" fxLayout="column" fxLayoutAlign="space-around stretch">
 
-    <app-header></app-header>
+    <section *ngIf="showHeader">
+      <app-header></app-header>
+    </section>
 
     <section id="main-container">
 
