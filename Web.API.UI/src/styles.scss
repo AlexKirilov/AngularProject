@@ -4,126 +4,128 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 // @import '~highlight.js/styles/github.css';
 @import '~highlight.js/styles/an-old-hope.css';
+
 @font-face {
-  font-family: "Din-bold";
-  src: url("app/fonts/font.eot");
-  src: local("Din-bold"), url("app/fonts/font.woff") format("woff"),
-    url("app/fonts/font.ttf") format("truetype");
-  font-family: "DIN";
-  src: url("app/fonts/dinregularwebfont.eot");
-  src: local("DIN"), url("app/fonts/dinregularwebfont.woff") format("woff"),
-    url("app/fonts/dinregularwebfont.ttf") format("truetype");
+    font-family: "Din-bold";
+    src: url("app/fonts/font.eot");
+    src: local("Din-bold"), url("app/fonts/font.woff") format("woff"),
+        url("app/fonts/font.ttf") format("truetype");
+    font-family: "DIN";
+    src: url("app/fonts/dinregularwebfont.eot");
+    src: local("DIN"), url("app/fonts/dinregularwebfont.woff") format("woff"),
+        url("app/fonts/dinregularwebfont.ttf") format("truetype");
 }
 
 * {
-  margin: 0 auto;
-  padding: 0;
-  font-family: "DIN", Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  outline: none !important;
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
-  &::-webkit-scrollbar {
-    width: 0 !important; // Hide Scroll-bar
-  }
+    margin: 0 auto;
+    padding: 0;
+    font-family: "DIN", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    outline: none !important;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 0px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+        -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
 }
 
 html {
-  // background: #ee36fa;
-  // /* Old browsers */
-  // background: -moz-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
-  // /* FF3.6-15 */
-  // background: -webkit-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
-  // /* Chrome10-25,Safari5.1-6 */
-  // background: linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);
-  // /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  // //filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ee36fa', endColorstr='#6f3ede', GradientType=1);/* IE6-9 fallback on horizontal gradient */
-  // background: #ee36fa;
-  // background: linear-gradient(9deg, #ff0000 -10%, #72c1fd78 50%);
-  background: url('./app/images/test/18.jpg') 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  position: relative;
+    background: url('./app/images/test/18.jpg') 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
 }
 
 body {
-  margin: 0 auto;
-  padding: 0px;
-  width: 100%;
-  // height: auto; // 100%;
-  height: 100%;
-  text-align: center;
+    margin: 0 auto;
+    padding: 0px;
+    width: 100%;
+    // height: auto; // 100%;
+    height: 100%;
+    text-align: center;
 }
+
 #app-wrapper,
 #body-wrapper {
-  height: 100%;
+    height: 100%;
 }
+
 .left {
-  float: left;
+    float: left;
 }
 
 .right {
-  float: right;
+    float: right;
 }
 
 .hide {
-  display: none !important;
+    display: none !important;
 }
 
 app-header {
-  position: fixed;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-  z-index: 1;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    z-index: 1;
 }
 
 app-dash-nav-icons {
-  position: fixed;
-  top: -59px;
-  width: 100%;
-  left: 0;
+    position: fixed;
+    top: -59px;
+    width: 100%;
+    left: 0;
 }
 
 app-login .mat-form-field-label {
-  color: white !important;
+    color: white !important;
 }
 
 #main-body-wrapper {
-  width: 98%;
-  padding-top: 45px;
-  height: calc(100% - 45px);
+    width: 98%;
+    padding-top: 45px;
+    height: calc(100% - 45px);
 }
+
 .btn-style {
-  font-weight: bold;
-  padding: 10px 30px;
-  text-transform: uppercase;
-  color: white;
-  box-shadow: 2px 2px 9px 0px #d5d5d5;
-  border-radius: 10px;
-  text-decoration: none;
-  background: transparent;
-  border: none;
+    font-weight: bold;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    color: white;
+    box-shadow: 2px 2px 9px 0px #d5d5d5;
+    border-radius: 10px;
+    text-decoration: none;
+    background: transparent;
+    border: none;
 }
 
 .btn-style:hover {
-  box-shadow: none;
-  margin-top: 2px;
-  margin-left: 2px;
-  border: 1px solid #d5d5d5;
+    box-shadow: none;
+    margin-top: 2px;
+    margin-left: 2px;
+    border: 1px solid #d5d5d5;
 }
 
 #home-container,
 #about-container {
-  width: 90%;
-  min-height: 100vh;
-  background-color: rgba(220, 220, 220, 0.5);
-  padding: 20px;
+    width: 90%;
+    min-height: 100vh;
+    background-color: rgba(220, 220, 220, 0.5);
+    padding: 20px;
 }
 
 // .input {
@@ -131,51 +133,56 @@ app-login .mat-form-field-label {
 // }
 
 .input input {
-  padding: 6px 10px;
+    padding: 6px 10px;
 }
 
 .mat-expansion-panel {
-  background: rgba(255, 255, 255, 0.5);
-  .mat-expansion-panel-body {
-    margin-top: 10px;
-    width: 90%;
-    app-data-table-template {
-      width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+
+    .mat-expansion-panel-body {
+        margin-top: 10px;
+        width: 90%;
+
+        app-data-table-template {
+            width: 100%;
+        }
     }
-  }
 }
 
 .mat-toolbar.mat-primary {
-  background: transparent;
+    background: transparent;
 }
 
 .mat-tab-group.mat-primary .mat-ink-bar,
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: white;
+    background-color: white;
 }
 
 .mat-tab-label-active {
-  color: white;
-  opacity: 1 !important;
-  background: rgba(255, 255, 255, 0.1);
+    color: white;
+    opacity: 1 !important;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 #purchases-wrapper {
-  .mat-card {
-    background: rgba(255, 255, 255, 0.4);
-  }
-  .mat-table,
-  .mat-paginator {
-    background: transparent;
-  }
-  mat-panel-title {
-    line-height: 36px;
-    height: 36px;
-  }
-  .mat-expansion-panel-header-title {
-    flex-grow: initial;
-    min-width: 45%;
-  }
+    .mat-card {
+        background: rgba(255, 255, 255, 0.4);
+    }
+
+    .mat-table,
+    .mat-paginator {
+        background: transparent;
+    }
+
+    mat-panel-title {
+        line-height: 36px;
+        height: 36px;
+    }
+
+    .mat-expansion-panel-header-title {
+        flex-grow: initial;
+        min-width: 45%;
+    }
 }
 
 #dashboard-wrapper,
@@ -187,78 +194,126 @@ app-login .mat-form-field-label {
 #purchases-wrapper {
     margin-bottom: 50px;
 }
+
 api-paginator {
-  width: 90%;
-  max-width: 1200px;
-  margin-top: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+
+#api-con-data-wrapper {
+
+    .mat-tab-label,
+    .mat-tab-link {
+        color: white;
+        font-weight: bold;
+    }
 }
 
 #dash-header-nav {
-  .mat-tab-link {
-    color: white;
-    opacity: 1;
-    padding: 0px 3%;
-    margin: 0px 10px;
-    min-width: 35px;
-    width: 35px;
-    height: 35px;
-    top: 5px;
-    overflow: hidden;
-    &:hover {
-      color: orange;
+    .mat-tab-link {
+        color: white;
+        opacity: 1;
+        padding: 0px 3%;
+        margin: 0px 10px;
+        min-width: 35px;
+        width: 35px;
+        height: 35px;
+        top: 5px;
+        overflow: hidden;
+
+        &:hover {
+            color: orange;
+        }
     }
-  }
 
-  .mat-tab-label-active {
-    color: darkorange !important;
-  }
+    .mat-tab-label-active {
+        color: darkorange !important;
+    }
 
-  .mat-tab-group.mat-primary .mat-ink-bar,
-  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
-    background-color: darkorange;
-  }
+    .mat-tab-group.mat-primary .mat-ink-bar,
+    .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+        background-color: darkorange;
+    }
 }
+
 #main-nav-container {
-  .mat-tab-link {
-    color: white !important;
-  }
+    .mat-tab-link {
+        color: white !important;
+    }
 }
 
 body {
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: 50% 50% !important;
-  &#back1 {
-    background: url('./app/images/test/1.jpg');
-  }
-  &#back2 {
-    background: url('./app/images/test/6.jpg');
-  }
-  &#back3 {
-    background: url('./app/images/test/7.jpg'); 
-  }
-  &#back4 {
-    background: url('./app/images/test/8.jpg');
-  }
-  &#back5 {
-    background: url('./app/images/test/9.jpg');
-  }
-  &#back6 {
-    background: url('./app/images/test/11.jpg');
-  }
-  &#back7 {
-    background: url('./app/images/test/13.jpg');
-  }
-  &#back8 {
-    background: url('./app/images/test/14.jpg');
-  }
-  &#back9 {
-    background: url('./app/images/test/16.jpg');
-  }
-  &#back10 {
-    background: url('./app/images/test/18.jpg');
-  }
-  &#back11 {
-    background: url('./app/images/test/20.jpg');
-  }
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: 50% 50% !important;
+
+    &#back1 {
+        background: url('./app/images/test/1.jpg');
+    }
+
+    &#back2 {
+        background: url('./app/images/test/6.jpg');
+    }
+
+    &#back3 {
+        background: url('./app/images/test/7.jpg');
+    }
+
+    &#back4 {
+        background: url('./app/images/test/8.jpg');
+    }
+
+    &#back5 {
+        background: url('./app/images/test/9.jpg');
+    }
+
+    &#back6 {
+        background: url('./app/images/test/11.jpg');
+    }
+
+    &#back7 {
+        background: url('./app/images/test/13.jpg');
+    }
+
+    &#back8 {
+        background: url('./app/images/test/14.jpg');
+    }
+
+    &#back9 {
+        background: url('./app/images/test/16.jpg');
+    }
+
+    &#back10 {
+        background: url('./app/images/test/18.jpg');
+    }
+
+    &#back11 {
+        background: url('./app/images/test/20.jpg');
+    }
+}
+
+#api-con-data-wrapper,
+#api-con-container,
+app-site-api-connection-data,
+.mat-tab-body-wrapper {
+    &::-webkit-scrollbar {
+        -webkit-appearance: none !important;
+        width: 10px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgba(0, 0, 0, .5);
+        box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+        -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+
+    // &::-webkit-scrollbar-track {}
+    // &::-webkit-scrollbar-button {}
 }

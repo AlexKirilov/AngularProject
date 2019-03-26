@@ -29,7 +29,9 @@ export class AppComponent implements OnInit {
     this.datashare.spinnerWrapper.subscribe(bool => (this.wrapperLoader = bool)).unsubscribe();
     this.datashare.spinnerContent.subscribe(bool => (this.contentLoader = bool));
     this.datashare.spinnerHMTL.subscribe(bool => (this.htmlLoader = bool));
-    this.datashare.snackbarData.subscribe(data => this.openSnackBar(data.message, data.action));
+    this.datashare.snackbarData.subscribe(data => {
+      if (data.message !== '') this.openSnackBar(data.message, data.action);
+    });
     console.log(devtools.orientation);
     console.log(devtools.open);
     this.datashare.currentPage.subscribe( (page: string) =>

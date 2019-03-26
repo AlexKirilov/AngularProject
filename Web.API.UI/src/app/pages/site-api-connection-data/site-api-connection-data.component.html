@@ -1,9 +1,23 @@
-<section id="api-con-data-wrapper">
-  <section id="api-con-container" >
+<section id="api-con-data-wrapper" fxLayout="column" fxLayoutAlign="stretch center">
+  <section id="api-con-container" fxLayout="column" fxLayoutAlign="space-around stretch">
 
-      <div highlightChildren>
-        <pre><code [highlight]="code"></code></pre>
-      </div>
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="API Requests">
+        <div highlightChildren>
+          <pre><code [highlight]="apiCalls"></code></pre>
+        </div>
+      </mat-tab>
+      <mat-tab label="Interceptor">
+        <div highlightChildren>
+          <pre><code [highlight]="apiInterceptor"></code></pre>
+        </div>
+      </mat-tab>
+      <mat-tab label="Interfaces">
+        <div highlightChildren>
+          <pre><code [highlight]="apiInterfaces"></code></pre>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
 
   </section>
 </section>
