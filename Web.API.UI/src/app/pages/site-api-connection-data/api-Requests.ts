@@ -231,7 +231,7 @@ export class APIRequests {
                 else if (flag == 'D') tmp.push('2')
                 else if (flag == 'E') tmp.push('3')
             */
-           
+
             let by = \`?perPage=\${this.itemsPerPage}&page=\${this.currentPage}&flags=BCD\`;
             getAllOrders(filters: any) {
                 return this.http.get<any>(\`\${this.authURL}/orders/getorders\${filters}\`);
@@ -248,7 +248,7 @@ export class APIRequests {
             addOrder(order: any) {
                 return this.http.post<any>(\`\${this.authURL}/orders/addOrder\`, order);
             }
-            
+
             // Edit Order
             // Exmple change the flag status of the order: { flag: -1, orderId: order.id }
             editOrder(order: any) {
@@ -262,7 +262,6 @@ export class APIRequests {
         `;
 
         this.products = `
-        
             getProducts(items: any) {
                 if (items === void 0) { items = ''; }
                 if (items.sortBy.direction !== '') {
@@ -313,7 +312,7 @@ export class APIRequests {
                         this.errorHandler.handleError(err);
                     });
                 }
-                
+
                 removeProdByCat() {
                     this.errorHandler.openDialogPrompt(this.deleteConfirmation, (res) => {
                       if (res) {

@@ -81,7 +81,7 @@ export class DatastoreService {
   }
 
   getSiteID() {
-    return this.http.get<any>(`${this.url}/auth/getSiteID`);
+    return this.http.get<any>(`${this.url}/auth/clientSiteID`);
   }
 
   /////////////////////////////////////////
