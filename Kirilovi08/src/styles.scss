@@ -5,28 +5,23 @@ $material-icons-font-path: '~material-icons/iconfont/';
 @import '~material-icons/iconfont/material-icons.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 * {
-    margin: 0;
-    padding: 0px;
+  margin: 0;
+  padding: 0px;
 }
-
 * {
-
-    // -ms-overflow-style: none;
-    // overflow: -moz-scrollbars-none;
-    &::-webkit-scrollbar {
-        -webkit-appearance: none;
-        width: 0px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        border-radius: 4px;
-        background-color: rgba(0, 0, 0, .5);
-        // -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
-    }
+  // -ms-overflow-style: none;
+  // overflow: -moz-scrollbars-none;
+  &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 0px;
+  }
+  &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, .5);
+      // -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
 }
-
 // html {
 //   // background: #ee36fa;/* Old browsers */
 //   // background: -moz-linear-gradient(9deg, #ee36fa -10%, #6f3ede 50%);/* FF3.6-15 */
@@ -40,72 +35,71 @@ $material-icons-font-path: '~material-icons/iconfont/';
 //   // background-attachment: fixed;
 // }
 body {
-    background: url('https://images.pexels.com/photos/325944/pexels-photo-325944.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
-    background-repeat: no-repeat !important;
-    background-position: 50% 50% !important;
-    background-size: cover !important;
-    background-attachment: fixed !important;
+  background: url('https://images.pexels.com/photos/325944/pexels-photo-325944.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
+  background-repeat: no-repeat !important;
+  background-position: 50% 50% !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 .right {
-    float: right;
+  float: right;
 }
 
 .left {
-    float: left;
+  float: left;
 }
 
 .menu-icon-nav {
-    cursor: pointer;
-    overflow: hidden;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .mat-icon,
 svg {
-    color: #673AB7; //$disabled-btn;
-    fill: #673AB7; //$disabled-btn;
+  color: #673AB7; //$disabled-btn;
+  fill: #673AB7; //$disabled-btn;
 }
 
 .image-transperant {
-    background: rgba(255, 255, 255, 0.5) !important;
-
-    .mat-dialog-title {
-        display: none !important;
-    }
+  background:rgba(255,255,255,0.5) !important;
+  .mat-dialog-title {
+    display: none !important;
+  }
 }
 
 .mat-table,
 .mat-paginator {
-    background: rgba(255, 255, 255, .5);
+  background: rgba(255,255,255,.5);
 }
 
 mat-expansion-panel {
-    background: rgba(255, 255, 255, .7) !important;
+  background: rgba(255,255,255,.7) !important;
 }
 
 .mat-icon {
-    &:hover {
-        color: black;
-    }
+  &:hover {
+    color: black;
+  }
 }
 
 
 #purchase-wrapper table {
-    background: transparent;
+  background: transparent;
 }
 
 app-coming-soon {
-    width: 100%;
-    height: 100vh;
-    z-index: 1111;
-    background: white;
-    position: fixed;
-    top: 0;
-    left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1111;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 app-home,
@@ -118,85 +112,38 @@ app-contacts,
 app-purchase,
 app-settings,
 app-purchase-history {
-    width: 100%;
+  width: 100%;
 }
 
 mat-paginator {
-    svg {
-        fill: #673ab7;
-        color: #673ab7;
-    }
+  svg {
+    fill: #673ab7;
+    color: #673ab7;
+  }
 }
-
 app-login {
-    padding: 0px 120px 0px;
-    background: rgba(255, 255, 255, 0.7);
-    min-width: 250px;
-    margin-top: 60px;
-    border-radius: 10px;
-    box-shadow: 1px 3px 23px #5aa951;
+  padding: 0px 120px 0px;
+  background: rgba(255,255,255,0.7);
+  min-width: 250px;
+  margin-top: 60px;
+  border-radius: 10px;
+  box-shadow: 1px 3px 23px #5aa951;
 }
 
 agm-map {
-    width: 700px;
-    height: 400px;
+  width: 700px;
+  height: 400px;
 }
 
 .mat-paginator-container {
-    font-weight: bold;
-    color: black;
+  font-weight: bold;
+  color: black;
 }
 
 a.mat-tab-link.ng-star-inserted:hover {
-    color: #673ab7;
+  color: #673ab7;
 }
 
 .mat-tab-link {
-    font-weight: bold;
-}
-
-@media only screen and (max-width: 1200px) {
-    #header-container {
-        .header-images {
-            max-width: 180px;
-            max-height: 100px;
-        }
-    }
-}
-
-@media only screen and (max-width: 1100px) {
-    #header-container {
-        .header-images {
-            max-width: 130;
-            max-height: 90px;
-        }
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    #header-container {
-        .header-images {
-            max-width: 110;
-            max-height: 80px;
-        }
-    }
-}
-
-@media only screen and (max-width: 800px) {
-    body {
-        transform: scale(0.9);
-    }
-
-    #header-container {
-        .header-images {
-            max-width: 90;
-            max-height: 70px;
-        }
-    }
-}
-
-@media only screen and (max-width: 700px) {
-  body {
-      transform: scale(0.8);
-  }
+  font-weight: bold;
 }

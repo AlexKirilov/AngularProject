@@ -317,34 +317,3 @@ app-site-api-connection-data,
     // &::-webkit-scrollbar-track {}
     // &::-webkit-scrollbar-button {}
 }
-
-mat-icon {
-    &.settings {
-        display: none;
-    }
-}
-
-#chart-container {
-    mat-card {
-        background: rgba(0, 0, 0, .4) !important;
-
-        rect {
-            fill: none;
-        }
-    }
-}
-
-.api-log-chart {
-    mat-card {
-        background: rgba(0, 0, 0, .4) !important;
-    }
-    mat-list-item > div {
-        color: orange;
-    }
-}
-
-#line_chart-sales {
-    text {
-        fill: orange;
-    }
-}

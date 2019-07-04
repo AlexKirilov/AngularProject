@@ -9,11 +9,11 @@ import { IBarSettings } from '../../google-charts.models';
 })
 export class BarChartComponent implements OnInit, OnChanges {
 
-  @Input() bar_ChartData: any;
+  @Input() bar_ChartData;
   @Input() bar_ChartSettings: IBarSettings;
   @Input() elementID: string;
-
-  public bar_ChartOptions: any;
+  
+  public bar_ChartOptions;
   public barGroupWidth: FormGroup;
 
   public barChartSyle = new FormControl('1', [Validators.required]); // 0, 1, 2, 3, 4

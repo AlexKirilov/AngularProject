@@ -25,18 +25,9 @@
         </ng-container>
   
         <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef  mat-sort-header> Quantity </th>
-          <td mat-cell *matCellDef="let element" class="quantity-col">
-            <!-- {{element?.prodClientQnt}} <span *ngIf="element.pack !== '' ">/</span> {{element?.pack}} -->
-            <div *ngIf="ifAdmin || ifUser" [class.hide]="editbtn === element._id">
-                <mat-icon class="small-screen menu-icon-nav" matTooltip="+ 1" matTooltipPosition="above" (click)="incrementQnt(element)">add
-                </mat-icon>
-                <mat-form-field class="numeric-input">
-                  <input matInput type="number" min="0" [(ngModel)]="element.prodClientQnt" disabled>
-                </mat-form-field>
-                <mat-icon class="small-screen menu-icon-nav" matTooltip="- 1" matTooltipPosition="above" (click)="decrementQnt(element)">remove
-                </mat-icon>
-              </div>
+          <th mat-header-cell *matHeaderCellDef  mat-sort-header> In Stock </th>
+          <td mat-cell *matCellDef="let element">
+            {{element?.prodClientQnt}} <span *ngIf="element.pack !== '' ">/</span> {{element?.pack}}
           </td>
         </ng-container>
   
