@@ -128,7 +128,10 @@ export class PieChartComponent implements OnInit, OnChanges {
       is3D: is3DBool, // true, false
       pieHole: pieHoleSize, // between 0 and 1
       pieSliceText: pieSliceTextType, // 'percentage', 'value', 'label', 'none',
-      pieSliceTextStyle: { color: pieSliceTextColor, margin: '20' },
+      pieSliceTextStyle: {
+        color: 'white', // pieSliceTextColor,
+        margin: '20'
+      },
       tooltip: {
         trigger: isTooltip, // focus, none, selection
         // textStyle: {
@@ -148,7 +151,11 @@ export class PieChartComponent implements OnInit, OnChanges {
         position: legendPosition, // labeled, top ,left, right, bottom, none
         maxLines: 1,
         alignment: 'end', // start, center, end
-        textStyle: { color: legendTxtStyle, fontSize: 'fontsize', width: '100%' },
+        textStyle: {
+          color: 'orange', // legendTxtStyle,
+          fontSize: 'fontsize',
+          width: '100%'
+        },
       }
     };
     // For more options see: 'https://developers.google.com/chart/interactive/docs/gallery/piechart'

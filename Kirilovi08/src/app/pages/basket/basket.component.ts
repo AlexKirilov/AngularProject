@@ -20,6 +20,8 @@ export class BasketComponent implements OnInit, OnDestroy {
   public dataSource = new MatTableDataSource([]);
   public displayedColumns = ['name', 'image', 'price', 'quantity', 'total'];
   public totalAmount = 0;
+  public ifAdmin: Boolean = false;
+  public ifUser: Boolean = false;
 
   private unscAddOrder: Unsubscribable;
   private unscGetBasket: Unsubscribable;
@@ -29,7 +31,10 @@ export class BasketComponent implements OnInit, OnDestroy {
     private datashare: DatashareService,
     private datastore: DatastoreService,
     private errorHandler: HandleErrorsService
-  ) { }
+  ) {
+    this.datashare.ifUser.subscribe(bool => { this.ifUser = bool; });
+    this.datashare.ifAdmin.subscribe(bool => { this.ifAdmin = bool; });
+  }
 
   ngOnInit() {
     this.getBasketData();
@@ -42,6 +47,7 @@ export class BasketComponent implements OnInit, OnDestroy {
 
   getBasketData() {
     this.unscGetBasket = this.datashare.getBasket.subscribe(basket => {
+      this.totalAmount = 0;
       basket.map((item: any) => {
         let packDig = item.pack.match(/\d/g);
         packDig = (packDig && packDig.length > 0) ? packDig.join('') : 1;
@@ -62,5 +68,40 @@ export class BasketComponent implements OnInit, OnDestroy {
         this.errorHandler.handleError(err);
       }
     );
+  }
+
+  incrementQnt(product) {
+    if (product.prodClientQnt < product.quantity) {
+      product.prodClientQnt++;
+      this.basket(product);
+    }
+  }
+  decrementQnt(product) {
+    if (product.prodClientQnt > 0) {
+      product.prodClientQnt--;
+      this.basket(product);
+    }
+    if (product.prodClientQnt === 0) {
+      this.basket(product);
+    }
+  }
+
+  basket(product) {
+    if (product.prodClientQnt === 0) {
+      this.dataSource.data = this.dataSource.data.filter(item => {
+        return item._id !== product._id;
+      });
+    } else if (!this.dataSource.data.find(item => {
+      return item._id === product._id;
+    })) {
+      this.dataSource.data.push(product);
+    } else {
+      this.dataSource.data.forEach(item => {
+        if (item._id === product._id) {
+          item.prodClientQnt = product.prodClientQnt;
+        }
+      });
+    }
+    this.datashare.changeBasket(this.dataSource.data);
   }
 }
