@@ -8,7 +8,7 @@
     </header>
 
     <form [formGroup]="login" (submit)="loginUser()" class="login-form" fxLayout="column" fxLayoutAlign="stretch center"
-        fxLayoutGap="20px">
+        fxLayoutGap="20px" style="margin-bottom: 30px;">
         <div fxLayout="column" fxLayoutGap="20px">
             <mat-form-field>
                 <input matInput type="text" [placeholder]=" 'placeholders.email' | translate " formControlName="email" min="4" (keyup)="onchange()">
@@ -28,9 +28,9 @@
         <button mat-raised-button type="submit" [disabled]="btnDisbaled">{{ 'buttons.login' | translate }}</button>
     </form>
 
-    <div class="blue additinal-login-options" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px"
+    <div class="blue additinal-login-options" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px"
         fx-layout-align="end">
-        <!-- <a [routerLink]="['/forgotpass']">{{ 'buttons.forgotpass' | translate }}</a> -->
+        <a [routerLink]="['/forgotpass']">{{ 'buttons.forgotpass' | translate }}</a>
         <a [routerLink]="['/signin']">{{ 'buttons.signin' | translate }}</a>
     </div>
 </section>
