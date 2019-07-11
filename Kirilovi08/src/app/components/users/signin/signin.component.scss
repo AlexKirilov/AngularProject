@@ -1,9 +1,13 @@
 #registration-form {
-  margin: 10vh auto;
+    width: 100%;
+    height: auto;
+    margin: 5vh auto;
+    position: relative;
     .custome-valid {
         position: absolute;
         bottom: -20px;
     }
+
     .custome-invalid {
         position: absolute;
         bottom: -38px;

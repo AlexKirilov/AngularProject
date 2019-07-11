@@ -2,6 +2,7 @@ import { Component, OnDestroy, ElementRef } from '@angular/core';
 import { DatashareService } from './services/datashare.service';
 import { MatSnackBar } from '../../node_modules/@angular/material';
 import { DatastoreService } from './services/datastore.service';
+import { TranslateService } from '@ngx-translate/core';
 import { Unsubscribable } from 'rxjs';
 
 @Component({
@@ -25,8 +26,14 @@ export class AppComponent implements OnDestroy {
   constructor(
     private snackBar: MatSnackBar,
     private datastore: DatastoreService,
-    private datashare: DatashareService
+    private datashare: DatashareService,
+    private translate: TranslateService
   ) {
+    translate.addLangs(['bg', 'de', 'en']);
+    translate.setDefaultLang('de');
+    translate.use('bg');
+    // const browserLang = translate.getBrowserLang();
+    // translate.use(browserLang.match(/bg|en|de/) ? ( console.log(browserLang), browserLang) : 'de');
 
     this.datashare.showIfUser(this.datastore.Username !== '' && this.datastore.Username !== null);
     this.datastore.checkUser();

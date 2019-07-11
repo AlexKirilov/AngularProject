@@ -1,7 +1,11 @@
 import { AgmCoreModule } from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+// import ngx-translate and the http loader
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -122,6 +126,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyD37sTWDS64-IteZwC4YsPv9e_ZpRpHXjs'
     }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [DatastoreService, AuthGuard, HandleErrorsService,
     { // Adding Interceptor
@@ -134,3 +145,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   schemas: [CUSTOM_ELEMENTS_SCHEMA], // NO_ERRORS_SCHEMA,
 })
 export class AppModule { }
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  console.log("translate loader running..");
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}

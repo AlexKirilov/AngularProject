@@ -1,0 +1,25 @@
+{
+    "settings": {
+        "hi": "Hi",
+        "account": "Account",
+        "purchaseHis": "Purchase History"
+    },
+    "navi": {
+        "basket": "Basket",
+        "purchase": "Puchase",
+        "products": "Products",
+        "aboutUs": "About Us",
+        "gallery": "Gallery",
+        "contacts": "Contacts"
+    },
+    "products": {
+        "name": "",
+        "image": "",
+        "sort": "",
+        "price": "",
+        "inStock": "",
+        "details": "",
+        "qnt": "",
+        "controls": ""
+    }
+}

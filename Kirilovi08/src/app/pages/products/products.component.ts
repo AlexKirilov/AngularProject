@@ -14,8 +14,8 @@ import { HandleErrorsService } from '../../services/handle-errors.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   public products: Product[] = [];
   public categories = [];

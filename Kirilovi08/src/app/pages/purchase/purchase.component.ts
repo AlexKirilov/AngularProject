@@ -12,8 +12,8 @@ import { Unsubscribable } from 'rxjs';
 })
 export class PurchaseComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   purchases;
   dataaa;

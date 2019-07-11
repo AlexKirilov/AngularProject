@@ -1,0 +1,74 @@
+{
+    "buttons": {
+        "end": "End",
+        "save": "Save",
+        "next": "Next",
+        "preview": "Preview",
+        "previous": "Previous",
+        "decline": "Decline",
+        "accept": "Accept",
+        "login": "Login",
+        "signin": "Signin",
+        "forgotpass": "Forgot password",
+        "create": "Sign In",
+        "logout": "Logout"
+    },
+    "errors": {
+        "required": "This field is required",
+        "emailFormat": "This email has invalid format",
+        "emailTaken": "This email is already taken",
+        "passwordMAtch": "Password doesn`t match"
+    },
+    "settings": {
+        "hi": "Hi",
+        "account": "Account",
+        "purchaseHis": "Purchase History"
+    },
+    "navi": {
+        "basket": "Basket",
+        "purchase": "Purchase",
+        "products": "Products",
+        "aboutUs": "About us",
+        "gallery": "Gallery",
+        "contacts": "Contacts"
+    },
+    "products": {
+        "all": "All",
+        "name": "Name",
+        "image": "Image",
+        "sort": "Sort",
+        "price": "Price",
+        "inStock": "In Stock",
+        "details": "Details",
+        "quantity": "Quantity",
+        "controls": "Controls"
+    },
+    "gallery": {
+        "": ""
+    },
+    "address": {
+        "address": "Address",
+        "phones": "Phone",
+        "connections": "Connections"
+    },
+    "account": {
+        "expPersonal": "Account details",
+        "expCheckPersonal": "Check you personal data",
+        "expInvoiceDetails": "Invoice details",
+        "expInvoiceDetailsTemp": "Fill out your invoice details"
+    },
+    "aboutUS": {},
+    "purchase": {
+        "canceled": "Canceled",
+        "forApproval": "For Approval",
+        "approved": "Approved",
+        "delivering": "Delivering",
+        "delivered": "Delivered"
+    },
+    "purchaseHistory": {},
+    "login": {},
+    "signIn": {
+        "regForm": "Registration Form"
+    },
+    "forgotpass": {}
+}

@@ -12,8 +12,8 @@ import { Unsubscribable } from 'rxjs';
 })
 export class PurchaseHistoryComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   public dataaa: any;
   public step = 0;

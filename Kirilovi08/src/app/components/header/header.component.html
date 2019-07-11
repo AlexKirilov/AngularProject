@@ -2,18 +2,26 @@
     <div class="top-section">
         <div class="header-images"></div>
         <div class="user-name" [class.hide]="!isUser">
-            <span>Hi,
-            </span>
+            <span>{{ 'settings.hi' | translate }} </span>
             <label>{{ username }}</label>
             <button mat-icon-button [matMenuTriggerFor]="menu" [class.hide]="!isUser">
-             <mat-icon placeholder="Settings" class="small-screen menu-icon-nav">settings</mat-icon>
+                <mat-icon class="small-screen menu-icon-nav">settings
+                </mat-icon>
             </button>
 
 
             <mat-menu #menu="matMenu">
-              <a routerLink="/account"><button mat-menu-item="mat-menu-item">Account</button></a>
-              <a routerLink="/purchase-history"><button mat-menu-item="mat-menu-item">Purchase History</button></a>
+                <a routerLink="/account"><button
+                        mat-menu-item="mat-menu-item">{{ 'settings.account' | translate }}</button></a>
+                <a routerLink="/purchase-history"><button
+                        mat-menu-item="mat-menu-item">{{ 'settings.purchaseHis'| translate }}</button></a>
+                <button mat-menu-item [matMenuTriggerFor]="lang">{{ 'placeholders.lang'| translate }}</button>
             </mat-menu>
+
+            <mat-menu #lang="matMenu">
+                <button mat-menu-item *ngFor="let lang of langs" (click)="changeMainLang(lang)">{{ lang }}</button>
+            </mat-menu>
+
         </div>
     </div>
     <app-navi></app-navi>

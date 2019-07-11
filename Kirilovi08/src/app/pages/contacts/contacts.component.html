@@ -11,7 +11,7 @@
                 class="dataDetailsSec"
                 *ngIf="contacts?.address?.address != ''"
             >
-                <h3>Address</h3>
+                <h3> {{ 'address.address' | translate }} </h3>
                 <span>
                     {{ contacts?.address?.address }}
                     <br>
@@ -25,7 +25,7 @@
                 class="dataDetailsSec"
                 *ngIf="contacts?.phones.length > 0"
             >
-                <h3>Phones</h3>
+                <h3>{{ 'address.phones' | translate }}</h3>
                 <div *ngFor="let phone of contacts.phones">{{ phone }}</div>
                 <br>
             </div>
@@ -34,7 +34,7 @@
                 class="dataDetailsSec"
                 *ngIf="contacts?.connections?.facebook != ''"
             >
-                <h3>Connections</h3>
+                <h3>{{ 'address.connections' | translate }}</h3>
                 <div
                     fxLayout="row"
                     fxLayoutAlign="space-around center"

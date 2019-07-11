@@ -14,8 +14,8 @@ import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 })
 export class BasketComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   public dataSource = new MatTableDataSource([]);
   public displayedColumns = ['name', 'image', 'price', 'quantity', 'total'];

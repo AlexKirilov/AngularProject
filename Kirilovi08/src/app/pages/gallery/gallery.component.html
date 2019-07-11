@@ -5,8 +5,8 @@
         <textarea type="text" [(ngModel)]="images"></textarea>
     
         <div fxLayout="row" fxLayoutGap="20px">
-          <button mat-raised-button type="button" (click)="save()">Save</button>
-          <button mat-raised-button type="button" (click)="preview()">Preview</button>
+          <button mat-raised-button type="button" (click)="save()"> {{ 'buttons.save' | translate }} </button>
+          <button mat-raised-button type="button" (click)="preview()"> {{ 'buttons.preview' | translate }} </button>
         </div>
       </div>
     

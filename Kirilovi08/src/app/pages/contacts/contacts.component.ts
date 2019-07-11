@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ErrorHandler } from '@angular/core';
 import { DatastoreService } from 'src/app/services/datastore.service';
 import { HandleErrorsService } from 'src/app/services/handle-errors.service';
 
@@ -25,7 +25,7 @@ export class ContactsComponent implements OnInit {
       (data: any) => {
         this.contacts = data;
       },
-      (err: ErrorEventHandler) => {
+      (err: ErrorHandler) => {
         this.errorhandler.openDialog(err);
       }
     );

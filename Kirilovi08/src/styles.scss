@@ -128,7 +128,8 @@ mat-paginator {
     }
 }
 
-app-login {
+app-login,
+app-signin {
     padding: 0px 120px 0px;
     background: rgba(255, 255, 255, 0.7);
     min-width: 250px;
@@ -196,7 +197,7 @@ a.mat-tab-link.ng-star-inserted:hover {
 }
 
 @media only screen and (max-width: 700px) {
-  body {
-      transform: scale(0.8);
-  }
+    body {
+        transform: scale(0.8);
+    }
 }

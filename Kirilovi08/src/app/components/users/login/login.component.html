@@ -11,26 +11,26 @@
         fxLayoutGap="20px">
         <div fxLayout="column" fxLayoutGap="20px">
             <mat-form-field>
-                <input matInput type="text" placeholder="Email" formControlName="email" min="4" (keyup)="onchange()">
-                <mat-error *ngIf="login.get('email')?.invalid">This field is required</mat-error>
+                <input matInput type="text" [placeholder]=" 'placeholders.email' | translate " formControlName="email" min="4" (keyup)="onchange()">
+                <mat-error *ngIf="login.get('email')?.invalid">{{ 'errors.required' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput type="password" placeholder="Password" formControlName="pass" min="3"
+                <input matInput type="password" [placeholder]=" 'placeholders.password' | translate " formControlName="pass" min="3"
                     (keyup)="onchange()">
-                <mat-error *ngIf="login.get('pass')?.invalid">This field is required</mat-error>
+                <mat-error *ngIf="login.get('pass')?.invalid">{{ 'errors.required' | translate }}</mat-error>
             </mat-form-field>
 
             <div class="input error-label" fxLayoutAlign="center center">
                 <div for="" id="login-error-msg"> {{warnMsg}}</div>
             </div>
         </div>
-        <button mat-raised-button type="submit" [disabled]="btnDisbaled">Login</button>
+        <button mat-raised-button type="submit" [disabled]="btnDisbaled">{{ 'buttons.login' | translate }}</button>
     </form>
 
     <div class="blue additinal-login-options" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px"
         fx-layout-align="end">
-        <a [routerLink]="['/forgotpass']">Forgot password</a>
-        <a [routerLink]="['/signin']">Sign In</a>
+        <!-- <a [routerLink]="['/forgotpass']">{{ 'buttons.forgotpass' | translate }}</a> -->
+        <a [routerLink]="['/signin']">{{ 'buttons.signin' | translate }}</a>
     </div>
 </section>
