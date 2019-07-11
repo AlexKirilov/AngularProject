@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material';
 import { DatashareService } from './services/datashare.service';
 import devtools from 'devtools-detect/index.js';
 import { DatastoreService } from './services/datastore.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +25,14 @@ export class AppComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private datashare: DatashareService,
-    private datastore: DatastoreService
-    ) {
+    private datastore: DatastoreService,
+    private translate: TranslateService
+  ) {
+
+    translate.addLangs(['bg', 'en']);
+    translate.setDefaultLang('bg');
+    translate.use('bg');
+
     this.datashare.spinnerWrapper.subscribe(bool => (this.wrapperLoader = bool)).unsubscribe();
     this.datashare.spinnerContent.subscribe(bool => (this.contentLoader = bool));
     this.datashare.spinnerHMTL.subscribe(bool => (this.htmlLoader = bool));
@@ -34,8 +41,8 @@ export class AppComponent implements OnInit {
     });
     console.log(devtools.orientation);
     console.log(devtools.open);
-    this.datashare.currentPage.subscribe( (page: string) =>
-        this.auth = (this.authListExp.includes(page)) ? false : true
+    this.datashare.currentPage.subscribe((page: string) =>
+      this.auth = (this.authListExp.includes(page)) ? false : true
     );
 
     window.addEventListener('devtoolschange', e => {
@@ -67,13 +74,13 @@ export class AppComponent implements OnInit {
   }
   // Delete me
 
-  ngOnInit (): void {
+  ngOnInit(): void {
     // this.changeBodyBackground();
   }
   changeBodyBackground() {
     let counter = 1;
     const tmp = document.body;
-    const interval = setInterval( () => {
+    const interval = setInterval(() => {
       tmp.id = `back${counter}`;
       counter++;
       if (counter === 12) { clearInterval(interval); }

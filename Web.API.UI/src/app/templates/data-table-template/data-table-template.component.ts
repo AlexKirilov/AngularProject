@@ -29,8 +29,8 @@ export class DataTableTemplateComponent implements OnInit {
   @Input() fullDate;
   @Input() allPages;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   @Output() currentPageOut = new EventEmitter<number>();
   @Output() itemsPerPageOut = new EventEmitter<number>();

@@ -1,0 +1,109 @@
+{
+    "buttons": {
+        "end": "Последна",
+        "save": "Запиши",
+        "next": "Следваща",
+        "preview": "Преглед",
+        "previous": "Предишна",
+        "decline": "Отказ на поръчка",
+        "accept": "Приемане на поръчка",
+        "login": "Вход",
+        "signin": "Нова регистрация",
+        "forgotpass": "Забравена парола",
+        "create": "Създай",
+        "logout": "Изход",
+        "delete": "Изтрий",
+        "edit": "Обнови",
+        "add": "Нов",
+        "searchByCat": "Търси по категория",
+        "addCat":"Добави категория",
+        "delByCat":"Изтрий по категория",
+        "deleteAll": "Изтрий всичко"
+    },
+    "errors": {
+        "required": "Това поле е задължително",
+        "emailFormat": "Невалиден имейл",
+        "emailTaken": "Този имейл е вече заед",
+        "passwordMAtch": "Паролата на съвпадат"
+    },
+    "settings": {
+        "hi": "Здравейте",
+        "account": "Акаунт",
+        "purchaseHis": "История"
+    },
+    "navi": {
+        "basket": "Кошница",
+        "purchase": "Поръчки",
+        "products": "Продукти",
+        "aboutUs": "За нас",
+        "gallery": "Галерия",
+        "contacts": "Контакти"
+    },
+    "products": {
+        "all": "Всички",
+        "name": "Продукт",
+        "image": "Снимка",
+        "sort": "Сортове",
+        "price": "Цена",
+        "inStock": "В наличност",
+        "details": "Детайли",
+        "quantity": "Количество",
+        "controls": "Контролери"
+    },
+    "gallery": {
+        "save": "Запис",
+        "preview": "Преглед"
+    },
+    "address": {
+        "address": "Адрес",
+        "phones": "Телефони",
+        "connections": "Връзки"
+    },
+    "account": {
+        "expPersonal": "Лични Данни",
+        "expCheckPersonal": "Проверете личните си данни",
+        "expInvoiceDetails": "Фирмени данни",
+        "expInvoiceDetailsTemp": "Попълнете всички данни"
+    },
+    "aboutUS": {},
+    "purchase": {
+        "canceled": "Отказана",
+        "forApproval": "За одобряване",
+        "approved": "Одобрена",
+        "address": "Адрес",
+        "delivering": "В процес на доставка",
+        "delivered": "Доставена"
+    },
+    "purchaseHistory": {},
+    "login": {},
+    "signIn": {
+        "regForm": "Регистрационна форма"
+    },
+    "forgotpass": {},
+    "placeholders": {
+        "lang": "Език",
+        "email": "Имейл",
+        "password": "Парола",
+        "re-password": "Парола",
+        "firstname": "Име",
+        "lastname": "Фамилия",
+        "company": "Компания",
+        "oldEmail": "Стар имейл",
+        "newEmail": "Нов имейл",
+        "address": "Адрес",
+        "eik": "ЕИК",
+        "citizenship": "Гражданство",
+        "country": "Държава",
+        "town": "Град",
+        "postcode": "Пощенски код",
+        "phone": "Номер за връзка",
+        "phonecode": "код",
+        "bulstat": "Булстат",
+        "details": "Детайли",
+        "pack": "Пакет",
+        "qnt": "Количество",
+        "imageAdr": "Адрес на снимката",
+        "productName": "Име на продукта",
+        "category": "Категория"
+    }
+}

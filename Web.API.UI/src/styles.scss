@@ -338,7 +338,8 @@ mat-icon {
     mat-card {
         background: rgba(0, 0, 0, .4) !important;
     }
-    mat-list-item > div {
+
+    mat-list-item>div {
         color: orange;
     }
 }
@@ -347,4 +348,9 @@ mat-icon {
     text {
         fill: orange;
     }
+}
+
+.cdk-overlay-pane {
+    position: absolute !important;
+    pointer-events: auto !important;
 }

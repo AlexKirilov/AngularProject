@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, OnDestroy } from '@angular/core';
+import { Component, HostListener, ElementRef, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { DatastoreService } from '../../services/datastore.service';
 import { DatashareService } from '../../services/datashare.service';
 import { Unsubscribable } from 'rxjs';
@@ -29,6 +29,9 @@ export class HeaderComponent implements OnDestroy {
 
   private unscRouterEvents: Unsubscribable;
   state = 'hide';
+  
+  @Input() langs = [];
+  @Output() changeLang = new EventEmitter<boolean>();
 
   @HostListener('window:scroll', ['$event'])
   checkScroll() {
@@ -75,4 +78,6 @@ export class HeaderComponent implements OnDestroy {
   ngOnDestroy(): void {
     if (this.unscRouterEvents) { this.unscRouterEvents.unsubscribe(); }
   }
+
+  changeMainLang($event: any) { this.changeLang.emit($event) }
 }

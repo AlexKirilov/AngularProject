@@ -1,7 +1,7 @@
 <section id="app-wrapper">
   <section id="body-wrapper">
 
-    <app-header *ngIf="auth"></app-header>
+    <app-header *ngIf="auth" [langs]="translate.getLangs()" (changeLang)="translate.use($event)"></app-header>
 
     <section id="main-body-wrapper">
 

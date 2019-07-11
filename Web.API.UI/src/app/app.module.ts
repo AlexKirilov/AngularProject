@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+// import ngx-translate and the http loader
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -55,9 +58,9 @@ import { SiteOrdersComponent } from './pages/site-orders/site-orders.component';
 
 export function hljsLanguages() {
   return [
-    {name: 'typescript', func: typescript},
-    {name: 'javascript', func: javascript},
-    {name: 'scss', func: scss}
+    { name: 'typescript', func: typescript },
+    { name: 'javascript', func: javascript },
+    { name: 'scss', func: scss }
   ];
 }
 @NgModule({
@@ -130,7 +133,14 @@ export function hljsLanguages() {
     MatTooltipModule,
     MatIconModule,
     MatExpansionModule,
-    HighlightModule.forRoot({ languages: hljsLanguages })
+    HighlightModule.forRoot({ languages: hljsLanguages }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     AuthGuard,
@@ -142,6 +152,12 @@ export function hljsLanguages() {
   ],
   entryComponents: [MessageHandlerComponent],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  console.log("translate loader running..");
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
