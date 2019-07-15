@@ -39,19 +39,12 @@ export class AppComponent implements OnInit {
     this.datashare.snackbarData.subscribe(data => {
       if (data.message !== '') this.openSnackBar(data.message, data.action);
     });
-    console.log(devtools.orientation);
-    console.log(devtools.open);
+
     this.datashare.currentPage.subscribe((page: string) =>
       this.auth = (this.authListExp.includes(page)) ? false : true
     );
 
     window.addEventListener('devtoolschange', e => {
-      // stateEl.textContent = e.detail.open ? 'yes' : 'no';
-      // oriEl.textContent = e.detail.orientation ? e.detail.orientation : '';
-      // console.log(e.target.detail.open);
-      // console.log(e.detail.orientation);
-      // console.log(!devtools.orientation);
-      console.log(!devtools.open);
       if (!devtools.open) {
         console.log('You are trying to access not allowed area!!! Because of that you will be relocate after: 10 seconds!');
         let index = 10;

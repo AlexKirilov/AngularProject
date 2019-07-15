@@ -6,7 +6,7 @@
       <div class="control-btns left" fxLayout="row" fxLayoutGap="10px">
         <!-- fxLayout.xs="column" -->
         <button mat-raised-button class="reload" (click)="reload()">
-          <span>Reload
+          <span>{{ 'buttons.reload' | translate }}
             <span *ngIf="timer < 10">0</span>{{ timer }}</span>
         </button>
 
@@ -14,7 +14,8 @@
           <span>{{ reloadControlLabel }}</span>
         </button>
 
-        <button mat-raised-button class="toggleReload" (click)="clearLogs()"> Clear Logs
+        <button mat-raised-button class="toggleReload" (click)="clearLogs()">
+          {{ 'buttons.clearLogs' | translate }}
         </button>
       </div>
 
@@ -22,20 +23,23 @@
         <!-- <span class="filter-label" fxHide.xs> Filters: </span> -->
         <!-- Tools filter -->
         <mat-form-field>
-          <mat-select placeholder="Tool" [(ngModel)]="selectedType" (selectionChange)='searchBy()'>
+          <mat-select [placeholder]=" 'placeholders.tool' | translate " [(ngModel)]="selectedType"
+            (selectionChange)='searchBy()'>
             <mat-option *ngFor="let tool of logTypes" value="{{tool.value}}">{{tool.label}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <!-- Level filter -->
         <mat-form-field>
-          <mat-select placeholder="Level" [(ngModel)]="selectedLevel" (selectionChange)='searchBy()'>
+          <mat-select [placeholder]=" 'placeholders.level' | translate " [(ngModel)]="selectedLevel"
+            (selectionChange)='searchBy()'>
             <mat-option *ngFor="let level of logLevels" value="{{level.value}}">{{level.label}}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field fxLayoutAlign.xs="center center">
-          <input matInput type="date" placeholder="For date" [(ngModel)]="SearchDate" (change)="searchBy()">
+          <input matInput type="date" [placeholder]=" 'placeholders.forDate' | translate " [(ngModel)]="SearchDate"
+            (change)="searchBy()">
         </mat-form-field>
       </div>
 
@@ -48,8 +52,8 @@
   </section>
 
   <section id="main-body">
-      <h3 id="noResultsMSG" [class.hide]="dataSource.data.length !== 0">{{noRecords}}</h3>
-      <!-- <tools-data-table-template
+    <h3 id="noResultsMSG" [class.hide]="dataSource.data.length !== 0">{{noRecords}}</h3>
+    <!-- <tools-data-table-template
         [class.hide]="dataSource.data.length == 0"
         [dataSource]="dataSource"
         [displayedColumns]="displayedColumns"
@@ -67,16 +71,10 @@
         (currentPageOut)="changeCurrentPage($event)" (itemsPerPageOut)="changeItemsPerPage($event)"
         (clearAllFilters)="clearAllFilters()">
       </tools-data-table-template> -->
-    <app-data-table-template
-      [class.hide]="dataSource.data.length == 0"
-      [dataSource]="dataSource"
-      [displayedColumns]="displayedColumns"
-      [tableColumnNames]="tableColumnNames"
-      [dateTransformNames]="dateTransformNames"
-      [displayedColumnsMedium]="displayedColumnsMedium"
-      [middleTableDataColumns]="middleTableDataColumns"
-      [serverPagging]="false"
-      [fullDate]="true">
+    <app-data-table-template [class.hide]="dataSource.data.length == 0" [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns" [tableColumnNames]="tableColumnNames"
+      [dateTransformNames]="dateTransformNames" [displayedColumnsMedium]="displayedColumnsMedium"
+      [middleTableDataColumns]="middleTableDataColumns" [serverPagging]="false" [fullDate]="true">
     </app-data-table-template>
 
   </section>

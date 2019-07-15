@@ -6,25 +6,28 @@
       <div class="page-settings" fxLayoutAlign="space-around stretch" [@slideInOut] *ngIf="!toggleChartSettings">
 
         <mat-checkbox [formControl]="charts.salesStat" [checked]="charts.salesStat.value" id="sales"
-          (change)="getSales()">Sales Statistics
+          (change)="getSales()">
+          {{ 'chb.salesStat' | translate }}
         </mat-checkbox>
 
         <mat-checkbox [formControl]="charts.salesMost" [checked]="charts.salesMost.value" id="salesMost"
           (change)="getSalesTopBottomList()">
-          Most Sales Products
+          {{ 'chb.salesMost' | translate }}
         </mat-checkbox>
 
         <mat-checkbox [formControl]="charts.salesLeast" [checked]="charts.salesLeast.value" id="salesLeast"
           (change)="getSalesTopBottomList()">
-          Least Sales Products
+          {{ 'chb.salesLeast' | translate }}
         </mat-checkbox>
 
         <mat-checkbox [formControl]="charts.productsQnt" [checked]="charts.productsQnt.value" id="productsQnt"
-          (change)="getProdcuts()">Products Qnt List
+          (change)="getProdcuts()">
+          {{ 'chb.productsQnt' | translate }}
         </mat-checkbox>
 
         <mat-checkbox [formControl]="charts.orderStat" [checked]="charts.orderStat.value" id="orderStat"
-          (change)="getOrderStat()">Order Status
+          (change)="getOrderStat()">
+          {{ 'chb.orderStat' | translate }}
         </mat-checkbox>
 
       </div>
@@ -39,14 +42,14 @@
 
     <section id="dashboard-content" fxLayout="column" fxLayoutAlign="center stretch">
 
-      <div class="api-log-chart" *ngIf="charts.salesStat.value" fxLayout="column"
-        fxLayoutAlign="space-between stretch" style="margin-bottom: 30px;">
+      <div class="api-log-chart" *ngIf="charts.salesStat.value" fxLayout="column" fxLayoutAlign="space-between stretch"
+        style="margin-bottom: 30px;">
         <div style="margin-bottom: 15px;" fxLayoutGap="5px">
-          <button mat-raised-button (click)="getSales(7)">Weekly</button>
-          <button mat-raised-button (click)="getSales(30)">Monthly</button>
-          <button mat-raised-button (click)="getSales(90)">3 Month</button>
-          <button mat-raised-button (click)="getSales(180)">6 Month</button>
-          <button mat-raised-button (click)="getSales(356)">1 Year</button>
+          <button mat-raised-button (click)="getSales(7)">{{ 'chart.weekly' | translate }}</button>
+          <button mat-raised-button (click)="getSales(30)">{{ 'chart.monthly' | translate }}</button>
+          <button mat-raised-button (click)="getSales(90)">{{ 'chart.3months' | translate }}</button>
+          <button mat-raised-button (click)="getSales(180)">{{ 'chart.halfYear' | translate }}</button>
+          <button mat-raised-button (click)="getSales(356)">{{ 'chart.oneYear' | translate }}</button>
           <!-- <button mat-raised-button (click)="getSales(1068)">3 Years</button> -->
         </div>
 
@@ -56,13 +59,13 @@
 
       </div>
 
-      <section fxLayout="row wrap" fxLayoutAlign="stretch stretch" >
-        
+      <section fxLayout="row wrap" fxLayoutAlign="stretch stretch">
+
         <div class="api-log-chart" fxFlex="" *ngIf="charts.productsQnt.value" fxLayout="row wrap"
           fxLayoutAlign="start stretch">
 
           <mat-card *ngIf="depletedProductsList.length" style="margin: 0;">
-            <h4>Depleted Products</h4>
+            <h4>{{ 'headings.depletedProd' | translate }}</h4>
 
             <mat-list dense>
               <mat-list-item *ngFor="let prod of depletedProductsList">{{prod.name}}</mat-list-item>

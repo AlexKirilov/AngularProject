@@ -16,33 +16,33 @@
     <section fxFlex fxLayoutGap="10px">
 
       <mat-form-field>
-        <input matInput placeholder="First name" [(ngModel)]="employee.firstname">
+        <input matInput [placeholder]=" 'placeholders.firstname' | translate " [(ngModel)]="employee.firstname">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Last name" [(ngModel)]="employee.lastname">
+        <input matInput [placeholder]=" 'placeholders.lastname' | translate " [(ngModel)]="employee.lastname">
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Email" [(ngModel)]="employee.email">
+        <input matInput [placeholder]=" 'placeholders.email' | translate " [(ngModel)]="employee.email">
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="Level" [(ngModel)]="employee.levelAuth">
+        <mat-select [placeholder]=" 'placeholders.level' | translate " [(ngModel)]="employee.levelAuth">
           <mat-option value="">--</mat-option>
-          <mat-option value="MN">Manager</mat-option>
-          <mat-option value="EE">Employee</mat-option>
-          <mat-option value="CU">Customer</mat-option>
+          <mat-option value="MN">{{ 'options.mn' | translate }}</mat-option>
+          <mat-option value="EE">{{ 'options.ee' | translate }}</mat-option>
+          <mat-option value="CU">{{ 'options.cu' | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <label placeholder="Level"> {{ employee.lastLogin | date: 'medium'}}</label>
+      <label> {{ employee.lastLogin | date: 'medium'}}</label>
 
     </section>
 
     <mat-action-row>
-      <button mat-button color="primary" (click)="SaveEmployeesData(employee)">Save</button>
-      <button mat-button color="primary" (click)="nextStep()">Next</button>
+      <button mat-button color="primary" (click)="SaveEmployeesData(employee)">{{ 'buttons.save' | translate }}</button>
+      <button mat-button color="primary" (click)="nextStep()">{{ 'buttons.next' | translate }}</button>
     </mat-action-row>
 
   </mat-expansion-panel>

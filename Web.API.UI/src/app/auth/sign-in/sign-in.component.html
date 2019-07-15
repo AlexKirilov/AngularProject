@@ -1,42 +1,52 @@
 <section class="newApiClientForm" id="registration-form" fxLayout="column" fxLayoutAlign="center stretch">
-    <h2>Registration form</h2>
+    <h2>{{ 'headings.regForm' | translate }}</h2>
 
-    <form [formGroup]="signin" (submit)="regNewCustmer($event)" id="signin-container" fxLayoutGap="10px" fxLayout="column" fxLayoutAlign="space-around stretch" >
+    <form [formGroup]="signin" (submit)="regNewCustmer($event)" id="signin-container" fxLayoutGap="10px"
+        fxLayout="column" fxLayoutAlign="space-around stretch">
         <mat-form-field>
-            <input matInput type="text" placeholder="Web Site Name" formControlName="sitename">
-            <mat-error *ngIf="signin.get('sitename')?.invalid">This field is required</mat-error>
+            <input matInput type="text" [placeholder]=" 'placeholders.webSiteName' | translate "
+                formControlName="sitename">
+            <mat-error *ngIf="signin.get('sitename')?.invalid">{{ 'errors.required' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput type="text" placeholder="First Name" formControlName="fname" (change)="this.validUserData()">
-            <mat-error *ngIf="signin.get('fname')?.invalid">This field is required</mat-error>
+            <input matInput type="text" [placeholder]=" 'placeholders.firstName' | translate " formControlName="fname"
+                (change)="this.validUserData()">
+            <mat-error *ngIf="signin.get('fname')?.invalid">{{ 'errors.required' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput type="text" placeholder="Last Name" formControlName="lname" (change)="this.validUserData()">
-            <mat-error *ngIf="signin.get('lname')?.invalid">This field is required</mat-error>
+            <input matInput type="text" [placeholder]=" 'placeholders.lastName' | translate " formControlName="lname"
+                (change)="this.validUserData()">
+            <mat-error *ngIf="signin.get('lname')?.invalid">{{ 'errors.required' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field [class.mat-form-field-invalid]="signin.get('email')?.invalid || emailNotValid || emailIsTaken">
-            <input matInput type="email" placeholder="Email" formControlName="email" (change)="this.emailValidation()">
-            <div [ngClass]="{'custome-valid': !signin.get('email')?.invalid, 'custome-invalid': signin.get('email')?.invalid}">
-                <div class="mat-error" *ngIf="emailNotValid">Enter valid email format</div>
-                <div class="mat-error" *ngIf="emailIsTaken">This email is already taken</div>
+            <input matInput type="email" [placeholder]=" 'placeholders.email' | translate " formControlName="email"
+                (change)="this.emailValidation()">
+            <div
+                [ngClass]="{'custome-valid': !signin.get('email')?.invalid, 'custome-invalid': signin.get('email')?.invalid}">
+                <div class="mat-error" *ngIf="emailNotValid">{{ 'errors.emailFormat' | translate }}</div>
+                <div class="mat-error" *ngIf="emailIsTaken">{{ 'errors.emailTaken' | translate }}</div>
             </div>
-            <mat-error *ngIf="signin.get('email')?.invalid">This field is required</mat-error>
+            <mat-error *ngIf="signin.get('email')?.invalid">{{ 'errors.required' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput type="password" placeholder="Password" formControlName="password" (change)="this.checkpass()">
-            <mat-error *ngIf="signin.get('password')?.invalid">This field is required</mat-error>
+            <input matInput type="password" [placeholder]=" 'placeholders.password' | translate "
+                formControlName="password" (change)="this.checkpass()">
+            <mat-error *ngIf="signin.get('password')?.invalid">{{ 'errors.required' | translate }}</mat-error>
         </mat-form-field>
-        <ng2-password-strength-bar [passwordToCheck]="signin.value.password" [barLabel]="barLabel" [barColors]="myColors"></ng2-password-strength-bar>
+        <ng2-password-strength-bar [passwordToCheck]="signin.value.password" [barLabel]="barLabel"
+            [barColors]="myColors"></ng2-password-strength-bar>
 
         <mat-form-field [class.mat-form-field-invalid]="signin.get('repassword')?.invalid || passNotMatch">
-            <input matInput type="password" placeholder="Re-Password" formControlName="repassword" (change)="this.checkpass()">
-            <mat-error *ngIf="signin.get('repassword')?.invalid">This field is required</mat-error>
-            <div [ngClass]="{'custome-valid': !signin.get('repassword')?.invalid, 'custome-invalid': signin.get('repassword')?.invalid}">
-                <div class="mat-error" *ngIf="passNotMatch">Password doesn`t match</div>
+            <input matInput type="password" [placeholder]=" 'placeholders.re-password' | translate "
+                formControlName="repassword" (change)="this.checkpass()">
+            <mat-error *ngIf="signin.get('repassword')?.invalid">{{ 'errors.required' | translate }}</mat-error>
+            <div
+                [ngClass]="{'custome-valid': !signin.get('repassword')?.invalid, 'custome-invalid': signin.get('repassword')?.invalid}">
+                <div class="mat-error" *ngIf="passNotMatch">{{ 'errors.passwordMatch' | translate }}</div>
             </div>
         </mat-form-field>
 
@@ -44,12 +54,13 @@
             <div for="" id="signin-error-msg"></div>
         </div>
 
-        <button mat-raised-button type="submit" class="submit-btn" [disabled]="!this.btnSubmitValidation">Sign In</button>
-        <a [routerLink]="['/login']" >
-          <button mat-raised-button type="submit">
-            <i class="material-icons" style="transform: rotate(180deg);">arrow_right_alt</i>
-            Back to login
-          </button>
-          </a>
+        <button mat-raised-button type="submit" class="submit-btn"
+            [disabled]="!this.btnSubmitValidation">{{ 'buttons.signin' | translate }}</button>
+        <a [routerLink]="['/login']">
+            <button mat-raised-button type="submit">
+                <i class="material-icons" style="transform: rotate(180deg);">arrow_right_alt</i>
+                {{ 'buttons.backToLogin' | translate }}
+            </button>
+        </a>
     </form>
 </section>

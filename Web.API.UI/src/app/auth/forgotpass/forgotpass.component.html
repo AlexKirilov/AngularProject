@@ -1,52 +1,23 @@
-<section
-    id="forgotpass-wrapper"
-    fxLayout="row"
-    fxLayoutAlign="center center"
->
-    <section
-        id="fotgotpass-container"
-        fxLayoutGap="20px"
-        fxLayout="column"
-        fxLayoutAlign="space-between center"
-    >
+<section id="forgotpass-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <section id="fotgotpass-container" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="space-between center">
 
-        <h1>Forgot Password</h1>
+        <h1>{{ 'headings.forgotPass' | translate }}</h1>
         <mat-form-field>
-            <input
-                matInput
-                type="text"
-                placeholder="Company Name"
-                [(ngModel)]="companyName"
-            >
+            <input matInput type="text" [placeholder]=" 'placeholders.company' | translate " [(ngModel)]="companyName">
         </mat-form-field>
         <mat-form-field>
-            <input
-                matInput
-                type="text"
-                placeholder="Email"
-                min="4"
-                [(ngModel)]="emailSub"
-            >
+            <input matInput type="text" [placeholder]=" 'placeholders.email' | translate " min="4"
+                [(ngModel)]="emailSub">
         </mat-form-field>
-        <button
-            mat-raised-button="mat-raised-button"
-            class="submit-btn"
-            (click)="resetPass()"
-        >
-            Submit
+        <button mat-raised-button="mat-raised-button" class="submit-btn" (click)="resetPass()">
+            {{ 'buttons.submit' | translate }}
         </button>
         <a [routerLink]="['/login']">
-            <button
-                mat-raised-button="mat-raised-button"
-                type="submit"
-            >
-                <i
-                    class="material-icons"
-                    style="transform: rotate(180deg);"
-                >
+            <button mat-raised-button="mat-raised-button" type="submit">
+                <i class="material-icons" style="transform: rotate(180deg);">
                     arrow_right_alt
                 </i>
-                Back to login
+                {{ 'buttons.backToLogin' | translate }}
             </button>
         </a>
     </section>

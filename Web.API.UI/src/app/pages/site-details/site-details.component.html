@@ -2,7 +2,7 @@
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Personal Data
+            {{ 'headings.personalData' | translate }}
         </mat-panel-title>
         <mat-panel-description>
           <!-- Type your name and age -->
@@ -11,7 +11,7 @@
       </mat-expansion-panel-header>
 
       <form [formGroup]="firstFormGroup" style="display: inline-grid;">
-          <ng-template matStepLabel>Check you personal data</ng-template>
+          <ng-template matStepLabel>{{ 'headings.checkPersData' | translate }}</ng-template>
 
         <!-- Company name -->
         <mat-form-field>
@@ -37,8 +37,8 @@
       </form>
 
       <mat-action-row>
-        <button mat-button color="primary" (click)="SaveDataPersonal()">Save</button>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
+        <button mat-button color="primary" (click)="SaveDataPersonal()">{{ 'buttons.save' | translate }}</button>
+        <button mat-button color="primary" (click)="nextStep()">{{ 'buttons.next' | translate }}</button>
       </mat-action-row>
 
     </mat-expansion-panel>
@@ -49,7 +49,7 @@
     <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Site Details
+            {{ 'headings.siteDetails' | translate }}
         </mat-panel-title>
         <mat-panel-description>
           <mat-icon>map</mat-icon>
@@ -57,16 +57,16 @@
       </mat-expansion-panel-header>
 
     <form [formGroup]="contactsDetails" style="display: inline-grid;">
-      <ng-template matStepLabel>Fill out your website contacts details</ng-template>
+      <ng-template matStepLabel>{{ 'headings.webSiteCont' | translate }}</ng-template>
       <!-- Phones Array -->
       <mat-form-field>
         <input matInput placeholder="Phone numbers" formControlName="phonesCtrl" required>
-        <mat-hint>Separete all numbers with comma!</mat-hint>
+        <mat-hint>{{ 'headings.webSiteHint' | translate }}</mat-hint>
       </mat-form-field>
 
       <div class="explanation-details">
         <!-- Connections -->
-        <h5>Connections</h5>
+        <h5>{{ 'headings.con' | translate }}</h5>
 
       <!-- Facebook  -->
       <mat-form-field>
@@ -91,8 +91,8 @@
     </div>
       <div class="explanation-details">
         <!-- Coordinates -->
-        <h5>Coordinates</h5>
-        <p>Here you can put coordinates or the google map link</p>
+        <h5>{{ 'headings.coords' | translate }}</h5>
+        <p>{{ 'headings.coordsubHeader' | translate }}</p>
 
 
       <!-- Latitude -->
@@ -113,9 +113,9 @@
     </form>
 
       <mat-action-row>
-        <button mat-button color="primary" (click)="SaveDataContacts()">Save</button>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
+        <button mat-button color="primary" (click)="SaveDataContacts()">{{ 'buttons.save' | translate }}</button>
+        <button mat-button color="warn" (click)="prevStep()">{{ 'buttons.previous' | translate }}</button>
+        <button mat-button color="primary" (click)="nextStep()">{{ 'buttons.next' | translate }}</button>
       </mat-action-row>
     </mat-expansion-panel>
 
@@ -124,7 +124,7 @@
     <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Invoice Details
+            {{ 'headings.invoiceDetails' | translate }}
         </mat-panel-title>
         <mat-panel-description>
 
@@ -134,7 +134,7 @@
 
       <form [formGroup]="invoiceDetails" style="display: inline-grid;">
           <div class="explanation-details">
-          <ng-template matStepLabel>Fill out your invoice details</ng-template>
+          <ng-template matStepLabel>{{ 'headings.fillInvoiceDetailsMsg' | translate }}</ng-template>
 
           <!-- Address -->
           <mat-form-field>
@@ -185,9 +185,9 @@
       <mat-datepicker #picker></mat-datepicker>
 
       <mat-action-row>
-        <button mat-button color="primary" (click)="SaveDataInvoices()">Save</button>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">End</button>
+        <button mat-button color="primary" (click)="SaveDataInvoices()">{{ 'buttons.save' | translate }}</button>
+        <button mat-button color="warn" (click)="prevStep()">{{ 'buttons.submiprevioust' | translate }}</button>
+        <button mat-button color="primary" (click)="nextStep()">{{ 'buttons.end' | translate }}</button>
       </mat-action-row>
     </mat-expansion-panel>
 

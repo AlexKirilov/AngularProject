@@ -8,23 +8,37 @@
         "decline": "Отказ на поръчка",
         "accept": "Приемане на поръчка",
         "login": "Вход",
+        "manually": "Ръчно",
         "signin": "Нова регистрация",
         "forgotpass": "Забравена парола",
         "create": "Създай",
+        "sendReq": "Изпрати заявка",
         "logout": "Изход",
         "delete": "Изтрий",
         "edit": "Обнови",
         "add": "Нов",
+        "success": "Успешно",
+        "fail": "Провал",
+        "done": "Приключи",
+        "finish": "Край",
+        "reset": "Изчисти",
+        "submit": "Изпращане",
+        "resetLink": "Подменящ линк",
         "searchByCat": "Търси по категория",
-        "addCat":"Добави категория",
-        "delByCat":"Изтрий по категория",
-        "deleteAll": "Изтрий всичко"
+        "addCat": "Добави категория",
+        "delByCat": "Изтрий по категория",
+        "deleteAll": "Изтрий всичко",
+        "backToLogin": "Входна страница",
+        "no": "Не",
+        "yes": "Да",
+        "clearLogs":"Изчистване на логове",
+        "reload":"Презереди "
     },
     "errors": {
         "required": "Това поле е задължително",
         "emailFormat": "Невалиден имейл",
         "emailTaken": "Този имейл е вече заед",
-        "passwordMAtch": "Паролата на съвпадат"
+        "passwordMatch": "Паролата на съвпадат"
     },
     "settings": {
         "hi": "Здравейте",
@@ -32,12 +46,27 @@
         "purchaseHis": "История"
     },
     "navi": {
-        "basket": "Кошница",
-        "purchase": "Поръчки",
-        "products": "Продукти",
-        "aboutUs": "За нас",
-        "gallery": "Галерия",
-        "contacts": "Контакти"
+        "dashboard": "Табло",
+        "customers": "Клиенти",
+        "employees": "Служители",
+        "orders": "Поръчки",
+        "apiCon": "Връзка с АПИ",
+        "details": "Детайли на Сайта",
+        "siteLogs": "Логове"
+    },
+    "chb": {
+        "salesMost": "Най-продавани продукти",
+        "salesLeast": "Най-слабо продавани продукти",
+        "salesStat": "Статистика Продажби",
+        "productsQnt": "Количествен продуктов лист",
+        "orderStat": "Статус на поръчките"
+    },
+    "chart": {
+        "weekly": "Седмично",
+        "monthly": "Месечно",
+        "3months": "3 месеца",
+        "halfYear": "6 месеца",
+        "oneYear": "1 година"
     },
     "products": {
         "all": "Всички",
@@ -49,6 +78,38 @@
         "details": "Детайли",
         "quantity": "Количество",
         "controls": "Контролери"
+    },
+    "headings": {
+        "depletedProd": "Изчерпани Продукти",
+        "forgotPass": "Забравена Парола",
+        "resetPass": "Възстановява на парола",
+        "toResetPassMsg": "За да въведете нова парола, кликнете върху връзката по-долу!",
+        "con": "Връзки",
+        "regForm": "Registration Form",
+        "coords": "Координати",
+        "personalData": "Лични данни",
+        "siteDetails": "Сайт данни",
+        "coordsubHeader": "Тук можете да поставите координати или връзката на google map",
+        "webSiteCont": "Попълнете данните за контактите на уебсайта",
+        "webSiteHint": "Разделете всички числа със запетая!",
+        "checkPersData": "Проверете личните си данни",
+        "authContacts": "Запазване на контактите на уебсайта?",
+        "invoiceDetails": "Подробности за фактурата",
+        "authInvoiceDetails": "Запазване на уебсайта Подробности за фактурата?",
+        "fillInvoiceDetailsMsg": "Попълнете данните за фактура",
+        "clAddresNotFound": "Адресът на клиента не бе намерен.",
+        "clSendEmailReq": "Изпратете запитване до имейла на клиентите или ако знаете адреса Можете да го поставите ръчно",
+        "enterClientAddress": "Ръчно попълване на клиентския адрес"
+    },
+    "msg": {
+        "tobeDelivered": "Да бъде доставено до:"
+    },
+    "labels": {
+        "name": "Име",
+        "address": "Адрес",
+        "town": "Град",
+        "postcode": "Пощенски код",
+        "phone": "Телефонни номера"
     },
     "gallery": {
         "save": "Запис",
@@ -65,7 +126,6 @@
         "expInvoiceDetails": "Фирмени данни",
         "expInvoiceDetailsTemp": "Попълнете всички данни"
     },
-    "aboutUS": {},
     "purchase": {
         "canceled": "Отказана",
         "forApproval": "За одобряване",
@@ -74,12 +134,17 @@
         "delivering": "В процес на доставка",
         "delivered": "Доставена"
     },
-    "purchaseHistory": {},
-    "login": {},
     "signIn": {
         "regForm": "Регистрационна форма"
     },
-    "forgotpass": {},
+    "options": {
+        "sa": "Системен Администратор",
+        "ad": "Админ",
+        "mn": "Мениджър",
+        "ee": "Служител",
+        "cu": "Клиент",
+        "gu": "Гост"
+    },
     "placeholders": {
         "lang": "Език",
         "email": "Имейл",
@@ -87,10 +152,13 @@
         "re-password": "Парола",
         "firstname": "Име",
         "lastname": "Фамилия",
+        "companyName": "Company Name",
         "company": "Компания",
         "oldEmail": "Стар имейл",
         "newEmail": "Нов имейл",
         "address": "Адрес",
+        "personalDiscount": "Лична отстъпка",
+        "phoneNumbers": "Телефонни номера",
         "eik": "ЕИК",
         "citizenship": "Гражданство",
         "country": "Държава",
@@ -104,6 +172,14 @@
         "qnt": "Количество",
         "imageAdr": "Адрес на снимката",
         "productName": "Име на продукта",
-        "category": "Категория"
+        "category": "Категория",
+        "webSiteName": "Име на сайта",
+        "latitude": "Височина",
+        "longtitude": "Дължина",
+        "link": "Линк",
+        "lastLogin": "Последен вход",
+        "level": "Ниво",
+        "tool": "Инструмент",
+        "forDate": "За дата"
     }
 }

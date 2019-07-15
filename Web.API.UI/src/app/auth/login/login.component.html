@@ -8,23 +8,23 @@
       </header>
       <form [formGroup]="login" (submit)="loginUser()" class="login-form" >
           <mat-form-field>
-              <input matInput type="text" placeholder="Email" formControlName="email" min="4" (keyup)="onchange()">
-              <mat-error *ngIf="login.get('email')?.invalid">This field is required</mat-error>
+              <input matInput type="text" [placeholder]=" 'placeholders.email' | translate " formControlName="email" min="4" (keyup)="onchange()">
+              <mat-error *ngIf="login.get('email')?.invalid">{{ 'errors.required' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-              <input matInput type="password" placeholder="Password" formControlName="pass" min="3" (keyup)="onchange()">
-              <mat-error *ngIf="login.get('pass')?.invalid">This field is required</mat-error>
+              <input matInput type="password" [placeholder]=" 'placeholders.password' | translate " formControlName="pass" min="3" (keyup)="onchange()">
+              <mat-error *ngIf="login.get('pass')?.invalid">{{ 'errors.required' | translate }}</mat-error>
           </mat-form-field>
 
           <div class="input error-label">
               <div for="" id="login-error-msg"> {{warnMsg}}</div>
           </div>
-          <button mat-raised-button type="submit" [disabled]="btnDisbaled">Login</button>
+          <button mat-raised-button type="submit" [disabled]="btnDisbaled">{{ 'buttons.login' | translate }}</button>
       </form>
       <div class="blue additinal-login-options" fxLayout="row" fxLayoutAlign="space-between center">
-          <a [routerLink]="['/forgotpassword']">Forgot password</a>
-          <a [routerLink]="['/signin']">Sign In</a>
+          <a [routerLink]="['/forgotpassword']">{{ 'buttons.forgotpass' | translate }}</a>
+          <a [routerLink]="['/signin']">{{ 'buttons.signin' | translate }}</a>
       </div>
   </section>
 </section>

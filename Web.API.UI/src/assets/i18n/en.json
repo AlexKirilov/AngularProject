@@ -8,29 +8,65 @@
         "decline": "Decline",
         "accept": "Accept",
         "login": "Login",
-        "signin": "Signin",
-        "forgotpass": "Forgot password",
-        "create": "Sign In",
-        "logout": "Logout"
+        "manually": "Manually",
+        "signin": "Sign In",
+        "forgotpass": "Forgot Password",
+        "create": "Create",
+        "sendReq": "Send Request",
+        "logout": "Logout",
+        "delete": "Delete",
+        "edit": "Edit",
+        "add": "Add",
+        "success": "Success",
+        "fail": "Fail",
+        "done": "Done",
+        "finish": "Finish",
+        "reset": "Reset",
+        "submit": "Submit",
+        "resetLink": "Reset Link",
+        "searchByCat": "Search by category",
+        "addCat": "Add category",
+        "delByCat": "Delete by category",
+        "deleteAll": "Delete all",
+        "backToLogin": "Back to login",
+        "no": "No",
+        "yes": "Yes",
+        "clearLogs":"Clear Logs",
+        "reload":"Reload "
     },
     "errors": {
         "required": "This field is required",
-        "emailFormat": "This email has invalid format",
+        "emailFormat": "Invalid email format",
         "emailTaken": "This email is already taken",
-        "passwordMAtch": "Password doesn`t match"
+        "passwordMatch": "Password doesn`t match"
     },
     "settings": {
         "hi": "Hi",
-        "account": "Account",
+        "account": "Acoount",
         "purchaseHis": "Purchase History"
     },
     "navi": {
-        "basket": "Basket",
-        "purchase": "Purchase",
-        "products": "Products",
-        "aboutUs": "About us",
-        "gallery": "Gallery",
-        "contacts": "Contacts"
+        "dashboard": "Dashboard",
+        "customers": "Customers",
+        "employees": "Employees",
+        "orders": "Orders",
+        "apiCon": "API Connection",
+        "details": "Web Site Details",
+        "siteLogs": "Site Logs"
+    },
+    "chb": {
+        "salesMost": "Most saled products",
+        "salesLeast": "Less saled products",
+        "salesStat": "Sales Statistic",
+        "productsQnt": "Product qnt List",
+        "orderStat": "Order Status"
+    },
+    "chart": {
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "3months": "3 Month",
+        "halfYear": "6 Month",
+        "oneYear": "1 Year"
     },
     "products": {
         "all": "All",
@@ -43,32 +79,103 @@
         "quantity": "Quantity",
         "controls": "Controls"
     },
-    "gallery": {
-        "": ""
+    "headings": {
+        "depletedProd": "Depleted Products",
+        "forgotPass": "Forgot Password",
+        "resetPass": "Reset Password",
+        "toResetPassMsg": "To reset your password, click on the link below!",
+        "con": "Connections",
+        "regForm": "Registration Form",
+        "coords": "Coords",
+        "personalData": "Personal Data",
+        "siteDetails": "Site Details",
+        "coordsubHeader": "Here you can put coordinates or the google map link",
+        "webSiteCont": "Fill out your website contacts details",
+        "webSiteHint": "Separete all numbers with comma!",
+        "checkPersData": "Check you personal data",
+        "authContacts": "Saving the website contacts?",
+        "invoiceDetails": "Invoice Details",
+        "authInvoiceDetails": "Saving the website Invoice details?",
+        "fillInvoiceDetailsMsg": "Fill out your invoice details",
+        "clAddresNotFound": "Client address was not found into our records.",
+        "clSendEmailReq": "Send request to the clients email or if you know the address You can put it manually",
+        "enterClientAddress": "Manually adding the client(s) address for"
+    },
+    "msg": {
+        "tobeDelivered": "To be delivered to"
+    },
+    "labels": {
+        "name": "Name",
+        "address": "Address",
+        "town": "Town",
+        "postcode": "Postcode",
+        "phone": "Phone"
     },
     "address": {
         "address": "Address",
-        "phones": "Phone",
+        "phones": "Phones",
         "connections": "Connections"
     },
     "account": {
-        "expPersonal": "Account details",
-        "expCheckPersonal": "Check you personal data",
-        "expInvoiceDetails": "Invoice details",
-        "expInvoiceDetailsTemp": "Fill out your invoice details"
+        "expPersonal": "Personal Details",
+        "expCheckPersonal": "Check your personal details",
+        "expInvoiceDetails": "Comany details",
+        "expInvoiceDetailsTemp": "All fields are required"
     },
-    "aboutUS": {},
     "purchase": {
         "canceled": "Canceled",
         "forApproval": "For Approval",
         "approved": "Approved",
+        "address": "Address",
         "delivering": "Delivering",
         "delivered": "Delivered"
     },
-    "purchaseHistory": {},
-    "login": {},
     "signIn": {
-        "regForm": "Registration Form"
+        "regForm": "Registration Formm"
     },
-    "forgotpass": {}
+    "options": {
+        "sa": "Sys Admin",
+        "ad": "Admin",
+        "mn": "Manager",
+        "ee": "Employee",
+        "cu": "Customer",
+        "gu": "Guest"
+    },
+    "placeholders": {
+        "lang": "Lang",
+        "email": "Email",
+        "password": "Password",
+        "re-password": "Re-password",
+        "firstname": "firstname",
+        "lastname": "lastname",
+        "companyName": "Company Name",
+        "company": "Company",
+        "oldEmail": "Old email",
+        "newEmail": "New email",
+        "address": "Address",
+        "personalDiscount": "Personal Discount",
+        "phoneNumbers": "Phone Numbers",
+        "eik": "EIK",
+        "citizenship": "Citizenship",
+        "country": "Country",
+        "town": "Town",
+        "postcode": "Postcode",
+        "phone": "Phones",
+        "phonecode": "phonecode",
+        "bulstat": "Bulstat",
+        "details": "Details",
+        "pack": "Pack",
+        "qnt": "Quantity",
+        "imageAdr": "Image URL",
+        "productName": "Product Name",
+        "category": "Category",
+        "webSiteName": "Web Site Name",
+        "latitude": "Latitude",
+        "longtitude": "Longtitude",
+        "link": "Link",
+        "lastLogin": "Last Login",
+        "level": "Level",
+        "tool": "Tool",
+        "forDate": "For Date"
+    }
 }
