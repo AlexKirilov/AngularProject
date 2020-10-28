@@ -50,34 +50,23 @@ export function hljsLanguages() {
     FlexLayoutModule,
     PasswordStrengthBarModule,
     MaterialModule,
-    HighlightModule, //.forRoot({ languages: hljsLanguages }),
-  //   TranslateModule.forChild({
-  //     loader: {provide: TranslateLoader, useFactory: HttpLoaderFactory,
-  //       deps: [HttpClient]},
-  //     compiler: {provide: TranslateCompiler, useFactory: HttpLoaderFactory,
-  //       deps: [HttpClient]},
-  //     parser: {provide: TranslateParser, useFactory: HttpLoaderFactory,
-  //       deps: [HttpClient]},
-  //     missingTranslationHandler: {provide: MissingTranslationHandler, useFactory: HttpLoaderFactory,
-  //       deps: [HttpClient]},
-  //     isolate: true
-  // })
-  TranslateModule.forRoot({
-    loader: {
-      provide: TranslateLoader,
-      useFactory: HttpLoaderFactory,
-      deps: [HttpClient]
-    }
-  })
+    HighlightModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     AuthGuard,
-    {
-      provide: HIGHLIGHT_OPTIONS,
-      useValue: {
-        fullLibraryLoader: () => import('highlight.js'),
-      }
-    },
+    // {
+    //   provide: HIGHLIGHT_OPTIONS,
+    //   useValue: {
+    //     fullLibraryLoader: () => import('highlight.js'),
+    //   }
+    // },
     { // Adding Interceptor
       provide: HTTP_INTERCEPTORS,
       useClass: AppAuthInterceptor,

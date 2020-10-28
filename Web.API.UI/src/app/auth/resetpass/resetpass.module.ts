@@ -8,6 +8,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from '../../app.module';
 import { MaterialModule } from '../../material.module';
 import { ResetpassComponent } from './resetpass.component';
+import { PasswordStrengthBarModule } from 'ng2-password-strength-bar';
 
 const routes: Routes = [{ path: '', component: ResetpassComponent }];
 
@@ -21,6 +22,7 @@ const routes: Routes = [{ path: '', component: ResetpassComponent }];
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
+    PasswordStrengthBarModule,
     RouterModule.forChild(routes),
     TranslateModule.forChild({
       loader: {
