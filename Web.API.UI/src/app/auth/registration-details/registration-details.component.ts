@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Unsubscribable } from 'rxjs';
 import { DatastoreService } from '../../services/datastore.service';
 import { DatashareService } from '../../services/datashare.service';
 import { HandleErrorsService } from '../../services/handle-errors.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -12,7 +12,7 @@ import { HandleErrorsService } from '../../services/handle-errors.service';
   templateUrl: './registration-details.component.html',
   styleUrls: ['./registration-details.component.scss']
 })
-export class RegistrationDetailsComponent implements OnInit, OnDestroy {
+export class RegistrationDetailsComponent {
 
   // New
   authInvoiceDetails = false;
@@ -25,9 +25,6 @@ export class RegistrationDetailsComponent implements OnInit, OnDestroy {
   invoiceDetails: FormGroup;
   isEditable = false; // Delete me
 
-  private unsUpdateSiteCont: Unsubscribable;
-  private unsUpdateCUInvoice: Unsubscribable;
-
   constructor(
     private titleService: Title,
     private _formBuilder: FormBuilder,
@@ -38,13 +35,6 @@ export class RegistrationDetailsComponent implements OnInit, OnDestroy {
     this.setDefaultVar();
     this.titleService.setTitle('Reg Details');
     this.datashare.changeCurrentPage('reg-details');
-  }
-
-  ngOnInit() { }
-
-  ngOnDestroy(): void {
-    if (this.unsUpdateSiteCont) { this.unsUpdateSiteCont.unsubscribe(); }
-    if (this.unsUpdateCUInvoice) { this.unsUpdateCUInvoice.unsubscribe(); }
   }
 
   SaveData () {
@@ -85,14 +75,14 @@ export class RegistrationDetailsComponent implements OnInit, OnDestroy {
   }
 
   editSiteData(tmpContacts: object) {
-    this.unsUpdateSiteCont = this.datastore.addOrEditSiteContacts(tmpContacts).subscribe(
+    this.datastore.addOrEditSiteContacts(tmpContacts).pipe(take(1)).subscribe(
       (data) => console.log(data),
       (err: any) => this.errorHandler.handleError(err)
     );
   }
 
   editCUInvoises(tmpInvoice: object) {
-    this.unsUpdateCUInvoice = this.datastore.addOrEditCusInvoiceDetails(tmpInvoice).subscribe(
+    this.datastore.addOrEditCusInvoiceDetails(tmpInvoice).pipe(take(1)).subscribe(
       (data: any) => console.log(data),
       (err: any) => this.errorHandler.handleError(err)
     );

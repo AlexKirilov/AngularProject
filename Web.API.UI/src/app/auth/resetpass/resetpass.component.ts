@@ -4,6 +4,7 @@ import { DatashareService } from "../../services/datashare.service";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { DatastoreService } from "../../services/datastore.service";
+import { take } from "rxjs/operators";
 
 @Component({
   selector: "app-resetpass",
@@ -55,10 +56,11 @@ export class ResetpassComponent implements OnInit {
       this.data.cid = params.value.cid;
       this.data.sd = params.value.sd;
       this.data.sid = params.value.sid;
+
       this.datastore.resetPass({
         data: this.data,
         newpass: this.signin.value.repassword
-      }).subscribe( data => console.log('reset data: ', data));
+      }).pipe(take(1)).subscribe( data => console.log('reset data: ', data));
     }
   }
 

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { DatastoreService } from '../../services/datastore.service';
-import { HandleErrorsService } from '../../services/handle-errors.service';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { DatastoreService } from '../../services/datastore.service';
 import { DatashareService } from '../../services/datashare.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-forgotpass',
@@ -11,14 +12,18 @@ import { DatashareService } from '../../services/datashare.service';
 })
 export class ForgotpassComponent implements OnInit {
 
-  public emailSub = 'admin@admin.com';
   public companyName = 'stressxx';
+  public emailSub = 'admin@admin.com';
+  public forgotmsg: string = '';
   private emailPattern = /^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/;
+
+  @ViewChild('callAPIDialog', {static: false}) callAPIDialog: TemplateRef<any>;
+  
   constructor(
     private titleService: Title,
+    private dialog: MatDialog,
     private datashare: DatashareService,
     private datastore: DatastoreService,
-    private errorHandler: HandleErrorsService,
   ) {
     this.titleService.setTitle('Forgot Password');
     this.datashare.changeCurrentPage('forgotpass');
@@ -29,13 +34,19 @@ export class ForgotpassComponent implements OnInit {
 
   resetPass() {
     if (this.companyName && this.companyName !== '' && this.emailSub !== '' && this.emailPattern.test(this.emailSub)) {
-      this.datastore.forgotPass({ companyName: this.companyName, email: this.emailSub}).subscribe( (data: any) => {
+      this.datastore.forgotPass({ companyName: this.companyName, email: this.emailSub})
+      .pipe(take(1)).subscribe( (data: any) => {
         if (data && data !== '') {
           const str = `?cid=${data.token}&sd=${data.SiteData.replace(' ', '-')}&sid=${data.WebSite.split(' ')[1]}`;
-          this.errorHandler.openDialogReset(str);
+          this.callAPI(str)
         }
       });
     }
   }
+
+  callAPI(str: any) {
+    this.forgotmsg = str;
+    let dialogRef = this.dialog.open(this.callAPIDialog);
+    }
 
 }

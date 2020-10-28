@@ -10,11 +10,14 @@
       "prefix": "api",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
         "build": {
+          "allowedCommonJsDependencies": [
+            "highlight.js"
+          ],
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/WebAPI",
@@ -54,6 +57,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -131,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "WebAPI"
+  "defaultProject": "WebAPI",
+  "cli": {
+    "analytics": false
+  }
 }

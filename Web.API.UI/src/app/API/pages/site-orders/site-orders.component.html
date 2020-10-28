@@ -1,0 +1,118 @@
+<section id="purchases-wrapper">
+    <section id="purchase-container" fxLayout="column" fxLayoutAlign="stretch center">
+        <div class="page-settings-container" fxLayout="column" fxLayoutAlign="space-around stretch">
+
+            <div class="page-settings" fxLayoutAlign="space-around stretch" [@slideInOut]
+                *ngIf="!toggleOptionalSettings">
+
+                <mat-checkbox [formControl]="optional.canceled" [checked]="optional.canceled.value" id="canceled"
+                    (change)="getData()">
+                    Canceled {{ 'buttons.canceled' | translate }}
+                </mat-checkbox>
+
+                <mat-checkbox [formControl]="optional.needApprove" [checked]="optional.needApprove.value"
+                    id="needApprove" (change)="getData()">
+                    {{ 'buttons.needApprove' | translate }}
+                </mat-checkbox>
+
+                <mat-checkbox [formControl]="optional.approved" [checked]="optional.approved.value" id="approved"
+                    (change)="getData()">
+                    {{ 'buttons.approved' | translate }}
+                </mat-checkbox>
+
+                <mat-checkbox [formControl]="optional.toClient" [checked]="optional.toClient.value" id="toClient"
+                    (change)="getData()">
+                    {{ 'buttons.sentTo' | translate }}
+                </mat-checkbox>
+
+                <mat-checkbox [formControl]="optional.delivered" [checked]="optional.delivered.value" id="delivered"
+                    (change)="getData()">
+                    {{ 'buttons.delivered' | translate }}
+                </mat-checkbox>
+            </div>
+
+            <div class="settings-toggle">
+                <div id="settings-btn" (click)="toggleOptionalSettings = !toggleOptionalSettings">
+                    <mat-icon class="small-screen menu-icon-nav black active">settings</mat-icon>
+                    <mat-icon>
+                        {{toggleOptionalSettings  ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+                    </mat-icon>
+                </div>
+            </div>
+        </div>
+
+        <api-paginator class="right" [startRow]="startRow" [endRow]="endRow" [currentPageIn]="currentPage"
+            [allPages]="allPages" [itemsPerPageIn]="itemsPerPage" [allRecords]="allRecords"
+            (currentPageOut)="changePageTo($event)" (itemsPerPageOut)="changeItemsPerPage($event)"
+            *ngIf="ordersForApproval.length > 0"></api-paginator>
+
+        <mat-accordion class="example-headers-align" fxlayout="column" fxlayoutAlign="center stretch">
+            <mat-expansion-panel *ngFor="let item of ordersForApproval; let i = index" data-index="i"
+                [expanded]="step === i" (opened)="setStep(i)" hideToggle style="position: relative;">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div fxLayout="row" fxLayoutAlign="start center" style="margin: 0 0 0 100px;">
+                            <!-- [className]="item.flag === -1 ? 'status-red': item.flag === 0 ? 'status-yellow' : item.flag === 1 ? 'status-orange': item.flag === 2 ? 'status-blue': item.flag === 3 ? 'status-green': 'status-none'" -->
+                            <div class="status-marker" [ngClass]="{ 
+                                  'status-red': item.flag === -1,
+                                  'status-yellow': item.flag === 0,
+                                  'status-orange': item.flag === 1,
+                                  'status-blue': item.flag === 2,
+                                  'status-green': item.flag === 3
+                                }">
+                            </div>
+                            <div *ngIf="item.flag === -1">{{ 'buttons.declined' | translate }}</div>
+                            <div *ngIf="item.flag === 0">{{ 'buttons.needApprove' | translate }}</div>
+                            <div *ngIf="item.flag === 1">{{ 'buttons.approved' | translate }}</div>
+                            <div *ngIf="item.flag === 2">{{ 'buttons.sentTo' | translate }}</div>
+                            <div *ngIf="item.flag === 3">{{ 'buttons.delivered' | translate }}</div>
+                        </div>
+                    </mat-panel-title>
+                    <mat-panel-description fxLayout="row" fxLayoutAlign="start center">
+                        <button mat-button (click)="getCustomersAddress(item)">
+                            Address
+                        </button>
+
+                        <div>
+                            <b>{{ item.company }}</b>
+                        </div>
+                        <div>
+                            <b>{{ item.name }}</b>
+                        </div>
+                        <div>{{item.date | date: 'medium'}}</div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <section id="order-table-container" fxLayout="column" fxLayoutAlign="center stretch">
+                    <app-data-table-template [class.hide]="item.order.length == 0" [dataSource]="item.order"
+                        [displayedColumns]="displayedColumns" [tableColumnNames]="tableColumnNames"
+                        [dateTransformNames]="dateTransformNames" [serverPagging]="false" [fullDate]="true">
+                    </app-data-table-template>
+                    <!-- [displayedColumnsMedium]="displayedColumnsMedium"
+                [middleTableDataColumns]="middleTableDataColumns" -->
+                    <mat-action-row>
+                        <button mat-button="mat-button" *ngIf="step !== 0" (click)="prevStep()">
+                            {{ 'buttons.previous' | translate }}
+                        </button>
+                        <button mat-button="mat-button" *ngIf="item.flag == 0" (click)="decline(item)">
+                            {{ 'buttons.decline' | translate }}
+                        </button>
+                        <button mat-button="mat-button" *ngIf="item.flag == 0" (click)="accept(item)">
+                            {{ 'buttons.accept' | translate }}
+                        </button>
+                        <button mat-button="mat-button" *ngIf="item.flag == 1" (click)="sendToClient(item)">
+                            {{ 'buttons.onTheWay' | translate }}
+                        </button>
+                        <button mat-button="mat-button" *ngIf="item.flag == 2" (click)="deliveredToClient(item)">
+                            {{ 'buttons.delivered' | translate }}
+                        </button>
+                        <button mat-button="mat-button" *ngIf="step !== ordersForApproval?.length" (click)="nextStep()">
+                            {{ 'buttons.next' | translate }}
+                        </button>
+                    </mat-action-row>
+                </section>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </section>
+</section>

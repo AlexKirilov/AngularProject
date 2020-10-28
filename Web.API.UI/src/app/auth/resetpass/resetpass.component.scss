@@ -10,6 +10,12 @@
       *:not(button):not(i) {
           color: white;
       }
+      input {
+        color: white;
+      }
+      .mat-form-field-underline {
+        background: white;
+    }
     }
   }
   

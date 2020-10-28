@@ -1,5 +1,6 @@
 {
     "buttons": {
+        "authorising": "Аuthorising",
         "end": "End",
         "save": "Save",
         "next": "Next",
@@ -9,7 +10,7 @@
         "accept": "Accept",
         "login": "Login",
         "manually": "Manually",
-        "signin": "Sign In",
+        "signup": "Sign Up",
         "forgotpass": "Forgot Password",
         "create": "Create",
         "sendReq": "Send Request",
@@ -32,7 +33,14 @@
         "no": "No",
         "yes": "Yes",
         "clearLogs":"Clear Logs",
-        "reload":"Reload "
+        "reload":"Reload",
+        "cancel": "Cancel",
+        "canceled": "Canceled",
+        "needApprove": "Need Approve",
+        "approved": "Approved",
+        "sentTo": "Send To",
+        "delivered": "Delivered",
+        "onTheWay": "On The Way"
     },
     "errors": {
         "required": "This field is required",
@@ -130,7 +138,7 @@
         "delivering": "Delivering",
         "delivered": "Delivered"
     },
-    "signIn": {
+    "signUp": {
         "regForm": "Registration Formm"
     },
     "options": {

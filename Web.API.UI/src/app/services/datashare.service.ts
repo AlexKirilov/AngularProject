@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {SnackBarI} from '../app.model';
-import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class DatashareService {
@@ -9,9 +8,8 @@ export class DatashareService {
   spinnerCountDown = 90;
   timercountdown: any;
 
-  constructor(private router: Router) {}
+  constructor() {}
 
-  private logedIn: boolean;
   private currentTourPage: string;
 
   private errorMsgTypeSource = new BehaviorSubject<object>({message: '', showMsg: false});

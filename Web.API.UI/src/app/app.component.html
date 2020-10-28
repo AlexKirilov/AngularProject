@@ -1,26 +1,7 @@
 <section id="app-wrapper">
-  <section id="body-wrapper">
+  <section id="app-container">
 
-    <app-header *ngIf="auth" [langs]="translate.getLangs()" (changeLang)="translate.use($event)"></app-header>
-
-    <section id="main-body-wrapper">
-
-      <div *ngIf="auth">
-        <site-nav-menu></site-nav-menu>
-      </div>
-
-      <router-outlet></router-outlet>
-      <div class="full-screen body" [class.hide]="!contentLoader">
-        <div class="relative">
-          <mat-spinner color="primary"></mat-spinner>
-        </div>
-      </div>
-    </section>
+    <router-outlet></router-outlet>
 
   </section>
-  <div class="full-screen html" [class.hide]="!htmlLoader">
-    <div class="relative">
-      <mat-spinner color="primary"></mat-spinner>
-    </div>
-  </div>
 </section>

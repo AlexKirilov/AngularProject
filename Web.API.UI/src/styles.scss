@@ -39,7 +39,7 @@
 }
 
 html {
-    background: url('./app/images/test/18.jpg') 50% 50%;
+    background: url('./app/images/18.jpg') 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -249,48 +249,8 @@ body {
     background-repeat: no-repeat !important;
     background-position: 50% 50% !important;
 
-    &#back1 {
-        background: url('./app/images/test/1.jpg');
-    }
-
-    &#back2 {
-        background: url('./app/images/test/6.jpg');
-    }
-
-    &#back3 {
-        background: url('./app/images/test/7.jpg');
-    }
-
-    &#back4 {
-        background: url('./app/images/test/8.jpg');
-    }
-
-    &#back5 {
-        background: url('./app/images/test/9.jpg');
-    }
-
-    &#back6 {
-        background: url('./app/images/test/11.jpg');
-    }
-
-    &#back7 {
-        background: url('./app/images/test/13.jpg');
-    }
-
-    &#back8 {
-        background: url('./app/images/test/14.jpg');
-    }
-
-    &#back9 {
-        background: url('./app/images/test/16.jpg');
-    }
-
     &#back10 {
-        background: url('./app/images/test/18.jpg');
-    }
-
-    &#back11 {
-        background: url('./app/images/test/20.jpg');
+        background: url('./app/images/18.jpg');
     }
 }
 
@@ -335,6 +295,8 @@ mat-icon {
 }
 
 .api-log-chart {
+    overflow: scroll;
+
     mat-card {
         background: rgba(0, 0, 0, .4) !important;
     }
@@ -353,4 +315,18 @@ mat-icon {
 .cdk-overlay-pane {
     position: absolute !important;
     pointer-events: auto !important;
+}
+
+#auth-contriner 
+{
+    .mat-form-field-underline {
+        background: white !important;
+    }
+
+    .mat-form-field-label {
+        color: white;
+    }
+}
+.mat-tab-header {
+    z-index: 0;
 }

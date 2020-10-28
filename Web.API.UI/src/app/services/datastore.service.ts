@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { map } from 'rxjs/operators';
 
-import { HandleErrorsService } from './handle-errors.service';
 import { UserCreds, NewUser, Invoice, ContactsData } from '../app.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -157,8 +156,8 @@ export class DatastoreService {
     return this.http.get<ContactsData>(`${this.url}/customers/getCustomerAddress`, user);
   }
 
-  getAuthCustomers() {
-    return this.http.get<ContactsData>(`${this.url}/authdata/getAuthCustomers`);
+  getAuthCustomers(): Observable<ContactsData[]> {
+    return this.http.get<ContactsData[]>(`${this.url}/authdata/getAuthCustomers`);
   }
 
   updateCustomerDiscount(data: any) {
@@ -227,7 +226,7 @@ export class DatastoreService {
   /////////////////////////////////////////
   logout() {
     this.removeAuthorization();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth/login']);
   }
 
 

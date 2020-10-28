@@ -1,5 +1,5 @@
 <section id="forgotpass-wrapper" fxLayout="row" fxLayoutAlign="center center">
-    <section id="fotgotpass-container" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="space-between center">
+    <section id="fotgotpass-container" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="center center">
 
         <h1>{{ 'headings.forgotPass' | translate }}</h1>
         <mat-form-field>
@@ -12,7 +12,7 @@
         <button mat-raised-button="mat-raised-button" class="submit-btn" (click)="resetPass()">
             {{ 'buttons.submit' | translate }}
         </button>
-        <a [routerLink]="['/login']">
+        <a [routerLink]="['/auth/login']">
             <button mat-raised-button="mat-raised-button" type="submit">
                 <i class="material-icons" style="transform: rotate(180deg);">
                     arrow_right_alt
@@ -22,3 +22,12 @@
         </a>
     </section>
 </section>
+
+<ng-template #callAPIDialog>
+    <p>
+        {{forgotmsg}}
+    </p>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>
+</ng-template>

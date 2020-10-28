@@ -1,5 +1,6 @@
 {
     "buttons": {
+        "authorising": "Оторизиране",
         "end": "Последна",
         "save": "Запиши",
         "next": "Следваща",
@@ -9,7 +10,7 @@
         "accept": "Приемане на поръчка",
         "login": "Вход",
         "manually": "Ръчно",
-        "signin": "Нова регистрация",
+        "signup": "Нова регистрация",
         "forgotpass": "Забравена парола",
         "create": "Създай",
         "sendReq": "Изпрати заявка",
@@ -32,7 +33,14 @@
         "no": "Не",
         "yes": "Да",
         "clearLogs":"Изчистване на логове",
-        "reload":"Презереди "
+        "reload":"Презереди",
+        "cancel": "Отказ",
+        "canceled": "Отказана",
+        "needApprove": "Изисква одобрение",
+        "approved": "Одобрено",
+        "sentTo": "Изпратено за доставка",
+        "delivered": "Доставено",
+        "onTheWay": "Изпратено за доставка"
     },
     "errors": {
         "required": "Това поле е задължително",
@@ -85,7 +93,7 @@
         "resetPass": "Възстановява на парола",
         "toResetPassMsg": "За да въведете нова парола, кликнете върху връзката по-долу!",
         "con": "Връзки",
-        "regForm": "Registration Form",
+        "regForm": "Регистрационна Форма",
         "coords": "Координати",
         "personalData": "Лични данни",
         "siteDetails": "Сайт данни",
@@ -134,7 +142,7 @@
         "delivering": "В процес на доставка",
         "delivered": "Доставена"
     },
-    "signIn": {
+    "signUp": {
         "regForm": "Регистрационна форма"
     },
     "options": {
@@ -150,8 +158,8 @@
         "email": "Имейл",
         "password": "Парола",
         "re-password": "Парола",
-        "firstname": "Име",
-        "lastname": "Фамилия",
+        "firstName": "Име",
+        "lastName": "Фамилия",
         "companyName": "Company Name",
         "company": "Компания",
         "oldEmail": "Стар имейл",

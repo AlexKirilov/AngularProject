@@ -1,0 +1,46 @@
+@import '../../../../variables.scss';
+.mat-elevation-z8 {
+    box-shadow: none;
+    display: flow-root;
+    width: 100%;
+}
+
+#table-template-wrapper table {
+    width: 100%;
+}
+
+#result-table {
+    .results-paginator {
+        display: flex;
+        line-height: 40px;
+        font-size: 12px;
+        float: right;
+        &.second-pagination {
+            margin-top: 30px;
+        }
+        .itemsPerPage,
+        .mat-paginator-range-label {
+            margin: 0 10px;
+        }
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+        .disabled {
+            svg {
+                fill: $disabled-btn;
+            }
+        }
+    }
+    tr {
+        &:hover {
+            background: $primary-border-bottom-color;
+        }
+        &.active {
+            background: $primary-selected-item-color;
+            &:hover {
+                background: $primary-selected-item-color-hover;
+            }
+        }
+    }
+}

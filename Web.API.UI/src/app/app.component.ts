@@ -1,9 +1,5 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
-import { DatashareService } from './services/datashare.service';
+import { Component, ViewEncapsulation } from '@angular/core';
 import devtools from 'devtools-detect/index.js';
-import { DatastoreService } from './services/datastore.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -14,39 +10,15 @@ import { TranslateService } from '@ngx-translate/core';
     '../../node_modules/shepherd.js/dist/css/shepherd-theme-default.css'
   ]
 })
-export class AppComponent implements OnInit {
-  contentLoader: boolean;
-  wrapperLoader: boolean;
-  htmlLoader: boolean;
-  auth: boolean;
+export class AppComponent{
 
-  private authListExp = ['resetpass', 'login', 'signin', 'forgotpass', 'reg-details'];
-
-  constructor(
-    private snackBar: MatSnackBar,
-    private datashare: DatashareService,
-    private datastore: DatastoreService,
-    private translate: TranslateService
-  ) {
-
-    translate.addLangs(['bg', 'en']);
-    translate.setDefaultLang('bg');
-    translate.use('bg');
-
-    this.datashare.spinnerWrapper.subscribe(bool => (this.wrapperLoader = bool)).unsubscribe();
-    this.datashare.spinnerContent.subscribe(bool => (this.contentLoader = bool));
-    this.datashare.spinnerHMTL.subscribe(bool => (this.htmlLoader = bool));
-    this.datashare.snackbarData.subscribe(data => {
-      if (data.message !== '') this.openSnackBar(data.message, data.action);
-    });
-
-    this.datashare.currentPage.subscribe((page: string) =>
-      this.auth = (this.authListExp.includes(page)) ? false : true
-    );
-
+  constructor() {
     window.addEventListener('devtoolschange', e => {
       if (!devtools.open) {
-        console.log('You are trying to access not allowed area!!! Because of that you will be relocate after: 10 seconds!');
+        
+        console.log(`You are trying to access not allowed area!!! 
+        Because of that you will be relocate after: 10 seconds!`);
+
         let index = 10;
         const interval = setInterval(() => {
           --index;
@@ -58,25 +30,5 @@ export class AppComponent implements OnInit {
         }, 1000);
       }
     });
-  }
-
-  openSnackBar(message: string, action: string) {
-    if (message !== ' ') {
-      this.snackBar.open(message, action, { duration: 4000 });
-    }
-  }
-  // Delete me
-
-  ngOnInit(): void {
-    // this.changeBodyBackground();
-  }
-  changeBodyBackground() {
-    let counter = 1;
-    const tmp = document.body;
-    const interval = setInterval(() => {
-      tmp.id = `back${counter}`;
-      counter++;
-      if (counter === 12) { clearInterval(interval); }
-    }, 10000);
   }
 }

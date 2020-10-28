@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  path:  'http://localhost:3000' // 'https://web-api-be.herokuapp.com'
+  path: 'https://web-api-be.herokuapp.com' // 'http://localhost:4567'
 };
 
 /*

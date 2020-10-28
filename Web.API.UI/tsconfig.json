@@ -4,6 +4,7 @@
     "enableIvy": false
   },
   "compilerOptions": {
+    "module": "es2020",
     "paths": { "*": ["types/*"] },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

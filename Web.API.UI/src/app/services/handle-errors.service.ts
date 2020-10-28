@@ -1,10 +1,13 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { MessageHandlerComponent } from '../components/message-handler/message-handler.component';
-import { ServiceProvider } from './services.service';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
+
 import { Unsubscribable } from 'rxjs';
+import { distinctUntilChanged, take } from 'rxjs/operators';
+
+import { ServiceProvider } from './services.service';
+import { MessageHandlerComponent } from '../API/components/message-handler/message-handler.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +25,7 @@ export class HandleErrorsService implements OnDestroy {
   private unsubscribeDialogRef: Unsubscribable;
   private datastore: any;
   private datashare: any;
+  private component = MessageHandlerComponent;
 
   constructor(public dialog: MatDialog, private services: ServiceProvider) {
     this.datastore = this.services.datastore;
@@ -40,6 +44,7 @@ export class HandleErrorsService implements OnDestroy {
       Type: 'prompt'
     };
     this.tmp = this.error;
+
     this.unsubscribeModal = this.datashare.isErrorHandleDisplayed
       .pipe(distinctUntilChanged())
       .subscribe(bool => this.isDisplayed);
@@ -63,7 +68,7 @@ export class HandleErrorsService implements OnDestroy {
   openDialog(error, callback = null): void {
     this.stopSpinners();
     if (!this.isDisplayed) {
-      const dialogRef = this.dialog.open(MessageHandlerComponent, {
+      const dialogRef = this.dialog.open(this.component, {
         width: this.modalWidth,
         data: {
           title: (error && error.Title ? error.Title : error.Type) || 'error',
@@ -77,6 +82,7 @@ export class HandleErrorsService implements OnDestroy {
       this.unsubscribeDialogRef = dialogRef
         .afterClosed()
         .pipe(distinctUntilChanged())
+        .pipe(take(1))
         .subscribe(result => {
           if (callback != null) {
             callback(result);
@@ -88,7 +94,7 @@ export class HandleErrorsService implements OnDestroy {
 
   openDialogPrompt(error, callback) {
     this.stopSpinners();
-    const dialogRef = this.dialog.open(MessageHandlerComponent, {
+    const dialogRef = this.dialog.open(this.component, {
       width: this.modalWidth,
       data: {
         title: error && error.Title ? error.Title : error.Type,
@@ -103,6 +109,7 @@ export class HandleErrorsService implements OnDestroy {
     this.unsubscribeDialogRef = dialogRef
       .afterClosed()
       .pipe(distinctUntilChanged())
+      .pipe(take(1))
       .subscribe(result => {
         if (result === void 0) {
           result = false;
@@ -113,7 +120,7 @@ export class HandleErrorsService implements OnDestroy {
 
   openDialogInputs(data, callback) {
     this.stopSpinners();
-    const dialogRef = this.dialog.open(MessageHandlerComponent, {
+    const dialogRef = this.dialog.open(this.component, {
       width: this.modalWidth,
       data: {
         title: '',
@@ -129,6 +136,7 @@ export class HandleErrorsService implements OnDestroy {
     this.unsubscribeDialogRef = dialogRef
       .afterClosed()
       .pipe(distinctUntilChanged())
+      .pipe(take(1))
       .subscribe(result => {
         if (result === void 0) {
           result = false;
@@ -139,7 +147,7 @@ export class HandleErrorsService implements OnDestroy {
 
   openDialogReset(data: string, callback = null) {
     this.stopSpinners();
-    const dialogRef = this.dialog.open(MessageHandlerComponent, {
+    const dialogRef = this.dialog.open(this.component, {
       width: this.modalWidth,
       data: {
         title: 'Password reset',
@@ -151,6 +159,7 @@ export class HandleErrorsService implements OnDestroy {
     this.unsubscribeDialogRef = dialogRef
       .afterClosed()
       .pipe(distinctUntilChanged())
+      .pipe(take(1))
       .subscribe(result => {
         if (callback != null) {
           callback(result);
@@ -160,7 +169,7 @@ export class HandleErrorsService implements OnDestroy {
 
   openDialogStatus(data, callback = null) {
     this.stopSpinners();
-    const dialogRef = this.dialog.open(MessageHandlerComponent, {
+    const dialogRef = this.dialog.open(this.component, {
       width: '650px',
       data: {
         title: 'status',
@@ -172,6 +181,7 @@ export class HandleErrorsService implements OnDestroy {
     this.unsubscribeDialogRef = dialogRef
       .afterClosed()
       .pipe(distinctUntilChanged())
+      .pipe(take(1))
       .subscribe(result => {
         if (callback != null) {
           callback(result);
@@ -182,7 +192,7 @@ export class HandleErrorsService implements OnDestroy {
   openDialogSendClientAddressFormRequest(data: any, callback = null) {
     this.stopSpinners();
     data.editable = true;
-    const dialogRef = this.dialog.open(MessageHandlerComponent, {
+    const dialogRef = this.dialog.open(this.component, {
       width: '450px',
       data: {
         title: '', // Order to be delivert to:
@@ -205,6 +215,7 @@ export class HandleErrorsService implements OnDestroy {
     this.unsubscribeDialogRef = dialogRef
       .afterClosed()
       .pipe(distinctUntilChanged())
+      .pipe(take(1))
       .subscribe(result => {
         if (callback != null) {
           callback(result);
@@ -215,7 +226,7 @@ export class HandleErrorsService implements OnDestroy {
   openDialogClientAddress(data: any, callback = null) {
     this.stopSpinners();
     data.editable = true;
-    const dialogRef = this.dialog.open(MessageHandlerComponent, {
+    const dialogRef = this.dialog.open(this.component, {
       width: '450px',
       data: {
         title: '', // Order to be delivert to:
@@ -238,6 +249,7 @@ export class HandleErrorsService implements OnDestroy {
     this.unsubscribeDialogRef = dialogRef
       .afterClosed()
       .pipe(distinctUntilChanged())
+      .pipe(take(1))
       .subscribe(result => {
         if (callback != null) {
           callback(result);
@@ -247,7 +259,7 @@ export class HandleErrorsService implements OnDestroy {
 
   openDialogShortKeys(data, callback = null) {
     this.stopSpinners();
-    const dialogRef = this.dialog.open(MessageHandlerComponent, {
+    const dialogRef = this.dialog.open(this.component, {
       width: '650px',
       data: {
         title: 'Short Keys',
@@ -260,6 +272,7 @@ export class HandleErrorsService implements OnDestroy {
     this.unsubscribeDialogRef = dialogRef
       .afterClosed()
       .pipe(distinctUntilChanged())
+      .pipe(take(1))
       .subscribe(result => {
         if (callback != null) {
           callback(result);
